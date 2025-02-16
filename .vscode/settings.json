@@ -1,0 +1,13 @@
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.provider": "autopep8",
+  "editor.rulers": [80, 120],
+
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#0000FF"  // Change this to your desired color
+  },
+
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false
+
+}

@@ -1,0 +1,39 @@
+Calling a function by its name, stored as a string, within a class in Python can be done using the getattr function.
+
+class MyClass:
+    def __init__(self):
+        self.value = 42
+
+    def greet(self):
+        return "Hello, world!"
+
+    def add(self, x, y):
+        return x + y
+
+    def call_method_by_name(self, method_name, *args, **kwargs):
+        method = getattr(self, method_name, None)
+        if callable(method):
+            return method(*args, **kwargs)
+        else:
+            raise AttributeError(f"Method '{method_name}' not found")
+
+# Example usage
+obj = MyClass()
+
+# Calling 'greet' method by name
+print(obj.call_method_by_name('greet'))  # Output: Hello, world!
+
+# Calling 'add' method by name with arguments
+print(obj.call_method_by_name('add', 3, 4))  # Output: 7
+
+
+In this example:
+
+The MyClass class has three methods: greet, add, and call_method_by_name.
+The call_method_by_name method takes the name of the method to call as a string (method_name), along with any
+arguments (*args) and keyword arguments (**kwargs).
+The getattr function is used to retrieve the method by name. If the method is
+found and is callable, it is invoked with the provided arguments.
+If the method is not found, an AttributeError is raised.
+
+This approach is flexible and allows you to dynamically call methods within a class using their names as strings.
