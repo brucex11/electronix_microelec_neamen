@@ -13,6 +13,7 @@ def p1_1(self):
 	"""
 	# print( f"CALLED: {p1_1.__name__}" )
 	pnum:str = f"{self.prob_str}"
+	print( f"Problem: {pnum}" )
 	print( f"{self.problem_text}" )
 	print( f"{self.problem_ans}" )
 	print( '-----------------------------------------------' )

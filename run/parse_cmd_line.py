@@ -54,7 +54,7 @@ def parse_the_args():
       print( f"Chap01 v0.1.0" )
       sys.exit(1)
 
-    global opera  # 'opera' for operation
-    opera = args.command
+    global chapter_subcmd
+    chapter_subcmd = args.command
     global path_to_config_file
     path_to_config_file = args.config_file
