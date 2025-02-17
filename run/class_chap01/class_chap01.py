@@ -76,6 +76,8 @@ class Chap01():
 
 		# Initialize constants for all problems
 		self._ni_Si_300K:float = 1.5e+10		# Si intrinsic carrier concentration @ 300K
+		self._ni_Ge_300K:float = 2.466e+13	# Ge intrinsic carrier concentration @ 300K
+		self._ni_GaAs_300K:float = 1.899e+06	# GaAs intrinsic carrier concentration @ 300K
 		self._qev:float = 1.602176634e-19	# magnitude of the electronic charge, Joules
 		self._Tk_300:float = 300  # Kelvin @ room temp
 		self._vthermal:float = Boltzmann * self.Tk_300 / self.qev
@@ -105,6 +107,12 @@ class Chap01():
 	@property
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
+	@property
+	def ni_GaAs_300K(self):
+		return self._ni_GaAs_300K
+	@property
+	def ni_Ge_300K(self):
+		return self._ni_Ge_300K
 	@property
 	def ni_Si_300K(self):
 		return self._ni_Si_300K

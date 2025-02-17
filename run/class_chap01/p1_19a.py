@@ -6,6 +6,9 @@ from assertions import assertions
 
 def p1_19a(self):
 	"""
+	Determine the built-in potential barrier Vbi in a silicon pn junction for
+	(i) Nd = Na = 5.e+15/cm-cubed; (ii) Nd = 5.e+17/cm+e3 and Na = 1.+e15/cm^3;
+	(iii) Na = Nd = 1.+e18/cm^3.
 	ANS: 1.19 (a) (i) 0.661V, (ii) 0.739V, (iii) 0.937V
 	"""
 	fcn_name:str = inspect.currentframe().f_code.co_name

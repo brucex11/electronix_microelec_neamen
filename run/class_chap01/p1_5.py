@@ -7,6 +7,9 @@ from assertions import assertions
 
 def p1_5(self):
 	"""
+	Gallium arsenide is doped with acceptor impurity atoms at a concentration
+	of 1e+16/cm^3. (a) Find the concentration of electrons and holes. Is the
+	semiconductor n-type or p-type? (b) Repeat part (a) for germanium.
 	ANS(a) p-type, po = 1e+16/cm^3, no = 3.24e-04/cm^3
 	ANS(b) p-type, po = 1e+16/cm^3, no = 5.76e+10/cm^3."
 	"""
