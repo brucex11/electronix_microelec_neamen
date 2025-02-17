@@ -1,3 +1,5 @@
+
+import inspect
 import math
 from typing import List
 from typing import Tuple
@@ -9,10 +11,13 @@ def p1_1(self):
 	ANS(a): (i) 1.03μA, (ii) 2.25mA
 	ANS(b): (i) 0.0103μA, (ii) 22.5μA
 	"""
-	# print( f"CALLED: {p1_1.__name__}" )
+	fcn_name:str = inspect.currentframe().f_code.co_name
+	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 	pnum:str = f"{self.prob_str}"
 	print( f"Problem: {pnum}" )
-	print( f"{self.problem_text}" )
+	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	print( '-----------------------------------------------' )
 

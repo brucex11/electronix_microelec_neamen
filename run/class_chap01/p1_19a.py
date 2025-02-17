@@ -1,3 +1,4 @@
+import inspect
 import math
 from scipy.constants import Boltzmann
 
@@ -7,15 +8,19 @@ def p1_19a(self):
 	"""
 	ANS: 1.19 (a) (i) 0.661V, (ii) 0.739V, (iii) 0.937V
 	"""
+	fcn_name:str = inspect.currentframe().f_code.co_name
+	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 	print( f"Problem: {self.prob_str}" )
-	print( f"{self.problem_text}" )
+	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	print()
+	print( '-----------------------------------------------' )
+
 	ans_i:float = 0.661
 	ans_ii:float = 0.739
 	ans_iii:float = 0.937
-	# print( f"{Chapter01.__name__} : {self.prob_str}" )
-	# print( self.dict_params['problem_text'] )
+
 	print( 'For the pn junction in thermal equilibrium, the voltage due to diffusion of holes and electrons' )
 	print( 'is called the built-in potential barrier, or built-in voltage Vbi:' )
 	print( '  Vbi = (kT/e)ln[(Na*Nd/ni^2)]' )
@@ -38,30 +43,30 @@ def p1_19a(self):
 	# The natural logarithm is only defined for positive numbers (x > 0).
 	# math.log(x) computes ln(x) for positive values of x.
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
-	print( f"ANS {pnum}:\tfor silicon, Vbi = {vbi} = {round(vbi, 3)}V" )
 	try:
 		assertions.assert_within_percentage( vbi, ans_i, 1.0 )
+		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )
 
 
 	pnum:str = f"{self.prob_str}(ii)"
 	Na:float = 1.0e+15		# net acceptor concentration in the p-region
 	Nd:float = 5.0e+17		# net donor concentration in the n-region
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
-	print( f"ANS {pnum}:\tfor silicon, Vbi = {vbi} = {round(vbi, 3)}V" )
 	try:
 		assertions.assert_within_percentage( vbi, ans_ii, 1.0 )
+		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )
 
 
 	pnum:str = f"{self.prob_str}(iii)"
 	Na:float = 1.0e+18		# net acceptor concentration in the p-region
 	Nd:float = 1.0e+18		# net donor concentration in the n-region
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
-	print( f"ANS {pnum}:\tfor silicon, Vbi = {vbi} = {round(vbi, 3)}V" )
 	try:
 		assertions.assert_within_percentage( vbi, ans_iii, 1.0 )
+		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )

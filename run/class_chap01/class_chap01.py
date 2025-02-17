@@ -6,6 +6,7 @@ from typing import Dict   # also available: Dict, Set
 # from typing import Tuple
 import os
 import importlib
+import inspect
 # import sys
 from scipy.constants import Boltzmann
 
@@ -32,6 +33,10 @@ class Chap01():
 			path_to_config_file : string
 				this is passed to the base class for parsing
 		"""
+		fcn_name:str = inspect.currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 		# print( f" BRKPOINT: class: {__name__}; CTOR: {__class__}; method: {self.__init__.__name__}" )
 		self._cf = configparams_obj
 		self._lg = logger_obj
@@ -44,8 +49,8 @@ class Chap01():
 		tmps:str = self.prob.lstrip(self.prob[0])
 		self._prob_str:str = tmps.replace( '_', '.' )
 
-		self._problem_text:str = self.cf.get_config_params['common']['problem_text']
-		self._problem_ans:str =  self.cf.get_config_params['common']['problem_ans']
+		self._problem_txt:str = self.cf.get_config_params['common']['problem_txt']
+		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
 
 
 		# Class-level attributes
@@ -96,8 +101,8 @@ class Chap01():
 	def problem_ans(self):
 		return self._problem_ans
 	@property
-	def problem_text(self):
-		return self._problem_text
+	def problem_txt(self):
+		return self._problem_txt
 	@property
 	def prob_str(self):
 		return self._prob_str
@@ -124,6 +129,10 @@ class Chap01():
 	def run(self):
 		"""Call the method per the config.ini file [problem_num]
 		"""
+		fcn_name:str = inspect.currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 		# build the module name starting with this class's name
 		class_name:str = self.__class__.__name__
 		# convert the camel-case classname to all lowercase

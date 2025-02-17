@@ -1,3 +1,4 @@
+import inspect
 import math
 from typing import List
 from typing import Tuple
@@ -15,9 +16,13 @@ def p1_29(self):
   ANS (b) (i)  At VD = 0.1V,  ID = 9.50e-14A;  at VD = 0.7V, ID = 1mA
          (ii) At VD = 0.1 V, ID = 1.39e-14 A; at VD = 0.7V, ID = 1.42e-9A
 	"""
+	fcn_name:str = inspect.currentframe().f_code.co_name
+	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 	pnum:str = f"{self.prob_str}"
 	print( f"Problem: {pnum}" )
-	print( f"{self.problem_text}" )
+	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	print( '-----------------------------------------------' )
 
@@ -33,6 +38,6 @@ def p1_29(self):
 	ans_a:float = 2.03e-15
 	try:
 		assertions.assert_within_percentage( IS, ans_a, 1.0 )
-		print( f"ANS (a) reverse saturation current IS = {round(IS,18)}A" )
+		print( f"CALC (a) reverse saturation current IS = {round(IS,18)}A" )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )

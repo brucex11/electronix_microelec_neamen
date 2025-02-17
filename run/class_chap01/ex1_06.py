@@ -14,7 +14,7 @@ def ex1_06(self):
 	# print( f"CALLED: {ex1_06.__name__}" )
 	pnum:str = f"{self.prob_str}"
 	print( f"Problem: {pnum}" )
-	print( f"{self.problem_text}" )
+	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 
 	Na:float = 1.0e16   # per cm^3
@@ -24,11 +24,11 @@ def ex1_06(self):
 	# First, calculate the pn-junction depletion-region built-in barrier voltage.
 	# Vbi = Vtherm ln[ (Na*Nd) / ni^2 ]
 	Vbi:float = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
-	print( f"ANS {pnum}: Vbi = {Vbi} = {round(Vbi, 3)}V" )
+	print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V" )
 	try:
 		assertions.assert_within_percentage( Vbi, 0.637, 1.0 )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )
 
 	# Now, using Vbi, able to calculate the junction capacitance.
 	Cjo:float = 0.5e-12  #  0.5pF
@@ -39,12 +39,12 @@ def ex1_06(self):
 	for VR in tuple_VR:
 		junction_capacitance_calculated.append( Cjo / math.sqrt( ( 1 + (VR/round(Vbi, 3)) ) ) )
 
-	# print( f"ANS junction capacitance: {junction_capacitance_calculated}" )
+	# print( f"CALC junction capacitance: {junction_capacitance_calculated}" )
 
 	answers:Tuple = ( 0.312e-12, 0.168e-12 )
 	for idx, ans in enumerate(answers):
 		try:
 			assertions.assert_within_percentage( junction_capacitance_calculated[idx], ans, 3.0 )
-			print( f"ANS junction capacitance: {junction_capacitance_calculated[idx]}" )
+			print( f"CALC junction capacitance: {junction_capacitance_calculated[idx]:.3e}" )
 		except AssertionError as e:
-			print( f"AssertionError {pnum}: {e}" )
+			print( f"CALC AssertionError {pnum}: {e}" )

@@ -1,4 +1,4 @@
-
+import inspect
 import logging
 import sys
 # import importlib
@@ -20,7 +20,9 @@ def main() -> int:
 	"""
 
 	try:
-		# print( f"RUN main !!")
+		fcn_name:str = inspect.currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; function: '{fcn_name}'" )
+
 		parse_cmd_line.parse_the_args()
 		# print( f">>>subcmd specified on cmd-line is '{parse_cmd_line.chapter_subcmd}'" )
 		# print( f">>>cfg.ini specified on cmd-line is '{parse_cmd_line.path_to_config_file}'" )
@@ -37,19 +39,23 @@ def main() -> int:
 		# Generate the module name as below; again, this is per project architecture
 		# module-by-subdir and source-code fnames.
 		module_name:str = f"class_{cllow}"
-		# Retrieve the module's reference per its name:str
-		module_ref = globals()[module_name]
-		# print( f"module_ref: '{module_ref}'" )
-		# Retrieve the class reference from the module
-		class_ref = getattr( module_ref, class_name )
-		# Setup the __init__ parameters
-		params = [pcf,lg]
-		# Instantiate the class and run it
-		class_ref( *params ).run()
-		# Note per line above: the code in the run() class-method could be moved
-		# to the end of the class __init__() method there eliminating the need
-		# for the run() method.  Then, the call would simply be as below:
-		# class_ref( *params )
+
+		try:
+			# Retrieve the module's reference per its name:str
+			module_ref = globals()[module_name]
+			# print( f"module_ref: '{module_ref}'" )
+			# Retrieve the class reference from the module
+			class_ref = getattr( module_ref, class_name )
+			# Setup the __init__ parameters
+			params = [pcf,lg]
+			# Instantiate the class and run it
+			class_ref( *params ).run()
+			# Note per line above: the code in the run() class-method could be moved
+			# to the end of the class __init__() method there eliminating the need
+			# for the run() method.  Then, the call would simply be as below:
+			# class_ref( *params )
+		except AttributeError as e:
+			print( f"Exception caught in main: {e}" )
 
 		# # Example to retrieve all modules
 		# global_variables = globals()
@@ -60,7 +66,7 @@ def main() -> int:
 		# print( f"module_names: {module_names}" )
 
 	except FileExistsError as e:
-		print( f"Error in main: {e}" )
+		print( f"Exception caught in main: {e}" )
 
 	return 0
 
