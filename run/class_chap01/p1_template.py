@@ -28,18 +28,18 @@ def p1_1(self):
 
 	try:
 		assertions.assert_within_percentage( calc_result, ans, 3.0 )
-		print( f"diode current ID = {calc_result}A" )
+		print( f"CALC diode current ID = {calc_result}A" )
 	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+		print( f"CALC AssertionError {pnum}: {e}" )
 
 
 
 # 	for idx, ans in enumerate(answers2):
 # 		try:
 # 			assertions.assert_within_percentage( calc_result[idx], ans, 3.0 )
-# 			print( f"when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
+# 			print( f"CALC when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
 # 		except AssertionError as e:
-# 			print( f"AssertionError {pnum}: {e}" )
+# 			print( f"CALC AssertionError {pnum}: {e}" )
 
 # 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
 # 		prep_fig( self, x=diode_voltages, y=calc_result )

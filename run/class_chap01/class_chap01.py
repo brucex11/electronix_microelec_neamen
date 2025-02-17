@@ -98,6 +98,9 @@ class Chap01():
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
 	@property
+	def ni(self):
+		return self._ni
+	@property
 	def problem_ans(self):
 		return self._problem_ans
 	@property

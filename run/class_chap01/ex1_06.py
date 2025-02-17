@@ -1,3 +1,4 @@
+import inspect
 import math
 from typing import List
 from typing import Tuple
@@ -11,7 +12,10 @@ def ex1_06(self):
 	Cjo = 0.5pF where Cjo is the junction capacitance at zero applied voltage.
 	Calculate the junction capacitance at VR = 1V and VR = 5V.
 	"""
-	# print( f"CALLED: {ex1_06.__name__}" )
+	fcn_name:str = inspect.currentframe().f_code.co_name
+	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
 	pnum:str = f"{self.prob_str}"
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
@@ -24,9 +28,9 @@ def ex1_06(self):
 	# First, calculate the pn-junction depletion-region built-in barrier voltage.
 	# Vbi = Vtherm ln[ (Na*Nd) / ni^2 ]
 	Vbi:float = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
-	print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V" )
 	try:
 		assertions.assert_within_percentage( Vbi, 0.637, 1.0 )
+		print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
