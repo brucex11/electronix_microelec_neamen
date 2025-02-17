@@ -1,4 +1,4 @@
-
+import ast
 # from collections import OrderedDict
 # from datetime import datetime
 from typing import Any
@@ -37,7 +37,6 @@ class Chap01():
 		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
-		# print( f" BRKPOINT: class: {__name__}; CTOR: {__class__}; method: {self.__init__.__name__}" )
 		self._cf = configparams_obj
 		self._lg = logger_obj
 		# print( f"+++PATH to config file: '{self.cf.path_to_config_file}'" )
@@ -51,6 +50,15 @@ class Chap01():
 
 		self._problem_txt:str = self.cf.get_config_params['common']['problem_txt']
 		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
+
+		# save figure params
+		self._save_figure = ast.literal_eval(
+			self.cf.get_config_params['common']['save_figure'] )
+		self._save_figure_dir:str = os.path.join(
+			self.cf.get_config_params['common']['save_figure_rootdir'],
+			self.cf.get_config_params['common']['save_figure_subdir'],
+			self.cf.get_config_params['common']['project_title']
+		)
 
 
 		# Class-level attributes
@@ -67,7 +75,7 @@ class Chap01():
 		}
 
 		# Initialize constants for all problems
-		self._ni:float = 1.5e+10		# intrinsic carrier concentration
+		self._ni_Si_300K:float = 1.5e+10		# Si intrinsic carrier concentration @ 300K
 		self._qev:float = 1.602176634e-19	# magnitude of the electronic charge, Joules
 		self._Tk_300:float = 300  # Kelvin @ room temp
 		self._vthermal:float = Boltzmann * self.Tk_300 / self.qev
@@ -98,8 +106,8 @@ class Chap01():
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
 	@property
-	def ni(self):
-		return self._ni
+	def ni_Si_300K(self):
+		return self._ni_Si_300K
 	@property
 	def problem_ans(self):
 		return self._problem_ans
@@ -112,6 +120,12 @@ class Chap01():
 	@property
 	def qev(self):
 		return self._qev
+	@property
+	def save_figure(self):
+		return self._save_figure
+	@property
+	def save_figure_dir(self):
+		return self._save_figure_dir
 	@property
 	def Tk_300(self):
 		return self._Tk_300

@@ -1,14 +1,17 @@
 import ast
 import inspect
 import math
-import numpy as np
+# import numpy as np
 from typing import List
 from typing import Tuple
 
 from assertions import assertions
 
-def p1_27(self):
+def p1_27_plot(self):
 	"""
+	(a) The reverse-saturation current of a pn junction diode is IS = 1e-11A.
+	Determine the diode current for diode voltages of 0.3, 0.5, 0.7, -0.02, -0.2, and -2V.
+	(b) Repeat for IS = 1e-13A
 	ANS(a): (i) 1.03μA, (ii) 2.25mA, (iii) 4.93A, (iv) -5.37ρA, (v) -1e-11A, (vi) -1e-11A
 	ANS(a): (i) 0.0103μA, (ii) 22.5μA, (iii) 49.3mA, (iv) -537.0ρA, (v) -1e-13A, (vi) -1e-13A
 	"""
@@ -45,7 +48,9 @@ def p1_27(self):
 			print( f"CALC AssertionError {pnum}: {e}" )
 
 	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
-		prep_fig( self, x=diode_voltages, y=diode_current )
+		title:str = f"{pnum} Diode Volts, IS = {IS:.3e}A"
+		fname_save_plot:str = 'p1_27_diode_volts_1.png'
+		prep_fig( self, title, fname_save_plot, x=diode_voltages, y=diode_current )
 
 	print( '-----------------------------------------------------' )
 	IS:float = 1e-13
@@ -66,39 +71,30 @@ def p1_27(self):
 			print( f"CALC AssertionError {pnum}: {e}" )
 
 	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
-		prep_fig( self, x=diode_voltages, y=diode_current )
+		title:str = f"{pnum} Diode Volts, IS = {IS:.3e}A"
+		fname_save_plot:str = 'p1_27_diode_volts_2.png'
+		prep_fig( self, title, fname_save_plot, x=diode_voltages, y=diode_current )
 
 
-def prep_fig(self, x=(), y=[] ):
+def prep_fig(self, title:str, fname_save_plot:str, x:Tuple=(), y:List[float]=[] ):
 	import os
 	import pathlib
 	import matplotlib
 	import matplotlib.pyplot as plt
 	from matplotlib.ticker import MaxNLocator
-	print( f"matplotlib.__version__ : {matplotlib.__version__}" )
+	# print( f"matplotlib.__version__ : {matplotlib.__version__}" )
 
-	# print( f"{prep_fig.__name__}" )
-	# print( f"p1_27.__name__: {p1_27.__name__}" )
-	dir_plot = os.path.join(
-		self.cf.get_config_params['common']['dir_draw_root'],
-		self.cf.get_config_params['common']['dir_draw_subdir'] )
-	print( f"dir_plot: '{dir_plot}'" )
-	pathlib.Path( dir_plot ).mkdir( parents=True, exist_ok=True )
+	print( f"self.save_figure_dir: '{self.save_figure_dir}'" )
+	pathlib.Path( self.save_figure_dir ).mkdir( parents=True, exist_ok=True )
 
-	fname = "{a}.png".format( a=p1_27.__name__ )
-	path_plot = os.path.join( dir_plot, fname )
-	print( f"path_plot: '{path_plot}'" )
-
-	# x = [1, 2, 3, 4, 5]
-	# y = [2, 3, 5, 7, 11]
-	x = x
-	y = y
+	path_save_figure = os.path.join( self.save_figure_dir, fname_save_plot )
+	print( f"path_save_figure: '{path_save_figure}'" )
 
 	plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
-	plt.scatter( x, y, color='blue', marker='x' )  # customize color and marker style
+	plt.scatter( x, y, color='blue', marker='o' )  # customize color and marker style
 
 	# Set titles and labels
-	plt.title('Diode Current')
+	plt.title( title )
 	plt.xlabel('Diode V')
 	plt.xlim( -2.5, 1 )
 	# Set the x-axis to have 12 divisions
@@ -107,6 +103,9 @@ def prep_fig(self, x=(), y=[] ):
 	plt.ylabel('Diode A')
 	plt.ylim( -1, 25 )
 	# plt.yscale( 'log' )
+
+	if( self.save_figure ):
+		plt.savefig( path_save_figure, dpi=300 )
 
 	# Display the plot
 	plt.show()
