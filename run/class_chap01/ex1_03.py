@@ -10,8 +10,8 @@ def ex1_03(self):
 	"""Page 18
 	Objective: Calculate the drift current density for a given semiconductor.
 	Consider silicon at T = 300 K doped with arsenic atoms at a concentration
-	of Nd = 8e+15/cm^3 . Assume mobility values of μn = 1350 cm^2/V*sec
-	and μp = 480 cm^2/V*sec. Assume the applied electric field is 100 V/cm.
+	of Nd = 8e+15/cm^3 . Assume mobility values of μn = 1350 cm^2/V-sec
+	and μp = 480 cm^2/V-sec. Assume the applied electric field is 100 V/cm.
 	ANS:  173μA/cm^2
 	"""
 	fcn_name:str = inspect.currentframe().f_code.co_name
@@ -23,7 +23,6 @@ def ex1_03(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	print( '-----------------------------------------------' )
-	print( f"{self.qev}" )
 
 	ans:float = 173e-06   # μA/cm^2
 
@@ -36,7 +35,7 @@ def ex1_03(self):
 	# the conductivity is given by:
 	#   sigma (σ) = (qev * μ_n * n) + (qev * μ_n * n) ~= (qev * μ_n * n) in units (Ω-cm)^-1
 	#     where qev = 1.602e-19 = magnitude of the electronic charge, Joules
-	u_n:float = 1350   # cm^2/V*sec
+	u_n:float = 1350   # cm^2/V-sec
 	sigma:float = self.qev * u_n * Nd
 
 	try:

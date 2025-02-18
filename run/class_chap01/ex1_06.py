@@ -6,11 +6,12 @@ from typing import Tuple
 from assertions import assertions
 
 def ex1_06(self):
-	"""
+	"""Page 26:
 	Consider a silicon pn junction at T = 300 K, with doping concentrations
 	of Na = 1e16/cm^3 and Nd = 1e15/cm^3. Assume that ni = 1.5e10/cm^3 and let
 	Cjo = 0.5pF where Cjo is the junction capacitance at zero applied voltage.
 	Calculate the junction capacitance at VR = 1V and VR = 5V.
+	ANS:  Cjunction = 0.312pF @ Vreverse = 1V; Cj = 0.168pF @ Vr = 5V.
 	"""
 	fcn_name:str = inspect.currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )

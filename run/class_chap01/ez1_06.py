@@ -6,7 +6,7 @@ from typing import Tuple
 from assertions import assertions
 
 def ez1_06(self):
-	"""
+	"""Page 26:
 	A silicon pn junction at T = 300 K is doped at Nd = 1e+16/cm^3 and
 	Na = 1e+17/cm^3. The junction capacitance is to be Cj = 0.8pF when a reverse
 	bias voltage of VR = 5V is applied.

@@ -11,17 +11,36 @@ EX 1.2: Calculate the majority and minority carrier concentrations.
 * ex1_02, pg 16
 
 EX 1.3: Calculate the drift current density for a given semiconductor.
-* ex1_03
+* ex1_03, pg 18
+
+EX 1.4: Calculate the drift current density for a given semiconductor.
+* ex1_04, pg 20
+
+EX 1.5: Calculate the built-in potential barrier of a pn junction.
+* ex1_05, pg 24, SEE ALSO p1.19
 
 EX 1.6: Calculate the pn junction capacitance at VR = 1V and VR = 5V.
-* ex1_06
+* ex1_06, pg 26
 
 ## ExerciZes
+EZ 1.1: See EXample 1.1.
+
 EZ 1.2: Calculate the majority and minority carrier concentrations.
 * ez1_02, pg 16
 
+EZ 1.3: Determine the resistivity (reciprocal of conductivity) of the material GaAs.
+* ez1_03, pg 19
+
+EZ 1.4: Calculate the hole diffusion current density of Si at (a) x = 0 and
+(b) x = 1e-03cm.
+* ez1_04, pg 21
+
+EZ 1.5: Calculate Vbi for GaAs and Ge pn junction with specified donor and acceptor
+doping concentrations.
+* ez1_05, pg25
+
 EZ 1.6: Find the zero-biased pn junction capacitance Cj0.
-* ez1_06
+* ez1_06, pg26
 
 ## Problems
 P1.1: Calculate the intrinsic carrier concentration in Si and GaAs.

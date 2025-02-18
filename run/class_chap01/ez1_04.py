@@ -11,7 +11,7 @@ def ez1_04(self):
 	Consider silicon at T = 300 K. Assume the hole concentration is given
  	by p = 1e+16*e^-(x/Lp) (per cm^3), where Lp = 1e-03cm. Calculate the hole
  	diffusion current density at (a) x = 0 and (b) x = 1e-03cm. Assume Dp = 10 cm^2/s.
-	ANS  (a) 16A/cm^2, (b) 5.89A/cm^2.
+	ANS  (a) 16A/cm^2  (b) 5.89A/cm^2.
 	"""
 	fcn_name:str = inspect.currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
