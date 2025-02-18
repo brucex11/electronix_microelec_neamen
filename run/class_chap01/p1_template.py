@@ -21,14 +21,15 @@ def p1_1(self):
 	print( f"{self.problem_ans}" )
 	print( '-----------------------------------------------' )
 
+	tolerance_percent:float = 2.0  # assertion accuracy
 
 	ans:float = 0
 
 	calc_result:float = 0
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, 3.0 )
-		print( f"CALC diode current ID = {calc_result}A" )
+		assertions.assert_within_percentage( calc_result, ans, tolerance_percent )
+		print( f"CALC diode current ID = {calc_result}A within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
