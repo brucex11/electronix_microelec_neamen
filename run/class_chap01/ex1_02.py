@@ -1,16 +1,12 @@
 
-import inspect
-import math
-from typing import List
-from typing import Tuple
-
+from inspect import currentframe
 from assertions import assertions
 
 def ex1_02(self):
 	"""
 	ANS (a) po = 2.25e+04/cm^3  (b) no = 4.5+e03/cm^3
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -18,6 +14,7 @@ def ex1_02(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 3.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	ans_a:float = 2.25e+04
@@ -26,8 +23,8 @@ def ex1_02(self):
 	po:float = self.ni_Si_300K**2 / Nd
 
 	try:
-		assertions.assert_within_percentage( po, ans_a, 3.0 )
-		print( f"CALC (a): po = {po:.3e}/cm^3" )
+		assertions.assert_within_percentage( po, ans_a, tolerance_percent )
+		print( f"CALC (a): po = {po:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC (a) AssertionError {pnum}: {e}" )
 
@@ -37,7 +34,7 @@ def ex1_02(self):
 	no:float = self.ni_Si_300K**2 / Na
 
 	try:
-		assertions.assert_within_percentage( no, ans_b, 3.0 )
-		print( f"CALC (a): po = {no:.3e}/cm^3" )
+		assertions.assert_within_percentage( no, ans_b, tolerance_percent )
+		print( f"CALC (a): po = {no:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC (a) AssertionError {pnum}: {e}" )

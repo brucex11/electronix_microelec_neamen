@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -13,7 +13,7 @@ def ez1_06(self):
 	Find the zero-biased junction capacitance Cj0.
 	ANS: 2.21pF
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -21,6 +21,8 @@ def ez1_06(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 1.0  # assertion accuracy
+	print( '-----------------------------------------------' )
 
 	ans:float = 2.21e-12  # pF
 	Na:float = 1.0e16   # per cm^3
@@ -32,8 +34,8 @@ def ez1_06(self):
 	# Vbi = Vtherm ln[ (Na*Nd) / ni^2 ]
 	Vbi:float = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( Vbi, 0.637, 1.0 )
-		print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V" )
+		assertions.assert_within_percentage( Vbi, 0.637, tolerance_percent )
+		print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -43,7 +45,7 @@ def ez1_06(self):
 	Cj0:float = Cj * math.sqrt( ( 1 + (Vr/round(Vbi, 3)) ) )
 
 	try:
-		assertions.assert_within_percentage( Cj0, ans, 8.0 )
-		print( f"CALC {pnum}: Cj0 = {Cj0:.3e}F." )
+		assertions.assert_within_percentage( Cj0, ans, tolerance_percent )
+		print( f"CALC {pnum}: Cj0 = {Cj0:.3e}F is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

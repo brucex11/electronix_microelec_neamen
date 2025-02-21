@@ -1,7 +1,5 @@
-import inspect
+from inspect import currentframe
 import math
-from typing import List
-from typing import Tuple
 
 from assertions import assertions
 
@@ -10,7 +8,7 @@ def ex1_01(self):
 	Objective: Calculate the intrinsic carrier concentration in silicon at T = 300 K.
 	ANS Si: ni = 1.5e+10/cm^3
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -18,6 +16,7 @@ def ex1_01(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 5.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	# --- Si ---
@@ -26,10 +25,10 @@ def ex1_01(self):
 	ni:float =  B * ( temp ** (3/2) ) \
 			* math.exp( -1.0 * self.dict_semicond_mat_consts['Si']['Eg_ev'] / (2 * self.boltzmann_ev * temp) )
 	book_ans:float = 1.5e+10   # /cm^3
-	assert_percentage:float = 5.0
+
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum} for Si @{temp}K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum} for Si @{temp}K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 

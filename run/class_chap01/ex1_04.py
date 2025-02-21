@@ -1,5 +1,5 @@
 
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -16,7 +16,7 @@ def ex1_04(self):
 	square centimeter can also be generated in a semiconductor.
 	ANS:  Jn = 187A/cm^2
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -24,9 +24,9 @@ def ex1_04(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 2.0
 	print( '-----------------------------------------------' )
 
-	tolerance_percent:float = 2.0
 	ans:float = 187  # A/cm^2
 	Dn:float = 35  # electron diffusion coefficient in units of cm^2/sec
 	n1:float = 1e+12

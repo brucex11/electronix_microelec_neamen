@@ -1,5 +1,5 @@
 import ast
-import inspect
+from inspect import currentframe
 import math
 # import numpy as np
 from typing import List
@@ -15,7 +15,7 @@ def p1_27_plot(self):
 	ANS(a): (i) 1.03μA, (ii) 2.25mA, (iii) 4.93A, (iv) -5.37ρA, (v) -1e-11A, (vi) -1e-11A
 	ANS(a): (i) 0.0103μA, (ii) 22.5μA, (iii) 49.3mA, (iv) -537.0ρA, (v) -1e-13A, (vi) -1e-13A
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -24,6 +24,7 @@ def p1_27_plot(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 3.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	diode_voltages:Tuple = ( -2.0, -0.2, -0.02, 0.3, 0.5, 0.7, 0.72, 0.74 )  # in ascending order for plot
@@ -31,7 +32,8 @@ def p1_27_plot(self):
 	IS:float = 1e-11
 
 	for VD in diode_voltages:
-		diode_current.append( IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 ) )
+		diode_current.append( self.calc_diode_ideal_current( IS, VD) )
+		# diode_current.append( IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 ) )
 	# take log of all elements of diode-currents
 	print( f">>>CALC (a) when IS = {IS}A: diode currents:       {diode_current}" )
 	diode_current_log10:List[float] = [math.log10(abs(x)) for x in diode_current]
@@ -42,7 +44,7 @@ def p1_27_plot(self):
 
 	for idx, ans in enumerate(answers1):
 		try:
-			assertions.assert_within_percentage( diode_current[idx], ans, 3.0 )
+			assertions.assert_within_percentage( diode_current[idx], ans, tolerance_percent )
 			print( f"CALC when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {diode_current[idx]}A" )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
@@ -65,7 +67,7 @@ def p1_27_plot(self):
 
 	for idx, ans in enumerate(answers2):
 		try:
-			assertions.assert_within_percentage( diode_current[idx], ans, 3.0 )
+			assertions.assert_within_percentage( diode_current[idx], ans, tolerance_percent )
 			print( f"CALC when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {diode_current[idx]}A" )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )

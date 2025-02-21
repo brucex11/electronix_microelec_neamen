@@ -1,7 +1,5 @@
-import inspect
+from inspect import currentframe
 import math
-from typing import List
-from typing import Tuple
 
 from assertions import assertions
 
@@ -12,7 +10,7 @@ def p1_1(self):
 	ANS(a) Si:   (i) 1.61e+8/cm^3, (ii) 3.97e+11/cm^3
 	ANS(b) GaAs: (i) 6.02e+3/cm^3, (ii) 1.09e+8/cm^3
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -20,6 +18,7 @@ def p1_1(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 2.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	Tk_250 = 250		# Kelvin
@@ -30,10 +29,10 @@ def p1_1(self):
 	ni:float =  B * ( Tk_250 ** (3/2) ) \
 			* math.exp( -1.0 * self.dict_semicond_mat_consts['Si']['Eg_ev'] / (2 * self.boltzmann_ev * Tk_250) )
 	book_ans:float = 1.61e+8
-	assert_percentage:float = 5.0
+
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum}(a)(i):\tfor Si @250K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum}(a)(i):\tfor Si @250K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -41,10 +40,10 @@ def p1_1(self):
 	ni =  B * ( Tk_350 ** (3/2) ) \
 		 * math.exp( -1.0 * self.dict_semicond_mat_consts['Si']['Eg_ev'] / (2 * self.boltzmann_ev * Tk_350) )
 	book_ans = 3.97e+11
-	assert_percentage:float = 4.0
+	tolerance_percent:float = 4.0
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum}(a)(ii):\tfor Si @350K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum}(a)(ii):\tfor Si @350K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -53,10 +52,10 @@ def p1_1(self):
 	ni =  B * ( Tk_250 ** (3/2) ) \
 					* math.exp( -1.0 * self.dict_semicond_mat_consts['GaAs']['Eg_ev'] / (2 * self.boltzmann_ev * Tk_250) )
 	book_ans = 6.02e+3
-	assert_percentage:float = 8.0
+	tolerance_percent:float = 8.0
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum}(b)(i):\tfor GaAs @250K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum}(b)(i):\tfor GaAs @250K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -64,10 +63,10 @@ def p1_1(self):
 	ni =  B * ( Tk_350 ** (3/2) ) \
 		 * math.exp( -1.0 * self.dict_semicond_mat_consts['GaAs']['Eg_ev'] / (2 * self.boltzmann_ev * Tk_350) )
 	book_ans = 1.09e+8
-	assert_percentage:float = 7.0
+	tolerance_percent:float = 7.0
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum}(a)(ii):\tfor GaAs @350K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum}(a)(ii):\tfor GaAs @350K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -76,10 +75,10 @@ def p1_1(self):
 	ni =  B * ( self.Tk_300 ** (3/2) ) \
 		 * math.exp( -1.0 * self.dict_semicond_mat_consts['Si']['Eg_ev'] / (2 * self.boltzmann_ev * self.Tk_300) )
 	book_ans = 1.5e+10
-	assert_percentage:float = 5.0
+	tolerance_percent:float = 5.0
 	try:
-		assertions.assert_within_percentage( ni, book_ans, assert_percentage )
-		print( f"CALC {pnum} Ex 1.1:\tfor Si @300K, ni = {ni:.3e}/cm^3 is within {assert_percentage}% of book answer." )
+		assertions.assert_within_percentage( ni, book_ans, tolerance_percent )
+		print( f"CALC {pnum} Ex 1.1:\tfor Si @300K, ni = {ni:.3e}/cm^3 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 

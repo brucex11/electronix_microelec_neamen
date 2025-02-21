@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -13,7 +13,7 @@ def p1_5(self):
 	ANS(a) p-type, po = 1e+16/cm^3, no = 3.24e-04/cm^3
 	ANS(b) p-type, po = 1e+16/cm^3, no = 5.76e+10/cm^3."
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -21,6 +21,7 @@ def p1_5(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 11.3  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	ans_a_no:float = 3.24e-04
@@ -38,7 +39,7 @@ def p1_5(self):
 	print( f"CALC GaAs Na = 1e+16, no = {no:.4e}/cm^3" )
 
 	try:
-		assertions.assert_within_percentage( no, ans_a_no, 11.3 )
+		assertions.assert_within_percentage( no, ans_a_no, tolerance_percent )
 		print( f"CALC GaAs no = {no:.3e}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
@@ -54,8 +55,9 @@ def p1_5(self):
 	no = ni**2 / Na
 	print( f"CALC Ge Na = 1e+16, no = {no:.4e}/cm^3" )
 
+	tolerance_percent:float = 5.0
 	try:
-		assertions.assert_within_percentage( no, ans_b_no, 5.0 )
+		assertions.assert_within_percentage( no, ans_b_no, tolerance_percent )
 		print( f"CALC GaAs no = {no:.3e}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

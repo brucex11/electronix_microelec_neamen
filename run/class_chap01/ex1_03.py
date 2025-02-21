@@ -1,5 +1,5 @@
 
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -14,7 +14,7 @@ def ex1_03(self):
 	and μp = 480 cm^2/V-sec. Assume the applied electric field is 100 V/cm.
 	ANS:  173μA/cm^2
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -22,6 +22,7 @@ def ex1_03(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 3.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	ans:float = 173e-06   # μA/cm^2
@@ -39,9 +40,9 @@ def ex1_03(self):
 	sigma:float = self.qev * u_n * Nd
 
 	try:
-		assertions.assert_within_percentage( sigma, 1.73, 3.0 )
+		assertions.assert_within_percentage( sigma, 1.73, tolerance_percent )
 		print( f"CALC sigma = {round(sigma,3)}(ohm-cm)^-1 -OR-" )
-		print( f"CALC sigma = {round(sigma,3)}/(ohm-cm)" )
+		print( f"CALC sigma = {round(sigma,3)}/(ohm-cm) is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -50,7 +51,7 @@ def ex1_03(self):
 	J:float = E_field * sigma
 
 	try:
-		assertions.assert_within_percentage( J, 173, 3.0 )
-		print( f"CALC J current density = {round(J,3)}A/cm^2" )
+		assertions.assert_within_percentage( J, 173, tolerance_percent )
+		print( f"CALC J current density = {round(J,3)}A/cm^2 is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

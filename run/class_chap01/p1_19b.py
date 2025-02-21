@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 import math
 from assertions import assertions
 
@@ -6,13 +6,14 @@ def p1_19b(self):
 	"""
 	ANS: 1.19b (i) 1.13V, (ii) 1.21V, (iii) 1.41V
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 	print( f"Problem: {self.prob_str}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 2.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	ans_i:float = 1.13
@@ -32,8 +33,8 @@ def p1_19b(self):
 	Nd:float = 5.0e+15		# net donor concentration in the n-region
 	vbi = self.vthermal * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_i )
-		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V" )
+		assertions.assert_within_percentage( vbi, ans_i, tolerance_percent )
+		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -43,8 +44,8 @@ def p1_19b(self):
 	Nd:float = 5.0e+17		# net donor concentration in the n-region
 	vbi = self.vthermal * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_ii )
-		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V" )
+		assertions.assert_within_percentage( vbi, ans_ii, tolerance_percent )
+		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -54,7 +55,7 @@ def p1_19b(self):
 	Nd:float = 1.0e+18		# net donor concentration in the n-region
 	vbi = self.vthermal * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_iii )
-		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V" )
+		assertions.assert_within_percentage( vbi, ans_iii, tolerance_percent )
+		print( f"CALC {pnum}:\tfor GaAs, Vbi = {round(vbi, 3)}V is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

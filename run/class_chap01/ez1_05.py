@@ -1,5 +1,5 @@
 
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -14,7 +14,7 @@ def ez1_05(self):
 	SEE ALSO EX 1.1."
 	ANS:  (a) Vbi = 1.23 V  (b) Vbi = 0.374 V.
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -22,9 +22,9 @@ def ez1_05(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 1.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
-	tolerance_percent:float = 1.0  # assertion accuracy
 	ans_a:float = 1.23  # V
 	ans_b:float = 0.374  # V
 
@@ -43,7 +43,7 @@ def ez1_05(self):
 	Vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
 		assertions.assert_within_percentage( Vbi, ans_a, tolerance_percent )
-		print( f"CALC {pnum} (a) for GaAs, Vbi = {round(Vbi, 3)}V within {tolerance_percent}% of accepted answer." )
+		print( f"CALC {pnum} (a) for GaAs, Vbi = {round(Vbi, 3)}V is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -55,6 +55,6 @@ def ez1_05(self):
 	Vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
 		assertions.assert_within_percentage( Vbi, ans_b, tolerance_percent )
-		print( f"CALC {pnum} (a) for GaAs, Vbi = {round(Vbi, 3)}V within {tolerance_percent}% of accepted answer." )
+		print( f"CALC {pnum} (a) for GaAs, Vbi = {round(Vbi, 3)}V is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

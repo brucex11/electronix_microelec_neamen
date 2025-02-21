@@ -1,7 +1,5 @@
-import inspect
+from inspect import currentframe
 import math
-from typing import List
-from typing import Tuple
 
 from assertions import assertions
 
@@ -16,7 +14,7 @@ def p1_29(self):
   ANS (b) (i)  At VD = 0.1V,  ID = 9.50e-14A;  at VD = 0.7V, ID = 1mA
          (ii) At VD = 0.1 V, ID = 1.39e-14 A; at VD = 0.7V, ID = 1.42e-9A
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -24,6 +22,7 @@ def p1_29(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 2.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	n:int = 1	# emission coefficient
@@ -38,6 +37,6 @@ def p1_29(self):
 	ans_a:float = 2.03e-15
 	try:
 		assertions.assert_within_percentage( IS, ans_a, 1.0 )
-		print( f"CALC (a) reverse saturation current IS = {round(IS,18)}A" )
+		print( f"CALC (a) reverse saturation current IS = {round(IS,18)}A is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

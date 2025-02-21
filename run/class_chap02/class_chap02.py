@@ -4,7 +4,6 @@ import ast
 # from typing import Any
 from typing import Dict   # also available: Dict, Set
 # from typing import Tuple
-import math
 import os
 import importlib
 from inspect import currentframe
@@ -17,18 +16,12 @@ from scipy.constants import Boltzmann
 # import class_chap01
 
 
-class Chap01():
+class Chap02():
 	"""
-	Chapter title:  Semiconductor Materials and Diodes
-	HW problems:  3, 19, 27
+	HW problems:  2A: 3, 5,13, 16
+	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
 
-	Functions for critical concepts in this chapter are included as member functions
-	in this file.
-
-	For example, section 1.2.4 speaks-to the ideal Current-Voltage relationship
-	for a diode when an electric-field (voltage) is applied across the pn junction
-	(of said diode).
-	See calc_diode_ideal_current(...)
+	Args:
 
 	"""
 
@@ -160,55 +153,6 @@ class Chap01():
 	# ----------------------------------------------------------------------------
 	# --- Functions --------------------------------------------------------------
 	# ----------------------------------------------------------------------------
-
-	def calc_diode_ideal_current( self, IS:float, VD:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the voltage
-		and the current in the pn junction of a diode.
-
-		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
-		
-		Return: diode drift current
-		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
-		iD:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
-		return iD
-
-
-	def calc_diode_ideal_current_complete(
-			self, IS:float, VD:float, Tk:float, n:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the voltage
-		and the current in the pn junction of a diode.  Requires all variables
-		(hence 'complete').
-		Calculates the VT thermal voltage based on temp, Boltzmann, and electron
-		charge.
-
-		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
-			Tk:float temp in Kelvin
-			n:float  emission coefficient or ideality factor,
-							 and its value is in the range 1 <= n <= 2.
-		
-		Return: diode drift current
-		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		VT:float = ( Boltzmann * Tk ) / self.qev
-		print( f"&&&&& VT: {VT:.5e}V @ {round(Tk,4)}Kelvin" )
-		iD:float = IS * ( math.exp( VD / VT ) - 1 )
-		return iD
-
-
 	def run(self):
 		"""Call the method per the config.ini file [problem_num]
 		"""

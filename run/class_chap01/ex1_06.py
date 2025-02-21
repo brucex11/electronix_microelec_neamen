@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -13,7 +13,7 @@ def ex1_06(self):
 	Calculate the junction capacitance at VR = 1V and VR = 5V.
 	ANS:  Cjunction = 0.312pF @ Vreverse = 1V; Cj = 0.168pF @ Vr = 5V.
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -21,6 +21,8 @@ def ex1_06(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 1.0  # assertion accuracy
+	print( '-----------------------------------------------' )
 
 	Na:float = 1.0e16   # per cm^3
 	Nd:float = 1.0e15
@@ -30,8 +32,8 @@ def ex1_06(self):
 	# Vbi = Vtherm ln[ (Na*Nd) / ni^2 ]
 	Vbi:float = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( Vbi, 0.637, 1.0 )
-		print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V" )
+		assertions.assert_within_percentage( Vbi, 0.637, tolerance_percent )
+		print( f"CALC {pnum}: Vbi = {round(Vbi, 3)}V is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -49,7 +51,7 @@ def ex1_06(self):
 	answers:Tuple = ( 0.312e-12, 0.168e-12 )
 	for idx, ans in enumerate(answers):
 		try:
-			assertions.assert_within_percentage( junction_capacitance_calculated[idx], ans, 3.0 )
-			print( f"CALC junction capacitance: {junction_capacitance_calculated[idx]:.3e}" )
+			assertions.assert_within_percentage( junction_capacitance_calculated[idx], ans, tolerance_percent )
+			print( f"CALC junction capacitance: {junction_capacitance_calculated[idx]:.3e}F  is within {tolerance_percent}% of book answer." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )

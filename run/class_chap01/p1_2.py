@@ -1,9 +1,7 @@
-import inspect
+from inspect import currentframe
 import math
 from typing import List
-from typing import Tuple
 
-from assertions import assertions
 
 def p1_2(self):
 	"""
@@ -16,7 +14,7 @@ def p1_2(self):
 	a range of temps, then assert that the concentration n_i meets the requirement
 	less than 1e+12 and 1e+09 per cm^3.
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 

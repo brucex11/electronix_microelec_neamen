@@ -1,4 +1,10 @@
-import inspect
+"""
+.. py:currentmodule:: py_main.py
+
+Runs a shell command.
+"""
+
+from  inspect import currentframe
 import logging
 import sys
 # import importlib
@@ -8,6 +14,7 @@ from typing import List   # also available: Dict, Set
 import parse_cmd_line
 import parse_config_file
 from class_chap01 import class_chap01
+from class_chap02 import class_chap02
 from logger import logger
 
 
@@ -20,7 +27,7 @@ def main() -> int:
 	"""
 
 	try:
-		fcn_name:str = inspect.currentframe().f_code.co_name
+		fcn_name:str = currentframe().f_code.co_name
 		print( f"ENTRYPOINT: Module: '{__name__}'; function: '{fcn_name}'" )
 
 		parse_cmd_line.parse_the_args()

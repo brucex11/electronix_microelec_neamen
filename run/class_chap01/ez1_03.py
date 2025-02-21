@@ -1,5 +1,5 @@
 
-import inspect
+from inspect import currentframe
 from assertions import assertions
 
 def ez1_03(self):
@@ -10,7 +10,7 @@ def ez1_03(self):
 	electric field that will induce a drift current density of 175 A/cm^2.
 	ANS:  (a) 0.046ohm-cm  (b) 8.04V/cm
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -18,9 +18,9 @@ def ez1_03(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 3.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
-	tolerance_percent:float = 3.0  # assertion accuracy
 	ans_a:float = 0.046   # Ωcm
 	ans_b:float = 8.04    # V/cm
 
@@ -42,7 +42,7 @@ def ez1_03(self):
 
 	try:
 		assertions.assert_within_percentage( resv, ans_a, tolerance_percent )
-		print( f"CALC sigma = {round(resv,3)}(ohm-cm)" )
+		print( f"CALC sigma = {round(resv,3)}(ohm-cm) is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -53,6 +53,6 @@ def ez1_03(self):
 
 	try:
 		assertions.assert_within_percentage( E_field, ans_b, tolerance_percent )
-		print( f"CALC E electric field = {round(E_field,3)}V/cm" )
+		print( f"CALC E electric field = {round(E_field,3)}V/cm is within {tolerance_percent}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

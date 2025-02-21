@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 import math
 from scipy.constants import Boltzmann
 
@@ -11,13 +11,14 @@ def p1_19a(self):
 	(iii) Na = Nd = 1.+e18/cm^3.
 	ANS: 1.19 (a) (i) 0.661V, (ii) 0.739V, (iii) 0.937V
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 	print( f"Problem: {self.prob_str}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 1.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
 	ans_i:float = 0.661
@@ -47,7 +48,7 @@ def p1_19a(self):
 	# math.log(x) computes ln(x) for positive values of x.
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_i, 1.0 )
+		assertions.assert_within_percentage( vbi, ans_i, tolerance_percent )
 		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
@@ -58,7 +59,7 @@ def p1_19a(self):
 	Nd:float = 5.0e+17		# net donor concentration in the n-region
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_ii, 1.0 )
+		assertions.assert_within_percentage( vbi, ans_ii, tolerance_percent )
 		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
@@ -69,7 +70,7 @@ def p1_19a(self):
 	Nd:float = 1.0e+18		# net donor concentration in the n-region
 	vbi = self.vthrml0_026 * math.log( Na * Nd / ni**2 )
 	try:
-		assertions.assert_within_percentage( vbi, ans_iii, 1.0 )
+		assertions.assert_within_percentage( vbi, ans_iii, tolerance_percent )
 		print( f"CALC {pnum}:\tfor silicon, Vbi = {round(vbi, 3)}V" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

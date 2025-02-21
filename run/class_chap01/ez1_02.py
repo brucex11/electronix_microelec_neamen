@@ -1,5 +1,5 @@
 
-import inspect
+from inspect import currentframe
 import math
 from typing import List
 from typing import Tuple
@@ -21,7 +21,7 @@ def ez1_02(self):
 	ANS (b)(i)  no = 2e+16/cm^3, po = 1.625e-04/cm^3
 	ANS (a)(ii) po = 1e+15/cm^3, no = 3.24e-04/cm^3
 	"""
-	fcn_name:str = inspect.currentframe().f_code.co_name
+	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
@@ -29,9 +29,9 @@ def ez1_02(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
+	tolerance_percent:float = 5.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
-	assert_tolerance:float = 5.0
 	carrier_concentration:List[float] = []
 	# At 300K, the Si intrinsic carrier concentration is 1.5e+10/cm^3.
 	ni_Si:float = self.ni_Si_300K
@@ -47,8 +47,8 @@ def ez1_02(self):
 
 	for idx, ans in enumerate(ans_ai):
 		try:
-			assertions.assert_within_percentage( carrier_concentration[idx], ans, assert_tolerance )
-			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e}" )
+			assertions.assert_within_percentage( carrier_concentration[idx], ans, tolerance_percent )
+			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e} is within {tolerance_percent}% of accepted answer." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -65,8 +65,8 @@ def ez1_02(self):
 
 	for idx, ans in enumerate(ans_aii):
 		try:
-			assertions.assert_within_percentage( carrier_concentration[idx], ans, assert_tolerance )
-			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e}" )
+			assertions.assert_within_percentage( carrier_concentration[idx], ans, tolerance_percent )
+			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e} is within {tolerance_percent}% of accepted answer." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -93,8 +93,8 @@ def ez1_02(self):
 
 	for idx, ans in enumerate(ans_bi):
 		try:
-			assertions.assert_within_percentage( carrier_concentration[idx], ans, assert_tolerance )
-			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e}" )
+			assertions.assert_within_percentage( carrier_concentration[idx], ans, tolerance_percent )
+			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e} is within {tolerance_percent}% of accepted answer." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -111,7 +111,7 @@ def ez1_02(self):
 
 	for idx, ans in enumerate(ans_bii):
 		try:
-			assertions.assert_within_percentage( carrier_concentration[idx], ans, assert_tolerance )
-			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e}" )
+			assertions.assert_within_percentage( carrier_concentration[idx], ans, tolerance_percent )
+			print( f"CALC carrier concentration: {carrier_concentration[idx]:.3e} is within {tolerance_percent}% of accepted answer." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )

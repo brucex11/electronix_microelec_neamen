@@ -22,6 +22,7 @@ def p1_1(self):
 	tolerance_percent:float = 2.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
+
 	ans:float = 0
 
 	calc_result:float = 0
