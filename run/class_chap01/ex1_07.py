@@ -4,10 +4,10 @@ from assertions import assertions
 
 def ex1_07(self):
 	"""Page 28:
-	Determine the current in a pn junction diode.
+	Determine the current in a pn junction diode given voltage VD across it.
 	Consider a pn junction at T = 300 K in which IS = 1e-14A and n = 1. Find the
 	diode current for VD = +0.70V and VD = -0.7V."
-	ANS ID=4.93e-03A @ +0.7V, ID=-1e-14A @ -0.7V..
+	ANS ID=4.93e-03A @ +0.7V, ID=-1e-14A @ -0.7V.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )

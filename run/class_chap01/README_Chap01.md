@@ -22,6 +22,9 @@ EX 1.5: Calculate the built-in potential barrier of a pn junction.
 EX 1.6: Calculate the pn junction capacitance at VR = 1V and VR = 5V.
 * ex1_06, pg 26
 
+EX 1.7: Determine the current in a pn junction diode given voltage VD across it.
+* ex1_07, pg 28
+
 ## ExerciZes
 EZ 1.1: See EXample 1.1.
 
@@ -41,6 +44,9 @@ doping concentrations.
 
 EZ 1.6: Find the zero-biased pn junction capacitance Cj0.
 * ez1_06, pg26
+
+EZ 1.7: Determine the required forward-bias voltage to produce a given current of ID.
+* ez1_07, pg29
 
 ## Problems
 P1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
