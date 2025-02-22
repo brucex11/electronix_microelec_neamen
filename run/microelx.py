@@ -27,8 +27,8 @@ def main() -> int:
 	"""
 
 	try:
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; function: '{fcn_name}'" )
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; function: '{fcn_name}'" )
 
 		parse_cmd_line.parse_the_args()
 		# print( f">>>subcmd specified on cmd-line is '{parse_cmd_line.chapter_subcmd}'" )
@@ -37,17 +37,13 @@ def main() -> int:
 
 		lg:logging.Logger = logger.build_logger( pcf, parse_cmd_line.chapter_subcmd )
 
-
-
-		# Example to retrieve all modules
-		global_variables = globals()
-		# Filter out modules that start with '__' and are instances of types like 'sys' (modules)
-		modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
-		# List of module names
-		module_names = list(modules.keys())
-		print( f"module_names: {module_names}" )
-
-
+		# # Example to retrieve all modules-by-name
+		# global_variables = globals()
+		# # Filter out modules that start with '__' and are instances of types like 'sys' (modules)
+		# modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
+		# # List of module names
+		# module_names = list(modules.keys())
+		# print( f"module_names: {module_names}" )
 
 		# Retrieve the command-line subcommand as this is the "operation" to perform.
 		# This is the implementation of the source-code's design.
@@ -69,9 +65,9 @@ def main() -> int:
 			params = [pcf,lg]
 			# Instantiate the class and run it
 			# Chap 01
-			class_ref( *params ).run()
+			# class_ref( *params ).run()
 			# Chap 02 and above
-			# class_ref( *params ).run_in_subdir()
+			class_ref( *params ).run_in_subdir()
 			# Note per line above: the code in the run() class-method could be moved
 			# to the end of the class __init__() method there eliminating the need
 			# for the run() method.  Then, the call would simply be as below:

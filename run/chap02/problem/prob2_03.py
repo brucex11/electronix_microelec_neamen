@@ -6,10 +6,17 @@ from typing import Tuple
 
 from assertions import assertions
 
-def p1_1(self):
-	"""
-	ANS(a): (i) 1.03μA, (ii) 2.25mA
-	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+def prob2_03(self):
+	"""Page 111:
+	A half-wave rectifier such as shown in Figure 2.2(a) has a 2k-ohm load.
+	The input is a 120V (rms), 60Hz signal and the transformer is a 10:1 stepdown
+	transformer. The diode has a cut-in voltage of Vgamma = 0.7V (rf = 0).
+	(a) What is the peak output voltage? (b) Determine the peak diode current.
+	(c) What is the fraction (percent) of a cycle that vO > 0. (d) Determine the
+	average output voltage. (e) Find the average current in the load.
+	Page 1338:
+	ANS (a) vO(peak) = 16.27V  (b) iD(peak) = 8.14mA  (c) 48.7pcnt  (d) vO(avg) = 5.06V
+	(e) id(avg) = 2.53mA.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )

@@ -1,33 +1,25 @@
 # import inspect
 from inspect import currentframe
 import math
-import os
 # from typing import List
 # from typing import Tuple
 
 from assertions import assertions
 
-# print( 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' )
-# fcn_name:str = currentframe().f_code.co_name
-# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-# print( 'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' )
-
-def exer2_01(self):
-	"""Page 71:
+def exam2_01(self):
+	"""Page 70:
 	Objective: Determine the currents and voltages in a half-wave rectifier circuit.
-	Consider the circuit shown in Figure 2.4. Assume VB = 4.5V, R = 250Ω, and
-	Vγ = 0.6 V. Also assume vS(t) = 12sinωt . Determine the peak diode current,
+	Consider the circuit shown in Figure 2.4. Assume VB = 12V, R = 100Ω, and
+	Vγ = 0.6 V. Also assume vS(t) = 24sinωt . Determine the peak diode current,
 	maximum reverse-bias diode voltage, and the fraction of the cycle over which
 	the diode is conducting.
-	ANS peak diode current = 27.6mA, max reverse-bias diode voltage = 16.5V, %-time = 36%.
+	ANS peak diode current = 114mA, max reverse-bias diode voltage = 36V, %-time = 32.4%.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
-	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
-	print( f"os.path.basename(__name__): '{os.path.basename(__name__)}'" )
+	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
@@ -37,11 +29,10 @@ def exer2_01(self):
 
 	ans_id_peak:float = 114e-03  # mA
 	ans_max_rev_voltage:float = 36   # V
-	ans_percent_cycle:float = 36
+	ans_percent_cycle:float = 32.4
 
-	VB:float = 4.5
-	R:float  = 250
-
+	VB:float = 12
+	R:float  = 100
 	Vgamma:float = 0.6
 	vS_t_peak:float = 24   # V
 
