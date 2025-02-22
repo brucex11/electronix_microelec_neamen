@@ -4,11 +4,10 @@ import ast
 # from typing import Any
 from typing import Dict   # also available: Dict, Set
 # from typing import Tuple
-import math
 import os
 import importlib
 from inspect import currentframe
-# import sys
+import sys
 from scipy.constants import Boltzmann
 
 # from pytools import glob_dir
@@ -16,19 +15,18 @@ from scipy.constants import Boltzmann
 # from pytools import py_file_io
 # import class_chap01
 
+# from chap02 import exez
+# exez.test.pr(self)
+# # test.pr()
 
-class Chap01():
+from chap02 import exez
+
+class Chap02():
 	"""
-	Chapter title:  Semiconductor Materials and Diodes
-	HW problems:  3, 19, 27
+	HW problems:  2A: 3, 5,13, 16
+	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
 
-	Functions for critical concepts in this chapter are included as member functions
-	in this file.
-
-	For example, section 1.2.4 speaks-to the ideal Current-Voltage relationship
-	for a diode when an electric-field (voltage) is applied across the pn junction
-	(of said diode).
-	See calc_diode_ideal_current(...)
+	Args:
 
 	"""
 
@@ -52,6 +50,8 @@ class Chap01():
 		self.lg.info( f"PATH to config file: '{self.cf.path_to_config_file}'" )
 
 		# Pick-up the specific config params
+		# subdir_name is used to build the "path" to dynamically call the problem function
+		self._subdir_name = self.cf.get_config_params['common']['subdir_name']
 		self.prob:str = self.cf.get_config_params['common']['problem_num']
 		# Strip the leading 'p' and replace '_' with '.' for printing purpose only.
 		tmps:str = self.prob.lstrip(self.prob[0])
@@ -99,6 +99,8 @@ class Chap01():
 		# 	print( 'QUIT' )
 		# 	exit()
 
+		# exez.exer2_01.exer2_01(self)
+
 	# ----------------------------------------------------------------------------
 	# --- Getters ----------------------------------------------------------------
 	# ----------------------------------------------------------------------------
@@ -144,6 +146,9 @@ class Chap01():
 	def save_figure_dir(self):
 		return self._save_figure_dir
 	@property
+	def subdir_name(self):
+		return self._subdir_name
+	@property
 	def Tk_300(self):
 		return self._Tk_300
 	@property
@@ -158,86 +163,16 @@ class Chap01():
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions --------------------------------------------------------------
+	# --- Functions: helpers to support all of Chapter 02 ------------------------
 	# ----------------------------------------------------------------------------
 
-	def calc_diode_ideal_current( self, IS:float, VD:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the current
-		and voltage in the pn junction of a diode.
 
-		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
-		
-		Return: diode drift current
-		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
-		ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
-		return ID
-
-
-	def calc_diode_ideal_current_complete(
-			self, IS:float, VD:float, Tk:float, n:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the current
-		and voltage in the pn junction of a diode.  Requires all variables
-		(hence 'complete').
-		Calculates the VT thermal voltage based on temp, Boltzmann, and electron
-		charge.
-
-		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
-			Tk:float temp in Kelvin
-			n:float  emission coefficient or ideality factor,
-							 and its value is in the range 1 <= n <= 2.
-		
-		Return: diode drift current
-		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		VT:float = ( Boltzmann * Tk ) / self.qev
-		print( f"&&&&& VT: {VT:.5e}V @ {round(Tk,4)}Kelvin" )
-		ID:float = IS * ( math.exp( VD / VT ) - 1 )
-		return ID
-
-
-	def calc_diode_ideal_voltage( self, IS:float, ID:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the voltage
-		and current in the pn junction of a diode.
-
-		Args:
-			IS:float reverse saturation current
-			ID:float current through junction
-		
-		Return: diode voltage VD
-		"""
-		# fcn_name:str = currentframe().f_code.co_name
-		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		# VT:float = ( Boltzmann * Tk ) / self.qev
-		VT:float = self.vthrml0_026
-
-		# The original equation below
-		# ID:float = IS * ( math.exp( VD / VT ) - 1 )
-		# See Mathematics for Scientists, Bak, Licchtenberg, page 174 for log-math-rules for division
-		# math.log(ID) - math.log(IS) + math.log(1) = (VD /VT)
-		VD:float = VT * ( math.log(ID) - math.log(IS) + 0 )   # math.log(1) = 0
-
-		return VD
-
-
-	def run(self):
-		"""Call the method per the config.ini file [problem_num]
+	# ----------------------------------------------------------------------------
+	# --- Dynamic method caller --------------------------------------------------
+	# ----------------------------------------------------------------------------
+	def run_in_dir(self):
+		"""Call the method per the config.ini file [problem_num] WHEN THE MODULE
+			 (OR .PY FILENAME) IS IN THE SAME SUBDIR AS THIS MODULE/.PY FILE.
 		"""
 		fcn_name:str = currentframe().f_code.co_name
 		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -247,7 +182,54 @@ class Chap01():
 		class_name:str = self.__class__.__name__
 		# convert the camel-case classname to all lowercase
 		cllow:str = class_name.lower()
-		module_name:str = f"class_{cllow}.{self.prob}"
+		# module_name:str = f"class_{cllow}.{self.prob}"
+		module_name:str = f"{cllow}.{self.prob}"
+		method_name:str = f"{self.prob}"
+		module = importlib.import_module( module_name )
+		method = getattr( module, method_name )
+		if callable(method):
+			method(self)
+		else:
+			raise AttributeError( f"Method '{self.prob}' not found" )
+
+
+	def run_in_subdir(self):
+		"""Call the method per the config.ini file [problem_num]
+		"""
+		fcn_name:str = currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+
+
+		# Example to retrieve all modules
+		global_variables = globals()
+		# Filter out modules that start with '__' and are instances of types like 'sys' (modules)
+		modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
+		# List of module names
+		module_names = list(modules.keys())
+		print( f">>>>>>>>>>>>>>>>>>>{currentframe().f_code.co_name}-module_names: {module_names}" )
+		print( f">>>>>>>>>>>>>>>>>>>self.prob: {self.prob}" )
+		print( f">>>>>>>>>>>>>>>>>>>self.subdir_name: {self.subdir_name}" )
+
+		print( f">>>>>>>>>>>>>>>>>>>self.__class__.__name__: '{self.__class__.__name__}'" )
+		print( f">>>>>>>>>>>>>>>>>>>sys.path: '{sys.path}'" )
+
+		# exez.exer2_01.exer2_01(self)
+		# return
+
+		# exez.exer2_01.exer2_01(self)
+
+
+		# build the module name starting with this class's name
+		class_name:str = self.__class__.__name__
+		print( f"class_name: {class_name}" )
+		# convert the camel-case classname to all lowercase
+		cllow:str = class_name.lower()
+		# module_name:str = f"class_{cllow}.{self.prob}"
+		# module_name:str = f"{cllow}.{self.prob}"
+		module_name:str = f"{cllow}.{self.subdir_name}.{self.prob}"
+		# module_name:str = 'chap02.exez.exer2_01'
 		method_name:str = f"{self.prob}"
 		module = importlib.import_module( module_name )
 		method = getattr( module, method_name )

@@ -6,10 +6,10 @@ import math
 
 from assertions import assertions
 
-def ex2_01(self):
+def exam2_01(self):
 	"""Page 70:
 	Objective: Determine the currents and voltages in a half-wave rectifier circuit.
-	Consider the circuit shown in Figure 2.4. Assume VB = 12 V, R = 100Ω, and
+	Consider the circuit shown in Figure 2.4. Assume VB = 12V, R = 100Ω, and
 	Vγ = 0.6 V. Also assume vS(t) = 24sinωt . Determine the peak diode current,
 	maximum reverse-bias diode voltage, and the fraction of the cycle over which
 	the diode is conducting.
@@ -23,8 +23,8 @@ def ex2_01(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	print( '-----------------------------------------------' )
 	assert_percentage:float = 2.0
+	print( '-----------------------------------------------' )
 
 	ans_id_peak:float = 114e-03  # mA
 	ans_max_rev_voltage:float = 36   # V

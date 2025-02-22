@@ -13,8 +13,8 @@ from typing import List   # also available: Dict, Set
 
 import parse_cmd_line
 import parse_config_file
-from class_chap01 import class_chap01
-from class_chap02 import class_chap02
+from chap01 import class_chap01
+from chap02 import class_chap02
 from logger import logger
 
 
@@ -36,7 +36,19 @@ def main() -> int:
 		pcf:parse_config_file.ParseConfigFile = parse_config_file.ParseConfigFile( parse_cmd_line.path_to_config_file )
 
 		lg:logging.Logger = logger.build_logger( pcf, parse_cmd_line.chapter_subcmd )
-			
+
+
+
+		# Example to retrieve all modules
+		global_variables = globals()
+		# Filter out modules that start with '__' and are instances of types like 'sys' (modules)
+		modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
+		# List of module names
+		module_names = list(modules.keys())
+		print( f"module_names: {module_names}" )
+
+
+
 		# Retrieve the command-line subcommand as this is the "operation" to perform.
 		# This is the implementation of the source-code's design.
 		class_name:str = parse_cmd_line.chapter_subcmd
@@ -56,21 +68,16 @@ def main() -> int:
 			# Setup the __init__ parameters
 			params = [pcf,lg]
 			# Instantiate the class and run it
+			# Chap 01
 			class_ref( *params ).run()
+			# Chap 02 and above
+			# class_ref( *params ).run_in_subdir()
 			# Note per line above: the code in the run() class-method could be moved
 			# to the end of the class __init__() method there eliminating the need
 			# for the run() method.  Then, the call would simply be as below:
 			# class_ref( *params )
 		except AttributeError as e:
 			print( f"Exception caught in main: {e}" )
-
-		# # Example to retrieve all modules
-		# global_variables = globals()
-		# # Filter out modules that start with '__' and are instances of types like 'sys' (modules)
-		# modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
-		# # List of module names
-		# module_names = list(modules.keys())
-		# print( f"module_names: {module_names}" )
 
 	except FileExistsError as e:
 		print( f"Exception caught in main: {e}" )

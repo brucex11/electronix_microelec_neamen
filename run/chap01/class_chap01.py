@@ -4,6 +4,7 @@ import ast
 # from typing import Any
 from typing import Dict   # also available: Dict, Set
 # from typing import Tuple
+import math
 import os
 import importlib
 from inspect import currentframe
@@ -16,12 +17,18 @@ from scipy.constants import Boltzmann
 # import class_chap01
 
 
-class Chap02():
+class Chap01():
 	"""
-	HW problems:  2A: 3, 5,13, 16
-	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
+	Chapter title:  Semiconductor Materials and Diodes
+	HW problems:  3, 19, 27
 
-	Args:
+	Functions for critical concepts in this chapter are included as member functions
+	in this file.
+
+	For example, section 1.2.4 speaks-to the ideal Current-Voltage relationship
+	for a diode when an electric-field (voltage) is applied across the pn junction
+	(of said diode).
+	See calc_diode_ideal_current(...)
 
 	"""
 
@@ -151,7 +158,86 @@ class Chap02():
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions --------------------------------------------------------------
+	# --- Functions: helpers to support all of Chapter 01 ------------------------
+	# ----------------------------------------------------------------------------
+
+	def calc_diode_ideal_current( self, IS:float, VD:float ) -> float:
+		"""
+		This function implements the theoretical relationship between the current
+		and voltage in the pn junction of a diode.
+
+		Args:
+			IS:float reverse saturation current
+			VD:float voltage across junction
+		
+		Return: diode drift current
+		"""
+		fcn_name:str = currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
+		ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
+		return ID
+
+
+	def calc_diode_ideal_current_complete(
+			self, IS:float, VD:float, Tk:float, n:float ) -> float:
+		"""
+		This function implements the theoretical relationship between the current
+		and voltage in the pn junction of a diode.  Requires all variables
+		(hence 'complete').
+		Calculates the VT thermal voltage based on temp, Boltzmann, and electron
+		charge.
+
+		Args:
+			IS:float reverse saturation current
+			VD:float voltage across junction
+			Tk:float temp in Kelvin
+			n:float  emission coefficient or ideality factor,
+							 and its value is in the range 1 <= n <= 2.
+		
+		Return: diode drift current
+		"""
+		fcn_name:str = currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		VT:float = ( Boltzmann * Tk ) / self.qev
+		print( f"&&&&& VT: {VT:.5e}V @ {round(Tk,4)}Kelvin" )
+		ID:float = IS * ( math.exp( VD / VT ) - 1 )
+		return ID
+
+
+	def calc_diode_ideal_voltage( self, IS:float, ID:float ) -> float:
+		"""
+		This function implements the theoretical relationship between the voltage
+		and current in the pn junction of a diode.
+
+		Args:
+			IS:float reverse saturation current
+			ID:float current through junction
+		
+		Return: diode voltage VD
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# VT:float = ( Boltzmann * Tk ) / self.qev
+		VT:float = self.vthrml0_026
+
+		# The original equation below
+		# ID:float = IS * ( math.exp( VD / VT ) - 1 )
+		# See Mathematics for Scientists, Bak, Licchtenberg, page 174 for log-math-rules for division
+		# math.log(ID) - math.log(IS) + math.log(1) = (VD /VT)
+		VD:float = VT * ( math.log(ID) - math.log(IS) + 0 )   # math.log(1) = 0
+
+		return VD
+
+
+	# ----------------------------------------------------------------------------
+	# --- Dynamic method caller --------------------------------------------------
 	# ----------------------------------------------------------------------------
 	def run(self):
 		"""Call the method per the config.ini file [problem_num]
@@ -164,7 +250,8 @@ class Chap02():
 		class_name:str = self.__class__.__name__
 		# convert the camel-case classname to all lowercase
 		cllow:str = class_name.lower()
-		module_name:str = f"class_{cllow}.{self.prob}"
+		module_name:str = f"{cllow}.{self.prob}"
+		# module_name:str = f"class_{cllow}.{self.prob}"
 		method_name:str = f"{self.prob}"
 		module = importlib.import_module( module_name )
 		method = getattr( module, method_name )
