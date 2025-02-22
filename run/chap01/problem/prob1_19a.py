@@ -4,7 +4,7 @@ from scipy.constants import Boltzmann
 
 from assertions import assertions
 
-def p1_19a(self):
+def prob1_19a(self):
 	"""
 	Determine the built-in potential barrier Vbi in a silicon pn junction for
 	(i) Nd = Na = 5.e+15/cm-cubed; (ii) Nd = 5.e+17/cm+e3 and Na = 1.+e15/cm^3;

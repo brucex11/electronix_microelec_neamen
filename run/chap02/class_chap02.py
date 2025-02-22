@@ -19,7 +19,8 @@ from scipy.constants import Boltzmann
 # exez.test.pr(self)
 # # test.pr()
 
-from chap02 import example, exercise, problem
+# below is not actually required
+# from chap02 import example, exercise, problem
 
 class Chap02():
 	"""

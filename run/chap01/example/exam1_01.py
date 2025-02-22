@@ -3,7 +3,7 @@ import math
 
 from assertions import assertions
 
-def ex1_01(self):
+def exam1_01(self):
 	"""
 	Objective: Calculate the intrinsic carrier concentration in silicon at T = 300 K.
 	ANS Si: ni = 1.5e+10/cm^3

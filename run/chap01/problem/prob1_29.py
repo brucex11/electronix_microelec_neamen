@@ -3,7 +3,7 @@ import math
 
 from assertions import assertions
 
-def p1_29(self):
+def prob1_29(self):
 	"""
 	A silicon pn junction diode has an emission coefficient of n = 1. The diode current is ID = 1mA
 	when VD = 0.7V. (a) What is the reverse-bias saturation current?

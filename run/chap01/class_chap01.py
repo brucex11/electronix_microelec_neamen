@@ -42,9 +42,9 @@ class Chap01():
 			path_to_config_file : string
 				this is passed to the base class for parsing
 		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		self._cf = configparams_obj
 		self._lg = logger_obj
@@ -52,10 +52,12 @@ class Chap01():
 		self.lg.info( f"PATH to config file: '{self.cf.path_to_config_file}'" )
 
 		# Pick-up the specific config params
+		# subdir_name is used to build the "path" to dynamically call the problem function
+		self._subdir_name = self.cf.get_config_params['common']['subdir_name']
 		self.prob:str = self.cf.get_config_params['common']['problem_num']
 		# Strip the leading 'p' and replace '_' with '.' for printing purpose only.
-		tmps:str = self.prob.lstrip(self.prob[0])
-		self._prob_str:str = tmps.replace( '_', '.' )
+		# tmps:str = self.prob.lstrip(self.prob[0])
+		self._prob_str:str = self.prob.replace( '_', '.' )
 
 		self._problem_txt:str = self.cf.get_config_params['common']['problem_txt']
 		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
@@ -143,6 +145,9 @@ class Chap01():
 	@property
 	def save_figure_dir(self):
 		return self._save_figure_dir
+	@property
+	def subdir_name(self):
+		return self._subdir_name
 	@property
 	def Tk_300(self):
 		return self._Tk_300
@@ -239,7 +244,7 @@ class Chap01():
 	# ----------------------------------------------------------------------------
 	# --- Dynamic method caller --------------------------------------------------
 	# ----------------------------------------------------------------------------
-	def run(self):
+	def run_in_dir(self):
 		"""Call the method per the config.ini file [problem_num]
 		"""
 		fcn_name:str = currentframe().f_code.co_name
@@ -259,3 +264,48 @@ class Chap01():
 			method(self)
 		else:
 			raise AttributeError( f"Method '{self.prob}' not found" )
+
+
+	def run_in_subdir(self):
+		"""Call the method per the config.ini file [problem_num]
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# # Example to retrieve all modules
+		# global_variables = globals()
+		# # Filter out modules that start with '__' and are instances of types like 'sys' (modules)
+		# modules = {name: obj for name, obj in global_variables.items() if isinstance(obj, type(sys)) and not name.startswith('__')}
+		# # List of module names
+		# module_names = list(modules.keys())
+		# print( f">>>>>>>>>>>>>>>>>>>{currentframe().f_code.co_name}-module_names: {module_names}" )
+
+		# Build the FULL module name in req'd format: class-name.subdir-name.python-fname
+		#   where:
+		#      class-name:   contains all lower-case chars,
+		#      subdir-name:  is picked up from the config.ini file,
+		#      python-fname: is aka a python "module" without the .py extension,
+		#                    and is also picked up from the config.ini file.
+		# this class's name
+		class_tmp:str = self.__class__.__name__
+		# print( f"class_name: {class_tmp}" )
+		# convert the camel-case classname to all lowercase
+		class_name:str = class_tmp.lower()
+		subdir_name:str = self.subdir_name
+		py_fname_sans_extension:str = self.prob
+		# build the FULL module name
+		module_name:str = f"{class_name}.{subdir_name}.{py_fname_sans_extension}"
+		# use the module-name string to import the desired module
+		module = importlib.import_module( module_name )
+		# finally, grab the function-name in the module
+		method = getattr( module, py_fname_sans_extension )
+		if callable(method):
+			method(self)
+		else:
+			raise AttributeError( f"Method '{self.prob}' not found" )
+
+		# 22Feb25:
+		# TBD that the py-files that contain the calculations-code do NOT
+		# necessarily need to be inside a (def:) method/function.
+		# If so, then the 'getattr' call above may be eliminated.

@@ -2,7 +2,7 @@
 from inspect import currentframe
 from assertions import assertions
 
-def ex1_02(self):
+def exam1_02(self):
 	"""
 	ANS (a) po = 2.25e+04/cm^3  (b) no = 4.5+e03/cm^3
 	"""

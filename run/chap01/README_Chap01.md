@@ -2,51 +2,54 @@
 # Electronix Microelectronics
 Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Edition by Donald Neamen.
 
-## EXamples
-EX 1.1: Calculate the intrinsic carrier concentration at T = 300 K for:
+Figures and notes for all `./subdir` examples, exercises, and problems for this
+chapter are contained in MSWord docx located in the `./subdir/doc` folder.
+
+## Examples
+1.1: Calculate the intrinsic carrier concentration at T = 300 K for:
 * `Si, Ge, GaAs`
-* ex1_01, page 13 (also covers ExersiZe 1.1)
+* example/exam1_01.py, textbook page 13 (also covers exer 1.1)
 
 EX 1.2: Calculate the majority and minority carrier concentrations.
-* ex1_02, pg 16
+* ex1_02, textbook pg 16
 
 EX 1.3: Calculate the drift current density for a given semiconductor.
-* ex1_03, pg 18
+* ex1_03, textbook pg 18
 
 EX 1.4: Calculate the drift current density for a given semiconductor.
-* ex1_04, pg 20
+* ex1_04, textbook pg 20
 
 EX 1.5: Calculate the built-in potential barrier of a pn junction.
-* ex1_05, pg 24, SEE ALSO p1.19
+* ex1_05, textbook pg 24, SEE ALSO p1.19
 
 EX 1.6: Calculate the pn junction capacitance at VR = 1V and VR = 5V.
-* ex1_06, pg 26
+* ex1_06, textbook pg 26
 
 EX 1.7: Determine the current in a pn junction diode given voltage VD across it.
-* ex1_07, pg 28
+* ex1_07, textbook pg 28
 
-## ExerciZes
+## Exercises
 EZ 1.1: See EXample 1.1.
 
 EZ 1.2: Calculate the majority and minority carrier concentrations.
-* ez1_02, pg 16
+* ez1_02, textbook pg 16
 
 EZ 1.3: Determine the resistivity (reciprocal of conductivity) of the material GaAs.
-* ez1_03, pg 19
+* ez1_03, textbook pg 19
 
 EZ 1.4: Calculate the hole diffusion current density of Si at (a) x = 0 and
 (b) x = 1e-03cm.
-* ez1_04, pg 21
+* ez1_04, textbook pg 21
 
 EZ 1.5: Calculate Vbi for GaAs and Ge pn junction with specified donor and acceptor
 doping concentrations.
-* ez1_05, pg25
+* ez1_05, textbook pg 25
 
 EZ 1.6: Find the zero-biased pn junction capacitance Cj0.
-* ez1_06, pg26
+* ez1_06, textbook pg 26
 
 EZ 1.7: Determine the required forward-bias voltage to produce a given current of ID.
-* ez1_07, pg29
+* ez1_07, textbook pg 29
 
 ## Problems
 P1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
@@ -55,7 +58,7 @@ P1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
 P1.2: Determine the maximum allowable temperature of a pn junction by
 programatically iterating through	a range of temps, then assert that the
 intrinsic concentration n_i meets the requirement	less than 1e+12 and 1e+09 per cm^3.
-* p1_2
+* p1_2, textbook pg 
 
 P1.3: Calculate the intrinsic carrier concentration in Si and Ge at various temps K.
 * p1_3

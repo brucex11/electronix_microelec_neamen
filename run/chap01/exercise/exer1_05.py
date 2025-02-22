@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ez1_05(self):
+def exer1_05(self):
 	"""Page 25:
 	(a) Calculate Vbi for a GaAs pn junction at T = 300 K for Na = 1e+16/cm^3
 	and Nd = 1e+17/cm^3 (b) Repeat part (a) for a Germanium pn junction with the

@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ez1_04(self):
+def exer1_04(self):
 	"""	Page 21:
 	Consider silicon at T = 300 K. Assume the hole concentration is given
  	by p = 1e+16*e^-(x/Lp) (per cm^3), where Lp = 1e-03cm. Calculate the hole

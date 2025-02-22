@@ -7,7 +7,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def p1_27_plot(self):
+def prob1_27_plot(self):
 	"""
 	(a) The reverse-saturation current of a pn junction diode is IS = 1e-11A.
 	Determine the diode current for diode voltages of 0.3, 0.5, 0.7, -0.02, -0.2, and -2V.

@@ -2,7 +2,7 @@ from inspect import currentframe
 import math
 from assertions import assertions
 
-def p1_19b(self):
+def prob1_19b(self):
 	"""
 	ANS: 1.19b (i) 1.13V, (ii) 1.21V, (iii) 1.41V
 	"""

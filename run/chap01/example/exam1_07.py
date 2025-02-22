@@ -2,7 +2,7 @@ from inspect import currentframe
 
 from assertions import assertions
 
-def ex1_07(self):
+def exam1_07(self):
 	"""Page 28:
 	Determine the current in a pn junction diode given voltage VD across it.
 	Consider a pn junction at T = 300 K in which IS = 1e-14A and n = 1. Find the

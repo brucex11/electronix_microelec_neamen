@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ez1_02(self):
+def exer1_02(self):
 	"""
 	(a) Calculate the majority and minority carrier concentrations in Si at
 	T = 300 K for (i) Nd = 2e+16/cm^3 and (ii) Na = 1e+15/cm^3.

@@ -3,7 +3,7 @@ import math
 
 from assertions import assertions
 
-def p1_1(self):
+def prob1_01(self):
 	"""
 	(a) Calculate the intrinsic carrier concentration in silicon at (i) T = 250 K
 			and (ii) T = 350 K. (b) Repeat part (a) for gallium arsenide.

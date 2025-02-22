@@ -3,7 +3,7 @@ import math
 from typing import List
 
 
-def p1_2(self):
+def prob1_02(self):
 	"""
 	Page 57:
 	(a) The intrinsic carrier concentration in silicon is to be no larger than

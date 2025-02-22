@@ -5,7 +5,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ex1_06(self):
+def exam1_06(self):
 	"""Page 26:
 	Consider a silicon pn junction at T = 300 K, with doping concentrations
 	of Na = 1e16/cm^3 and Nd = 1e15/cm^3. Assume that ni = 1.5e10/cm^3 and let

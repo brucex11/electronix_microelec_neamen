@@ -2,7 +2,7 @@
 from inspect import currentframe
 from assertions import assertions
 
-def ez1_03(self):
+def exer1_03(self):
 	"""Page 19:
 	Consider n-type GaAs at T = 300 K doped to a concentration of Nd = 2e+16/cm^3.
 	Assume mobility values of μn = 6800 cm^2/V-s and μp = 300 cm^2/V-s.

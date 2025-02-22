@@ -5,7 +5,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def p1_3(self):
+def prob1_03(self):
 	"""
 	Calculate the intrinsic carrier concentration in silicon and germanium at
 	(a) T = 100K, (b) T = 300K, and (c) T = 500K.

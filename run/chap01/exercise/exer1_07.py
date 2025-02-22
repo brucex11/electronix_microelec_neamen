@@ -8,7 +8,7 @@ from scipy.constants import Boltzmann
 
 from assertions import assertions
 
-def ez1_07(self):
+def exer1_07(self):
 	"""Page 29:
 	A silicon pn junction at T = 300 K has a reverse-saturation current of
 	IS = 2e-14 A.  Determine the required forward-bias voltage VD to produce

@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ex1_04(self):
+def exam1_04(self):
 	"""Page 20
 	Objective: Calculate the diffusion current density for a given semiconductor.
 	Consider silicon at T = 300 K. Assume the electron concentration varies linearly

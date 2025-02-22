@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ex1_05(self):
+def exam1_05(self):
 	"""Page 24:
 	Objective: Calculate the built-in potential barrier of a pn junction.
 	Consider a Si pn junction at T = 300 K, doped at Na = 1e+16/cm^3 in the

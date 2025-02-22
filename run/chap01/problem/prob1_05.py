@@ -5,7 +5,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def p1_5(self):
+def prob1_05(self):
 	"""
 	Gallium arsenide is doped with acceptor impurity atoms at a concentration
 	of 1e+16/cm^3. (a) Find the concentration of electrons and holes. Is the

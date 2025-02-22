@@ -6,7 +6,7 @@ from typing import Tuple
 
 from assertions import assertions
 
-def ex1_03(self):
+def exam1_03(self):
 	"""Page 18
 	Objective: Calculate the drift current density for a given semiconductor.
 	Consider silicon at T = 300 K doped with arsenic atoms at a concentration
