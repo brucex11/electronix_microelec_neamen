@@ -26,26 +26,26 @@ X.X: Description
 * keywords list (optional)
 
 ### Example Format for Listings (below)
-2.3: Diode half-wave rectifier calculations.
-* problem/prob2_03.py, textbook page 111
-* problem/doc/prob2_03.docx
+X.X: Diode half-wave rectifier calculations.
+* problem/probX_XX.py, textbook page 111
+* problem/doc/probX_XX.docx
 * keywords: `YYY ZZZ`
 
 
 ## Examples
-2.1: Objective: Determine the currents and voltages in a half-wave rectifier circuit.
-* example/exam2_01.py, textbook page 70
+X.X: DESCRIPTION.
+* example/examX_XX.py, textbook page PP
 
 
 ## Exercises
-2.1: Objective: Determine the currents and voltages in a half-wave rectifier circuit.
-* exercise/exer2_01.py, textbook page 71
+X.X: DESCRIPTION.
+* exercise/exerX_XX.py, textbook page PP
 
 
 ## Problems
-2.3: Diode half-wave rectifier calculations.
-* problem/prob2_03.py, textbook page 111
+X.X: DESCRIPTION.
+* problem/probX_XX.py, textbook page PP
 
 
 # Notes
-* Pg 12: 
+* Pg XX: 

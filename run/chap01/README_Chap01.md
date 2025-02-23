@@ -6,9 +6,33 @@ Figures and notes for all `./subdir` examples, exercises, and problems for this
 chapter are contained in MSWord docx located in the `./subdir/doc` folder.
 Don't forget to update .gitignore to preclude .docx binaries from repository.
 
+# Search This Document
+Use the keywords below for python-code implementations, problems with plots, etc.
+When applicable, each problem has keywords that reflect code in that problem.
+
+## Available Keywords
+* `line_plot`
+* `list_comprehension`
+* `scatter_plot` `highlight_point_diff_color`
+
+# Examples, Exercises, and Problems
+All worked Examples, Exercises, and Problems are listed in order by number in their
+prospective category.  Here is the format for each number (X.X):
+
+X.X: Description
+* worked-file PATH, textbook page num
+* associated word docx (optional)
+* keywords list (optional)
+
+### Example Format for Listings (below)
+1.7: Determine the current in a pn junction diode given voltage VD across it.
+* example/exam1_07, textbook pg 28
+* example/doc/exam1_07.docx
+* keywords: `scatter_plot line_plot list_comprehension highlight_point_diff_color`
+
+
 ## Examples
-1.1: Calculate the intrinsic carrier concentration at T = 300 K for:
-* `Si, Ge, GaAs`
+1.1: Calculate the intrinsic carrier concentration at T = 300 K for `Si, Ge, GaAs`.
 * example/exam1_01.py, textbook page 13 (also covers exer 1.1)
 
 1.2: Calculate the majority and minority carrier concentrations.
@@ -29,6 +53,8 @@ Don't forget to update .gitignore to preclude .docx binaries from repository.
 1.7: Determine the current in a pn junction diode given voltage VD across it.
 * example/exam1_07, textbook pg 28
 * example/doc/exam1_07.docx
+* keywords: `scatter_plot line_plot list_comprehension highlight_point_diff_color`
+
 
 ## Exercises
 1.1: See example 1.1.
@@ -52,6 +78,7 @@ doping concentrations.
 
 1.7: Determine the required forward-bias voltage to produce a given current of ID.
 * exercise/exer1_07, textbook pg 29
+
 
 ## Problems
 1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
@@ -82,7 +109,7 @@ an emission coefficient.
 * problem/prob1_29, textbook pg 60
 
 
-## Notes
+# Notes
 * Pg 12: In order to break the covalent bond, the valence electron must gain a minimum energy,
   `Eg`, called the bandgap energy. The electrons that gain this minimum energy now exist in the
   conduction band and are said to be free electrons.

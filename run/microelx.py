@@ -15,6 +15,7 @@ import parse_cmd_line
 import parse_config_file
 from chap01 import class_chap01
 from chap02 import class_chap02
+# from chap77 import class_chap77
 from logger import logger
 
 
@@ -58,9 +59,10 @@ def main() -> int:
 		try:
 			# Retrieve the module's reference per its name:str
 			module_ref = globals()[module_name]
-			# print( f"module_ref: '{module_ref}'" )
+			# print( f"module_ref: '{module_ref}' -> TYPE: '{type(module_ref)}'" )
 			# Retrieve the class reference from the module
 			class_ref = getattr( module_ref, class_name )
+			# print( f"class_ref: '{class_ref}' -> TYPE: '{type(class_ref)}'" )
 			# Setup the __init__ parameters
 			params = [pcf,lg]
 			# Instantiate the class and run it

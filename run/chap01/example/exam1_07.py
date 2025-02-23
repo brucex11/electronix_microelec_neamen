@@ -32,17 +32,17 @@ def exam1_07(self):
 	Tk:float = 300    # Kelvin
 	n:float = 1       # mission coefficient
 
-	ID:float = self.calc_diode_ideal_current_complete( IS, VD, Tk, n )
-	# ID:float = self.calc_diode_ideal_current( IS, VD )
+	# ID:float = self.calc_diode_ideal_current_complete( IS, VD, Tk, n )
+	ID:float = self.calc_diode_ideal_current( IS, VD )
 
 	ans:float = 4.93e-03  # A
 	try:
 		assertions.assert_within_percentage( ID, ans, tolerance_percent )
-		print( f"CALC {pnum}: ID = {round(ID, 5)}A @ VD=+0.7V within {tolerance_percent}% of accepted answer: {ans}A" )
+		print( f"CALC {pnum}: ID = {round(ID, 5)}A @ VD=+{VD}V within {tolerance_percent}% of accepted answer: {ans}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
-	VD:float = -0.7    # V
+	VD:float = -0.7  # V
 
 	# ID:float = self.calc_diode_ideal_current_complete( IS, VD, Tk, n )
 	ID:float = self.calc_diode_ideal_current( IS, VD )
@@ -50,7 +50,7 @@ def exam1_07(self):
 	ans:float = -1e-14  # A
 	try:
 		assertions.assert_within_percentage( ID, ans, tolerance_percent )
-		print( f"CALC {pnum}: ID = {ID}A @ VD=-0.7V within {tolerance_percent}% of accepted answer: {ans}A" )
+		print( f"CALC {pnum}: ID = {ID}A @ VD={VD}V within {tolerance_percent}% of accepted answer: {ans}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -71,8 +71,9 @@ def exam1_07(self):
 
 	diode_current:List[float] = []
 	for idx, VDa in enumerate(VD_across):
-		diode_current.append( self.calc_diode_ideal_current( IS, VDa ) )
-		# print( f"ID: {ID} @ {VD_across[idx]}" )
+		ID_this_scope:float = self.calc_diode_ideal_current( IS, VDa )
+		diode_current.append( ID_this_scope )
+		# print( f"ID: {ID_this_scope} @ {VDa}" )
 
 	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
 		print( '---- DRAW PLOT -----' )
@@ -87,13 +88,16 @@ def exam1_07(self):
 
 
 	# --- NARROW RANGE of voltages across the diode to show the "knee" ---
-	VD_range:List[float] = [round(0.6 + i * 0.005, 3) for i in range(53)]  # 36 values from -0.2 to 0.9
+	VD_range:List[float] = [round(0.5 + i * 0.005, 3) for i in range(64)]  # 36 values from -0.2 to 0.9
 	VD_across:Tuple = tuple( VD_range )
-	print( f"VD_across: {VD_across}, COUNT elements: {len(VD_across)}" )
+	# print( f"VD_across: {VD_across}, COUNT elements: {len(VD_across)}" )
 
+	# clear the list for the next plot
 	diode_current.clear()
 	for idx, VDacr in enumerate(VD_across):
-		diode_current.append( self.calc_diode_ideal_current( IS, VDacr ) )
+		ID_thru:float = self.calc_diode_ideal_current( IS, VDacr )
+		diode_current.append( ID_thru )
+		# print( f"ID: {ID_thru} @ {VDacr}" )
 
 	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
 		print( '---- DRAW PLOT -----' )
@@ -123,25 +127,42 @@ def plot_diode_IV_characteristic(self, title:str, fname_save_plot:str, VD:Tuple,
 	path_save_figure = os.path.join( self.save_figure_dir, fname_save_plot )
 	print( f"path_save_figure: '{path_save_figure}'" )
 
+	# print the (x=VD, y=ID)values to be plotted
+	for idx, VDacr in enumerate(VD):
+		print( f"PLOT: [{idx}] (x={VDacr}, y=ID: {ID[idx]})" )
+	print( f"count PLOT pts: (x=VD={len(VD)}, y=ID={len(ID)})" )
+
 	plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
-	# plt.scatter( VD, ID, color='blue', marker='o' )  # customize color and marker style
-	plt.plot( VD, ID, color='blue' )  # customize color
+
+	# --- SCATTER plot ---
+	plt.scatter( VD, ID, color='blue', marker='o' )  # customize color and marker style
+	# Highlight a specific point (e.g., the third point) with a different color
+	highlight_x = [VD[40]]  # x-coordinate of the point to highlight
+	highlight_y = [ID[40]]  # y-coordinate of the point to highlight
+
+	# Plot the highlighted point with a different color
+	# plt.scatter(highlight_x, highlight_y, color='red', s=100, label='Highlighted Point')  # 's' for size
+	plt.scatter( highlight_x, highlight_y, color='red', label=f"({VD[40]}, {round(ID[40],5):.3e})" )
+
+	# --- LINE plot ---
+	# plt.plot( VD, ID, color='blue' )  # customize color
 
 	# Set titles and labels
 	plt.title( title )
 	plt.xlabel('Diode V')
 	# plt.xlim( -0.3, 1 )
-	plt.xlim( 0.58, 0.88 )
+	plt.xlim( 0.48, 0.72 )
 	# Set the x-axis to have 12 divisions
 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
 
 	plt.ylabel('Diode A')
 	# plt.ylim( -1, 11 )
-	plt.ylim( -0.1, 2.5 )
+	plt.ylim( -1e-03, 7e-03 )
 	# plt.yscale( 'log' )
 
 	if( self.save_figure ):
 		plt.savefig( path_save_figure, dpi=300 )
 
 	# Display the plot
+	plt.legend()  # adds a legend to label the highlighted point
 	plt.show()

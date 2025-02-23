@@ -26,6 +26,8 @@ def parse_the_args():
     parser_chap01.add_argument( 'config_file', help='PATH to config.ini' )
     parser_chap02 = subparsers.add_parser( 'Chap02', help='run Chapter 02 problems' )
     parser_chap02.add_argument( 'config_file', help='PATH to config.ini' )
+    parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
+    parser_chap77.add_argument( 'config_file', help='PATH to config.ini' )
 
     # The REST
     parser.add_argument( "-p", "--pr", help="OPTION: print config.ini contents" )
