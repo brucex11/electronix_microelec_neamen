@@ -184,6 +184,29 @@ class Chap01():
 		return ID
 
 
+	def calc_diode_ideal_current_log( self, IS:float, VD:float ) -> float:
+		"""
+		This function implements the theoretical relationship between the current
+		and voltage in the pn junction of a diode.
+		Take the log of each 'value' in the ideal I-V equation and note that
+		the logarithm turns multiplication into addition.
+
+		Args:
+			IS:float reverse saturation current
+			VD:float voltage across junction
+		
+		Return: diode drift current
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
+		# ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
+		log_ID:float = math.log(IS)  +  math.log( ( math.exp( VD / self.vthrml0_026) ) - 1 )
+		return log_ID
+
+
 	def calc_diode_ideal_current_complete(
 			self, IS:float, VD:float, Tk:float, n:float ) -> float:
 		"""

@@ -13,7 +13,8 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `line_plot`
 * `list_comprehension`
-* `scatter_plot` `highlight_point_diff_color`
+* `scatter_plot` `highlight_point_diff_color` `plot_horiz_vert_line`
+* `semilog_plot`
 
 # Examples, Exercises, and Problems
 All worked Examples, Exercises, and Problems are listed in order by number in their
@@ -53,7 +54,8 @@ X.X: Description
 1.7: Determine the current in a pn junction diode given voltage VD across it.
 * example/exam1_07, textbook pg 28
 * example/doc/exam1_07.docx
-* keywords: `scatter_plot line_plot list_comprehension highlight_point_diff_color`
+* keywords: `scatter_plot  line_plot list_comprehension  highlight_point_diff_color`
+* keywords: `semilog_plot  plot_horiz_vert_line`
 
 
 ## Exercises
