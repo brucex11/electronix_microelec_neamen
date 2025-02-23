@@ -11,9 +11,11 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
+* `iteration`
+* `KVL`
 * `line_plot`
-* `list_comprehension`
-* `scatter_plot` `highlight_point_diff_color` `plot_horiz_vert_line`
+* `list_comprehension  list_range_for_rationals`
+* `scatter_plot  highlight_point_diff_color  plot_horiz_vert_line`
 * `semilog_plot`
 
 # Examples, Exercises, and Problems
@@ -55,7 +57,12 @@ X.X: Description
 * example/exam1_07, textbook pg 28
 * example/doc/exam1_07.docx
 * keywords: `scatter_plot  line_plot list_comprehension  highlight_point_diff_color`
-* keywords: `semilog_plot  plot_horiz_vert_line`
+* keywords: `semilog_plot  plot_horiz_vert_line list_range_for_rationals`
+
+1.8: Use iteration to determine the diode voltage and current for simple circuit.
+* example/exam1_08, textbook pg 36
+* example/doc/exam1_08.docx
+* keywords: `iteration  KVL  list_range_for_rationals`
 
 
 ## Exercises
@@ -90,6 +97,7 @@ doping concentrations.
 programatically iterating through	a range of temps, then assert that the
 intrinsic concentration n_i meets the requirement	less than 1e+12 and 1e+09 per cm^3.
 * problem/prob1_02, textbook pg 57
+* keywords: `iteration`
 
 1.3: Calculate the intrinsic carrier concentration in Si and Ge at various temps K.
 * problem/prob1_03, textbook pg 57
@@ -157,7 +165,51 @@ Any further increase in electric field will not produce an increase in `drift ve
 of lower concentration.
   - See EX 1.4
 * Pg 21 The mobility values in the drift current equations and the diffusion coefficient values in the diffusion current
-equations are not independent quantities. They are related by the Einstein relation.
-* Pg 
+equations are not independent quantities. They are related by the `Einstein relation: kT/e ~= 0.026V` at 300K (room temp).
+* Pg 21 The total current density is the sum of the drift and diffusion components. Fortunately, in most cases only one
+component dominates the current at any one time in a given region of a semiconductor.
+* Pg 21 When a voltage is applied to, or a current exists in, a semiconductor device, both an electron and a hole are
+produced, thus generating an electron–hole pair. These additional electrons and holes are called `excess electrons`
+and `excess holes`.
+* Pg 22 `n = no + δn` and `p = po + δp`
+         where no and po are the thermal equilibrium concentrations of electrons and holes, and δn and δp are the
+         `excess electron` and `excess hole` concentrations.
+* Pg 22 The mean time over which an excess electron and hole exist before recombination is called the
+`excess carrier lifetime`.
+* Pg 23 The real power of semiconductor electronics occurs when p- and n-regions are `directly adjacent` to each other,
+forming a pn junction. In most integrated circuit applications, the entire semiconductor material is a `single crystal`,
+with one region doped to be p-type and the adjacent region doped to be n-type.
 
+* Pg 23 The `[p|n]` interface at x = 0 is called the `metallurgical junction`.
+               ^
+              x=0
+* Pg 23 A large density gradient in both the hole and electron concentrations occurs across the `metallurgical junction`.
+Initially, holes diffuse into the n-region, and electrons diffuse into the p-region.
+* Pg 24  See Fig 1.12. With no voltage applied to the pn junction, the diffusion of holes and electrons must eventually
+cease.
+* Pg 24 The positively charged region and the negatively charged region comprise the `space-charge region`, or
+`depletion region`, of the pn junction, in which there are essentially no mobile electrons or holes.
+* Pg 24 Because of the electric field in the space-charge region, there is a potential difference across that region
+[Figure 1.12(b)].  This potential difference is called the built-in potential barrier, or `built-in voltage`, for which
+there is an equation.
+* Pg 25 With an increasing `reverse-bias` voltage, space-charge `width` also increases. This effect is shown in Figure 1.14.
+* Pg 26 `junction capacitance` is generated across the pn junction when a reverse-bias voltage is applied.
+* Pg 27 `Forward bias` voltage must always be less than the `built-in voltage`.
+* Pg 28 The pn junction, with `nonlinear rectifying current characteristics`, is called a pn junction diode.
+* Pg 30 Since both IS and VT are functions of temperature, diode characteristics also vary with `temperature`.
+* Pg 30 The actual (vs ideal) reverse-bias diode current, as a general rule, doubles for every 10°C rise in temperature.
+* Pg 31 The most common breakdown mechanism is called `avalanche breakdown`, which occurs when carriers crossing the
+space charge region gain sufficient kinetic energy from the high electric field to be able to break covalent bonds
+during a collision process.
+* Pg 32 A second breakdown mechanism, `Zener breakdown`, is a result of tunneling of carriers across the junction.
+This effect is prominent at very high doping concentrations and results in breakdown voltages less than 5V.
+* Pg 34 For an `ideal diode` (as opposed to a diode with ideal I–V characteristics), when a reverse-bias voltage
+is applied, the current through the diode is zero; when current through the diode is greater than zero, the voltage
+across the diode is zero.
+* Pg 3
+* Pg 3
+* Pg 3
+* Pg 3
+* Pg 3
+* Pg 3
 
