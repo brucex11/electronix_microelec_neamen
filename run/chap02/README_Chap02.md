@@ -4,6 +4,7 @@ Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Ed
 
 Figures and notes for all `./subdir` examples, exercises, and problems for this
 chapter are contained in MSWord docx located in the `./subdir/doc` folder.
+Don't forget to update .gitignore to preclude .docx binaries from repository.
 
 ## Examples
 2.1: Objective: Determine the currents and voltages in a half-wave rectifier circuit.

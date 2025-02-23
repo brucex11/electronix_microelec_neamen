@@ -50,6 +50,9 @@ def prob1_27_plot(self):
 			print( f"CALC AssertionError {pnum}: {e}" )
 
 	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
+		print( '---- DRAW PLOT -----' )
+		print( f"diode_voltages: {diode_voltages}" )
+		print( f"diode_current: {diode_current}" )
 		title:str = f"{pnum} Diode Volts, IS = {IS:.3e}A"
 		fname_save_plot:str = 'p1_27_diode_volts_1.png'
 		prep_fig( self, title, fname_save_plot, x=diode_voltages, y=diode_current )

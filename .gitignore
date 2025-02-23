@@ -8,6 +8,8 @@ __pycache__/
 /input
 /output
 /log
+/run/chap01/**/doc
+/run/chap02/**/doc
 
 # C extensions
 *.so

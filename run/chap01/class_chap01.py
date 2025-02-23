@@ -1,9 +1,7 @@
 import ast
 # from collections import OrderedDict
 # from datetime import datetime
-# from typing import Any
-from typing import Dict   # also available: Dict, Set
-# from typing import Tuple
+from typing import Dict, List, Tuple   # also available: Any, Set
 import math
 import os
 import importlib
@@ -177,11 +175,11 @@ class Chap01():
 		
 		Return: diode drift current
 		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
-		print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
+		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
 		ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
 		return ID
 
@@ -239,6 +237,42 @@ class Chap01():
 		VD:float = VT * ( math.log(ID) - math.log(IS) + 0 )   # math.log(1) = 0
 
 		return VD
+
+
+	def plot_diode_IV_characteristic(self, title:str, fname_save_plot:str, VD:Tuple, ID:List[float] ):
+		import os
+		import pathlib
+		# import matplotlib
+		import matplotlib.pyplot as plt
+		from matplotlib.ticker import MaxNLocator
+		# print( f"matplotlib.__version__ : {matplotlib.__version__}" )
+
+		print( f"self.save_figure_dir: '{self.save_figure_dir}'" )
+		pathlib.Path( self.save_figure_dir ).mkdir( parents=True, exist_ok=True )
+
+		path_save_figure = os.path.join( self.save_figure_dir, fname_save_plot )
+		print( f"path_save_figure: '{path_save_figure}'" )
+
+		plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
+		# plt.scatter( VD, ID, color='blue', marker='o' )  # customize color and marker style
+		# plt.plot( VD, ID, color='blue' )  # customize color
+
+		# # Set titles and labels
+		# plt.title( title )
+		# plt.xlabel('Diode V')
+		# plt.xlim( -1, 1 )
+		# # Set the x-axis to have 12 divisions
+		# plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
+
+		# plt.ylabel('Diode A')
+		# plt.ylim( -1, 6 )
+		# # plt.yscale( 'log' )
+
+		# if( self.save_figure ):
+		# 	plt.savefig( path_save_figure, dpi=300 )
+
+		# # Display the plot
+		# plt.show()
 
 
 	# ----------------------------------------------------------------------------
