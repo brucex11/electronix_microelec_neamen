@@ -66,6 +66,7 @@ def exam1_07(self) -> None:
 	# VD_across:Tuple = tuple( VD_range )
 	# python - range(22) creates 22 steps, and the round() function ensures each value is to one decimal place.
 	# VD_range:List[float] = [round(-0.7 + i * 0.1, 1) for i in range(22)]  # 22 values from -0.7 to 1.4
+	# keyword: list_range_for_rationals
 	VD_range:List[float] = [round(-0.2 + i * 0.02, 2) for i in range(56)]  # 56 values from -0.2 to 0.9
 	VD_across:Tuple = tuple( VD_range )
 	# print( f"VD_across: {VD_across}, COUNT elements: {len(VD_across)}" )

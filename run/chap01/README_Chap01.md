@@ -13,7 +13,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `iteration`
 * `KVL`
-* `line_plot`
+* `line_plot  Q_point`
 * `list_comprehension  list_range_for_rationals`
 * `scatter_plot  highlight_point_diff_color  plot_horiz_vert_line`
 * `semilog_plot`
@@ -60,9 +60,10 @@ X.X: Description
 * keywords: `semilog_plot  plot_horiz_vert_line list_range_for_rationals`
 
 1.8: Use iteration to determine the diode voltage and current for simple circuit.
+Also, use graphic analysis by plotting the `load line`.
 * example/exam1_08, textbook pg 36
 * example/doc/exam1_08.docx
-* keywords: `iteration  KVL  list_range_for_rationals`
+* keywords: `iteration  KVL  list_range_for_rationals  load_line  Q_point`
 
 
 ## Exercises
@@ -87,6 +88,9 @@ doping concentrations.
 
 1.7: Determine the required forward-bias voltage to produce a given current of ID.
 * exercise/exer1_07, textbook pg 29
+
+1.8: Use iteration to determine the diode voltage and current for simple circuit.
+* exercise/exer1_08, textbook pg 29
 
 
 ## Problems
@@ -206,7 +210,8 @@ This effect is prominent at very high doping concentrations and results in break
 * Pg 34 For an `ideal diode` (as opposed to a diode with ideal I–V characteristics), when a reverse-bias voltage
 is applied, the current through the diode is zero; when current through the diode is greater than zero, the voltage
 across the diode is zero.
-* Pg 3
+* Pg 37 For the simple diode circuit Figure 1.28, the equation ID = (VPS - VD) / R is referred to as the circuit `load line`,
+and is usually plotted on a graph with the current ID as the vertical axis and the voltage VD as the horizontal axis.
 * Pg 3
 * Pg 3
 * Pg 3
