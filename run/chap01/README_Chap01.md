@@ -96,7 +96,7 @@ Exer 1.7: Determine the required forward-bias voltage to produce a given current
 * exercise/exer1_07, textbook pg 29
 
 Exer 1.8: Use iteration to determine the diode voltage and current for simple circuit.
-* exercise/exer1_08, textbook pg 29
+* exercise/exer1_08, textbook pg 37
 
 Exer 1.9 SKIP: Simple diode circuit piecewise linear model.
 
@@ -104,6 +104,10 @@ Exer 1.10 LtSpice: Simple diode circuit piecewise linear model.
 * ./LTspice/chap01/exer1_10/   textbook pg 42
 * ./docx/exercise/chap01_exercise1_10.docx
 
+
+## Test Your Understanding
+TYU 1.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
+* ./chap01/testunder/test1_09, textbook pg 43
 
 
 ## Problems

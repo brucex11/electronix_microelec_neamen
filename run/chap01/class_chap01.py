@@ -326,9 +326,9 @@ class Chap01():
 	def run_in_subdir(self):
 		"""Call the method per the config.ini file [problem_num]
 		"""
-		# fcn_name:str = currentframe().f_code.co_name
-		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		fcn_name:str = currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		# # Example to retrieve all modules
 		# global_variables = globals()
@@ -353,6 +353,7 @@ class Chap01():
 		py_fname_sans_extension:str = self.prob
 		# build the FULL module name
 		module_name:str = f"{class_name}.{subdir_name}.{py_fname_sans_extension}"
+		# print( f"module_name: '{module_name}'" )
 		# use the module-name string to import the desired module
 		module = importlib.import_module( module_name )
 		# finally, grab the function-name in the module

@@ -75,7 +75,7 @@ def main() -> int:
 			# for the run() method.  Then, the call would simply be as below:
 			# class_ref( *params )
 		except AttributeError as e:
-			print( f"Exception caught in main: {e}" )
+			print( f"Exception caught in main: {e} for getattr( {class_ref} )" )
 
 	except FileExistsError as e:
 		print( f"Exception caught in main: {e}" )

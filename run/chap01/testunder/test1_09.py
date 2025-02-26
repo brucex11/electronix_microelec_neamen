@@ -1,28 +1,29 @@
-
 import ast
 from inspect import currentframe
 # import math
-from typing import List, Tuple  # , Any, Dict, Set
+from typing import List, Tuple   #, Any, Dict, Set
 
 import matplotlib.pyplot as plt
-from matplotlib.ticker import MaxNLocator
+# from matplotlib.ticker import MaxNLocator
 
 from assertions import assertions
 
-def exam1_08(self):
-	"""Page 36:
+def test1_09(self):
+	"""Page 43:
+	Consider the diode and circuit in Exercise EX 1.8.  Determine VD and ID
+	using the graphical technique.
+	From page 37, exercise 1.8:
 	Use iteration to determine the diode voltage and current for the circuit
 	per Figure 1.28.  Consider a diode with a given reverse-saturation current
-	of IS = 1e-13A.  VPS = 5V; R=2kΩ.
+	of IS = 1e-13A.  VPS = V; R=4kΩ.
 	Comment: Once the diode voltage is known, the current can also be determined
 	from the ideal diode equation. However, dividing the voltage difference across
 	a resistor by the resistance is usually easier, and this approach is used
 	extensively in the analysis of diode and transistor circuits.
-	Also, use graphic analysis by plotting the `load line`.
 	Page 37:
-	ANS VD = 0.619 V, ID = 2.19mA.
+	ANS VD ~= 0.54 V, ID ~= 0.87mA.
 
-	See example/doc/exam1_08.docx.
+	See example/doc/exam1_08.docx (because this exercise is essentially the same).
 
 	Solution:
 	Use KVL to write the voltage equation around the loop:
@@ -44,28 +45,28 @@ def exam1_08(self):
 	assert_percentage:float = 1.0
 	print( '-----------------------------------------------' )
 
-	ans_VD:float = 0.619     # V
-	ans_ID:float = 2.19e-03  # A
+	ans_VD:float = 0.54     # V
+	ans_ID:float = 0.87e-03  # A
 
 	# Write the KVL equation:
 	# VPS = R * (ideal diode eq) + VD
-	VPS:float = 5     # V
-	R:float = 2000    # Ω
-	IS:float = 1e-13  # A
-	VD_iter_val:List[float] = [round(0.6 + i * 0.001, 3) for i in range(24)]  # 24 values from 0.6 to 0.623
+	VPS:float = 4     # V
+	R:float = 4000    # Ω
+	IS:float = 1e-12  # A
+	VD_iter_val:List[float] = [round(0.52 + i * 0.001, 3) for i in range(24)]  # 24 values from 0.6 to 0.623
 	print( f"VD_iter_val: {VD_iter_val}V" )
 
 	# Iteratively solve for VPS using range of values for VD.
 	VD_per_iteration:float = -1
 	for VDi in VD_iter_val:
 		ID_ideal:float = self.calc_diode_ideal_current( IS=IS, VD=VDi )
-		VPS_iter_val:float = R * ID_ideal + VDi
+		VPS_iter_val:float = round(R * ID_ideal + VDi, 2)
 		print( f"VPS_iter_val = {VPS_iter_val}V" )
 
 		# check the iteral value against VPS
 		try:
 			assertions.assert_within_percentage( VPS, VPS_iter_val, assert_percentage )
-			print( f"CALC VPS = {round(VPS_iter_val,3)}V when VD = {VDi}V, and ID = {ID_ideal}A" )
+			print( f"CALC VPS = {round(VPS_iter_val,3)}V when VD = {round(VDi, 2)}V, and ID = {round(ID_ideal, 5)}A" )
 			VD_per_iteration = VDi
 			break
 		except AssertionError:
@@ -74,7 +75,7 @@ def exam1_08(self):
 	# At this point, the ideal ID when the assertion was satified IS the loop current.
 	try:
 		assertions.assert_within_percentage( ID_ideal, ans_ID, assert_percentage )
-		print( f"CALC using diode ideal-ID value = {ID_ideal}A within {assert_percentage}% of accepted answer: {ans_ID}A" )
+		print( f"CALC using diode ideal-ID value = {round(ID_ideal, 5)}A within {assert_percentage}% of accepted answer: {round(ans_ID ,5)}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -84,11 +85,11 @@ def exam1_08(self):
 	ID_final:float = ( VPS - VD_per_iteration ) / R
 	try:
 		assertions.assert_within_percentage( ID_final, ans_ID, assert_percentage )
-		print( f"CALC (VPS-VD)/R = ID = {ID_final}A within {assert_percentage}% of accepted answer: {ans_ID}A" )
+		print( f"CALC (VPS-VD)/R = ID = {round(ID_ideal, 5)}A within {assert_percentage}% of accepted answer: {round(ans_ID, 5)}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
-	print( f"Q-point = ({round(VD_per_iteration, 2)}V, {round(ID_final, 4)}A)" )
+	print( f"Q-point = ({round(VD_per_iteration, 2)}V, {round(ID_final, 5)}A)" )
 
 	# --------- Use graphic analysis by plotting the `load line`. ----------------
 	# From Equation ID = (VPS-VD)/R, when ID = 0, then VD = VPS which is the
@@ -143,20 +144,20 @@ def exam1_08(self):
 	# # Add a vertical guide line at x = VD[40]
 	# plt.axvline( x=VD_range[31], color='black', linestyle='--' )  # , label='x = 3')
 
-	plt.axhline( y=2.2e-03, color='black', linestyle='--' )  #, label='y = 1000')
-	plt.axvline( x=0.62, color='black', linestyle='--' )  # , label='x = 3')
+	plt.axhline( y=0.86e-03, color='black', linestyle='--' )  #, label='y = 1000')
+	plt.axvline( x=0.54, color='black', linestyle='--' )  # , label='x = 3')
 
 	# drop a point on the graph at the Q_point
-	plt.scatter( x=0.61, y=2.2e-03, color='black', label=f"Q point (0.61, {2.2}m)" )
+	plt.scatter( x=0.54, y=0.86e-03, color='black', label=f"Q point (0.61, {2.2}m)" )
 
 
-	plt.xlim( 0 , 5 )
-	plt.ylim( -5e-05, 3e-03 )
+	plt.xlim( 0 , 4 )
+	plt.ylim( -5e-05, 1.25e-03 )
 
 	# Add labels and title
 	plt.xlabel('Voltage V')
 	plt.ylabel('Current I')
-	plt.title('Load Line, Q-point Fig 1.29, pg 38')
+	plt.title('TYU 1.9 Load Line, Q-point')
 
 	# Show the plot
 	plt.show()
