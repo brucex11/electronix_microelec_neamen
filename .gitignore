@@ -5,11 +5,12 @@ __pycache__/
 *$py.class
 /.venvPy3-8-10
 /.venvPy3-12-0
+/log
+/LTspice
 /input
 /output
-/log
-/run/chap01/**/doc
-/run/chap02/**/doc
+# below, ignore all *.docx files throughout entire repository
+*.docx
 
 # C extensions
 *.so

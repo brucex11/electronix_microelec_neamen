@@ -3,7 +3,7 @@
 Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Edition by Donald Neamen.
 
 Figures and notes for all `./subdir` examples, exercises, and problems for this
-chapter are contained in MSWord docx located in the `./subdir/doc` folder.
+chapter are contained in MSWord docx located in the `./subdir/docx` folder.
 Don't forget to update .gitignore to preclude .docx binaries from repository.
 
 # Search This Document
@@ -30,95 +30,108 @@ X.X: Description
 ### Example Format for Listings (below)
 1.7: Determine the current in a pn junction diode given voltage VD across it.
 * example/exam1_07, textbook pg 28
-* example/doc/exam1_07.docx
+* example/docx/exam1_07.docx
 * keywords: `scatter_plot line_plot list_comprehension highlight_point_diff_color`
 
 
 ## Examples
-1.1: Calculate the intrinsic carrier concentration at T = 300 K for `Si, Ge, GaAs`.
+Exam 1.1: Calculate the intrinsic carrier concentration at T = 300 K for `Si, Ge, GaAs`.
 * example/exam1_01.py, textbook page 13 (also covers exer 1.1)
 
-1.2: Calculate the majority and minority carrier concentrations.
+Exam 1.2: Calculate the majority and minority carrier concentrations.
 * example/exam1_02, textbook pg 16
 
-1.3: Calculate the drift current density for a given semiconductor.
+Exam 1.3: Calculate the drift current density for a given semiconductor.
 * example/exam1_03, textbook pg 18
 
-1.4: Calculate the drift current density for a given semiconductor.
+Exam 1.4: Calculate the drift current density for a given semiconductor.
 * example/exam1_04, textbook pg 20
 
-1.5: Calculate the built-in potential barrier of a pn junction.
+Exam 1.5: Calculate the built-in potential barrier of a pn junction.
 * example/exam1_05, textbook pg 24, SEE ALSO p1.19
 
-1.6: Calculate the pn junction capacitance at VR = 1V and VR = 5V.
+Exam 1.6: Calculate the pn junction capacitance at VR = 1V and VR = 5V.
 * example/exam1_06, textbook pg 26
 
-1.7: Determine the current in a pn junction diode given voltage VD across it.
+Exam 1.7: Determine the current in a pn junction diode given voltage VD across it.
 * example/exam1_07, textbook pg 28
-* example/doc/exam1_07.docx
+* example/docx/exam1_07.docx
 * keywords: `scatter_plot  line_plot list_comprehension  highlight_point_diff_color`
 * keywords: `semilog_plot  plot_horiz_vert_line list_range_for_rationals`
 
-1.8: Use iteration to determine the diode voltage and current for simple circuit.
+Exam 1.8: Use iteration to determine the diode voltage and current for simple circuit.
 Also, use graphic analysis by plotting the `load line`.
 * example/exam1_08, textbook pg 36
-* example/doc/exam1_08.docx
+* example/docx/exam1_08.docx
 * keywords: `iteration  KVL  list_range_for_rationals  load_line  Q_point`
+
+Exam 1.9 SKIP: Simple diode circuit piecewise linear model.
+
+Exam 1.10 LtSpice: Simple diode circuit piecewise linear model.
+* ./LTspice/chap01/exam1_10/   textbook pg 42
+* ./docx/example/chap01_example1_10.docx
 
 
 ## Exercises
-1.1: See example 1.1.
+Exer 1.1: See example 1.1.
 
-1.2: Calculate the majority and minority carrier concentrations.
+Exer 1.2: Calculate the majority and minority carrier concentrations.
 * exercise/exer1_02, textbook pg 16
 
-1.3: Determine the resistivity (reciprocal of conductivity) of the material GaAs.
+Exer 1.3: Determine the resistivity (reciprocal of conductivity) of the material GaAs.
 * exercise/exer1_03, textbook pg 19
 
-1.4: Calculate the hole diffusion current density of Si at (a) x = 0 and
+Exer 1.4: Calculate the hole diffusion current density of Si at (a) x = 0 and
 (b) x = 1e-03cm.
 * exercise/exer1_04, textbook pg 21
 
-1.5: Calculate Vbi for GaAs and Ge pn junction with specified donor and acceptor
+Exer 1.5: Calculate Vbi for GaAs and Ge pn junction with specified donor and acceptor
 doping concentrations.
 * exercise/exer1_05, textbook pg 25
 
-1.6: Find the zero-biased pn junction capacitance Cj0.
+Exer 1.6: Find the zero-biased pn junction capacitance Cj0.
 * exercise/exer1_06, textbook pg 26
 
-1.7: Determine the required forward-bias voltage to produce a given current of ID.
+Exer 1.7: Determine the required forward-bias voltage to produce a given current of ID.
 * exercise/exer1_07, textbook pg 29
 
-1.8: Use iteration to determine the diode voltage and current for simple circuit.
+Exer 1.8: Use iteration to determine the diode voltage and current for simple circuit.
 * exercise/exer1_08, textbook pg 29
+
+Exer 1.9 SKIP: Simple diode circuit piecewise linear model.
+
+Exer 1.10 LtSpice: Simple diode circuit piecewise linear model.
+* ./LTspice/chap01/exer1_10/   textbook pg 42
+* ./docx/exercise/chap01_exercise1_10.docx
+
 
 
 ## Problems
-1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
+Prob 1.1: Calculate the intrinsic carrier concentration in Si and GaAs.
 * problem/prob1_01, textbook pg 57
 
-1.2: Determine the maximum allowable temperature of a pn junction by
+Prob 1.2: Determine the maximum allowable temperature of a pn junction by
 programatically iterating through	a range of temps, then assert that the
 intrinsic concentration n_i meets the requirement	less than 1e+12 and 1e+09 per cm^3.
 * problem/prob1_02, textbook pg 57
 * keywords: `iteration`
 
-1.3: Calculate the intrinsic carrier concentration in Si and Ge at various temps K.
+Prob 1.3: Calculate the intrinsic carrier concentration in Si and Ge at various temps K.
 * problem/prob1_03, textbook pg 57
 
-1.5: Find the concentration of electrons and holes. Is the semiconductor n-type
+Prob 1.5: Find the concentration of electrons and holes. Is the semiconductor n-type
 or p-type?
 * problem/prob1_05, textbook pg 58
 
-1.19: Determine the built-in potential barrier Vbi in Si and GaAs pn junction.
+Prob 1.19: Determine the built-in potential barrier Vbi in Si and GaAs pn junction.
 * problem/prob1_19a, textbook pg 59
 * problem/prob1_19b, textbook pg 59
 
-1.27: Determine the diode current for various diode voltages per the
+Prob 1.27: Determine the diode current for various diode voltages per the
 reverse-saturation current IS.
 * problem/prob1_27_plot, textbook pg 60
 
-1.29: Determine the reverse-bias saturation current for pn junction diode given
+Prob 1.29: Determine the reverse-bias saturation current for pn junction diode given
 an emission coefficient.
 * problem/prob1_29, textbook pg 60
 
