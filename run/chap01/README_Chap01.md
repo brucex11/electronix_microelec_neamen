@@ -13,7 +13,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `iteration`
 * `KVL`
-* `line_plot  Q_point`
+* `line_plot  Q_point twin_y_axes`
 * `list_comprehension  list_range_for_rationals`
 * `scatter_plot  highlight_point_diff_color  plot_horiz_vert_line`
 * `semilog_plot`
@@ -62,14 +62,18 @@ Exam 1.7: Determine the current in a pn junction diode given voltage VD across i
 Exam 1.8: Use iteration to determine the diode voltage and current for simple circuit.
 Also, use graphic analysis by plotting the `load line`.
 * example/exam1_08, textbook pg 36
-* example/docx/exam1_08.docx
+* ./run/chap01/example/docx/exam1_08.docx
 * keywords: `iteration  KVL  list_range_for_rationals  load_line  Q_point`
 
 Exam 1.9 SKIP: Simple diode circuit piecewise linear model.
 
 Exam 1.10 LtSpice: Simple diode circuit piecewise linear model.
-* ./LTspice/chap01/exam1_10/   textbook pg 42
+* ./LTspice/chap01/exam1_10/   textbook pg 41
+* chap01/example/exam1_10, textbook pg 41
 * ./docx/example/chap01_example1_10.docx
+* ./run/chap01/example/docx/exam1_10.docx
+* of note: image (exam1_10.png) of twin-plot saved manually from 'show window' task-bar
+* keywords: `twin_y_axes`
 
 
 ## Exercises

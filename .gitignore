@@ -11,6 +11,7 @@ __pycache__/
 /output
 # below, ignore all *.docx files throughout entire repository
 *.docx
+*.png
 
 # C extensions
 *.so

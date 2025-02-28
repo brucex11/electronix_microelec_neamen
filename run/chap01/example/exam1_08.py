@@ -2,7 +2,7 @@
 import ast
 from inspect import currentframe
 # import math
-from typing import List, Tuple  # , Any, Dict, Set
+from typing import Any, List, Tuple  # Dict, Set
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -20,7 +20,7 @@ def exam1_08(self):
 	extensively in the analysis of diode and transistor circuits.
 	Also, use graphic analysis by plotting the `load line`.
 	Page 37:
-	ANS VD = 0.619 V, ID = 2.19mA.
+	ANS Q-point VD = 0.619 V, ID = 2.19mA.
 
 	See example/doc/exam1_08.docx.
 
@@ -57,38 +57,48 @@ def exam1_08(self):
 
 	# Iteratively solve for VPS using range of values for VD.
 	VD_per_iteration:float = -1
-	for VDi in VD_iter_val:
+	ID_per_iteration:float = -1
+	q_point:Any = []   # [V,D,qidx]
+	for qidx, VDi in enumerate(VD_iter_val):
 		ID_ideal:float = self.calc_diode_ideal_current( IS=IS, VD=VDi )
 		VPS_iter_val:float = R * ID_ideal + VDi
-		print( f"VPS_iter_val = {VPS_iter_val}V" )
+		print( f"[{qidx}] VPS_iter_val = {VPS_iter_val}V" )
 
 		# check the iteral value against VPS
 		try:
 			assertions.assert_within_percentage( VPS, VPS_iter_val, assert_percentage )
-			print( f"CALC VPS = {round(VPS_iter_val,3)}V when VD = {VDi}V, and ID = {ID_ideal}A" )
-			VD_per_iteration = VDi
-			break
+			print( f"CALC iterate VPS = {round(VPS_iter_val,3)}V when VD = {VDi}V, and ID = {ID_ideal}A" )
+			q_point = [VDi, ID_ideal, qidx]
+			# break
 		except AssertionError:
 			pass
+	print( f"Q-point: ({q_point[0]}V, {round(q_point[1],5)}A) @ qidx:[{q_point[2]}]" )
 
-	# At this point, the ideal ID when the assertion was satified IS the loop current.
+	# At this point, the ideal ID when the assertion was satified == Q-point loop current.
 	try:
-		assertions.assert_within_percentage( ID_ideal, ans_ID, assert_percentage )
-		print( f"CALC using diode ideal-ID value = {ID_ideal}A within {assert_percentage}% of accepted answer: {ans_ID}A" )
+		assertions.assert_within_percentage( q_point[0], ans_VD, assert_percentage )
+		print( f"CALC VD @ Q-point = {round(q_point[0],3)}V", end=' ' )
+		print( f"within {assert_percentage}% of accepted answer: {round(ans_VD,3)}A" )
+	except AssertionError as e:
+		print( f"CALC AssertionError {pnum}: {e}" )
+
+	try:
+		assertions.assert_within_percentage( q_point[1], ans_ID, assert_percentage )
+		print( f"CALC using diode ideal-ID value @ Q-point = {round(q_point[1],5)}A", end=' ' )
+		print( f"within {assert_percentage}% of accepted answer: {round(ans_ID,5)}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
 	# However, the dividing-the-voltage-difference-across-a-resistor approach
 	# is used extensively in the analysis of diode and transistor circuits.
 
-	ID_final:float = ( VPS - VD_per_iteration ) / R
+	ID_final:float = ( VPS - q_point[0] ) / R
 	try:
 		assertions.assert_within_percentage( ID_final, ans_ID, assert_percentage )
 		print( f"CALC (VPS-VD)/R = ID = {ID_final}A within {assert_percentage}% of accepted answer: {ans_ID}A" )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
-	print( f"Q-point = ({round(VD_per_iteration, 2)}V, {round(ID_final, 4)}A)" )
 
 	# --------- Use graphic analysis by plotting the `load line`. ----------------
 	# From Equation ID = (VPS-VD)/R, when ID = 0, then VD = VPS which is the
@@ -143,11 +153,11 @@ def exam1_08(self):
 	# # Add a vertical guide line at x = VD[40]
 	# plt.axvline( x=VD_range[31], color='black', linestyle='--' )  # , label='x = 3')
 
-	plt.axhline( y=2.2e-03, color='black', linestyle='--' )  #, label='y = 1000')
-	plt.axvline( x=0.62, color='black', linestyle='--' )  # , label='x = 3')
+	plt.axhline( y=q_point[1], color='black', linestyle='--' )  #, label='y = 1000')
+	plt.axvline( x=q_point[0], color='black', linestyle='--' )  # , label='x = 3')
 
 	# drop a point on the graph at the Q_point
-	plt.scatter( x=0.61, y=2.2e-03, color='black', label=f"Q point (0.61, {2.2}m)" )
+	plt.scatter( x=q_point[0], y=q_point[1], color='black', label=f"Q-point ({q_point[0]}V, {round(q_point[1],5)*1000}mA)" )
 
 
 	plt.xlim( 0 , 5 )
@@ -156,7 +166,8 @@ def exam1_08(self):
 	# Add labels and title
 	plt.xlabel('Voltage V')
 	plt.ylabel('Current I')
-	plt.title('Load Line, Q-point Fig 1.29, pg 38')
+	plt.title( f"{pnum} Load Line, Q-point Fig 1.29, pg 38" )
 
 	# Show the plot
+	plt.legend()  # adds a legend to label the highlighted point
 	plt.show()
