@@ -9,17 +9,16 @@ from matplotlib.ticker import MaxNLocator
 
 from assertions import assertions
 
-def exam1_10(self) -> None:
+def exer1_10(self) -> None:
 	"""Page 41:
 	Objective: Determine the diode current and voltage characteristics of the
 	circuit shown in Figure 1.28. using ideal diode calcs.
 	Compare to the LTspice simulation:
-	C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\LTspice\\chap01\\exam1_10\\exam1_10_Dcust01.asc
+	C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\LTspice\\chap01\\exer1_10\\exer1_10_Dcust01.asc
 
-	Create a range of VD from 0 to +5V at 0.05V incrementsand plot the I-V characteristic.
+	Let R = 20kΩ over VPS range 0 to 10V.
 
-	ANS Q-point VD = 0.619 V, ID = 2.19mA.
-	ANS ID1=1.6mA @ V1 = +0.51V, ID1=2.12mA @ V1 = +0.673V.
+	ANS Q-point VD = 0.579V, ID = 469μA.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -32,16 +31,16 @@ def exam1_10(self) -> None:
 	assert_percentage:float = 2.0  # assertion accuracy
 	print( '-----------------------------------------------' )
 
-	ans_VD:float = 0.619     # V
-	ans_ID:float = 2.19e-03  # A
+	ans_VD:float = 0.579     # V
+	ans_ID:float = 469e-06   # A
 
 	# Write the KVL equation:
 	# VPS = R * (ideal diode eq) + VD
-	VPS:float = 5     # V
-	R:float = 2000    # Ω
-	IS:float = 1e-13  # A
-	VD_iter_val:List[float] = [round(0.6 + i * 0.001, 3) for i in range(24)]  # 24 values from 0.6 to 0.623
-	# print( f"VD_iter_val: {VD_iter_val}V" )
+	VPS:float = 10     # V
+	R:float = 20000    # Ω
+	IS:float = 1e-13   # A
+	VD_iter_val:List[float] = [round(0.54 + i * 0.001, 3) for i in range(51)]  # 51 values from 0.54 to 0.59
+	print( f"VD_iter_val: {VD_iter_val}V" )
 
 	# Iteratively solve for VPS using range of values for VD.
 	VD_per_iteration:float = -1
@@ -55,7 +54,7 @@ def exam1_10(self) -> None:
 		# check the iteral value against VPS
 		try:
 			assertions.assert_within_percentage( VPS, qVPS_iter_val, assert_percentage )
-			print( f"CALC iterate qVPS = {round(qVPS_iter_val,3)}V when VD = {VDi}V, and ID = {round(ID_ideal,5)}A" )
+			print( f"CALC iterate qVPS = {round(qVPS_iter_val,3)}V when VD = {VDi}V, and ID = {round(ID_ideal,6)}A" )
 			q_point = [VDi, ID_ideal, qidx]
 			# break
 		except AssertionError:
@@ -92,7 +91,7 @@ def exam1_10(self) -> None:
 	# ------ Implement the LTspice simulation ------------------------------------
 	# ----------------------------------------------------------------------------
 	VD_iter_val.clear()
-	VD_iter_val:List[float] = [round(0 + i * 0.002, 3) for i in range(501)]  # 501 values from 0 to 5
+	VD_iter_val:List[float] = [round(0 + i * 0.002, 3) for i in range(1001)]  # 501 values from 0 to 10V
 	# print( f"VD_iter_val: {VD_iter_val}V" )
 
 	# Iteratively solve for VPS using range of values for VD.
@@ -109,10 +108,9 @@ def exam1_10(self) -> None:
 		id1.append( ID_ideal )
 		vd1.append( VDi )
 		VPS_x_coord.append( qVPS_iter_val )
-		if qVPS_iter_val > 5:
+		if qVPS_iter_val > 10:
 			break
 
-	# return
 
 	# --- GENERATE figure and plot the load_line. --------------------------------
 	# plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
@@ -142,4 +140,3 @@ def exam1_10(self) -> None:
 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
 	plt.legend()  # adds a legend to label the highlighted point
 	plt.show()
-

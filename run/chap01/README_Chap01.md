@@ -73,7 +73,7 @@ Exam 1.10 LtSpice: Simple diode circuit piecewise linear model.
 * ./docx/example/chap01_example1_10.docx
 * ./run/chap01/example/docx/exam1_10.docx
 * of note: image (exam1_10.png) of twin-plot saved manually from 'show window' task-bar
-* keywords: `twin_y_axes`
+* keywords: `twin_y_axes  list_range_for_rationals`
 
 
 ## Exercises
@@ -107,6 +107,8 @@ Exer 1.9 SKIP: Simple diode circuit piecewise linear model.
 Exer 1.10 LtSpice: Simple diode circuit piecewise linear model.
 * ./LTspice/chap01/exer1_10/   textbook pg 42
 * ./docx/exercise/chap01_exercise1_10.docx
+* chap01/exercise/exer1_10, textbook pg 41
+* keywords: `twin_y_axes  list_range_for_rationals`
 
 
 ## Test Your Understanding
