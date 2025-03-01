@@ -6,7 +6,7 @@ __pycache__/
 /.venvPy3-8-10
 /.venvPy3-12-0
 /log
-/LTspice
+# /LTspice
 /input
 /output
 # below, ignore all *.docx files throughout entire repository

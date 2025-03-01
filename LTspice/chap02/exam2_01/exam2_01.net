@@ -1,0 +1,10 @@
+* C:\SourceCode\GitHub\electronix\microelec_neamen\LTspice\chap02\exam2_01\exam2_01.asc
+R1 vd1 vs 100
+D1 vd1 vb 1N4148
+VB vb 0 12
+Vs vs 0 AC 24 SIN(0 24 1000)
+.model D D
+.lib C:\Users\OwnerA\AppData\Local\LTspice\lib\cmp\standard.dio
+.tran 0 2m 0 1000
+.backanno
+.end

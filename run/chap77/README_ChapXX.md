@@ -35,11 +35,18 @@ X.X: Diode half-wave rectifier calculations.
 ## Examples
 X.X: DESCRIPTION.
 * example/examX_XX.py, textbook page PP
+* keywords: `YYY ZZZ`
 
 
 ## Exercises
 X.X: DESCRIPTION.
 * exercise/exerX_XX.py, textbook page PP
+* keywords: `YYY ZZZ`
+
+
+## Test Your Understanding
+TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
+* ./chap01/testunder/test1_09, textbook pg 43
 
 
 ## Problems
