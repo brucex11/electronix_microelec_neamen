@@ -15,21 +15,15 @@ When applicable, each problem has keywords that reflect code in that problem.
 * ``
 * `YYY ZZZ`
 
-
-# Examples, Exercises, and Problems
-All worked Examples, Exercises, and Problems are listed in order by number in their
-prospective category.  Here is the format for each number (X.X):
+# Examples, Exercises, Test Your Understanding, and Problems
+All worked sections are listed in order by number in their prospective category.
+Here is the format for each problem number (X.X):
 
 X.X: Description
 * worked-file PATH, textbook page num
 * associated word docx (optional)
-* keywords list (optional)
-
-### Example Format for Listings (below)
-2.3: Diode half-wave rectifier calculations.
-* problem/prob2_03.py, textbook page 111
-* problem/doc/prob2_03.docx
-* keywords: `YYY ZZZ`
+* LTspice folder (optional)
+* keywords list `YYY ZZZ`(optional)
 
 
 ## Examples

@@ -6,10 +6,18 @@ from typing import List, Tuple  # Any, Dict, Set
 from assertions import assertions
 
 def exer3_01(self):
-	"""Page XX:
+	"""Page 134:
+	An NMOS transistor with VTN = 1V has a drain current iD = 0.8mA
+	when vGS = 3V and vDS = 4.5V.  Calculate the drain current when:
+	a) vGS = 2V, vDS = 4.5V; and (b) vGS = 3V, vDS = 1V.
 
-	ANS(a): (i) 1.03μA, (ii) 2.25mA
-	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+	Solution: Solve for Kn conduction parameter per equations 3.2a and 3.2b,
+	then solve for drain current given vGS and vDS.
+
+	Assuming operation in nonsaturation region where vDS < vDS(sat), use eq 3.2a.
+	Assuming operation in saturation region where vGS > VTN, use eq 3.2b.
+
+	ANS  (a) 0.2 mA  (b) 0.6 mA.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -26,8 +34,45 @@ def exer3_01(self):
 
 	ans:float = 0
 
-	calc_result:float = 0
+	VTN:float = 1.0      # V
+	iD_given:float = 0.8e-03   # 0.8mA
+	vGS_given:float = 3   # V
+	vDS_given:float = 4.5   # V
 
+	# Calc Kn in saturation region
+	# iD_nonsat:float = Kn * ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
+	Kn_sat:float = iD_given / (vGS_given - VTN )**2
+	print( f"CALC Kn_sat = {Kn_sat}" )
+
+	# ---- NON saturation region -------------------------------------------------
+	#  iD = Kn[ 2(vGS-VTN)vDS - vDS^2]
+	# a) vGS = 2V, vDS = 4.5V
+	vGS:float = 2
+	vDS:float = 4.5
+	iD_nonsat:float = Kn_sat * ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
+	print( f"CALC iD_nonsat = {iD_nonsat}" )
+
+	# Kn_nonsat:float = iD_given / ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
+	# print( f"CALC iD_nonsat = {iD_nonsat}" )
+
+	# Kn_nonsat:float = iD_given / ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
+	# print( f"CALC Kn_nonsat = {Kn_nonsat}" )
+
+
+	# Kn:float = 1.4e-03
+	# iD_nonsat:float = Kn * ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
+
+	# ---- saturation region -------------------------------------------------
+	#  iD = Kn(vGS-VTN)^2
+	# a) vGS = 2V, vDS = 4.5V
+	# vGS:float = 2
+
+	# iD_a:float = Kn_sat * ( vGS - VTN )**2
+	# print( f"CALC iD_a = {iD_a}" )
+
+
+
+	calc_result:float = 0
 	try:
 		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
 		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer." )

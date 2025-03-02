@@ -11,31 +11,27 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* ``
-* ``
+* `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
+* `conduction  angstroms_per_meter  cm_per_meter`
 * `YYY ZZZ`
 
 
-# Examples, Exercises, and Problems
-All worked Examples, Exercises, and Problems are listed in order by number in their
-prospective category.  Here is the format for each number (X.X):
+# Examples, Exercises, Test Your Understanding, and Problems
+All worked sections are listed in order by number in their prospective category.
+Here is the format for each problem number (X.X):
 
 X.X: Description
 * worked-file PATH, textbook page num
 * associated word docx (optional)
-* keywords list (optional)
-
-### Example Format for Listings (below)
-X.X: Diode half-wave rectifier calculations.
-* problem/probX_XX.py, textbook page 111
-* problem/doc/probX_XX.docx
-* keywords: `YYY ZZZ`
+* LTspice folder (optional)
+* keywords list `YYY ZZZ`(optional)
 
 
 ## Examples
-X.X: DESCRIPTION.
-* example/examX_XX.py, textbook page PP
-* keywords: `YYY ZZZ`
+3.1: Calculate the current in an n-channel MOSFET.
+* example/exam3_01.py, textbook page 134
+* keywords: `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
+* keywords: `angstroms_per_meter  cm_per_meter`
 
 
 ## Exercises
@@ -63,17 +59,38 @@ the current in a semiconductor, by applying an electric field perpendicular to
 the surface.
 * Pg 127: For Fig 3.1, the parameter tox is the thickness of the oxide and
  εox is the `oxide permittivity`.
-* Pg 127: For an n-channel/type MOSFET, a large, positive gate voltage generates
-an `electron inversion layer` inside the channel/substrate against the oxide-layer.
-* Pg 128: For a p-channel/type MOSFET, a large, negative gate voltage generates
-a `hole inversion layer` inside the channel/substrate against the oxide-layer.
+* Pg 127: For an n-channel MOSFET, a large, positive gate voltage generates
+an `electron inversion layer` inside the p-type substrate against the oxide-layer.
+* Pg 128: For a p-channel MOSFET, a large, negative gate voltage generates
+a `hole inversion layer` inside the n-type substrate against the oxide-layer.
 * Pg 128: The magnitude of the charge in the `inversion layer` is a function
 of the applied gate voltage.
-* Pg 128: The term `enhancement mode` means that a Gate Voltage must be applied
-to the gate to create the inversion layer.
-* Pg 128: To enable `enhancement mode`, the Gate Voltage must be the
-`same polarity` as the channel/substrate.
-* Pg 1: 
+* Pg 128: The term `enhancement mode` means that a Gate Voltage (VG) must be
+applied to the gate to create the inversion layer.
+* Pg 128: To enable `enhancement mode`, the Gate Voltage (VG) must be the
+`same polarity` as the substrate-type and `opposite polarity` of the channel-type.
+* Therefore, to induce current flow for the 2 channel-types in `enhancement mode`:
+  - `(NMOS)` N-CHANNEL ENHANCEMENT with p-type substrate: VG is positive, and
+	  the current carriers in the N-CHANNEL are `electrons`.
+  - `(PMOS)` P-CHANNEL ENHANCEMENT with n-type substrate: VG is negative, and
+	  the current carriers in the P-CHANNEL are `holes`.
+* Pg 129: The MOSFET substrate is also called the `body` and is denoted as `B`
+on its schematic symbol.
+* Pg 130: The source terminal supplies carriers that flow through the channel,
+and the drain terminal allows the carriers to drain from the channel.
+* Pg 130: Since the gate terminal is separated from the channel by an oxide
+or insulator, there is `no gate current`.
+  - Similarly, since the channel and substrate are separated by a space-charge
+	  region, there is essentially `no current through the substrate`.
+* Pg 130: The `threshold voltage VTN` of the n-channel MOSFET (NMOS) is defined
+as the applied gate voltage needed to create an `inversion charge` in which the
+density is equal to the concentration of majority carriers in the semiconductor
+substrate.
+  - In simple terms, we can think of the `threshold voltage` as the gate voltage
+required to `turn on` the transistor.
+  - For `PMOS`, threshold voltage == `VTP`.
+* Pg 133: `Kn` is the `conduction parameter` which for an n-channel device
+is given by equation 3.3a.
 * Pg 1: 
 * Pg 1: 
 * Pg 1: 

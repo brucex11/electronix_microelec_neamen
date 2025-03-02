@@ -6,10 +6,14 @@ from typing import List, Tuple  # Any, Dict, Set
 from assertions import assertions
 
 def prob3_01(self):
-	"""Page XX:
-
-	ANS(a): (i) 1.03μA, (ii) 2.25mA
-	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+	"""Page 134:
+	(a) Calculate the drain current in an NMOS transistor with parameters
+	VTN = 0.4V, k'n = 120μA/V^2, W = 10μm, L = 0.8μm, and with applied
+	voltages of VDS = 0.1V and (i) VGS = 0, (ii) VGS = 1V,
+	(iii) VGS = 2V, and (iv) VGS = 3V.
+	(b) Repeat part (a) for VDS = 4V.
+	ANS(a): ID = 0  (ii) ID = 82.5μA  (iii) ID = 0.2325mA  (iv) ID = 0.3825mA
+	ANS(b): ID = 0  (ii) ID = 0.27mA  (iii) ID = 1.92mA  (iv) ID = 5.07mA
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -20,66 +24,68 @@ def prob3_01(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	assert_percentage:float = 2.0
+	assert_percentage:float = 1.0
 	print( '-----------------------------------------------' )
 
+	# Since answer = 0 for both (a) and (b) by inspection, just calculate
+	# when VGS > VTN.
+	ans_a_iDS:Tuple = ( 82.5e-06, 232.5e-06, 382.5e-06 )
+	ans_b_iDS:Tuple = ( 0.27e-03, 1.92e-03, 5.07e-03 )
+	# list_calc_iD:List[float] = []
 
-	ans:float = 0
+	angstroms_per_meter:float = 1e+10
+	cm_per_meter:float = 100
 
-	calc_result:float = 0
+	# Givens for (a) and (b):
+	VTN:float = 0.4   # V
+	k_prime_n:float = 120e-06   # A/V^2
+	W_m:float = 10e-06   # meter
+	L_m:float = 0.8e-06  # m
 
-	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer." )
-	except AssertionError as e:
-		print( f"CALC AssertionError {pnum}: {e}" )
+	# Since the W/L ratio is needed, no need to convert m to cm
+	W_over_L:float = W_m / L_m
+
+	# Therefore, Kn = k'n * W/L / 2
+	Kn:float = k_prime_n * W_over_L / 2
+	print( f"---Kn = {Kn:.3e}A/V2" )
 
 
+	vGS_given:Tuple = ( 1, 2, 3 )
 
-# 	for idx, ans in enumerate(answers2):
-# 		try:
-# 			assertions.assert_within_percentage( calc_result[idx], ans, 3.0 )
-# 			print( f"CALC when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
-# 		except AssertionError as e:
-# 			print( f"CALC AssertionError {pnum}: {e}" )
+	# ------- (a)(i) - (iv)
+	# Since VGS < VTN, 0 < 0.4V, then current iDS = 0
+	a_VDS:float = 0.1   # V
+	list_calc_iD:List[float] = []   # first answer = 0A
+	for VGS in vGS_given:
+		ids:float = Kn * ( ( 2 * (VGS - VTN ) * a_VDS ) - a_VDS**2 )
+		list_calc_iD.append( ids )
 
-# 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
-# 		prep_fig( self, x=diode_voltages, y=calc_result )
+	# Assert the calculations
+	print( f"(a) NMOS operating in nonsaturation region")
+	print( f"CALC @VGS = 0V, VDS = {a_VDS}V, then iDS = 0A by inspection." )
+	for idx, iDS in enumerate(list_calc_iD):
+		try:
+			assertions.assert_within_percentage( iDS, ans_a_iDS[idx], assert_percentage )
+			print( f"CALC @VGS = {vGS_given[idx]}V, VDS = {a_VDS}V, then iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer." )
+		except AssertionError as e:
+			print( f"CALC AssertionError {pnum}: {e}" )
 
-# def prep_fig(self, x=(), y=[] ):
-# 	import os
-# 	import pathlib
-# 	import matplotlib.pyplot as plt
-# 	from matplotlib.ticker import MaxNLocator
 
-# 	print( f"{prep_fig.__name__}" )
-# 	print( f"p1_27.__name__: {p1_27.__name__}" )
-# 	dir_plot = os.path.join( self.dir_draw_root, self.dir_draw_subdir )
-# 	print( f"dir_plot: '{dir_plot}'" )
-# 	pathlib.Path( dir_plot ).mkdir( parents=True, exist_ok=True )
+	# ------- (b)(i) - (iv)
+	# Since VGS < VTN, 0 < 0.4V, then current iDS = 0
+	b_VDS:float = 4   # V
+	list_calc_iD.clear()
+	for VGS in vGS_given:
+		ids:float = Kn * ( VGS - VTN ) **2
+		list_calc_iD.append( ids )
 
-# 	fname = "{a}.png".format( a=p1_27.__name__ )
-# 	path_plot = os.path.join( dir_plot, fname )
-# 	print( f"path_plot: '{path_plot}'" )
+	# Assert the calculations
+	print( f"(b) NMOS operating in saturation region")
+	print( f"CALC @VGS = 0V, VDS = {b_VDS}V, then iDS = 0A by inspection." )
+	for idx, iDS in enumerate(list_calc_iD):
+		try:
+			assertions.assert_within_percentage( iDS, ans_b_iDS[idx], assert_percentage )
+			print( f"CALC @VGS = {vGS_given[idx]}V, VDS = {b_VDS}V, then iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer." )
+		except AssertionError as e:
+			print( f"CALC AssertionError {pnum}: {e}" )
 
-# 	# x = [1, 2, 3, 4, 5]
-# 	# y = [2, 3, 5, 7, 11]
-# 	x = x
-# 	y = y
-
-# 	plt.figure( figsize=self.param_figure_figsize )
-# 	plt.scatter(x, y, color='blue', marker='o')  # You can customize the color and marker style
-
-# 	# Set titles and labels
-# 	plt.title('Diode Current')
-# 	plt.xlabel('Diode V')
-# 	plt.xlim( -2.5, 1 )
-# 	# Set the x-axis to have 12 divisions
-# 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
-
-# 	plt.ylabel('Diode A')
-# 	plt.ylim( -1, 25 )
-# 	# plt.yscale( 'log' )
-
-# 	# Display the plot
-# 	plt.show()
