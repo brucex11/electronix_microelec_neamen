@@ -1,0 +1,9 @@
+*
+* Bandini  28Feb2025
+*
+
+.model Dcust01 D(Is=1e-14 Rs=0.0 N=1.0 Vpk=175 mfg=Textbook type=silicon)
+.model 1N914 D(Is=2.52n Rs=.568 N=1.752 Cjo=4p M=.4 tt=20n Iave=200m Vpk=75 mfg=OnSemi type=silicon)
+.model 1N4148 D(Is=2.52n Rs=.568 N=1.752 Cjo=4p M=.4 tt=20n Iave=200m Vpk=75 mfg=OnSemi type=silicon)
+.model 1N4002 D(IS=2.52E-9 N=1.72 tt=5n BV=100 IBV=0.1 XTI=3 CJO=1E-12 M=0.5 mfg=chatgpt type=silicon)
+.model 1N4007 D(Is=90p Rs=40m Cjo=30p N=1.4 TT=5u Iave=1 Vpk=1000 mfg=Diodes_Inc. type=silicon)

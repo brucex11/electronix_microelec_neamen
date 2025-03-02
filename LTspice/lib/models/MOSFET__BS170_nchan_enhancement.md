@@ -1,0 +1,1 @@
+See Motorola SMALL-SIGNAL TRANSISTOR DATA book, pg 6-99.

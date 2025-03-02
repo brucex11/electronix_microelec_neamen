@@ -15,6 +15,7 @@ import parse_cmd_line
 import parse_config_file
 from chap01 import class_chap01
 from chap02 import class_chap02
+from chap03 import class_chap03
 # from chap77 import class_chap77
 from logger import logger
 
