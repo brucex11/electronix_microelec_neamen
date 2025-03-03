@@ -57,7 +57,7 @@ def prob3_01(self):
 	a_VDS:float = 0.1   # V
 	list_calc_iD:List[float] = []   # first answer = 0A
 	for VGS in vGS_given:
-		ids:float = Kn * ( ( 2 * (VGS - VTN ) * a_VDS ) - a_VDS**2 )
+		ids:float = Kn * ( ( 2 * (VGS - VTN ) * a_VDS ) - a_VDS**2 )   # <=== EQUATION for iDS_in_NONsaturation
 		list_calc_iD.append( ids )
 
 	# Assert the calculations
@@ -76,7 +76,7 @@ def prob3_01(self):
 	b_VDS:float = 4   # V
 	list_calc_iD.clear()
 	for VGS in vGS_given:
-		ids:float = Kn * ( VGS - VTN ) **2
+		ids:float = Kn * ( VGS - VTN )**2   # <=== EQUATION for iDS_in_NONsaturation
 		list_calc_iD.append( ids )
 
 	# Assert the calculations

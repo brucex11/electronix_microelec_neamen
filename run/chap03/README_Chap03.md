@@ -11,9 +11,10 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
 * `conduction  angstroms_per_meter  cm_per_meter`
-* `YYY ZZZ`
+* `iDS_in_saturation  iDS_in_NONsaturation`
+* `Kn_in_NONsaturation  Kn_in_saturation`
+* `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -24,7 +25,7 @@ X.X: Description
 * worked-file PATH, textbook page num
 * associated word docx (optional)
 * LTspice folder (optional)
-* keywords list `YYY ZZZ`(optional)
+* keywords list `YYY  ZZZ`(optional)
 
 
 ## Examples
@@ -35,9 +36,9 @@ X.X: Description
 
 
 ## Exercises
-X.X: DESCRIPTION.
-* exercise/exerX_XX.py, textbook page PP
-* keywords: `YYY ZZZ`
+3.1: Solve for Kn conduction parameter per equations 3.2a and 3.2b, then calc iDS.
+* exercise/exer3_01.py, textbook page 134
+* keywords: `Kn_in_NONsaturation  Kn_in_saturation`
 
 
 ## Test Your Understanding
@@ -46,8 +47,9 @@ TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphica
 
 
 ## Problems
-X.X: DESCRIPTION.
-* problem/probX_XX.py, textbook page PP
+3.1: Calculate the drain current in an NMOS transistor.
+* problem/prob3_01.py, textbook page PP
+* keywords: `iDS_in_saturation  iDS_in_NONsaturation`
 
 
 # Notes
