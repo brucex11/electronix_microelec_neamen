@@ -160,8 +160,73 @@ class Chap03():
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions: helpers to support all of Chapter 77 ------------------------
+	# --- Functions: helpers to support all of Chapter 03 ------------------------
 	# ----------------------------------------------------------------------------
+
+	def nmos_enhancement_iDS_saturation(
+			self, Kn_sat:float, vGS:float, VTN:float ) -> float:
+		"""
+		Calculate saturated drain current for n-channel/p-substrate MOSFET
+		in enhancement mode.
+
+		Args:
+			Kn_sat:float (trans)conduction parameter, A/V^2
+			vGS:float gate-to-source voltage, V, positive by convention
+			VTN:float gate threshold voltage, V, positive by convention
+		Return:
+			current:float
+		"""
+		return Kn_sat* (vGS - VTN)**2
+
+
+	def nmos_enhancement_iDS_nonsaturation(
+			self, Kn_nonsat:float, vGS:float, VTN:float, vDS:float ) -> float:
+		"""
+		Calculate non-saturated drain current for n-channel/p-substrate MOSFET
+		in enhancement mode.
+
+		Args:
+			Kn_nonsat:float (trans)conduction parameter, A/V^2
+			vGS:float gate-to-source voltage, V, positive by convention
+			VTN:float gate threshold voltage, V, positive by convention
+			vDS:float drain-to-source voltage, V, positive by convention
+		Return:
+			current:float
+		"""
+		return Kn_nonsat * ( 2 * (vGS - VTN) * vDS - vDS**2 )
+
+
+	def pmos_enhancement_iDS_saturation(
+			self, Kp_sat:float, vSG:float, VTP:float ) -> float:
+		"""
+		Calculate saturated drain current for p-channel/n-substrate MOSFET
+		in enhancement mode.
+
+		Args:
+			Kp_sat:float (trans)conduction parameter, A/V^2
+			vSG:float gate-to-source voltage, V, positive by convention
+			VTN:float gate threshold voltage, V, negative by convention
+		Return:
+			current:float
+		"""
+		return Kp_sat* (vSG + VTP)**2
+
+
+	def pmos_enhancement_iDS_nonsaturation(
+			self, Kp_nonsat:float, vSG:float, VTP:float, vSD:float ) -> float:
+		"""
+		Calculate non-saturated drain current for p-channel/n-substrate MOSFET
+		in enhancement mode.
+
+		Args:
+			Kp_nonsat:float (trans)conduction parameter, A/V^2
+			vSG:float gate-to-source voltage, V, positive by convention
+			VTN:float gate threshold voltage, V, negative by convention
+			vSD:float drain-to-source voltage, V, positive by convention
+		Return:
+			current:float
+		"""
+		return Kp_nonsat * ( 2 * (vSG + VTP) * vSD - vSD**2 )
 
 
 	# ----------------------------------------------------------------------------

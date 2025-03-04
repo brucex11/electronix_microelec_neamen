@@ -11,10 +11,11 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `conduction  angstroms_per_meter  cm_per_meter`
-* `iDS_in_saturation  iDS_in_NONsaturation`
-* `Kn_in_NONsaturation  Kn_in_saturation`
-* `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
+* `conduction`  `angstroms_per_meter`  `cm_per_meter`
+* `iDS_in_saturation`  `iDS_in_NONsaturation`
+* `Kn_in_NONsaturation`  `Kn_in_saturation`
+* `MOSFET_conduction_param_Kn`  `MOSFET_saturation_current`  `NMOS_threshold_voltage_VTN`
+* `NMOS_calc_iD_function`  `PMOS_calc_iD_function`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -25,20 +26,28 @@ X.X: Description
 * worked-file PATH, textbook page num
 * associated word docx (optional)
 * LTspice folder (optional)
-* keywords list `YYY  ZZZ`(optional)
+* keywords list `YYY`  `ZZZ`(optional)
 
 
 ## Examples
 3.1: Calculate the current in an n-channel MOSFET.
 * example/exam3_01.py, textbook page 134
-* keywords: `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
-* keywords: `angstroms_per_meter  cm_per_meter`
+* keywords: `MOSFET_conduction_param_Kn`  `MOSFET_saturation_current`  `NMOS_threshold_voltage_VTN`
+* keywords: `angstroms_per_meter`  `cm_per_meter`
+
+3.2: Determine the source-to-drain voltage vSD required to bias a p-channel
+enhancement-mode MOSFET in the saturation region.
+* example/exam3_02.py, textbook page 136
 
 
 ## Exercises
 3.1: Solve for Kn conduction parameter per equations 3.2a and 3.2b, then calc iDS.
 * exercise/exer3_01.py, textbook page 134
-* keywords: `Kn_in_NONsaturation  Kn_in_saturation`
+* keywords: `Kn_in_NONsaturation`  `Kn_in_saturation`
+
+3.2: For PMOS in enhancement mode, calculate current iSD.
+* exercise/exer3_02.py, textbook page 137
+* keywords: `NMOS_calc_iD_function`  `PMOS_calc_iD_function`
 
 
 ## Test Your Understanding
@@ -49,7 +58,7 @@ TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphica
 ## Problems
 3.1: Calculate the drain current in an NMOS transistor.
 * problem/prob3_01.py, textbook page PP
-* keywords: `iDS_in_saturation  iDS_in_NONsaturation`
+* keywords: `iDS_in_saturation`  `iDS_in_NONsaturation`
 
 
 # Notes
@@ -73,9 +82,9 @@ applied to the gate to create the inversion layer.
 `same polarity` as the substrate-type and `opposite polarity` of the channel-type.
 * Therefore, to induce current flow for the 2 channel-types in `enhancement mode`:
   - `(NMOS)` N-CHANNEL ENHANCEMENT with p-type substrate: VG is positive, and
-	  the current carriers in the N-CHANNEL are `electrons`.
+    the current carriers in the N-CHANNEL are `electrons`.
   - `(PMOS)` P-CHANNEL ENHANCEMENT with n-type substrate: VG is negative, and
-	  the current carriers in the P-CHANNEL are `holes`.
+    the current carriers in the P-CHANNEL are `holes`.
 * Pg 129: The MOSFET substrate is also called the `body` and is denoted as `B`
 on its schematic symbol.
 * Pg 130: The source terminal supplies carriers that flow through the channel,
@@ -83,7 +92,7 @@ and the drain terminal allows the carriers to drain from the channel.
 * Pg 130: Since the gate terminal is separated from the channel by an oxide
 or insulator, there is `no gate current`.
   - Similarly, since the channel and substrate are separated by a space-charge
-	  region, there is essentially `no current through the substrate`.
+    region, there is essentially `no current through the substrate`.
 * Pg 130: The `threshold voltage VTN` of the n-channel MOSFET (NMOS) is defined
 as the applied gate voltage needed to create an `inversion charge` in which the
 density is equal to the concentration of majority carriers in the semiconductor
@@ -91,8 +100,21 @@ substrate.
   - In simple terms, we can think of the `threshold voltage` as the gate voltage
 required to `turn on` the transistor.
   - For `PMOS`, threshold voltage == `VTP`.
-* Pg 133: `Kn` is the `conduction parameter` which for an n-channel device
-is given by equation 3.3a.
+* Pg 133: `Kn` is the `conduction parameter` which for an n-channel/p-substrate
+device is given by equation 3.3a.
+* Pg 136: `Kp` is the `conduction parameter` which for an p-channel/n-substrate
+device is given by equation 3.5a.
+* Pg 133: The conduction parameter `(Kn | Kp)` is a function of both `electrical`
+and `geometric parameters`:
+  - the `electrical` oxide capacitance and carrier mobility are essentially
+    constants for a given fabrication technology, and
+  - the `geometry`, or width-to-length ratio W/L, is a variable in the MOSFET's
+    structure/footprint.
+* Pg 136: Biasing a transistor in either the saturation or the nonsaturation
+ region depends on both the gate-to-source voltage and the drain-to-source
+ voltage.
+* Pg 1: 
+* Pg 1: 
 * Pg 1: 
 * Pg 1: 
 * Pg 1: 

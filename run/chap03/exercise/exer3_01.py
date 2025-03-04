@@ -39,13 +39,13 @@ def exer3_01(self):
 	vGS_given:float = 3     # V
 	vDS_given:float = 4.5   # V
 
-	# Calc Kn in NONsaturation region
+	# Calc Kn_in_NONsaturation region
 	# See page 132
 	# iD_nonsat:float = Kn * ( ( 2 * (vGS - VTN ) * vDS ) - vDS**2 )
 	Kn_nonsat:float = iDS_given / ( ( 2 * (vGS_given - VTN ) * vDS_given ) - vDS_given**2 )
 	print( f"CALC Kn_nonsat = {Kn_nonsat}" )
 
-	# Calc Kn in saturation region
+	# Calc Kn_in_saturation region
 	# See page 133
 	# iDS_sat:float = Kn_sat * ( vGS - VTN )**2
 	Kn_sat:float = iDS_given /  ( vGS_given - VTN )**2
