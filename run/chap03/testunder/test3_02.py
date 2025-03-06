@@ -13,7 +13,7 @@ def test3_02(self):
 	The NMOS devices described in Exercise TYU 3.1 have parameters
 	W = 20μm, L = 0.8μm, tox = 200°A, μn = 500 cm2/V-s, and λ = 0.
 	(a) Calculate the conduction parameter Kn for each device.
-	(b) Calculate the drain current for each bias condition listed in Exercise TYU 3.1.
+	(b) Calculate the drain current for each bias condition listed in TYU 3.1.
 	Page 145:
 	ANS (a) Kn = 1.08mA/V2;	(b) iD = 0.518mA, 0.691mA, and 0.691mA; iD = 2.59mA, 5.83mA, and 11.1mA.
 	"""

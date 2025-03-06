@@ -1,7 +1,7 @@
 
 from inspect import currentframe
 import math
-from typing import List, Tuple  # Any, Dict, Set
+from typing import Dict, List, Tuple  # Any, Set
 
 from assertions import assertions
 
@@ -57,7 +57,21 @@ def exam3_01(self):
 	L:float = 0.8e-04  # cm
 	un:float = 650     # inversion-layer electron-mobility
 
+	abc:float = self.calc_MOSFET_oxide_capacitance( eox=eox, tox=tox )
+
 	Kn:float = ( W * un * eox ) / ( 2 * L * tox )   # A/V^2
+	print( f"LOCAL Kn: {Kn}" )
+
+	# Test the object function call; build the kwargs Dict object
+	conduction_parameter_params:Dict = {}
+	conduction_parameter_params['channel_width'] = W
+	conduction_parameter_params['channel_length'] = L
+	conduction_parameter_params['carrier_mobility'] = un
+	conduction_parameter_params['oxide_permittivity'] = eox
+	conduction_parameter_params['oxide_thickness'] = tox
+	Knf:float = self.calc_MOSFET_K_conduction_parameter( **conduction_parameter_params )
+	print( f"LOCAL Knf: {Knf}" )
+
 	try:
 		assertions.assert_within_percentage( Kn, ans_Kn, assert_percentage )
 		print( f"CALC Kn conduction parameter = {round(Kn,5)}A/V^2", end=' ' )

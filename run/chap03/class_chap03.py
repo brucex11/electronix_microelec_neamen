@@ -163,7 +163,7 @@ class Chap03():
 	# --- Functions: helpers to support all of Chapter 03 ------------------------
 	# ----------------------------------------------------------------------------
 
-	def nmos_enhancement_iDS_saturation(
+	def calc_iDS_for_NMOS_enhancement_in_saturation(
 			self, Kn_sat:float, vGS:float, VTN:float ) -> float:
 		"""
 		Calculate saturated drain current for n-channel/p-substrate MOSFET
@@ -176,10 +176,10 @@ class Chap03():
 		Return:
 			current:float
 		"""
-		return Kn_sat* (vGS - VTN)**2
+		return Kn_sat * (vGS - VTN)**2
 
 
-	def nmos_enhancement_iDS_nonsaturation(
+	def calc_iDS_for_NMOS_enhancement_in_nonsaturation(
 			self, Kn_nonsat:float, vGS:float, VTN:float, vDS:float ) -> float:
 		"""
 		Calculate non-saturated drain current for n-channel/p-substrate MOSFET
@@ -196,7 +196,7 @@ class Chap03():
 		return Kn_nonsat * ( 2 * (vGS - VTN) * vDS - vDS**2 )
 
 
-	def pmos_enhancement_iDS_saturation(
+	def calc_iDS_for_PMOS_enhancement_in_saturation(
 			self, Kp_sat:float, vSG:float, VTP:float ) -> float:
 		"""
 		Calculate saturated drain current for p-channel/n-substrate MOSFET
@@ -209,10 +209,10 @@ class Chap03():
 		Return:
 			current:float
 		"""
-		return Kp_sat* (vSG + VTP)**2
+		return Kp_sat * (vSG + VTP)**2
 
 
-	def pmos_enhancement_iDS_nonsaturation(
+	def calc_iDS_for_PMOS_enhancement_in_nonsaturation(
 			self, Kp_nonsat:float, vSG:float, VTP:float, vSD:float ) -> float:
 		"""
 		Calculate non-saturated drain current for p-channel/n-substrate MOSFET
@@ -227,6 +227,52 @@ class Chap03():
 			current:float
 		"""
 		return Kp_nonsat * ( 2 * (vSG + VTP) * vSD - vSD**2 )
+
+
+	def calc_MOSFET_K_conduction_parameter( self, **kwargs ) -> float:
+		"""
+		Pg 133: The conduction parameter `(Kn | Kp)` is a function of both
+		`electrical` and `geometric parameters`:
+  		- the `electrical` oxide capacitance and carrier mobility are essentially
+    		constants for a given fabrication technology, and
+  		- the `geometry`, or width-to-length ratio W/L, is a variable in the MOSFET's
+    		structure/footprint.
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        W:float channel width,
+        L:float channel length,
+				un:float mobility of majority-carriers in the inversion layer
+				eox:float oxide permittivity, Farads/unit-area
+				tox:float oxide thickness, same units as eox
+		Return:
+			Kn or Kp:float - conduction parameter, A/V^2
+		"""
+		W = kwargs['channel_width']
+		L = kwargs['channel_length']
+		un = kwargs['carrier_mobility']
+		eox = kwargs['oxide_permittivity']
+		tox = kwargs['oxide_thickness']
+
+		Cox:float = self.calc_MOSFET_oxide_capacitance( eox=eox, tox=tox )
+
+		return ( W * un * Cox ) / ( 2 * L )
+		# return ( W * un * eox ) / ( 2 * L * tox )
+
+
+	def calc_MOSFET_oxide_capacitance(
+			self, eox:float, tox:float ) -> float:
+		"""
+		Calculate MOSFET oxide capacitance per unit area.
+		Note that eox and tox must have same "length" units, eg, centimeter
+
+		Args:
+			eox:float oxide permittivity, Farads/unit-area
+			tox:float oxide thickness, same units as eox
+		Return:
+			Cox:float - oxide capacitance per unit area
+		"""
+		return eox/tox
 
 
 	# ----------------------------------------------------------------------------
