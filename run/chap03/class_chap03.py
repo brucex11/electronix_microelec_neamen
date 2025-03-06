@@ -20,7 +20,7 @@ from scipy.constants import Boltzmann
 
 class Chap03():
 	"""
-	HW problems:  2A: 3, 5,13, 16
+	HW problems:  2A: 3, 5, 13, 16
 	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
 
 	Args:

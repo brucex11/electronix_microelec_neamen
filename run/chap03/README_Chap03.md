@@ -51,8 +51,8 @@ enhancement-mode MOSFET in the saturation region.
 
 
 ## Test Your Understanding
-TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
-* ./chap01/testunder/test1_09, textbook pg 43
+3.2: For NMOS devices described in Exercise TYU 3.1e, calculate conduction param Kn.
+* ./chap03/testunder/test3_02, textbook pg 145
 
 
 ## Problems
