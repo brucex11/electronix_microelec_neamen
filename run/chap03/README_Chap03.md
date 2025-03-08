@@ -11,11 +11,13 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `conduction`  `angstroms_per_meter`  `cm_per_meter`
-* `iDS_in_saturation`  `iDS_in_NONsaturation`
-* `Kn_in_NONsaturation`  `Kn_in_saturation`
-* `MOSFET_conduction_param_Kn`  `MOSFET_saturation_current`  `NMOS_threshold_voltage_VTN`
-* `NMOS_calc_iD_function`  `PMOS_calc_iD_function`
+* `conduction  angstroms_per_meter  cm_per_meter`
+* `iDS_in_saturation  iDS_in_NONsaturation`
+* `Kn_in_NONsaturation  Kn_in_saturation  calc_Knp_from_conduction_parameters`
+* `calc_Kn_via_iteration`
+* `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
+* `NMOS_calc_iD_function  PMOS_calc_iD_function`
+* `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -32,6 +34,7 @@ X.X: Description
 ## Examples
 3.1: Calculate the current in an n-channel MOSFET.
 * example/exam3_01.py, textbook page 134
+* keywords: `calc_Knp_from_conduction_parameters`
 * keywords: `MOSFET_conduction_param_Kn`  `MOSFET_saturation_current`  `NMOS_threshold_voltage_VTN`
 * keywords: `angstroms_per_meter`  `cm_per_meter`
 
@@ -51,6 +54,13 @@ enhancement-mode MOSFET in the saturation region.
 
 
 ## Test Your Understanding
+3.1: An n-channel enhancement-mode MOSFET has a threshold voltage of
+VTN = 1.2V and an applied gate-to-source voltage of vGS = 2V.
+Determine the  region of operation.
+* ./chap03/testunder/test3_01, textbook pg 145
+* keywords: `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
+* keywords: `calc_Kn_via_iteration`
+
 3.2: For NMOS devices described in Exercise TYU 3.1e, calculate conduction param Kn.
 * ./chap03/testunder/test3_02, textbook pg 145
 

@@ -31,6 +31,40 @@ def test3_01(self):
 	assert_percentage:float = 1.0
 	print( '-----------------------------------------------' )
 
-	ans_VD:float = 0.54     # V
-	ans_ID:float = 0.87e-03  # A
+	ans_enha:List[str] = ['nonsaturation/ohmic/triode', 'saturation', 'saturation']
+	ans_depl:List[str] = ['nonsaturation/ohmic/triode', 'nonsaturation/ohmic/triode', 'saturation']
+	vDS:List[float] = [0.4, 1, 5]   #V
+	sat:str = 'saturation'
+	nsat:List[str] = ['nonsaturation', 'ohmic', 'triode']
 
+	vGS_applied:float = 2     # V
+	VTN_enhancement:float = +1.2   # V
+	VTN_depletion:float =   -1.2   # V
+
+	print( f"An n-channel enhancement-mode MOSFET has:" )
+	print( f"  * VTN = +{VTN_enhancement}V" )
+	print( f"  * vGS = {vGS_applied}V" )
+	for idx, v in enumerate(vDS):
+		print( f"When vDS = {v}V,  region of operation is '{ans_enha[idx]}'" )
+
+	print( f"\nAn n-channel depletion-mode MOSFET has:" )
+	print( f"  * VTN = {VTN_depletion}V" )
+	print( f"  * vGS = {vGS_applied}V" )
+	for idx, v in enumerate(vDS):
+		print( f"When vDS = {v}V,  region of operation is '{ans_depl[idx]}'" )
+
+# OUTPUT of this function:
+# -----------------------------------------------
+# An n-channel enhancement-mode MOSFET has:
+#   * VTN = +1.2V
+#   * vGS = 2V
+# When vDS = 0.4V,  region of operation is 'nonsaturation/ohmic/triode'
+# When vDS = 1V,  region of operation is 'saturation'
+# When vDS = 5V,  region of operation is 'saturation'
+
+# An n-channel depletion-mode MOSFET has:
+#   * VTN = -1.2V
+#   * vGS = 2V
+# When vDS = 0.4V,  region of operation is 'nonsaturation/ohmic/triode'
+# When vDS = 1V,  region of operation is 'nonsaturation/ohmic/triode'
+# When vDS = 5V,  region of operation is 'saturation'

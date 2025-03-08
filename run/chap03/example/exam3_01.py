@@ -27,7 +27,7 @@ def exam3_01(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	assert_percentage:float = 2.0
+	assert_percentage:float = 0.2
 	print( '-----------------------------------------------' )
 
 
@@ -57,10 +57,11 @@ def exam3_01(self):
 	L:float = 0.8e-04  # cm
 	un:float = 650     # inversion-layer electron-mobility
 
+	# Below, test the function-call.
 	abc:float = self.calc_MOSFET_oxide_capacitance( eox=eox, tox=tox )
 
 	Kn:float = ( W * un * eox ) / ( 2 * L * tox )   # A/V^2
-	print( f"LOCAL Kn: {Kn}" )
+	print( f"LOCAL Kn:    {Kn}" )
 
 	# Test the object function call; build the kwargs Dict object
 	conduction_parameter_params:Dict = {}
@@ -69,8 +70,17 @@ def exam3_01(self):
 	conduction_parameter_params['carrier_mobility'] = un
 	conduction_parameter_params['oxide_permittivity'] = eox
 	conduction_parameter_params['oxide_thickness'] = tox
+	# Function below calls calc_MOSFET_oxide_capacitance() and then uses that
+	# result to calculate conduction-parameter.
 	Knf:float = self.calc_MOSFET_K_conduction_parameter( **conduction_parameter_params )
-	print( f"LOCAL Knf: {Knf}" )
+	print( f"FUNCTION Kn: {Knf}" )
+
+	try:
+		assertions.assert_within_percentage( Kn, Knf, assert_percentage )
+		print( f"CALC Kn local and by function-call", end=' ' )
+		print( f"are within {assert_percentage}% of each other." )
+	except AssertionError as e:
+		print( f"CALC AssertionError Kn==Knf {pnum}: {e}" )
 
 	try:
 		assertions.assert_within_percentage( Kn, ans_Kn, assert_percentage )

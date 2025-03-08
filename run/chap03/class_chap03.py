@@ -231,17 +231,25 @@ class Chap03():
 
 	def calc_MOSFET_K_conduction_parameter( self, **kwargs ) -> float:
 		"""
-		Pg 133: The conduction parameter `(Kn | Kp)` is a function of both
+		Pg 133:
+		The conduction parameter `(Kn | Kp)` is a function of both
 		`electrical` and `geometric parameters`:
   		- the `electrical` oxide capacitance and carrier mobility are essentially
     		constants for a given fabrication technology, and
   		- the `geometry`, or width-to-length ratio W/L, is a variable in the MOSFET's
     		structure/footprint.
 
+		Pg 139:
+		The current-voltage characteristics defined by Equations (3.2(a)) and (3.2(b))
+		apply to both enhancement- and depletion-mode n-channel devices.
+
+		Note that all 'unit-' dimensions must be the same, eg, all must be centimeter.
+		Again, see pg 133 and example 3.1 page 134.
+
 		Keyword arguments:
     **kwargs: keyword arguments:
-        W:float channel width,
-        L:float channel length,
+        W:float channel width, unit-length
+        L:float channel length, unit-length
 				un:float mobility of majority-carriers in the inversion layer
 				eox:float oxide permittivity, Farads/unit-area
 				tox:float oxide thickness, same units as eox
