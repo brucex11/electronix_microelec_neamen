@@ -18,6 +18,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
 * `NMOS_calc_iD_function  PMOS_calc_iD_function`
 * `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
+* `ratio_equations_iDS_in_nonsaturation`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -63,12 +64,18 @@ Determine the  region of operation.
 
 3.2: For NMOS devices described in Exercise TYU 3.1e, calculate conduction param Kn.
 * ./chap03/testunder/test3_02, textbook pg 145
+* ./doc/testunder/chap03_testunder3_02.md  for explanation of λ in context
+of MOSFET conduction parameter calculation Kn/Kp (there is none).
 
 
 ## Problems
 3.1: Calculate the drain current in an NMOS transistor.
-* problem/prob3_01.py, textbook page PP
+* problem/prob3_01.py, textbook page 194
 * keywords: `iDS_in_saturation`  `iDS_in_NONsaturation`
+
+3.2: Calculate Kn and vDS using ratio of equations for iDS in nonsaturation.
+* problem/prob3_02.py, pg 194
+* keywords: `ratio_equations_iDS_in_nonsaturation`
 
 
 # Notes

@@ -49,6 +49,8 @@ def test3_02(self):
 	# Try values for eox to approx book ans: 1.08e-03
 	eox:float = 3.47e-09
 
+	# NOTE: The permittivity of silicon dioxide (SiO2) = 3.45e-13 F/cm.
+
 	# ----------------------------------------------------------------------------
 	# ----- (a) Calculate the conduction parameter Kn for each device. -----------
 
