@@ -19,6 +19,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `NMOS_calc_iD_function  PMOS_calc_iD_function`
 * `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
 * `ratio_equations_iDS_in_nonsaturation`
+* `estimate_VTN_iDS_per_graph`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -76,6 +77,11 @@ of MOSFET conduction parameter calculation Kn/Kp (there is none).
 3.2: Calculate Kn and vDS using ratio of equations for iDS in nonsaturation.
 * problem/prob3_02.py, pg 194
 * keywords: `ratio_equations_iDS_in_nonsaturation`
+
+3.3: Given graph transistor characteristics iD versus vDS for an NMOS device,
+estimate VTN and iDS, and calc iD(sat) for vGS = 3.5V and vGS = 4.5V.
+* problem/prob3_03.py, pg 194
+* keywords: `estimate_VTN_iDS_per_graph`
 
 
 # Notes
