@@ -21,6 +21,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `ratio_equations_iDS_in_nonsaturation`
 * `estimate_VTN_iDS_per_graph  matplotlib_multiple_curves  scatterplot_intersection`
 * `matplotlib_slice  matplotlib_stop_plot_past_point`
+* `region_of_operation  saturation  ohmic  cutoff`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -95,6 +96,11 @@ by slicing-off the non-sat curve after the transition-point for each VGS.
 * problem/prob3_03_plot_full.py, pg 194
 * ./docx/problem/chap03_problem3_03_plot.docx
 * keywords: `matplotlib_slice  matplotlib_stop_plot_past_point`
+
+3.5: The threshold voltage of each transistor in Figure P3.5 is VTN = 0.4V.
+Determine the region of operation of the transistor in each circuit.
+* problem/prob3_05.py, pg 194
+* keywords: `region_of_operation  saturation  ohmic  cutoff`
 
 
 # Notes
