@@ -4,22 +4,26 @@ import math
 from typing import Dict, List, Tuple  # Any, Set
 
 
-def prob3_03_plot(self):
+def prob3_03_plot_full(self):
 	"""Page 194:
 	The transistor characteristics iD versus vDS for an NMOS device are shown
 	in Figure P3.3. (a) Is this an enhancement-mode or depletion-mode device?
 	(b) Determine the values for Kn and VTN. (c) Determine iD(sat) for
 	vGS = 3.5V and vGS = 4.5V
 
-	Calc and plot the iDS ONLY FOR nonsaturation/ohmic region equation.
-	This works out well as the max IDs is quite obvious per the plot.
-	It also support plot of the "transition-point" for iDS(sat) for incremental
-	values for VGS.
+	Previously, calc and plot the iDS ONLY FOR nonsaturation/ohmic region equation.
+	See file prob3_03_plot.py.
 
-	This code stops at this point; to complete the IV-curve for the MOSFET,
-	the iDS(sat) must be "tacked-on" to these curves at the transition-point
-	for each VGS: 2,3,4,5 Volts.
-	See file prob3_03_plot_full.py.
+	Complete the ideal IV-curves for the MOSFET, the iDS(sat) portions of the
+	VGS= curves	are "tacked-on" to these curves at the transition-point	for each
+	VGS: 2,3,4,5 Volts.
+
+	This is a brute-force method; the iDS nonsat curves are sliced at the
+	transition-point for each VGS curve, then the iDS at saturation is tacked-on.
+	This will not work for non-ideal IV characteristics.
+	Better method would be to build the "entire" iDS-curve by "switching" to the
+	iDS(sat) equation to build the "rest" of the curve.  This will support
+	non-ideal IV curves when slope of iDS in saturation > 0.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -155,11 +159,71 @@ def prob3_03_plot(self):
 		import matplotlib.pyplot as plt
 
 		plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
-		plt.plot( x_VDS_range, list_calc_iDS_vgs_5, color='k', label=f"VGS={vGS_5}V" )  # customize color, recall 'k' = black
-		plt.plot( x_VDS_range, list_calc_iDS_vgs_4, color='b', label=f"VGS={vGS_4}V" )
-		plt.plot( x_VDS_range, list_calc_iDS_vgs_3, color='r', label=f"VGS={vGS_3}V" )
-		plt.plot( x_VDS_range, list_calc_iDS_vgs_2, color='g', label=f"VGS={vGS_2}V" )
-		# plt.plot( x_VDS_range, list_iDSnonsat, color='r', label=f"iDS(nonsat)" )
+
+		# Slice the VGS curve data at transition-point to make room for the
+		# saturation-region part of the curve.
+		# VGS = 5
+		x_slice:Tuple = x_VDS_range[:iDS_idx_VGS_5]
+		y_slice:List[float] = list_calc_iDS_vgs_5[:iDS_idx_VGS_5]
+		plt.plot( x_slice, y_slice, color='k', label=f"VGS={vGS_5}V" )  # customize color, recall 'k' = black
+		# Next, replace the 'sliced-off' curve from the transition-point to the end.
+		x_slice = x_VDS_range[iDS_idx_VGS_5:]
+		len_x_slice:int = len(x_slice)
+		len_y_slice:int = max_for_curve_calc_plot_range - len_x_slice - 1
+		# print( f"LLLLLLLLLEN len_y_slice: {len_y_slice}" )
+		# Below, get the value of iDS at transition-point from list of iDS to build
+		# the list of same values = saturation-current.
+		y_slice = [ list_calc_iDS_vgs_5[len_y_slice] ] * len_x_slice
+		plt.plot( x_slice, y_slice, color='k' )
+
+
+		# Slice the VGS curve data at transition-point to make room for the
+		# saturation-region part of the curve.
+		# VGS = 4
+		x_slice = x_VDS_range[:iDS_idx_VGS_4]
+		y_slice = list_calc_iDS_vgs_4[:iDS_idx_VGS_4]
+		plt.plot( x_slice, y_slice, color='b', label=f"VGS={vGS_4}V" )
+		# Next, replace the 'sliced-off' curve from the transition-point to the end.
+		x_slice = x_VDS_range[iDS_idx_VGS_4:]
+		len_x_slice = len(x_slice)
+		len_y_slice = max_for_curve_calc_plot_range - len_x_slice - 1
+		# Below, get the value of iDS at transition-point from list of iDS to build
+		# the list of same values = saturation-current.
+		y_slice = [ list_calc_iDS_vgs_4[len_y_slice] ] * len_x_slice
+		plt.plot( x_slice, y_slice, color='b' )
+
+
+		# Slice the VGS curve data at transition-point to make room for the
+		# saturation-region part of the curve.
+		# VGS = 3
+		x_slice = x_VDS_range[:iDS_idx_VGS_3]
+		y_slice = list_calc_iDS_vgs_3[:iDS_idx_VGS_3]
+		plt.plot( x_slice, y_slice, color='r', label=f"VGS={vGS_3}V" )
+		# Next, replace the 'sliced-off' curve from the transition-point to the end.
+		x_slice = x_VDS_range[iDS_idx_VGS_3:]
+		len_x_slice = len(x_slice)
+		len_y_slice = max_for_curve_calc_plot_range - len_x_slice - 1
+		# Below, get the value of iDS at transition-point from list of iDS to build
+		# the list of same values = saturation-current.
+		y_slice = [ list_calc_iDS_vgs_3[len_y_slice] ] * len_x_slice
+		plt.plot( x_slice, y_slice, color='r' )
+
+
+		# Slice the VGS curve data at transition-point to make room for the
+		# saturation-region part of the curve.
+		# VGS = 2
+		x_slice = x_VDS_range[:iDS_idx_VGS_2]
+		y_slice = list_calc_iDS_vgs_2[:iDS_idx_VGS_2]
+		plt.plot( x_slice, y_slice, color='g', label=f"VGS={vGS_2}V" )
+		# Next, replace the 'sliced-off' curve from the transition-point to the end.
+		x_slice = x_VDS_range[iDS_idx_VGS_2:]
+		len_x_slice = len(x_slice)
+		len_y_slice = max_for_curve_calc_plot_range - len_x_slice - 1
+		# Below, get the value of iDS at transition-point from list of iDS to build
+		# the list of same values = saturation-current.
+		y_slice = [ list_calc_iDS_vgs_2[len_y_slice] ] * len_x_slice
+		plt.plot( x_slice, y_slice, color='g' )
+
 
 		# Slice the IDSsat data to stop plotting when iDSsat is maximum.
 		x_slice = x_VDS_range[:iDS_idx_max]
