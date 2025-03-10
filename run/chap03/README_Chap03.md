@@ -22,6 +22,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `estimate_VTN_iDS_per_graph  matplotlib_multiple_curves  scatterplot_intersection`
 * `matplotlib_slice  matplotlib_stop_plot_past_point`
 * `region_of_operation  saturation  ohmic  cutoff`
+* `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -101,6 +102,11 @@ by slicing-off the non-sat curve after the transition-point for each VGS.
 Determine the region of operation of the transistor in each circuit.
 * problem/prob3_05.py, pg 194
 * keywords: `region_of_operation  saturation  ohmic  cutoff`
+
+3.13: For a p-channel enhancement-mode MOSFET, k'p = 50μA/V^2 ... Determine the
+W/L ratio and the value of VTP.
+* problem/prob3_13.py, pg 195
+* keywords: `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
 
 
 # Notes
