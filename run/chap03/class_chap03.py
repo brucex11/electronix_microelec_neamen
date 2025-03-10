@@ -1,9 +1,7 @@
 import ast
 # from collections import OrderedDict
 # from datetime import datetime
-# from typing import Any
-from typing import Dict   # also available: Dict, Set
-# from typing import Tuple
+from typing import Dict, List   # also available: Dict, Set, Tuple
 import os
 import importlib
 from inspect import currentframe
@@ -229,6 +227,41 @@ class Chap03():
 		return Kp_nonsat * ( 2 * (vSG + VTP) * vSD - vSD**2 )
 
 
+	def calc_MOSFET_IV_ohmic_curve_given_VGS( self, **kwargs ) -> List[float]:
+		"""
+		Pg 141 Table 3.1:
+		Depending on channel-type, NMOS or PMOS, calc the:
+		* Transition point VDS @ saturation, V
+		* Saturation point: (VDS, IDS)
+			- this is where slope of IV-curve = zero
+			- value:
+				* iDS(sat) = max-value in iDS-curve
+				* VDS = x_VDS_range[ index @ iDS(sat) ]
+				* plot-coordinates index: index @ iDS(sat)
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        VGS:float gate-Source voltage, V
+				VTN:float threshold voltage, V
+        Kn:float device conduction param, A/V^2
+				x_VDS_range:List[float] range of VDS, 0 to some-max-val
+		Return:
+			List of iDS, A
+		"""
+		VGS:float = kwargs['VGS']  # V
+		VTN:float = kwargs['VTN']  # V
+		vDS_sat:float = VGS - VTN  # V
+		Kn:float = kwargs['Kn']
+
+		calc_curve:List[float] = []
+
+		for vDS in kwargs['x_VDS_range']:
+			i:float = Kn * ( 2 * vDS_sat * vDS - vDS**2 )
+			calc_curve.append( i )
+
+		return calc_curve
+
+		
 	def calc_MOSFET_K_conduction_parameter( self, **kwargs ) -> float:
 		"""
 		Pg 133:

@@ -19,7 +19,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `NMOS_calc_iD_function  PMOS_calc_iD_function`
 * `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
 * `ratio_equations_iDS_in_nonsaturation`
-* `estimate_VTN_iDS_per_graph`
+* `estimate_VTN_iDS_per_graph  matplotlib_multiple_curves  scatterplot_intersection`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -82,6 +82,12 @@ of MOSFET conduction parameter calculation Kn/Kp (there is none).
 estimate VTN and iDS, and calc iD(sat) for vGS = 3.5V and vGS = 4.5V.
 * problem/prob3_03.py, pg 194
 * keywords: `estimate_VTN_iDS_per_graph`
+
+3.3.plot: Given graph transistor characteristics iD versus vDS for an NMOS device,
+estimate VTN and iDS, and calc iD(sat) for vGS = 3.5V and vGS = 4.5V.
+* problem/prob3_03_plot.py, pg 194
+* ./docx/problem/chap03_problem3_03_plot.docx
+* keywords: `matplotlib_multiple_curves  scatterplot_intersection`
 
 
 # Notes

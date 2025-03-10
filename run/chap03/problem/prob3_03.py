@@ -30,13 +30,13 @@ def prob3_03(self):
 	# saturation: iDS = Kn_sat * (vGS - VTN)**2
 	# VTN = vGS - vDS(sat)
 
-	ans_a:str = 'enhancement-mode'
+	ans_mode:str = 'enhancement-mode'
 	ans_VTN = 1.5   # V
 	ans_Kn:float = 0.064e-03   # A/V^2
 	tuple_ans_iDS_sat:Tuple = ( 0.256e-03, 0.576e-03 )
 
 	print( '\n---- (a) -------------------------------------------' )
-	ans_string:str = f"Since VGS is positive, device is {ans_a}."
+	ans_string:str = f"Since VGS is positive, device is {ans_mode}."
 	print( ans_string )
 
 	print( '\n---- (b) -------------------------------------------' )
@@ -99,8 +99,8 @@ in saturation:
 	for idx, ans_iDS in enumerate(tuple_ans_iDS_sat):
 		try:
 			assertions.assert_within_percentage( list_calc_iDS_sat[idx], ans_iDS, assert_percentage )
-			print( f"CALC iDS(sat) = {list_calc_iDS_sat[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
+			print( f"CALC iDS(sat) = {list_calc_iDS_sat[idx]:.3e}A @ VGS = {vGS_curve[idx]}V is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
 
-	print( '--- END ---' )
+	print( f"--- END {self.prob_str} ---" )
