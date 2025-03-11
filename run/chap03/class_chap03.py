@@ -167,6 +167,24 @@ class Chap03():
 	# --- Functions: helpers to support all of Chapter 03 ------------------------
 	# ----------------------------------------------------------------------------
 
+	def angstroms_per_meter( self, angstroms:float, units:str ) -> float:
+		"""
+		Args:
+			angstroms:float to convert
+			units:str 'm' for meters, 'cm' for centimeters
+		Return:
+			units value: float
+		"""
+		# Units conversion factor
+		Angstroms_per_meter:float = 1e+10
+		if( units == 'm' ):
+			return angstroms / Angstroms_per_meter
+		elif( units == 'cm' ):
+			cm_per_meter:float = 100
+			return angstroms / Angstroms_per_meter * cm_per_meter
+
+		return -1
+
 	def calc_iDS_for_NMOS_enhancement_in_saturation(
 			self, Kn_sat:float, vGS:float, VTN:float ) -> float:
 		"""
@@ -307,8 +325,7 @@ class Chap03():
 		# return ( W * un * eox ) / ( 2 * L * tox )
 
 
-	def calc_MOSFET_oxide_capacitance(
-			self, eox:float, tox:float ) -> float:
+	def calc_MOSFET_oxide_capacitance( self, eox:float, tox:float ) -> float:
 		"""
 		Calculate MOSFET oxide capacitance per unit area.
 		Note that eox and tox must have same "length" units, eg, centimeter

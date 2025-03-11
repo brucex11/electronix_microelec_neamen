@@ -115,6 +115,11 @@ W/L ratio and the value of VTP.
 * ./docx/problem/chap03_prob3_16_PMOS_plot.docx
 * keywords: `plot_scatter_line  PMOS_vSDsat_iSD`
 
+3.19: Design the widths for the two PMOS and NMOS transistors such that they
+are electrically equivalent.
+* problem/prob3_19.py, pg 196
+* keywords: `angstroms_per_meter  solve_for_W/L`
+
 
 # Notes
 * Pg 126: The `metal-oxide-semiconductor field-effect transistor` (MOSFET)
