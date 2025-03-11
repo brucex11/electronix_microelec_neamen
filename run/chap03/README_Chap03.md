@@ -24,6 +24,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `region_of_operation  saturation  ohmic  cutoff`
 * `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
 * `plot_scatter_line  PMOS_vSDsat_iSD`
+* `NMOS_finite_output_resistance  NMOS_body_effect`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -119,6 +120,11 @@ W/L ratio and the value of VTP.
 are electrically equivalent.
 * problem/prob3_19.py, pg 196
 * keywords: `angstroms_per_meter  solve_for_W/L`
+
+3.22: At what value of VSB will the threshold voltage change by 2V due
+to the body effect?
+* problem/prob3_22.py, pg 196
+* keywords: `NMOS_finite_output_resistance  NMOS_body_effect`
 
 
 # Notes
