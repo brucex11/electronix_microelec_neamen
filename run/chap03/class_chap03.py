@@ -55,8 +55,11 @@ class Chap03():
 		self._problem_txt:str = self.cf.get_config_params['common']['problem_txt']
 		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
 
+		self._draw_figure:bool = ast.literal_eval(
+			self.cf.get_config_params['common']['draw_figure'] )
+
 		# save figure params
-		self._save_figure = ast.literal_eval(
+		self._save_figure:bool = ast.literal_eval(
 			self.cf.get_config_params['common']['save_figure'] )
 		self._save_figure_dir:str = os.path.join(
 			self.cf.get_config_params['common']['save_figure_rootdir'],
@@ -113,6 +116,9 @@ class Chap03():
 	@property
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
+	@property
+	def draw_figure(self):
+		return self._draw_figure
 	@property
 	def ni_GaAs_300K(self):
 		return self._ni_GaAs_300K

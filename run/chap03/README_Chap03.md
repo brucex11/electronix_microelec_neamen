@@ -23,6 +23,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `matplotlib_slice  matplotlib_stop_plot_past_point`
 * `region_of_operation  saturation  ohmic  cutoff`
 * `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
+* `plot_scatter_line  PMOS_vSDsat_iSD`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -107,6 +108,12 @@ Determine the region of operation of the transistor in each circuit.
 W/L ratio and the value of VTP.
 * problem/prob3_13.py, pg 195
 * keywords: `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
+
+3.16: A p-channel depletion-mode MOSFET has parameters VTP = +2V ...  calculate
+	the drain current in the saturation	region.
+* problem/prob3_16.py, pg 196
+* ./docx/problem/chap03_prob3_16_PMOS_plot.docx
+* keywords: `plot_scatter_line  PMOS_vSDsat_iSD`
 
 
 # Notes
