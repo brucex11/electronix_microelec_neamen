@@ -25,6 +25,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `ratio_of_currents  ratio_of_voltages  solve_for_W/L`
 * `plot_scatter_line  PMOS_vSDsat_iSD`
 * `NMOS_finite_output_resistance  NMOS_body_effect`
+* `given_Kn_calc_VGS  ohmic_vs_saturation_region`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -125,6 +126,16 @@ are electrically equivalent.
 to the body effect?
 * problem/prob3_22.py, pg 196
 * keywords: `NMOS_finite_output_resistance  NMOS_body_effect`
+
+3.30: Consider the circuit in Figure P3.30.
+* problem/prob3_30.py, pg 197
+* ./LTspice/chap03/prob3_30/prob3_30.asc
+* keywords: ``
+
+3.34: Per Figure P3.34, determine VGS such that ID = 0.35mA; determine VDS
+and VDS (sat).
+* problem/prob3_34.py, pg 198
+* keywords: `given_Kn_calc_VGS  ohmic_vs_saturation_region`
 
 
 # Notes
