@@ -26,7 +26,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `plot_scatter_line  PMOS_vSDsat_iSD`
 * `NMOS_finite_output_resistance  NMOS_body_effect`
 * `given_Kn_calc_VGS  ohmic_vs_saturation_region`
-* `PMOS_depletion_mode`
+* `PMOS_depletion_mode  calc_NMOS_W/L`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -141,6 +141,11 @@ and VDS (sat).
 3.41: Design the circuit in Figure P3.41 so that VSD = 2.5V.
 * problem/prob3_41.py, pg 199
 * keywords: `PMOS_depletion_mode`
+
+3.45: Consider the circuit in Figure P3.44; determine the W/L ratio of M1
+such that	vO = 0.025V when vI = 3V.
+* problem/prob3_45.py, pg 200
+* keywords: `calc_NMOS_W/L`
 
 
 # Notes
