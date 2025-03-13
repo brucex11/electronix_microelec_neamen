@@ -26,6 +26,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `plot_scatter_line  PMOS_vSDsat_iSD`
 * `NMOS_finite_output_resistance  NMOS_body_effect`
 * `given_Kn_calc_VGS  ohmic_vs_saturation_region`
+* `PMOS_depletion_mode`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -136,6 +137,10 @@ to the body effect?
 and VDS (sat).
 * problem/prob3_34.py, pg 198
 * keywords: `given_Kn_calc_VGS  ohmic_vs_saturation_region`
+
+3.41: Design the circuit in Figure P3.41 so that VSD = 2.5V.
+* problem/prob3_41.py, pg 199
+* keywords: `PMOS_depletion_mode`
 
 
 # Notes
