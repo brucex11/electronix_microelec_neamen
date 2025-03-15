@@ -1,4 +1,3 @@
-
 from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
@@ -17,20 +16,34 @@ def exerX_XX(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}" )
+	print( f"Problem: {pnum}\nSolution" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------' )
 
-
+	# ---- Answers -------------------
 	ans:float = 0
 
+	# ---- Givens --------------------
 	calc_result:float = 0
+
+	ans_string:str = """
+The devices per schematic symbol are n-channel enhancement-mode.  This is
+confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
+
+For each device, calculate VDS(sat) and compare against VDS:
+* if VDS > VDS(sat), operation is saturation-region
+* if VDS < VDS(sat), operation is ohmic-region
+"""
+	print( ans_string )
+
+	print( '\n---- (a) -------------------------------------------' )
+
 
 	try:
 		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer." )
+		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 

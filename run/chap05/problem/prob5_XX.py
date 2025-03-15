@@ -4,7 +4,7 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def probX_XX(self):
+def prob5_XX(self):
 	"""Page XX:
 
 	ANS(a): (i) 1.03μA, (ii) 2.25mA
@@ -27,6 +27,7 @@ def probX_XX(self):
 
 	# ---- Givens --------------------
 	calc_result:float = 0
+
 
 	ans_string:str = """
 The devices per schematic symbol are n-channel enhancement-mode.  This is

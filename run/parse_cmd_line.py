@@ -11,12 +11,13 @@ Input and output dirs are checked for existence.  The output PATH is
 built to ensure that the filename's extension is .csv.
 """
 def parse_the_args():
-    desc="""microelx.py [ Chap01 | Chap02 | Chap02 ]  PATH-to-config.ini
+    desc="""microelx.py [ Chap01 | Chap02 | Chap02 | Chap05 ]  PATH-to-config.ini
 
     Example runtime commands:
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap01  ..\\config\\chap01\\example\\config_example__01-10.ini
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap02  ..\\config\\chap02\\example\\config_example__01-10.ini
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap03  ..\\config\\chap03\\example\\config_example__01-10.ini
+    (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap05  ..\\config\\chap05\\example\\config_example__01-10.ini
     """
 
     parser = argparse.ArgumentParser( prog=desc )
@@ -28,8 +29,10 @@ def parse_the_args():
     parser_chap01.add_argument( 'config_file', help='PATH to config.ini' )
     parser_chap02 = subparsers.add_parser( 'Chap02', help='run Chapter 02 problems' )
     parser_chap02.add_argument( 'config_file', help='PATH to config.ini' )
-    parser_chap03 = subparsers.add_parser( 'Chap03', help='run Chapter XX problems' )
+    parser_chap03 = subparsers.add_parser( 'Chap03', help='run Chapter 03 problems' )
     parser_chap03.add_argument( 'config_file', help='PATH to config.ini' )
+    parser_chap05 = subparsers.add_parser( 'Chap05', help='run Chapter 05 problems' )
+    parser_chap05.add_argument( 'config_file', help='PATH to config.ini' )
     # parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
     # parser_chap77.add_argument( 'config_file', help='PATH to config.ini' )
 

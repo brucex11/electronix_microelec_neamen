@@ -1,9 +1,9 @@
 # Python Project MICROELEC_NEAMEN
-# Electronix Microelectronics
+# Electronix Microelectronics Chap 01
 Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Edition by Donald Neamen.
 
 Figures and notes for all `./subdir` examples, exercises, and problems for this
-chapter are contained in MSWord docx located in the `./subdir/docx` folder.
+chapter are contained in MSWord docx located in the `./docx/` folder.
 Don't forget to update .gitignore to preclude .docx binaries from repository.
 
 # Search This Document
