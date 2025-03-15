@@ -1,6 +1,6 @@
 
 from inspect import currentframe
-import math
+from math import sqrt
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
@@ -8,8 +8,10 @@ from assertions import assertions
 def prob3_30(self):
 	"""Page 197:
 	Consider the circuit in Figure P3.30.  The transistor parameters are
-	VTP = -0.8 V and Kp = 0.5mA/V^2.  Determine ID, VSG, and VSD.
-	ANS  ID= 0.2332mA, VSG = 1.483V, VSD = 4.72V
+	VTP = -0.8V and Kp = 0.5mA/V^2.  Determine ID, VSG, and VSD.
+	ANS:  ID = 0.2332mA, VSG = 1.483V, VSD = 4.72V.
+
+	See also ./LTspice/chap03/prob3_30/
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -23,9 +25,9 @@ def prob3_30(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------' )
 
-
+	# ---- Answers -------------------
 	ans:float = 0
-	calc_result:float = 0
+
 
 	ans_string:str = """
 Firstly, since the given VTP < 0, device is p-chan enhancement mode.
@@ -42,113 +44,130 @@ Then, to calc the gate voltage, subtract the voltage-drop across R1 from the
 """
 	print( ans_string )
 
-	VPT:float = -0.8    # V
+	# ---- Givens --------------------
+	VTP:float = -0.8    # V
 	Kp:float = 0.5e-03  # A/V^2
 	VSS:float = 3   # V
 	VDD:float = -3   # V
-	Vtotal:float = VSS - VDD    # V
 	R1:float = 8e+03
 	R2:float = 22e+03
 	RS:float = 0.5e+03
 	RD:float = 5e+03
 
-	print( '---- (gate voltage) -----------------------------------------------' )
-	IGB:float = Vtotal / (R1+R2)
-	VR1 = IGB * R1
-	VGB:float = VSS - VR1
-	print( f"The gate bias voltage VGB = {VGB}V" )
+	calc_Vtotal:float = VSS - VDD    # V
 
-	print( '---- (PMOS cutoff) ------------------------------------------------' )
-	print( f"At cutoff, iD = 0, therefore with 0 voltage-drop across RS, VS = +3, and then VSG = VS - VGB" )
-	VSG_cutoff:float = VSS - VGB
+	print( '\n---- (gate bias voltage) -----------------------------------------' )
+	IGB:float = calc_Vtotal / (R1+R2)
+	VR1 = IGB * R1
+	calc_VG:float = VSS - VR1
+	print( f"The gate bias voltage VG = {calc_VG}V" )
+
+	print( '\n---- (PMOS cutoff) ----------------------------------------------' )
+	print( f"At cutoff, iD = 0, therefore with 0 voltage-drop across RS,", end=' ' )
+	print( f"VS = +3, and then VSG = VS - VG" )
+	VSG_cutoff:float = VSS - calc_VG
 	print( f"CALC VSG(cutoff) = {VSG_cutoff}V" )
 
 	ans_string = """
----- (PMOS saturation) ------------------------------------------------.
+---- (source circuit voltage drops) --------------------------------------------
+VSS - VS - VSG - VG = 0
 
-In saturation, the current (ID) is 6V across RS and RD.
-Calc ID = 6V / RS + RD.
-Then, to calc the source voltage, subtract the voltage-drop across RS from the
-+3 supply voltage VSS.
+The voltage-drop across RS = ID*RS where ID is determined by the MOSFET biasing.
+Therefore, VS = ID*RS.
+
+Assume saturation-region:  ID = Kp*(VSG + VTP)^2
+Substitute ID in voltage-drop equation and solve for VGS.
+
+VSS - RS * ( Kp*(VSG + VTP)^2 ) - VSG - VG = 0
+
+Let z = RS*Kp.
+VSS  -  z*(VSG + VTP)^2  -  VSG  -  VG = 0
+
+VSS  -  z*(VSG + VTP)(VSG + VTP)  -  VSG  -  VG = 0
+VSS  -  z*(VSG^2 + 2VSG*VTP + VTP^2)  -  VSG  -  VG = 0
+VSS  -  z*VSG^2 - 2zVSG*VTP - zVTP^2  -  VSG  -  VG = 0
+Combine VGS and constants to covert to quadratic equation.
+[ VSS - zVTP^2 - VG ]  -  zVSG^2  -  2zVSG*VTP  -  VSG = 0
+[ VSS - zVTP^2 - VG ]  -  zVSG^2  -  VSG(2zVTP + 1) = 0
+Rearrange for quadratic.
+-zVSG^2  -  (2zVTP+1)VSG  +  [ VSS - zVTP^2 - VG ] = 0
+
+a = -z
+b = -(2zVPT+1)
+c = [ VSS - zVTP^2 - VG ]
 """
 	print( ans_string )
 
-	iD:float = Vtotal / (RS+RD)
-	VS_sat:float = VSS - (iD * RS)
-	VSG_sat:float = VS_sat - VGB
-	print( f"CALC VSG(saturation) = {VSG_sat}V" )
+	z:float = Kp * RS
+	print( f"z = {z}" )
 
-	# try:
-	# 	assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-	# 	print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer." )
-	# except AssertionError as e:
-	# 	print( f"CALC AssertionError {pnum}: {e}" )
+	a:float = -z
+	b:float = -( 2 * z * VTP + 1 )
+	c:float = VSS - ( z * VTP**2 ) - calc_VG
+	list_abc:List[float] = [ a, b, c ]
+	print( f"list_abc: {list_abc}" )
 
+	calc_roots:List[float ] = []  # reference to function-call
+	# list_abc:List[float] = [ 1,2,5 ]   # test-coeffs for complex roots
+	if( not self.calc_quadratic_roots( list_abc, calc_roots ) ):
+		print( 'Quadratic equation roots are complex' )
+		return
 
-
-	# Usage single value:
-	# ans_a:float = 0.518e-03   # A
-	# try:
-	# 	assertions.assert_within_percentage( iDS, ans_a, assert_percentage )
-	# 	print( f"CALC NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
-	# except AssertionError as e:
-	# 	print( f"CALC AssertionError {pnum}: {e}" )
-
-	# try:
-	# 	assertions.assert_within_percentage( iSD, ans_a, assert_percentage )
-	# 	print( f"CALC PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
-	# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
-	# except AssertionError as e:
-	# 	print( f"CALC AssertionError {pnum}: {e}" )
-
-	# Usage with List:
-	# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
-	# ans_a_iDS:Tuple = (0.518e-03, 0.691e-03, 0.691e-03)   #
-	# for idx, ans_iDS in enumerate(ans_a_iDS):
-	# 	try:
-	# 		assertions.assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
-	# 		print( f"CALC NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
-	# 	except AssertionError as e:
-	# 		print( f"CALC AssertionError {pnum}: {e}" )
+	print( f"Quadratic roots: {calc_roots}" )
+	calc_VSG:float = calc_roots[1]
+	calc_VSG = round(calc_VSG,3)
+	print( f"VSG cannot be negative, so\n  VSG = {calc_VSG}V" )
 
 
-# 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
-# 		prep_fig( self, x=diode_voltages, y=calc_result )
+	ans_string = f"""
+---- (calculate ID(sat)) -------------------------------------------------------
+With VSG calculated, use the ID(sat) equation to solve for ID(sat):
 
-# def prep_fig(self, x=(), y=[] ):
-# 	import os
-# 	import pathlib
-# 	import matplotlib.pyplot as plt
-# 	from matplotlib.ticker import MaxNLocator
+  ID(sat) = Kp[ VSG + VTP ]^2
 
-# 	print( f"{prep_fig.__name__}" )
-# 	print( f"p1_27.__name__: {p1_27.__name__}" )
-# 	dir_plot = os.path.join( self.dir_draw_root, self.dir_draw_subdir )
-# 	print( f"dir_plot: '{dir_plot}'" )
-# 	pathlib.Path( dir_plot ).mkdir( parents=True, exist_ok=True )
+  where:
+    Kp = {Kp}A/V^2
+    VSG = {calc_VSG}V
+    VTP = {VTP}V
+"""
+	print( ans_string )
 
-# 	fname = "{a}.png".format( a=p1_27.__name__ )
-# 	path_plot = os.path.join( dir_plot, fname )
-# 	print( f"path_plot: '{path_plot}'" )
+	calc_ID_sat:float = Kp * ( calc_VSG + VTP )**2
+	calc_ID_sat = round(calc_ID_sat,7)
+	print( f"ID(sat) = {calc_ID_sat}A = {calc_ID_sat*1000}mA" )
 
-# 	# x = [1, 2, 3, 4, 5]
-# 	# y = [2, 3, 5, 7, 11]
-# 	x = x
-# 	y = y
+	ans_string = f"""
+---- (calculate VSD) -----------------------------------------------------------
+With the current through the series components now known, {calc_ID_sat*1000}mA,
+use KVL to calculate VSD:
 
-# 	plt.figure( figsize=self.param_figure_figsize )
-# 	plt.scatter(x, y, color='blue', marker='o')  # You can customize the color and marker style
+  VSS - VRS - VSD - VRD - VDD = 0
+  -OR-
+  VSD = VSS - VRS - VRD - VDD
 
-# 	# Set titles and labels
-# 	plt.title('Diode Current')
-# 	plt.xlabel('Diode V')
-# 	plt.xlim( -2.5, 1 )
-# 	# Set the x-axis to have 12 divisions
-# 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
+  where:
+    VSS = {VSS}V
+    VRS = ID(sat) * RS  =  {calc_ID_sat} * {RS}
+    VRD = ID(sat) * RD  =  {calc_ID_sat} * {RD}
+    VDD = {VDD}V
+"""
+	print( ans_string )
 
-# 	plt.ylabel('Diode A')
-# 	plt.ylim( -1, 25 )
-# 	# plt.yscale( 'log' )
+	calc_VRS:float = calc_ID_sat * RS
+	calc_VRD:float = calc_ID_sat * RD
+	calc_VSD:float = VSS - calc_VRS - calc_VRD - VDD
+	calc_VSD = round(calc_VSD,2)
+	print( f"VSD = {calc_VSD}V" )
 
-# 	# Display the plot
-# 	plt.show()
+
+
+	ans_string = f"""
+---- (calculate VSD(sat)) ------------------------------------------------------
+VSD(sat) = VSG + VTP  =  {calc_VSG} + {VTP}
+"""
+	print( ans_string )
+
+	calc_VSD_sat:float = calc_VSG + VTP
+	print( f"VSD(sat) = {calc_VSD_sat}V" )
+
+	print( '---- END -----------------------------------------------------------')

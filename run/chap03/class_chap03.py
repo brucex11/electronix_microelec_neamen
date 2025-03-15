@@ -5,7 +5,7 @@ from typing import Dict, List   # also available: Dict, Set, Tuple
 import os
 import importlib
 from inspect import currentframe
-import sys
+from math import sqrt
 from scipy.constants import Boltzmann
 
 # from pytools import glob_dir
@@ -337,6 +337,35 @@ class Chap03():
 			Cox:float - oxide capacitance per unit area
 		"""
 		return eox/tox
+
+
+	def calc_quadratic_roots( self, coeffs:List[float], roots:List[float] ) -> bool:
+		"""
+		Given coefficients a, b, c, get the roots.
+
+		Args:
+			coeffs:List[float] contains [ a, b, c ]
+			roots:List[float] the calulated-roots (reference)
+
+		Return:
+			True if discriminant >= 0, False otherwise
+		"""
+		not_complex:bool = True
+		a:float = coeffs[0]
+		b:float = coeffs[1]
+		c:float = coeffs[2]
+
+		discriminant:float = b**2 - ( 4 * a * c )
+		if( discriminant < 0 ):
+			not_complex = False
+			return not_complex
+
+		xPosRoot:float = ( -b + sqrt(discriminant) ) / ( 2.0 * a )
+		xNegRoot:float = ( -b - sqrt(discriminant) ) / ( 2.0 * a )
+		roots.extend( [xPosRoot, xNegRoot] )
+
+		return not_complex
+
 
 
 	# ----------------------------------------------------------------------------

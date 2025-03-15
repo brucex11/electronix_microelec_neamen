@@ -14,7 +14,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `conduction  angstroms_per_meter  cm_per_meter`
 * `iDS_in_saturation  iDS_in_NONsaturation`
 * `Kn_in_NONsaturation  Kn_in_saturation  calc_Knp_from_conduction_parameters`
-* `calc_Kn_via_iteration`
+* `calc_Kn_via_iteration  quadratic_roots`
 * `MOSFET_conduction_param_Kn  MOSFET_saturation_current  NMOS_threshold_voltage_VTN`
 * `NMOS_calc_iD_function  PMOS_calc_iD_function`
 * `calc_iDS_for_NMOS_enhancement_in_nonsaturation  calc_iDS_for_NMOS_enhancement_in_saturation`
@@ -131,7 +131,7 @@ to the body effect?
 3.30: Consider the circuit in Figure P3.30.
 * problem/prob3_30.py, pg 197
 * ./LTspice/chap03/prob3_30/prob3_30.asc
-* keywords: ``
+* keywords: `quadratic_roots`
 
 3.34: Per Figure P3.34, determine VGS such that ID = 0.35mA; determine VDS
 and VDS (sat).
