@@ -5,7 +5,7 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def prob3_XX(self):
+def prob2_XX(self):
 	"""Page XX:
 
 	ANS(a): (i) 1.03μA, (ii) 2.25mA

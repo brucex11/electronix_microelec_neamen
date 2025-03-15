@@ -10,7 +10,7 @@ def prob3_45(self):
 	k'n = 120uA/V^2, and W/L = 1. Determine the W/L ratio of M1 such that
 	vO = 0.025V when vI = 3V.
 	Page 1340:
-	NS: (W/L)M1 = 2.78
+	ANS: (W/L)M1 = 2.78
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -49,8 +49,8 @@ M2: VGS = 0, VDS = VDD - vo
 	VG_M1:float = VG_M1_spec   # V
 	VS_M1:float = 0   # V
 	VD_M1:float = vo_spec
-	calc_VGS_M1:float = VG_M1_spec - VS_M1
-	calc_VDS_M1:float = vo_spec - VS_M1
+	calc_VGS_M1:float = VG_M1 - VS_M1
+	calc_VDS_M1:float = VD_M1 - VS_M1
 	calc_VDS_M1_sat:float = calc_VGS_M1 - VTN_M1
 	print( f"M1: VGS = {calc_VGS_M1}V, VDS = {calc_VDS_M1}V, and VG > VD." )
 	print( f"    Since VDS(sat) = VGS - VTN = {calc_VDS_M1_sat}V, then VDS << VDS(sat)," )
@@ -60,8 +60,8 @@ M2: VGS = 0, VDS = VDD - vo
 	VG_M2:float = vo_spec   # V
 	VS_M2:float = vo_spec   # V
 	VD_M2:float = VDD
-	calc_VGS_M2:float = vo_spec - vo_spec
-	calc_VDS_M2:float = VDD - vo_spec
+	calc_VGS_M2:float = VG_M2 - VS_M2
+	calc_VDS_M2:float = VD_M2 - VS_M2
 	calc_VDS_M2_sat:float = calc_VGS_M2 - VTN_M2
 	print( f"M2: VGS = {calc_VGS_M2}V, VDS = {calc_VDS_M2}V, and VG < VD." )
 	print( f"    Since VDS(sat) = VGS - VTN = {calc_VDS_M2_sat}V, then VDS >> VDS(sat)," )
@@ -75,9 +75,9 @@ Use the ideal I-V current equations:
  - ID(ohmic) for M1
  - ID(saturation) for M2
 
-IDM1 = IDM2:
-IDM1 = Kn[ 2(VGS - VTN)VDS - VDS^2 ]
-IDM2 = Kn( VGS - VTN )^2
+IDM1 in ohmic-region = IDM2 in saturation-region:
+IDM1(ohmic) = Kn[ 2(VGS - VTN)VDS - VDS^2 ]
+IDM2(sat)   = Kn( VGS - VTN )^2
 
 Since Kn is known for both, use the Kn-version with (W/L) and solve for M1's (W/L).
 """
@@ -86,16 +86,17 @@ Since Kn is known for both, use the Kn-version with (W/L) and solve for M1's (W/
 	calc_ID_M2:float = ( k_prime_n_M2 / 2 ) * WoverL_M2 * ( calc_VGS_M2 - VTN_M2 )**2
 	print( f"Calculate M2 drain current:\nIDM2(sat) = {calc_ID_M2}A" )
 
-	print( f"Then set the homic-ID equation to IDM1(sat) and solve for (W/L)M1:" )
+	print( f"Then set the ohmic-ID equation to IDM1(sat) and solve for (W/L)M1:" )
 	# print( f"calc_VGS_M1 = {calc_VGS_M1}")
 	# print( f"VTN_M1 = {VTN_M1}")
 	# print( f"calc_VDS_M1 = {calc_VDS_M1}")
 	# print( f"ABC = {2 * ( calc_VGS_M1 - VTN_M1) * calc_VDS_M1 - calc_VDS_M1**2 }")
 	calc_WoverL_M1:float = ( 2 * calc_ID_M2 / k_prime_n_M1 ) / ( 2 * ( calc_VGS_M1 - VTN_M1) * calc_VDS_M1 - calc_VDS_M1**2 )
+	calc_WoverL_M1 = round(calc_WoverL_M1,3)
 	print( f"(W/L)M1 = {calc_WoverL_M1} ")
 
 	try:
 		assertions.assert_within_percentage( calc_WoverL_M1, ans_WoverL_M1, assert_percentage )
-		print( f"CALC (W/L)M1 = {round(calc_WoverL_M1,3)} is within {assert_percentage}% of accepted answer {ans_WoverL_M1}." )
+		print( f"CALC (W/L)M1 = {calc_WoverL_M1} is within {assert_percentage}% of accepted answer {ans_WoverL_M1}." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )

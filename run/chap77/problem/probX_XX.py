@@ -24,7 +24,10 @@ def probX_XX(self):
 	print( '-----------------------------------------------' )
 
 
+	# ---- Answers -------------------
 	ans:float = 0
+
+	# ---- Givens --------------------
 	calc_result:float = 0
 
 	ans_string:str = """
@@ -41,7 +44,7 @@ For each device, calculate VDS(sat) and compare against VDS:
 
 	try:
 		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer." )
+		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
