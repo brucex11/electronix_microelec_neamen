@@ -1,6 +1,5 @@
 
 from inspect import currentframe
-from math import sqrt
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
@@ -19,18 +18,14 @@ def prob3_30(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}" )
+	print( f"Problem: {pnum}\nSolution" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------' )
 
-	# ---- Answers -------------------
-	ans:float = 0
-
-
 	ans_string:str = """
-Firstly, since the given VTP < 0, device is p-chan enhancement mode.
+First, since the given VTP < 0, device is p-chan enhancement mode.
 
 The current (IGB) in the voltage-divider circuit that drives the PMOS gate
 is biased by 6V across R1 and R2.  (GB: gate bias).
@@ -56,37 +51,38 @@ Then, to calc the gate voltage, subtract the voltage-drop across R1 from the
 
 	calc_Vtotal:float = VSS - VDD    # V
 
-	print( '\n---- (gate bias voltage) -----------------------------------------' )
+	print( '\n---- (gate bias voltage) -------------------------------' )
 	IGB:float = calc_Vtotal / (R1+R2)
 	VR1 = IGB * R1
 	calc_VG:float = VSS - VR1
 	print( f"The gate bias voltage VG = {calc_VG}V" )
 
-	print( '\n---- (PMOS cutoff) ----------------------------------------------' )
-	print( f"At cutoff, iD = 0, therefore with 0 voltage-drop across RS,", end=' ' )
+	print( '\n---- (PMOS cutoff) -------------------------------------' )
+	print( f"At cutoff, iD = 0, therefore with 0 voltage-drop across RS," )
 	print( f"VS = +3, and then VSG = VS - VG" )
 	VSG_cutoff:float = VSS - calc_VG
 	print( f"CALC VSG(cutoff) = {VSG_cutoff}V" )
 
 	ans_string = """
----- (source circuit voltage drops) --------------------------------------------
+---- (source circuit voltage drops) -----------------------------
 VSS - VS - VSG - VG = 0
 
 The voltage-drop across RS = ID*RS where ID is determined by the MOSFET biasing.
 Therefore, VS = ID*RS.
 
 Assume saturation-region:  ID = Kp*(VSG + VTP)^2
-Substitute ID in voltage-drop equation and solve for VGS.
+Substitute ID in voltage-drop equation and solve for VSG.
 
 VSS - RS * ( Kp*(VSG + VTP)^2 ) - VSG - VG = 0
 
+---- (calc VSG) -------------------------------------------------
 Let z = RS*Kp.
 VSS  -  z*(VSG + VTP)^2  -  VSG  -  VG = 0
 
 VSS  -  z*(VSG + VTP)(VSG + VTP)  -  VSG  -  VG = 0
 VSS  -  z*(VSG^2 + 2VSG*VTP + VTP^2)  -  VSG  -  VG = 0
 VSS  -  z*VSG^2 - 2zVSG*VTP - zVTP^2  -  VSG  -  VG = 0
-Combine VGS and constants to covert to quadratic equation.
+Combine VSG and constants to covert to quadratic equation.
 [ VSS - zVTP^2 - VG ]  -  zVSG^2  -  2zVSG*VTP  -  VSG = 0
 [ VSS - zVTP^2 - VG ]  -  zVSG^2  -  VSG(2zVTP + 1) = 0
 Rearrange for quadratic.
@@ -120,7 +116,7 @@ c = [ VSS - zVTP^2 - VG ]
 
 
 	ans_string = f"""
----- (calculate ID(sat)) -------------------------------------------------------
+---- (calculate ID(sat)) ----------------------------------------
 With VSG calculated, use the ID(sat) equation to solve for ID(sat):
 
   ID(sat) = Kp[ VSG + VTP ]^2
@@ -137,7 +133,7 @@ With VSG calculated, use the ID(sat) equation to solve for ID(sat):
 	print( f"ID(sat) = {calc_ID_sat}A = {calc_ID_sat*1000}mA" )
 
 	ans_string = f"""
----- (calculate VSD) -----------------------------------------------------------
+---- (calculate VSD) --------------------------------------------
 With the current through the series components now known, {calc_ID_sat*1000}mA,
 use KVL to calculate VSD:
 
@@ -162,7 +158,7 @@ use KVL to calculate VSD:
 
 
 	ans_string = f"""
----- (calculate VSD(sat)) ------------------------------------------------------
+---- (calculate VSD(sat)) ---------------------------------------
 VSD(sat) = VSG + VTP  =  {calc_VSG} + {VTP}
 """
 	print( ans_string )
@@ -170,4 +166,4 @@ VSD(sat) = VSG + VTP  =  {calc_VSG} + {VTP}
 	calc_VSD_sat:float = calc_VSG + VTP
 	print( f"VSD(sat) = {calc_VSD_sat}V" )
 
-	print( '---- END -----------------------------------------------------------')
+	print( '---- END --------------------------------------------------')

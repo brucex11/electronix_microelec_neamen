@@ -3,7 +3,7 @@
 Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Edition by Donald Neamen.
 
 Figures and notes for all `./subdir` examples, exercises, and problems for this
-chapter are contained in MSWord docx located in the `./subdir/doc` folder.
+chapter are contained in MSWord docx located in the `./doc/` folder.
 Don't forget to update .gitignore to preclude .docx binaries from repository.
 
 # Search This Document
@@ -93,13 +93,13 @@ estimate VTN and iDS, and calc iD(sat) for vGS = 3.5V and vGS = 4.5V.
 3.3.plot: Given graph transistor characteristics iD versus vDS for an NMOS device,
 estimate VTN and iDS, and calc iD(sat) for vGS = 3.5V and vGS = 4.5V.
 * problem/prob3_03_plot.py, pg 194
-* ./docx/problem/chap03_problem3_03_plot.docx
+* ./docx/chap03/problem/chap03_problem3_03_plot.docx
 * keywords: `matplotlib_multiple_curves  scatterplot_intersection`
 
 3.3.plot.full: Continuation of 3.3.plot; draw the saturation-region of the iDS
 by slicing-off the non-sat curve after the transition-point for each VGS.
 * problem/prob3_03_plot_full.py, pg 194
-* ./docx/problem/chap03_problem3_03_plot.docx
+* ./docx/chap03/problem/chap03_problem3_03_plot.docx
 * keywords: `matplotlib_slice  matplotlib_stop_plot_past_point`
 
 3.5: The threshold voltage of each transistor in Figure P3.5 is VTN = 0.4V.
@@ -115,7 +115,7 @@ W/L ratio and the value of VTP.
 3.16: A p-channel depletion-mode MOSFET has parameters VTP = +2V ...  calculate
 	the drain current in the saturation	region.
 * problem/prob3_16.py, pg 196
-* ./docx/problem/chap03_prob3_16_PMOS_plot.docx
+* ./docx/chap03/problem/chap03_prob3_16_PMOS_plot.docx
 * keywords: `plot_scatter_line  PMOS_vSDsat_iSD`
 
 3.19: Design the widths for the two PMOS and NMOS transistors such that they

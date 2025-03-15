@@ -1,16 +1,16 @@
 
 from inspect import currentframe
-from math import sqrt
-from typing import List, Tuple  # Any, Dict, Set
+# from math import sqrt
+# from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
 def prob3_02(self):
 	"""Page 194:
-	The current in an NMOS transistor is (a) 0.5mA when VGS - VTN = 0.6V and
-	(b) 1.0mA when VGS - VTN = 1.0V. The device is operating in the nonsaturation
-	region. Determine VDS and Kn.
-	ANS none
+	The current in an NMOS transistor is (a) 0.5mA when VGS - VTN = 0.6V
+	and (b) 1.0mA when VGS - VTN = 1.0V. The device is operating in the
+	nonsaturation	region. Determine VDS and Kn.
+	ANS:  VDS = 0.4V, Kn = 1.56mA/V^2
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -18,7 +18,7 @@ def prob3_02(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}" )
+	print( f"Problem: {pnum}\nSolution" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 0.5
@@ -49,9 +49,9 @@ iDS can be substituted leaving only vDS to be solved.\n"""
 	print( ans_string )
 
 	ans_string:str = """  Ratio:
-    0.5 = Kn[2(0.6)vDS - vDS^2)]
+    0.5 = Kn[2(0.6)vDS - vDS^2]
     ---------------------------
-    1.0 = Kn[2(1.0)vDS - vDS^2)]
+    1.0 = Kn[2(1.0)vDS - vDS^2]
 
 The Kn's cancal and the above reduces algebraically:
     vDS - 0.5vDS^2 = 1.2vDS - vDS^2 , divide both sides by vDS
