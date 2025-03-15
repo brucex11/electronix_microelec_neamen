@@ -147,6 +147,11 @@ such that	vO = 0.025V when vI = 3V.
 * problem/prob3_45.py, pg 200
 * keywords: `calc_NMOS_W/L`
 
+3.46: The transistors in the circuit in Figure P3.46 both have parameters
+VTN = 0.4V and k'n = 120μA/V^2.
+* problem/prob3_46.py, pg 200
+* keywords: `discuss_MOSFET_VGS_equalto_VDS`
+
 
 # Notes
 * Pg 126: The `metal-oxide-semiconductor field-effect transistor` (MOSFET)
