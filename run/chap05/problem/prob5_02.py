@@ -41,7 +41,7 @@ Modeling the bipolar transistor as a single node, by Kirchhoff's current law:
 
 When the transistor is biased in the forward-active mode, then
 
-  **  iC = Beta(iB)   Eq (5.8)  note: conventional current gain,
+  **>  iC = Beta(iB)   Eq (5.8)  note: conventional current gain,
 
 Substitute Equation (5.8) into (5.7) for the relationship between the emitter
 and base currents:
@@ -51,14 +51,14 @@ and base currents:
 Solving for iB in Equation (5.8) and substituting into Equation (5.9), the
 relationship between the collector and emitter currents is:
 
-  **  iC = ( Beta / 1 + Beta ) * iE   Eq (5.10)
+  **>  iC = ( Beta / 1 + Beta ) * iE   Eq (5.10)
 
 Define   Alpha = ( Beta / 1 + Beta )    Eq (5.11)
    and   Alpha is the common-base current gain and is always slightly < 1.
 		
 And therefore:
 
-  **  iC = Alpha * iE, then:
+  **>  iC = Alpha * iE, then:
 
 From Equation (5.11), the common-emitter current gain in terms of the
 common-base current gain:

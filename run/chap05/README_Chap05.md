@@ -12,6 +12,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
 * `Alpha  Beta  reverse_saturation_current  active_region`
+* `iE_EQ_iC_plus_iB  KVL_transistor`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -51,6 +52,10 @@ Beta, Alpha, and iB.
 5.10: An npn transistor has a reverse-saturation current of IS = 5e-15A...
 * problem/prob5_10.py, page 353
 * keywords: `Alpha  Beta  reverse_saturation_current  active_region`
+
+5.17: For all the transistors in Figure P5.17, β = 75.
+* problem/prob5_17.py, page 353
+* keywords: `iE_EQ_iC_plus_iB  KVL_transistor`
 
 
 # Notes

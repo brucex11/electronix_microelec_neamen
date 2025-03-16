@@ -75,7 +75,7 @@ iC = IS * ( math.exp( VBE / VT) )    Eq (5.2)
 	ans_string = """
 Since:
 
-  **  iC = Beta(iB)   Eq (5.8)  note: conventional current gain
+  **>  iC = Beta(iB)   Eq (5.8)  note: conventional current gain
 and Beta is given, calculate iB.
 """
 	print( ans_string )
@@ -94,9 +94,9 @@ and Beta is given, calculate iB.
 	ans_string = """
 With iC and iB known, there are two ways to calculate iE:
 
-  **  iE = iC + iB         Eq (5.7)
+  **>  iE = iC + iB         Eq (5.7)
 
-  **  iE = (1 + Beta)iB    Eq (5.9)
+  **>  iE = (1 + Beta)iB    Eq (5.9)
 
 """
 	print( ans_string )
