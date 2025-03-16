@@ -103,4 +103,4 @@ in saturation:
 		except AssertionError as e:
 			print( f"CALC AssertionError {pnum}: {e}" )
 
-	print( f"--- END {self.prob_str} ---" )
+	print( f"\n--- END {self.prob_str} ---" )

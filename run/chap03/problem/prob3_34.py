@@ -23,7 +23,7 @@ def prob3_34(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	VTN:float = 0.4   # V
 	k_prime_n:float = 120e-06   # AV^2
@@ -86,3 +86,5 @@ When VDS > VGS - VTN, saturation.
 		print( f"VDS @ {round(VDS,3)}V < VDS(sat) @ {round(VDS_sat,3)}V : device opertaing in ohmic-region." )
 	else:
 		print( f"VDS @ {round(VDS,3)}V > VDS(sat) @ {round(VDS_sat,3)}V : device opertaing in saturation-region." )
+
+	print( f"\n--- END {self.prob_str} ---" )

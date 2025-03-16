@@ -18,11 +18,11 @@ def prob3_30(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}\nSolution" )
+	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	ans_string:str = """
 First, since the given VTP < 0, device is p-chan enhancement mode.
@@ -156,7 +156,6 @@ use KVL to calculate VSD:
 	print( f"VSD = {calc_VSD}V" )
 
 
-
 	ans_string = f"""
 ---- (calculate VSD(sat)) ---------------------------------------
 VSD(sat) = VSG + VTP  =  {calc_VSG} + {VTP}
@@ -166,4 +165,4 @@ VSD(sat) = VSG + VTP  =  {calc_VSG} + {VTP}
 	calc_VSD_sat:float = calc_VSG + VTP
 	print( f"VSD(sat) = {calc_VSD_sat}V" )
 
-	print( '---- END --------------------------------------------------')
+	print( f"\n--- END {self.prob_str} ---" )

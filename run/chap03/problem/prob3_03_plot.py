@@ -27,7 +27,7 @@ def prob3_03_plot(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}" )
+	print( f"Problem: {pnum}\nSolution" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.5
@@ -198,7 +198,7 @@ def prob3_03_plot(self):
 		plt.ylabel('iDS(A)')  # shared x-axis
 
 		plt.title( title )
-		plt.ylim( 0, 0.00085 )
+		plt.ylim( -0.002, 0.00085 )
 
 		# plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
 		plt.legend()  # adds a legend to label the highlighted point

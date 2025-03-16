@@ -23,7 +23,7 @@ def prob3_13(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 1.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 
 	ans_VTP:float = -0.571   # V
@@ -111,3 +111,5 @@ and note that the W/L ratios are practically equal.
 		print( f"CALC W/L ratio = {calc_WoverL} is within {assert_percentage}% of accepted answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
+
+	print( f"\n--- END {self.prob_str} ---" )

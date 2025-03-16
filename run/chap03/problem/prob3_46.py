@@ -28,7 +28,7 @@ def prob3_46(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 0.5
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	# ---- Givens --------------------
 	VDD:float = 5     # V
@@ -190,3 +190,5 @@ Substitute VGS2 with above, solve for VGS1 by equating the current in saturation
 	print( f"ID2(sat) = Kn1 * ( calc_VGS2 - VTN )^2 = {calc_ID2*1000}mA")
 
 	print( '\nNote that the ID(sat) currents for part (b) and (c) are equal.' )
+
+	print( f"\n--- END {self.prob_str} ---" )

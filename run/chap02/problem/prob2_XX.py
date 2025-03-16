@@ -21,7 +21,7 @@ def prob2_XX(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 
 	# ---- Answers -------------------
@@ -48,6 +48,7 @@ For each device, calculate VDS(sat) and compare against VDS:
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
+	print( f"\n--- END {self.prob_str} ---" )
 
 
 	# Usage single value:

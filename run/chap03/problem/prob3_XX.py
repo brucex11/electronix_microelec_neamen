@@ -48,6 +48,7 @@ For each device, calculate VDS(sat) and compare against VDS:
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
+	print( f"\n--- END {self.prob_str} ---" )
 
 
 	# Usage single value:

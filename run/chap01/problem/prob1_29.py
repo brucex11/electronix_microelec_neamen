@@ -23,7 +23,7 @@ def prob1_29(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	tolerance_percent:float = 2.0  # assertion accuracy
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	n:int = 1	# emission coefficient
 	ID:float = 1.0e-3
@@ -40,3 +40,5 @@ def prob1_29(self):
 		print( f"CALC (a) reverse saturation current IS = {round(IS,18)}A is within {tolerance_percent}% of book answer." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
+
+	print( f"\n--- END {self.prob_str} ---" )

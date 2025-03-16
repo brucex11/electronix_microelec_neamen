@@ -19,7 +19,7 @@ def prob3_22(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	# assert_percentage:float = 2.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	ans_string:str = """
 Finite Output Resistance:
@@ -69,11 +69,11 @@ voltage (VTN) changes, ie INCREASES, by +2V due to the body effect.
 	print( 'VTN = VTNO + (gamma)[ (2*phi-f + vSB)^1/2 - (2*phi-f)^1/2 ]   Eq 3.10' )
 	print( 'VTN - VTNO = (gamma)[ (2*phi-f + vSB)^1/2 - (2*phi-f)^1/2 ]' )
 	print( '(VTN - VTNO) /  gamma = (2*phi-f + vSB)^1/2 - (2*phi-f)^1/2' )
-	print( '[ ((VTN - VTNO) /  gamma) + (2*phi-f)^1/2 ] = (2*phi-f + vSB)^1/2' )
-	print( '[ ((VTN - VTNO) /  gamma) + (2*phi-f)^1/2 ]^2 = (2*phi-f + vSB)' )
-	print( '[ ((VTN - VTNO) /  gamma) + (2*phi-f)^1/2 ]^2 - 2*phi-f = vSB' )
+	print( '[ ((VTN - VTNO) / gamma) + (2*phi-f)^1/2 ] = (2*phi-f + vSB)^1/2' )
+	print( '[ ((VTN - VTNO) / gamma) + (2*phi-f)^1/2 ]^2 = (2*phi-f + vSB)' )
+	print( '[ ((VTN - VTNO) / gamma) + (2*phi-f)^1/2 ]^2 - 2*phi-f = vSB' )
 
 	vSB:float = ( ((delta_VTN - VTNO) /  gamma) + sqrt((2*phi_f)) )**2 - 2*phi_f
 	print( f"\nANS  vSB = {round(vSB,3)}V" )
 
-	print( '\n---- END ----' )
+	print( f"\n--- END {self.prob_str} ---" )

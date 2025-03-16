@@ -27,7 +27,7 @@ def prob2_03(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	tolerance_percent:float = 2.0  # assertion accuracy
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 
 	ans:float = 0
@@ -40,6 +40,7 @@ def prob2_03(self):
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
+	print( f"\n--- END {self.prob_str} ---" )
 
 
 # 	for idx, ans in enumerate(answers2):

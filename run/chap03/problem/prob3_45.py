@@ -22,7 +22,7 @@ def prob3_45(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 0.4
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	VDD:float = 5        # V
 	VTN_M1:float = 0.4   # V
@@ -100,3 +100,5 @@ Since Kn is known for both, use the Kn-version with (W/L) and solve for M1's (W/
 		print( f"CALC (W/L)M1 = {calc_WoverL_M1} is within {assert_percentage}% of accepted answer {ans_WoverL_M1}." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
+
+	print( f"\n--- END {self.prob_str} ---" )

@@ -23,7 +23,7 @@ def prob3_16(self):
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 1.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	ans_string:str = """
 For PMOS depletion-mode, vSD(sat) = vSG + VTP per Eq 3.6 pg 136.
@@ -98,7 +98,7 @@ since Kp = (k'p/2)(W/L), calculate Kp and substitute into the equation for iD.
 			vSD=list_calc_vSD_sat
 		)
 
-	print( '---- END ----------------------------------------------------------' )
+	print( f"\n--- END {self.prob_str} ---" )
 
 
 def plot_PMOS_depl_vSG_vs_vSDsat(self,

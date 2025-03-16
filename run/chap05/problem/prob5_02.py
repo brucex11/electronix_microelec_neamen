@@ -111,3 +111,5 @@ common-base current gain:
 		print( f"CALC iB = {calc_iBb}A is within {assert_percentage}% of accepted answer: {ans_b_iB}A." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
+
+	print( f"\n--- END {self.prob_str} ---" )

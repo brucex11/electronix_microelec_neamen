@@ -12,7 +12,7 @@ def prob3_05(self):
 	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
-	pnum:str = f"{self.prob_str}"
+	pnum:str = f"{self.prob_str}\nSolution"
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
@@ -85,3 +85,5 @@ Given:  VTN = +0.4V.
 		print( f"Since VDS > VDS(sat), operation-region is saturation." )
 	elif( VDS <= VDS_sat ):
 		print( f"Since VDS <= VDS(sat), operation-region is ohmic/nonsaturation." )
+
+	print( f"--- END {self.prob_str} ---" )
