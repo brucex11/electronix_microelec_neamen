@@ -1,26 +1,14 @@
 import ast
-# from collections import OrderedDict
 # from datetime import datetime
-# from typing import Any
-from typing import Dict   # also available: Dict, Set
-# from typing import Tuple
-import os
 import importlib
 from inspect import currentframe
+import math
+import os
 import sys
+from typing import Dict   # also available: Any, List, Set
+
 from scipy.constants import Boltzmann
 
-# from pytools import glob_dir
-# from parse_config_file import ParseConfigFile
-# from pytools import py_file_io
-# import class_chap01
-
-# from chap02 import exez
-# exez.test.pr(self)
-# # test.pr()
-
-# below is not actually required
-# from chap02 import example, exercise, problem
 
 class Chap05():
 	"""
@@ -163,8 +151,28 @@ class Chap05():
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions: helpers to support all of Chapter 77 ------------------------
+	# --- Functions: helpers to support all of Chapter 05 ------------------------
 	# ----------------------------------------------------------------------------
+	def calc_BJT_collector_current( self, IS:float, VBE:float ) -> float:
+		"""
+		This function implements the theoretical relationship between the current
+		and voltage in the collector (junction) of BJT.
+
+		Args:
+			IS:float reverse saturation current
+			VD:float voltage across base-emitter junction
+		
+		Return: emitter current
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
+		ID:float = IS * ( math.exp( VBE / self.vthrml0_026) )
+		return ID
+
+
 
 
 	# ----------------------------------------------------------------------------

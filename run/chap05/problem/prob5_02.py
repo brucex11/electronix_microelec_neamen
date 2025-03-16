@@ -16,11 +16,11 @@ def prob5_02(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}\nSolution" )
+	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 0.4
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	# ---- Answers -------------------
 	ans_a_iB:float = 6e-06   # A
