@@ -55,6 +55,7 @@ Beta, Alpha, and iB.
 
 5.17: For all the transistors in Figure P5.17, β = 75.
 * problem/prob5_17.py, page 353
+* LTspice: ./LTspice/chap05/prob5_17/
 * keywords: `iE_EQ_iC_plus_iB  KVL_transistor`
 
 
