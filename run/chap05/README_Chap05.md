@@ -27,15 +27,17 @@ X.X: Description
 
 
 ## Examples
-X.X: DESCRIPTION.
-* example/examX_XX.py, page XXX
-* keywords: `YYY ZZZ`
+5.1: Objective: Calculate the collector and emitter currents given the
+base current and current gain.
+* example/exam5_01.py, page 292
+* keywords: `Alpha  Beta`
 
 
 ## Exercises
-X.X: DESCRIPTION.
-* exercise/exerX_XX.py, page XXX
-* keywords: `YYY ZZZ`
+5.1: An NPN transistor is biased in the forward-active mode.
+Determine β, α, and IC.
+* exercise/exer5_01.py, page XXX
+* keywords: `Alpha  Beta`
 
 
 ## Test Your Understanding

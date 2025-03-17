@@ -121,19 +121,22 @@ RC = {calc_RC}ohm = {round(calc_RC/1000,2)}kohm
 	print( '---- (Fig P5.17 d) -------------------------------------------', end='' )
 
 	ans_string = f"""
-At node VC, iC and iB flow INTO the transistor Q1, and therefore flow OUT
-of the node VC.
-Since iE = iC + iB, then the current INTO node VC MUST = iE by KCL.
+At node VC, iC and iB flow INTO the transistor Q1, and therefore
+flow OUT of the node VC.
+Since for any transistor iE = iC + iB, then the current INTO node
+VC MUST = iE by KCL.
 
-With one equation ( KVL through RC, RB, Q1-BE-junction and RE and one
-unknown, namely iE, iE is calculated.
+Therefore, iRC = iRE, and it follows that iE = iRE.
 
-Use iE = (1 + Beta)iB for RB current.
+With one equation ( KVL through VCC, RC, RB, Q1-BE-junction and RE )
+and one unknown, namely iE, iE is calculated.
 
-Once iE is known, along with Q1's Beta, iB and iC are calculated.
+Use iE = (1 + Beta)iB for RB current, iRB.
+
+Once iE is known, along with Q1's Beta, iB and VC are calculated.
 
 KVL:
-VCC - iB*RB - VBE - iRE*RE = 0
+VCC - iC*RC - iB*RB - VBE - iRE*RE = 0
 and,
 iB = iE / (1 + Beta)   Eq (5.9)
 
@@ -141,7 +144,7 @@ Substitute for iB and iRE (where iRE is in series with emitter)
 
   **>  VCC - iE*RC - ( iE / (1 + Beta) )*RB - VBE - iE*RE = 0
 
-Solve equation above for iE, assume VBE = 0.7V
+Solve equation above for iE, assume VBE = 0.7V.
 """
 	print( ans_string )
 

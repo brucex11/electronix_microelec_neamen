@@ -16,11 +16,11 @@ def exer5_XX(self):
 
 	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
 	pnum:str = f"{self.prob_str}"
-	print( f"Problem: {pnum}\nSolution" )
+	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
 	assert_percentage:float = 2.0
-	print( '-----------------------------------------------' )
+	print( '-----------------------------------------------\nSolution' )
 
 	# ---- Answers -------------------
 	ans:float = 0
