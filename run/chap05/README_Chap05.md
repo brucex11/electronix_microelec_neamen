@@ -55,8 +55,11 @@ Beta, Alpha, and iB.
 * problem/prob5_10.py, page 353
 * keywords: `Alpha  Beta  reverse_saturation_current  active_region`
 
-5.17: For all the transistors in Figure P5.17, β = 75.
-* problem/prob5_17.py, page 353
+5.17(a-d): For all the transistors in Figure P5.17, β = 75.
+* problem/prob5_17a.py, page 353
+* problem/prob5_17b.py, page 353
+* problem/prob5_17c.py, page 353
+* problem/prob5_17d.py, page 353
 * LTspice: ./LTspice/chap05/prob5_17/
 * keywords: `iE_EQ_iC_plus_iB  KVL_transistor`
 
