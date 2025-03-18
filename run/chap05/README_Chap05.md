@@ -51,6 +51,10 @@ Beta, Alpha, and iB.
 * problem/prob5_02.py, page 352
 * keywords: `Alpha  Beta`
 
+5.5: Calculate Alpha given Beta, calc Beta given Alpha.
+* problem/prob5_05.py, page 352
+* keywords: `Alpha  Beta`
+
 5.10: An npn transistor has a reverse-saturation current of IS = 5e-15A...
 * problem/prob5_10.py, page 353
 * keywords: `Alpha  Beta  reverse_saturation_current  active_region`
