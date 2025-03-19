@@ -13,6 +13,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `Alpha  Beta  reverse_saturation_current  active_region`
 * `iE_EQ_iC_plus_iB  KVL_transistor`
+* `Q1_saturation_VCE_impossible`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -66,6 +67,13 @@ Beta, Alpha, and iB.
 * problem/prob5_17d.py, page 353
 * LTspice: ./LTspice/chap05/prob5_17/
 * keywords: `iE_EQ_iC_plus_iB  KVL_transistor`
+
+5.20(a-c): For all the transistors in Figure P5.20, β = 120.
+* problem/prob5_20a.py, page 354
+* problem/prob5_20b.py, page 354
+* problem/prob5_20c.py, page 354
+* LTspice: ./LTspice/chap05/prob5_20/
+* keywords: `Q1_saturation_VCE_impossible`
 
 
 # Notes
