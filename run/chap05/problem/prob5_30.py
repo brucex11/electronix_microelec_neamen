@@ -4,11 +4,17 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def test5_XX(self):
-	"""Page XX:
-
+def prob5_30(self):
+	"""Page 357:
+	The circuit shown in Figure P5.30 is to be designed such that ICQ = 0.8mA
+	and VCEQ = 2V for the case when (a) RE = 0 and (b) RE = 1 kΩ. Assume
+	β = 80. (c) The transistor in Figure P5.30 is replaced with one with
+	a value	of β = 120. Using the results of parts (a) and (b), determine
+	the Q-point	values ICQ and VCEQ. Which design shows the smallest change
+	in Q-point values?
 	ANS(a): (i) 1.03μA, (ii) 2.25mA
 	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+	ANS(c): (i) 0.0103μA, (ii) 22.5μA.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -43,9 +49,9 @@ For each device, calculate VDS(sat) and compare against VDS:
 
 	try:
 		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
+		print( f"ASSERT diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
-		print( f"CALC AssertionError {pnum}: {e}" )
+		print( f"ASSERT AssertionError {pnum}: {e}" )
 
 	print( f"\n--- END {self.prob_str} ---" )
 
@@ -54,16 +60,16 @@ For each device, calculate VDS(sat) and compare against VDS:
 	# ans_a:float = 0.518e-03   # A
 	# try:
 	# 	assertions.assert_within_percentage( iDS, ans_a, assert_percentage )
-	# 	print( f"CALC NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
+	# 	print( f"ASSERT NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
 	# except AssertionError as e:
-	# 	print( f"CALC AssertionError {pnum}: {e}" )
+	# 	print( f"ASSERT AssertionError {pnum}: {e}" )
 
 	# try:
 	# 	assertions.assert_within_percentage( iSD, ans_a, assert_percentage )
-	# 	print( f"CALC PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
+	# 	print( f"ASSERT PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
 	# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
 	# except AssertionError as e:
-	# 	print( f"CALC AssertionError {pnum}: {e}" )
+	# 	print( f"ASSERT AssertionError {pnum}: {e}" )
 
 	# Usage with List:
 	# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
@@ -71,9 +77,9 @@ For each device, calculate VDS(sat) and compare against VDS:
 	# for idx, ans_iDS in enumerate(ans_a_iDS):
 	# 	try:
 	# 		assertions.assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
-	# 		print( f"CALC NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
+	# 		print( f"ASSERT NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
 	# 	except AssertionError as e:
-	# 		print( f"CALC AssertionError {pnum}: {e}" )
+	# 		print( f"ASSERT AssertionError {pnum}: {e}" )
 
 
 # 	if( ast.literal_eval(self.dict_params['draw_figure']) ):

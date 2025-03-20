@@ -14,6 +14,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `Alpha  Beta  reverse_saturation_current  active_region`
 * `iE_EQ_iC_plus_iB  KVL_transistor`
 * `Q1_saturation_VCE_impossible`
+* `Early_voltage  output_resistance`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -42,8 +43,10 @@ Determine β, α, and IC.
 
 
 ## Test Your Understanding
-TYU 5.X: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
-* ./chap01/testunder/test1_09, pg XXX
+TYU 5.4: The output resistance of a bipolar transistor is ro = 225Kohm
+at IC = 0.8mA. Determine the Early voltage.
+* ./chap05/testunder/test5_04, pg 297
+* keywords: `Early_voltage  output_resistance`
 
 
 ## Problems
@@ -85,9 +88,14 @@ is applied to each junction.
 `base–collector` `(B–C) junction is reverse biased`, in a configuration called
 the forward-active operating mode, or simply the `active region`.
 
-![](../../doc/mdimg/chap05_npn_bjt_active_region.png)
+![Fig5.3](../../doc/mdimg/chap05_npn_bjt_active_region.png)
 
-* Pg XXX: 
+* Pg 297: In Figure 5.14, the nonzero slope of the curves indicates that the
+output resistance ro looking into the collector is finite.  Using
+Equation (5.16), ro ~= VA / IC.
+
+![Fig5.14](../../doc/mdimg/chap05_CE_Early_voltage.png)
+
 * Pg XXX: 
 * Pg XXX: 
 * Pg XXX: 
