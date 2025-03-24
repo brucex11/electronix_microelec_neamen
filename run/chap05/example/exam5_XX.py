@@ -22,14 +22,16 @@ def exam5_XX(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
+	#  α   β   Ω   μ   λ   ξ   ω
+
 	# ---- Answers -------------------
-	ans:float = 0
+	ans:float = 0   #
 
 	# ---- Givens --------------------
 	calc_result:float = 0
 
 
-	ans_string:str = """
+	ans_string:str = f"""
 The devices per schematic symbol are n-channel enhancement-mode.  This is
 confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
 

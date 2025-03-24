@@ -34,6 +34,12 @@ base current and current gain.
 * example/exam5_01.py, page 292
 * keywords: `Alpha  Beta`
 
+5.3: Objective: Calculate the base, collector, and emitter currents and the
+C-E voltage for a common-emitter circuit. Calculate the transistor power
+dissipation.
+* example/exam5_03.py, page 303
+* keywords: `transistor_power`
+
 
 ## Exercises
 5.1: An NPN transistor is biased in the forward-active mode.
@@ -108,9 +114,24 @@ is applied to each junction.
 `base–collector` `(B–C) junction is reverse biased`, in a configuration called
 the forward-active operating mode, or simply the `active region`.
 
-* Pg 294: Table 5.1.
+* Pg 294: Summary of bipolar I-V relationships in ACTIVE region.
 
 ![Tbl5.1](../../doc/mdimg/chap05_table5.1_BJT_I-V_ACTIVE_region.png)
+
+* Pg 294: Common-emitter circuits.  Fig 5.10.
+
+![Fig5.10](../../doc/mdimg/chap05_NPN_PNP_common_emitter.png)
+
+* Pg 295: Common-base circuits.  The collector current iC = αiE is nearly
+independent of the C–B voltage when the the B–C junction is reverse biased.
+
+![Fig5.12](../../doc/mdimg/chap05_NPN_PNP_common_base_I-V.png)
+
+* Pg 295: Common-emitter circuits.  Per Fig5.10 above, the VBB source
+forward biases the B–E junction and controls the base current iB. The
+C–E voltage can be varied by changing VCC.
+
+![Fig5.13](../../doc/mdimg/chap05_NPN_PNP_common_emitter_I-V.png)
 
 * Pg 297: In Figure 5.14, the nonzero slope of the curves indicates that the
 output resistance ro looking into the collector is finite.  Using
