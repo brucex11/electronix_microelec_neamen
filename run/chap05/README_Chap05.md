@@ -43,11 +43,19 @@ Determine β, α, and IC.
 
 
 ## Test Your Understanding
-TYU 5.1: The common-emitter current gains of two transistors are β = 60 and
-β = 150.
+TYU 5.1: The common-emitter current gains of two transistors are β = 60
+and β = 150.
+Determine the common-base and common-emitter current gains.
 * ./chap05/testunder/test5_01, pg 295
 * keywords: `Alpha_vs_Beta  Beta_vs_Alpha`
 
+TYU 5.2: An npn transistor is biased in the forward-active mode.
+Determine IE, β, and α.
+* ./chap05/testunder/test5_02, pg 295
+
+TYU 5.3: The emitter current in a pnp transistor biased in the forward-active
+mode.  Determine β, IB, and IC.
+* ./chap05/testunder/test5_03, pg 295
 
 TYU 5.4: The output resistance of a bipolar transistor is ro = 225Kohm
 at IC = 0.8mA. Determine the Early voltage.
