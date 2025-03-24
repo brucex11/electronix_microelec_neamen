@@ -4,6 +4,8 @@ Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Ed
 
 
 # ENKI2 Laptop
+LTspice component models:  C:\Users\OwnerA\AppData\Local\LTspice\lib\cmp\.
+
 ## Generate Virtual Env
 
 ```

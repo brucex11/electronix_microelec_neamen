@@ -43,6 +43,12 @@ Determine β, α, and IC.
 
 
 ## Test Your Understanding
+TYU 5.1: The common-emitter current gains of two transistors are β = 60 and
+β = 150.
+* ./chap05/testunder/test5_01, pg 295
+* keywords: `Alpha_vs_Beta  Beta_vs_Alpha`
+
+
 TYU 5.4: The output resistance of a bipolar transistor is ro = 225Kohm
 at IC = 0.8mA. Determine the Early voltage.
 * ./chap05/testunder/test5_04, pg 297
@@ -80,15 +86,23 @@ Beta, Alpha, and iB.
 
 
 # Notes
+* Pg 286: Current in the transistor is due to the flow of both electrons
+and holes, hence the name `bipolar`.
+
 * Pg 287: Since the transistor has two pn junctions, `four possible bias combinations`
 may be applied to the device, depending on whether a forward or reverse bias
 is applied to each junction.
+
+![img](../../doc/mdimg/chap05_BJT_quadrant_operations.png)
+
 * Pg 287: For the transistor applied as an amplifying device, the `base–emitter`
 `(B–E) junction is forward biased` and the
 `base–collector` `(B–C) junction is reverse biased`, in a configuration called
 the forward-active operating mode, or simply the `active region`.
 
-![Fig5.3](../../doc/mdimg/chap05_npn_bjt_active_region.png)
+* Pg 294: Table 5.1.
+
+![Tbl5.1](../../doc/mdimg/chap05_table5.1_BJT_I-V_ACTIVE_region.png)
 
 * Pg 297: In Figure 5.14, the nonzero slope of the curves indicates that the
 output resistance ro looking into the collector is finite.  Using
