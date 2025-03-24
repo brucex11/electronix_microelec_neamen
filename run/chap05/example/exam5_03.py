@@ -1,8 +1,7 @@
 from inspect import currentframe
-import math
-from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
+
 
 def exam5_03(self):
 	"""Page 303:
@@ -119,7 +118,7 @@ Therefore, PT = PBE + PCE
 
 	try:
 		assertions.assert_within_percentage( calc_IE, ans_IE, assert_percentage )
-		print( f"CALC IC = {calc_IE}A is within {assert_percentage}% of accepted answer: {ans_IE}A." )
+		print( f"CALC IE = {calc_IE}A is within {assert_percentage}% of accepted answer: {ans_IE}A." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
 
@@ -128,3 +127,49 @@ Therefore, PT = PBE + PCE
 		print( f"CALC Xistor power diss = {calc_PT}W is within {assert_percentage}% of accepted answer: {ans_PT}W." )
 	except AssertionError as e:
 		print( f"CALC AssertionError {pnum}: {e}" )
+
+
+# ---- LTspice .op points -------------------------------
+# 5.3a for RB = 220k
+#   --- Operating Point ---
+# V(vc):	 3.8426	 voltage
+# V(vb):	 0.684426	 voltage
+# V(vcc):	 10	 voltage
+# V(vbb):	 4	 voltage
+# Ic(Q1):	 0.0030787	 device_current
+# Ib(Q1):	 1.50708e-05	 device_current
+# Ie(Q1):	 -0.00309377	 device_current
+# I(Rc):	 0.0030787	 device_current
+# I(Rb):	 -1.50708e-05	 device_current
+# I(Vbb):	 -0.00309377	 device_current
+# I(V2):	 -0.0030787	 device_current
+
+
+# 5.3b for RB = 180k
+#   --- Operating Point ---
+# V(vc):	 2.59359	 voltage
+# V(vb):	 0.689733	 voltage
+# V(vcc):	 10	 voltage
+# V(vbb):	 4	 voltage
+# Ic(Q1):	 0.00370321	 device_current
+# Ib(Q1):	 1.83904e-05	 device_current
+# Ie(Q1):	 -0.0037216	 device_current
+# I(Rc):	 0.00370321	 device_current
+# I(Rb):	 -1.83904e-05	 device_current
+# I(Vbb):	 -0.0037216	 device_current
+# I(V2):	 -0.00370321	 device_current
+
+
+# 5.3c for RB = 260k
+#   --- Operating Point ---
+# V(vc):	 4.73001	 voltage
+# V(vb):	 0.680027	 voltage
+# V(vcc):	 10	 voltage
+# V(vbb):	 4	 voltage
+# Ic(Q1):	 0.002635	 device_current
+# Ib(Q1):	 1.27691e-05	 device_current
+# Ie(Q1):	 -0.00264776	 device_current
+# I(Rc):	 0.002635	 device_current
+# I(Rb):	 -1.27691e-05	 device_current
+# I(Vbb):	 -0.00264776	 device_current
+# I(V2):	 -0.002635	 device_current

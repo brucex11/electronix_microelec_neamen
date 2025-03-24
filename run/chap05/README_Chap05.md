@@ -15,6 +15,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `iE_EQ_iC_plus_iB  KVL_transistor`
 * `Q1_saturation_VCE_impossible`
 * `Early_voltage  output_resistance`
+* `transistor_power_dissipation`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -35,10 +36,18 @@ base current and current gain.
 * keywords: `Alpha  Beta`
 
 5.3: Objective: Calculate the base, collector, and emitter currents and the
-C-E voltage for a common-emitter circuit. Calculate the transistor power
+C-E voltage for NPN common-emitter circuit. Calculate the transistor power
 dissipation.
 * example/exam5_03.py, page 303
-* keywords: `transistor_power`
+* LTspice: ./LTspice/chap05/exam5_03/
+* keywords: `transistor_power_dissipation`
+
+5.4: Objective: Calculate the base, collector, and emitter currents and the
+C-E voltage for PNP common-emitter circuit. Calculate the transistor power
+dissipation.
+* example/exam5_04.py, page 305
+* LTspice: ./LTspice/chap05/exam5_04/
+* keywords: `transistor_power_dissipation`
 
 
 ## Exercises
@@ -139,7 +148,10 @@ Equation (5.16), ro ~= VA / IC.
 
 ![Fig5.14](../../doc/mdimg/chap05_CE_Early_voltage.png)
 
-* Pg XXX: 
+* Pg 304: PNP common-emitter DC equivalent using piecewise linear parameters:
+
+![Fig5.21](../../doc/mdimg/chap05_PNP_DC_equivalent.png)
+
 * Pg XXX: 
 * Pg XXX: 
 * Pg XXX: 
