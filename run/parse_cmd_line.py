@@ -18,6 +18,7 @@ def parse_the_args():
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap02  ..\\config\\chap02\\example\\config_example__01-10.ini
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap03  ..\\config\\chap03\\example\\config_example__01-10.ini
     (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap05  ..\\config\\chap05\\example\\config_example__01-10.ini
+    (.venvPy3-12-0) C:\\SourceCode\\GitHub\\electronix\\microelec_neamen\\run> python microelx.py Chap06  ..\\config\\chap06\\example\\config_example__01-10.ini
     """
 
     parser = argparse.ArgumentParser( prog=desc )
@@ -33,6 +34,8 @@ def parse_the_args():
     parser_chap03.add_argument( 'config_file', help='PATH to config.ini' )
     parser_chap05 = subparsers.add_parser( 'Chap05', help='run Chapter 05 problems' )
     parser_chap05.add_argument( 'config_file', help='PATH to config.ini' )
+    parser_chap06 = subparsers.add_parser( 'Chap06', help='run Chapter 06 problems' )
+    parser_chap06.add_argument( 'config_file', help='PATH to config.ini' )
     # parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
     # parser_chap77.add_argument( 'config_file', help='PATH to config.ini' )
 
