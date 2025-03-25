@@ -5,11 +5,13 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def prob1_XX(self):
-	"""Page XX:
-
-	ANS(a): (i) 1.03μA, (ii) 2.25mA
-	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+def exam1_11(self):
+	"""Page 45:
+	Objective: Analyze the circuit shown in Figure 1.35(a).
+	Assume circuit and diode parameters of VPS = 5V, R = 5kΩ, Vγ = 0.6V,
+	and vi = 0.1sinωt(V).
+	ANS:  IDQ = 0.88mA, Vo = 4.4V, rd = 0.0295kΩ, id = 19.9sinωt (μa),
+	vo = 0.0995sinωt(V).
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -27,25 +29,72 @@ def prob1_XX(self):
 
 	# ---- Answers -------------------
 	ans:float = 0
+	ans_IDQ = 0.88e-03
 
 	# ---- Givens --------------------
-	calc_result:float = 0
+	VPS:float = 5   # V
+	R:float = 5000   # Ω
+	Vgamma:float = 0.6   # V
+	vi_ac:str = 'sin(omega-t)'
+	vi_A:float = 0.1   # V
 
-	ans_string:str = """
-The devices per schematic symbol are n-channel enhancement-mode.  This is
-confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
+	# ---- Calcs ---------------------
+	calc_IDQ:float = ( VPS - Vgamma ) / R
 
-For each device, calculate VDS(sat) and compare against VDS:
-* if VDS > VDS(sat), operation is saturation-region
-* if VDS < VDS(sat), operation is ohmic-region
+	calc_Vo:float = calc_IDQ * R
+
+	calc_rd:float = self.vthrml0_026 / calc_IDQ
+
+	calc_id_mag:float = vi_A / (calc_rd + R)
+	calc_id_mag = round(calc_id_mag,8)
+
+	calc_vo_mag:float = calc_id_mag * R
+
+
+	ans_string:str = f"""
+Divide the analysis into two parts: the dc analysis and the ac analysis.
+For the dc analysis, we set vi = 0 and then determine the dc quiescent current
+from Figure 1.36(a).
+
+  IDQ = (VPS - Vgamma) / R
+      = ({VPS} - {Vgamma}) / {R}
+      = {calc_IDQ}A.
+
+The dc value of the output voltage is:
+
+  Vo = IDQ*R = {calc_IDQ} * {R}
+     = {calc_Vo}V.
+
+For the ac analysis, only the ac signals and parameters in the circuit
+in Figure 1.36(b) are considered. This effectively sets VPS = 0.
+The ac KVL equation:
+
+  vi = id*rd + id*R = id*(rd + R)
+  where rd is again the small-signal diode diffusion resistance.
+
+Calc rd per Eq 1.32 pg 45:
+
+  rd = VT / IDQ = {self.vthrml0_026} / {calc_IDQ}
+     = {calc_rd} Ohm
+
+The ac diode current:
+
+  id = vi / (rd + R) = {vi_A}{vi_ac} / ({calc_rd} + {R})
+     = {calc_id_mag}{vi_ac} (A).
+
+The ac component of the output voltage:
+
+  vo = id*R = {calc_id_mag}{vi_ac} * {R}
+     = {calc_vo_mag}{vi_ac} (V).
+
 """
 	print( ans_string )
 
-	print( '\n---- (a) -------------------------------------------' )
+	# print( '---- (a) -------------------------------------------' )
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"ASSERT diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
+		assertions.assert_within_percentage( calc_IDQ, ans_IDQ, assert_percentage )
+		print( f"ASSERT IDQ = {calc_IDQ}A is within {assert_percentage}% of accepted answer: {ans_IDQ}A." )
 	except AssertionError as e:
 		print( f"ASSERT AssertionError {pnum}: {e}" )
 

@@ -17,6 +17,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `list_comprehension  list_range_for_rationals`
 * `scatter_plot  highlight_point_diff_color  plot_horiz_vert_line`
 * `semilog_plot`
+* `diode_AC_analysis  LTspice_ac_and_dc_oppoint`
 
 # Examples, Exercises, Test Your Understanding, and Problems
 All worked sections are listed in order by number in their prospective category.
@@ -69,6 +70,10 @@ Exam 1.10 LtSpice: Simple diode circuit piecewise linear model.
 * ./run/chap01/example/docx/exam1_10.docx
 * of note: image (exam1_10.png) of twin-plot saved manually from 'show window' task-bar
 * keywords: `twin_y_axes  list_range_for_rationals`
+
+Exam 1.11: Simple diode DC and AC analysis.
+* chap01/example/exam1_11, textbook pg 45
+* keywords: `diode_AC_analysis  LTspice_ac_and_dc_oppoint`
 
 
 ## Exercises

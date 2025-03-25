@@ -5,7 +5,7 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def prob1_XX(self):
+def exam1_XX(self):
 	"""Page XX:
 
 	ANS(a): (i) 1.03μA, (ii) 2.25mA
@@ -29,9 +29,12 @@ def prob1_XX(self):
 	ans:float = 0
 
 	# ---- Givens --------------------
+
+	# ---- Calcs ---------------------
 	calc_result:float = 0
 
-	ans_string:str = """
+
+	ans_string:str = f"""
 The devices per schematic symbol are n-channel enhancement-mode.  This is
 confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
 
