@@ -4,11 +4,17 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def probX_XX(self):
-	"""Page XX:
-
-	ANS(a): (i) 1.03μA, (ii) 2.25mA
-	ANS(b): (i) 0.0103μA, (ii) 22.5μA
+def prob6_44(self):
+	"""Page 459:
+	The transistor parameters for the circuit in Figure P6.44 are β = 180
+	and	VA = inf.
+	(a) Find ICQ and VCEQ.
+	(b) Plot the dc and ac load lines.
+	(c) Calculate the small-signal voltage gain.
+	(d) Determine the input and output resistances Rib and Ro.
+	ANS(a):  ICQ = 15.7mA, VCEQ = 10.1V
+	ANS(c):  
+	ANS(d):  
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -19,37 +25,120 @@ def probX_XX(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	assert_percentage:float = 2.0
+	# assert_percentage:float = 1.0
 	print( '-----------------------------------------------\nSolution' )
 
 	#  α   β   Ω   μ   λ   γ   ξ   ω
 
 	# ---- Answers -------------------
-	ans:float = 0
+	ans_ICQ = 15.7e-03   # A
+	ans_VCEQ = 10.1      # V
 
 	# ---- Givens --------------------
-	calc_result:float = 0
+	Beta:float = 180
+	VCC:float = 9
+	VEE:float = -9
+	R1:float = 10000
+	R2:float = 10000
+	RE:float = 500
+
 
 	# ---- Assumptions ---------------
-	VBE:float = 0.7   # V
+	VBE:float = 0.731   # V
+	IB:float = 75e-06
+
 
 	# ---- Calcs ---------------------
 
+	print( '\n---- (calc VB) -------------------------------------------' )
+
+	calc_IR1:float = VCC / R1
+	calc_IR2:float = VEE / R2
+
+	calc_VB:float = -1 * ( (IB - calc_IR1 - calc_IR2) / ( (1/R1) + (1/R2) ) )
+	calc_VB:float = -( IB - VEE/R2 - VCC/R1 ) / (1/R1 + 1/R2)
+	calc_VB = round(calc_VB,4)
 
 	ans_string:str = f"""
-REPLACE THIS TEXT.
+Since IB is NOT zero, assume IB = {IB*1000000}uA.
+
+Use KCL at node VB:
+
+  **>  IR1 = IB + IR2
+
+Then,
+IR1 = (VCC - VB) / R1
+IR2 = (VB - VEE) / R2
+
+  **>  (VCC - VB) / R1 = IB + (VB - VEE) / R2
+
+Now with one equation-one unknown, solve for VB:
+
+  (VCC - VB) / R1 = IB + (VB - VEE) / R2  <**
+  VCC/R1 - VB/R1 = IB + VB/R2 - VEE/R2
+  -VB/R1 - VB/R2 = IB - VEE/R2 - VCC/R1
+  -VB(1/R1 + 1/R2) = IB - VEE/R2 - VCC/R1
+  -VB = ( IB - VEE/R2 - VCC/R1 ) / (1/R1 + 1/R2)
+   VB = -( IB - VEE/R2 - VCC/R1 ) / (1/R1 + 1/R2)  <==== THIS SOLVES FOR VB
+
+   VB = -( {IB} - {VEE}/{R2} - {VCC}/{R1} ) / (1/{R1} + 1/{R2})
+      = {calc_VB}V.
 """
 	print( ans_string )
 
-	print( '\n---- (a) -------------------------------------------' )
 
+	print( '\n---- (calc ICQ and VCEQ) ---------------------------------' )
+
+	calc_VE:float = calc_VB - VBE
+	calc_VE = round(calc_VE,5)
+
+	calc_IE = ( calc_VE - VEE ) / RE
+
+	calc_ICQ:float = IB + calc_IE
+
+	calc_VCEQ:float = VCC - calc_VE
+
+	ans_string = f"""
+Using transistor current relations equations, assume VBE = {VBE}V:
+
+  VE = VB - VBE
+     = {calc_VB} - {VBE}
+     = {calc_VE}V.
+
+  IE = (VE - VEE) / RE
+     = ({calc_VE} - {VEE}) / {RE}
+     = {calc_IE}
+
+  ICQ = IB + IE
+      = {IB} + {calc_IE}
+      = {calc_ICQ}A.
+
+  VCEQ = VCC - VE
+       = {VCC} - ({calc_VE})
+       = {calc_VCEQ}V.
+"""
+	print( ans_string )
+
+
+	assert_percentage:float = 1.4
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
+		assertions.assert_within_percentage( calc_ICQ, ans_ICQ, assert_percentage )
+		print( f"ASSERT ICQ = {calc_ICQ}A is within {assert_percentage}% of accepted answer: {ans_ICQ}A." )
 	except AssertionError as e:
 		print( f"AssertionError {pnum}: {e}" )
 
-	print( f"--- END {self.prob_str} ---" )
+	assert_percentage = 1.0
+	try:
+		assertions.assert_within_percentage( calc_VCEQ, ans_VCEQ, assert_percentage )
+		print( f"ASSERT VCEQ = {calc_VCEQ}V is within {assert_percentage}% of accepted answer: {ans_VCEQ}V." )
+	except AssertionError as e:
+		print( f"AssertionError {pnum}: {e}" )
+
+
+	print( f"\n--- END {self.prob_str} ---" )
+
+
+
 
 
 	# Usage single value:
