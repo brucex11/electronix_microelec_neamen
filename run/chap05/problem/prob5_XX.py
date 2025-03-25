@@ -22,6 +22,8 @@ def prob5_XX(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
+	#  α   β   Ω   μ   λ   γ   ξ   ω
+
 	# ---- Answers -------------------
 	ans:float = 0
 

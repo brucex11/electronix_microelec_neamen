@@ -16,6 +16,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `Q1_saturation_VCE_impossible`
 * `Early_voltage  output_resistance`
 * `transistor_power_dissipation`
+* `NPN_common_emitter_RE_0_and_1k`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -106,6 +107,13 @@ Beta, Alpha, and iB.
 * problem/prob5_20c.py, page 354
 * LTspice: ./LTspice/chap05/prob5_20/
 * keywords: `Q1_saturation_VCE_impossible`
+
+5.30: The circuit shown in Figure P5.30 is to be designed such that ICQ = 0.8mA
+and VCEQ = 2V.  Beta = 80.  Find resistor values.  The process differs with
+RE in circuit and when NOT in circuit; curious!
+* problem/prob5_30.py, page 357
+* LTspice: ./LTspice/chap05/prob5_30/
+* keywords: `NPN_common_emitter_RE_0_and_1k`
 
 
 # Notes

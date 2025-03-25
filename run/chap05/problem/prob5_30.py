@@ -7,7 +7,7 @@ from assertions import assertions
 def prob5_30(self):
 	"""Page 357:
 	The circuit shown in Figure P5.30 is to be designed such that ICQ = 0.8mA
-	and VCEQ = 2V for the case when (a) RE = 0 and (b) RE = 1 kΩ. Assume
+	and VCEQ = 2V for the case when (a) RE = 0 and (b) RE = 1kΩ. Assume
 	β = 80. (c) The transistor in Figure P5.30 is replaced with one with
 	a value	of β = 120. Using the results of parts (a) and (b), determine
 	the Q-point	values ICQ and VCEQ. Which design shows the smallest change
@@ -28,97 +28,117 @@ def prob5_30(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
+	#  α   β   Ω   μ   λ   γ   ξ   ω
+
 	# ---- Answers -------------------
 	ans:float = 0
 
 	# ---- Givens --------------------
-	calc_result:float = 0
+	ICQ:float = 0.8e-03   # A
+	VCEQ:float = 2   # V
+	VCC:float = 5    # V
+	VEE:float = 0    # V
+	VBB:float = 2      # V
+	RE_a:float = 0     # Ω
+	RE_b:float = 1000  # Ω
+	Beta_a:float = 80
+	Beta_b:float = 120
+
+	# ---- Assumptions ---------------
+	VBE:float = 0.7   # V
+	VB_a:float = VBB - VBE  # since RE = 0, emitter at ground
+
+	# ---- Calcs (a) ---------------------
+	calc_VRB_a:float = VBB - VBE
+	calc_RB_a:float = Beta_a * calc_VRB_a / ICQ
+	calc_RC_a:float = (VCC - VCEQ) / ICQ
+
+	# ---- Calcs (b) ---------------------
+	# Alpha:float = Beta_a / ( 1 + Beta_a )
+	calc_IB_b:float = ICQ / Beta_a
+	calc_IE_b:float = ( 1 + Beta_a ) * calc_IB_b
+	calc_IE_b = round(calc_IE_b,6)
+
+	calc_VRE_b:float = calc_IE_b * RE_b
+	calc_VRE_b = round(calc_VRE_b,3)
+
+	calc_VRB_b:float = VBB - VBE - calc_VRE_b
+	calc_RB_b = calc_VRB_b / calc_IB_b
+	calc_RB_b = round(calc_RB_b,0)
+
+	calc_VRC_b:float = VCC - VCEQ - calc_VRE_b
+	calc_RC_b:float = calc_VRC_b / ICQ
 
 
-	ans_string:str = """
-The devices per schematic symbol are n-channel enhancement-mode.  This is
-confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
+	ans_string:str = f"""
+With RE = {RE_a}Ohm, the KVL for BE-junction circuit is relatively simple:
 
-For each device, calculate VDS(sat) and compare against VDS:
-* if VDS > VDS(sat), operation is saturation-region
-* if VDS < VDS(sat), operation is ohmic-region
+  VBB - VB - VBE = 0, therefore, voltage-drop across RB:
+
+  VRB = VBB - VBE
+      = {VBB} - {VBE}
+      = {calc_VRB_a}V.
+
+The current through RB is forced.
+
+  IRB = IB = VRB / RB
+
+For any transistor, IC = Beta * IB.  With Beta and ICQ given,
+and IRB(=IB) equation in terms of RB:
+
+  ICQ = Beta * VRB / RB, solve for RB:
+  RB = Beta * VRB / ICEQ
+     = {Beta_a} * {calc_VRB_a} / {ICQ}
+     = {calc_RB_a}ohm.
+
+To calculate RC, just use the voltage-drop across it using ICQ.		 
+
+  ICQ = (VCC - VCEQ) / RC
+   RC = (VCC - VCEQ) / ICQ
+      = ({VCC} - {VCEQ}) / {ICQ}
+      = {calc_RC_a}ohm.
+
+
+With RE = {RE_b}ohm,
+  IB = ICQ / Beta = {ICQ} / {Beta_a}
+     = {calc_IB_b}A.
+  IE = ( 1 + Beta ) * IB
+     = ( 1 + {Beta_a} ) * {calc_IB_b}
+     = {calc_IE_b}A.
+
+The KVL for BE-junction circuit is:
+
+  VBB - VRB - VBE - VRE = 0,
+    where
+    VRB = IB * RB  -AND-  VRE = IE * RE
+
+  VRE = IE * RE = {calc_IE_b} * {RE_b}
+      = {calc_VRE_b}V.
+
+Solve for VRB:
+  VBB - VRB - VBE = VRE
+  VRB = {VBB} - {VBE} - {calc_VRE_b}
+      = {calc_VRB_b}V.
+
+Such that RB = VRB / IB.
+  RB = {calc_VRB_b} / {calc_IB_b}
+     = {calc_RB_b}ohm.
+
+The KVL for CE-junction circuit is:
+
+  VCC - VRC - VCEQ - VRE = 0,
+    where
+    VRC = ICQ * RC  -AND-  VRE = IE * RE
+
+Solve for RC:
+  VRC = VCC - VCEQ - VRE
+      = {VCC} - {VCEQ} - {calc_VRE_b}
+      = {calc_VRC_b}
+
+  RC = VRC / ICQ
+     = {calc_VRC_b} / {ICQ}
+     = {calc_RC_b}ohm.
 """
 	print( ans_string )
 
-	print( '\n---- (a) -------------------------------------------' )
-
-	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"ASSERT diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
-	except AssertionError as e:
-		print( f"ASSERT AssertionError {pnum}: {e}" )
-
-	print( f"\n--- END {self.prob_str} ---" )
-
-
-	# Usage single value:
-	# ans_a:float = 0.518e-03   # A
-	# try:
-	# 	assertions.assert_within_percentage( iDS, ans_a, assert_percentage )
-	# 	print( f"ASSERT NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
-	# except AssertionError as e:
-	# 	print( f"ASSERT AssertionError {pnum}: {e}" )
-
-	# try:
-	# 	assertions.assert_within_percentage( iSD, ans_a, assert_percentage )
-	# 	print( f"ASSERT PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
-	# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
-	# except AssertionError as e:
-	# 	print( f"ASSERT AssertionError {pnum}: {e}" )
-
-	# Usage with List:
-	# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
-	# ans_a_iDS:Tuple = (0.518e-03, 0.691e-03, 0.691e-03)   #
-	# for idx, ans_iDS in enumerate(ans_a_iDS):
-	# 	try:
-	# 		assertions.assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
-	# 		print( f"ASSERT NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
-	# 	except AssertionError as e:
-	# 		print( f"ASSERT AssertionError {pnum}: {e}" )
-
-
-# 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
-# 		prep_fig( self, x=diode_voltages, y=calc_result )
-
-# def prep_fig(self, x=(), y=[] ):
-# 	import os
-# 	import pathlib
-# 	import matplotlib.pyplot as plt
-# 	from matplotlib.ticker import MaxNLocator
-
-# 	print( f"{prep_fig.__name__}" )
-# 	print( f"p1_27.__name__: {p1_27.__name__}" )
-# 	dir_plot = os.path.join( self.dir_draw_root, self.dir_draw_subdir )
-# 	print( f"dir_plot: '{dir_plot}'" )
-# 	pathlib.Path( dir_plot ).mkdir( parents=True, exist_ok=True )
-
-# 	fname = "{a}.png".format( a=p1_27.__name__ )
-# 	path_plot = os.path.join( dir_plot, fname )
-# 	print( f"path_plot: '{path_plot}'" )
-
-# 	# x = [1, 2, 3, 4, 5]
-# 	# y = [2, 3, 5, 7, 11]
-# 	x = x
-# 	y = y
-
-# 	plt.figure( figsize=self.param_figure_figsize )
-# 	plt.scatter(x, y, color='blue', marker='o')  # You can customize the color and marker style
-
-# 	# Set titles and labels
-# 	plt.title('Diode Current')
-# 	plt.xlabel('Diode V')
-# 	plt.xlim( -2.5, 1 )
-# 	# Set the x-axis to have 12 divisions
-# 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
-
-# 	plt.ylabel('Diode A')
-# 	plt.ylim( -1, 25 )
-# 	# plt.yscale( 'log' )
-
-# 	# Display the plot
-# 	plt.show()
+	print( f"--- END {self.prob_str} ---" )

@@ -1,0 +1,13 @@
+* C:\SourceCode\GitHub\electronix\microelec_neamen\LTspice\chap05\prob5_30\prob5_30b.asc
+Q1 VC VB VE 0 2NBetafwd80
+V1 VCC VBB 3
+VBB VBB 0 2
+RC VCC VC 2500
+RB VB VBB 49k
+RE VE 0 1k
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\OwnerA\AppData\Local\LTspice\lib\cmp\standard.bjt
+.op
+.backanno
+.end
