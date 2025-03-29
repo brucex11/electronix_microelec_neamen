@@ -54,10 +54,15 @@ dissipation.
 in Figures 5.27(a) and 5.27(b).
 * example/exam5_06.py, page 311
 * ./docx/chap05/example/chap05_example5_06.docx
+* LTspice: ./LTspice/chap05/exam5_06/
+* help: ./doc/example/BJT_DC_loadline_vs_AC_loadline.md
+* help: ./doc/example/2N3904_2N3906_complementary_pair.md
 * keywords: `voltage_transfer_function`
 
 ![EX5.06a](../../docx/png/chap05_exam5_06_NPN_volts_xfer_func.png)
-![EX5.06a](../../docx/png/chap05_exam5_06_PNP_volts_xfer_func.png)
+![EX5.06b](../../docx/png/chap05_exam5_06_PNP_volts_xfer_func.png)
+![EX5.06a](../../docx/png/chap05_exam5_06_NPN_volts_xfer_func_LTspice.png)
+![EX5.06b](../../docx/png/chap05_exam5_06_PNP_volts_xfer_func_LTspice.png)
 
 
 ## Exercises

@@ -237,6 +237,11 @@ def plot_voltage_xfer_function( self, pts:Dict[str,Tuple], title_type:str ):
 	# Add a vertical guide line at origin
 	plt.axvline( x=pts['VI_2'][0], color='r', linestyle='--', linewidth=1.0 )
 
+	# Plot the DC sweep for VI.
+	x_vin:List = [0,5]
+	y_vin:List = [0,5]
+	plt.plot( x_vin, y_vin, color='r' )
+
 	# Display the plot
 	plt.tight_layout()
 	# plt.legend()
