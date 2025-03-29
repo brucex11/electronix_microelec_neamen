@@ -61,7 +61,7 @@ and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 * problem/prob6_44b.py, textbook page 459
 * keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
-![P6.44b](../../docx/png/chap6_44b_dc_load_line.png)
+![P6.44b](../../docx/png/chap06_prob6_44b_dc_load_line.png)
 
 # Notes
 * Pg XX: 
