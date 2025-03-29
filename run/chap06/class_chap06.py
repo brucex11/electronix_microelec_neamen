@@ -52,6 +52,8 @@ class Chap06():
 		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
 
 		# save figure params
+		self._param_figure_figsize = ast.literal_eval(
+			self.cf.get_config_params['common']['param_figure_figsize'] )
 		self._save_figure = ast.literal_eval(
 			self.cf.get_config_params['common']['save_figure'] )
 		self._save_figure_dir:str = os.path.join(
@@ -118,6 +120,9 @@ class Chap06():
 	@property
 	def ni_Si_300K(self):
 		return self._ni_Si_300K
+	@property
+	def param_figure_figsize(self):
+		return self._param_figure_figsize
 	@property
 	def problem_ans(self):
 		return self._problem_ans
