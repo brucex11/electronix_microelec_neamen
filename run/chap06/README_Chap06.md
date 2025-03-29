@@ -1,5 +1,5 @@
 # Python Project MICROELEC_NEAMEN
-# Electronix Microelectronics Chap XX
+# Electronix Microelectronics Chap 06
 Problems from the textbook: Microelectronics Circuit Analysis and Design, 4th Edition by Donald Neamen.
 
 Figures and notes for all `./subdir` examples, exercises, and problems for this
@@ -11,9 +11,7 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* ``
-* ``
-* `YYY ZZZ`
+* `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -45,8 +43,18 @@ TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphica
 
 
 ## Problems
-X.X: DESCRIPTION.
-* problem/probX_XX.py, textbook page PP
+6.44_assumeIB: The transistor parameters for the circuit in Figure P6.44 are
+β = 180	and	VA = inf.  Assume IB = 75μA.  (a) Find ICQ and VCEQ.
+* problem/prob6_44assumeIB.py, textbook page 459
+* LTspice/chap06/prob6_44
+
+![Fig6_44](../../doc/mdimg/chap06_figP6_44.png)
+
+6.44a: The transistor parameters for the circuit in Figure P6.44 are β = 180
+and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.
+* problem/prob6_44a.py, textbook page 459
+* LTspice/chap06/prob6_44
+* keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
 
 # Notes

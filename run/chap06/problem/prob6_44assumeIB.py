@@ -4,10 +4,10 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions import assertions
 
-def prob6_44(self):
+def prob6_44assumeIB(self):
 	"""Page 459:
 	The transistor parameters for the circuit in Figure P6.44 are β = 180
-	and	VA = inf.
+	and	VA = inf.  Assume IB = 75μA.  See README_chap06.md for figure.
 	(a) Find ICQ and VCEQ.
 	(b) Plot the dc and ac load lines.
 	(c) Calculate the small-signal voltage gain.
