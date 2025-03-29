@@ -53,9 +53,12 @@ dissipation.
 5.6: Objective: Develop the voltage transfer curves for the circuits shown
 in Figures 5.27(a) and 5.27(b).
 * example/exam5_06.py, page 311
+* ./docx/chap05/example/chap05_example5_06.docx
 * keywords: `voltage_transfer_function`
 
-![EX5.06a](../../docx/png/chap05_exam5_06a_volts_xfer_func.png)
+![EX5.06a](../../docx/png/chap05_exam5_06_NPN_volts_xfer_func.png)
+![EX5.06a](../../docx/png/chap05_exam5_06_PNP_volts_xfer_func.png)
+
 
 ## Exercises
 5.1: An NPN transistor is biased in the forward-active mode.
