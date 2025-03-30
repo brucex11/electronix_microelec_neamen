@@ -1,18 +1,23 @@
 from inspect import currentframe
-import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions.assertions import assert_within_percentage
+from equations import equations
 
-def prob6_44a(self):
+def prob6_45a(self):
 	"""Page 459:
-	The transistor parameters for the circuit in Figure P6.44 are β = 180
-	and	VA = inf.  Assume ideal Q1.  See README_chap06.md for figure.
+	The transistor parameters for the circuit in Figure P6.44 are β = 120
+	and	VA = inf.  Assume ideal Q1.
+	See ./docx/chap06/problem/chap06_prob6_45_VCC10V.docx for Figures and note
+	that VCC = 10V for this problem and not ground, and VEE = ground.
+	According to LTspice (./LTspice/chap06/prob6_45/prob6_45_VCC10V_Beta120.asc),
+	Q1 is biased in active-region (see answers below).
 	(a) Find ICQ and VCEQ.
 	(b) Plot the dc and ac load lines.
 	(c) Calculate the small-signal voltage gain.
 	(d) Determine the input and output resistances Rib and Ro.
-	ANS(a):  ICQ = 15.7mA, VCEQ = 10.1V
+	ANS(a) LTspice:   ICQ = 2.10mA, VCEQ = 3.65V
+	ANS(a) textbook:  ICQ = 2.11mA, VCEQ = 3.69V
 	ANS(c):  
 	ANS(d):  
 	"""
@@ -25,41 +30,39 @@ def prob6_44a(self):
 	print( f"Problem: {pnum}" )
 	print( f"{self.problem_txt}" )
 	print( f"{self.problem_ans}" )
-	# assert_percentage:float = 1.0
+	assert_percentage:float = 1.0
 	print( '-----------------------------------------------\nSolution' )
 
 	#  α   β   Ω   μ   λ   γ   ξ   ω
 
 	# ---- Answers -------------------
-	ans_ICQ = 15.7e-03   # A
-	ans_VCEQ = 10.1      # V
+	ans_ICQ = 2.11e-03   # A
+	ans_VCEQ = 3.69      # V
 
 	# ---- Givens --------------------
-	Beta:float = 180
-	VCC:float = 9
-	VEE:float = -9
+	Beta:float = 120
+	VCC:float = 10
+	VEE:float = 0
 	R1:float = 10000
 	R2:float = 10000
-	RE:float = 500
+	RC:float = 1000
+	RE:float = 2000
+	RS:float = 5000
 
 
 	# ---- Assumptions ---------------
 	VBE:float = 0.7   # V
 
 
-	# ---- Calcs ---------------------
-	VTh = 0   # by inspection
-
-
 	print( '\n---- (calc IB, IBQ and IEQ) -----------------------' )
 
-	RTh:float = (R1 * R2) / (R1 + R2)
+	RTh:float = equations.r1_parallel_r2( R1, R2 )
 
+	VTh:float = (VCC*R2 + VEE*R1) / (R1 + R2)
 	IBQ:float = -1 * ( -VTh + VBE + VEE ) / ( RTh + (1+Beta)*RE )
 	ICQ:float = Beta * IBQ
 	IEQ:float = IBQ + ICQ
 
-	VTh:float = (VCC*R2 + VEE*R1) / (R1 + R2)
 	Iloop:float = (VCC - VEE) / (R1 + R2)
 
 	VR1:float = Iloop * R1
@@ -135,27 +138,47 @@ and (again) per KVL:
 """
 	print( ans_string )
 
-	print( '---- (VCEQ) ----------------------------------------' )
+	try:
+		assert_within_percentage( ICQ, ans_ICQ, assert_percentage )
+		print( f"ASSERT ICQ = {ICQ:.3e}A is within {assert_percentage}% of accepted answer: {ans_ICQ:.3e}." )
+	except AssertionError as e:
+		print( f"AssertionError {pnum}: {e}" )
 
+
+	print( '\n---- (VCEQ) ----------------------------------------' )
+
+	VRC:float = ICQ * RC
 	VRE:float = IEQ * RE
-	VCEQ:float = VCC - VRE - VEE
+	VCEQ:float = VCC - VRC - VRE - VEE
 	VCEQ = round(VCEQ,1)
 
 	ans_string = f"""
 Use KVL through CE-junction:
 
-  **>  VCC - VCEQ - VRE - VEE = 0
+  **>  VCC - VRC - VCEQ - VRE - VEE = 0
  
+where VRC = ICQ * RC
+          = {ICQ} * {RC}.
+          = {VRC}V.
+
 and VRE = IEQ * RE
         = {IEQ} * {RE}.
         = {VRE}V.
 
-  {VCC} - VCEQ - {VRE} - {VEE} = 0
+  VCC - VRC - VCEQ - VRE - VEE = 0
+  {VCC} - {VRC} - {VCEQ} - {VRE} - {VEE} = 0
 
-  VCEQ = (VCC) - (VRE) - (VEE)
-       = ({VCC}) - ({VRE}) - ({VEE})
+  VCEQ = (VCC) - (VRC) - (VRE) - (VEE)
+       = ({VCC}) - ({VRC}) - ({VRE}) - ({VEE})
        = {VCEQ}V.
 """
 	print( ans_string )
+
+	try:
+		assert_within_percentage( VCEQ, ans_VCEQ, assert_percentage )
+		print( f"ASSERT VCEQ = {VCEQ:.3e}V is within {assert_percentage}% of accepted answer: {ans_VCEQ:.3e}V." )
+	except AssertionError as e:
+		print( f"AssertionError {pnum}: {e}" )
+
 
 	print( f"--- END {self.prob_str} ---" )

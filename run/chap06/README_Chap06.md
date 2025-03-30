@@ -23,7 +23,7 @@ Here is the format for each problem number (X.X):
 X.X: Description
 * worked-file PATH, textbook page num
 * associated word docx (optional)
-* LTspice folder (optional)
+* ./LTspice folder (optional)
 * keywords list `YYY ZZZ`(optional)
 
 
@@ -41,21 +41,21 @@ X.X: DESCRIPTION.
 
 ## Test Your Understanding
 TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
-* ./chap01/testunder/test1_09, textbook pg 43
+* /testunder/test1_09, textbook pg 43
 
 
 ## Problems
 6.44_assumeIB: The transistor parameters for the circuit in Figure P6.44 are
 β = 180	and	VA = inf.  Assume IB = 75μA.  (a) Find ICQ and VCEQ.
 * problem/prob6_44assumeIB.py, textbook page 459
-* LTspice/chap06/prob6_44
+* ./LTspice/chap06/prob6_44
 
 ![Fig6_44](../../doc/mdimg/chap06_figP6_44.png)
 
 6.44a: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.
 * problem/prob6_44a.py, textbook page 459
-* LTspice/chap06/prob6_44
+* ./LTspice/chap06/prob6_44
 * keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
 6.44b: The transistor parameters for the circuit in Figure P6.44 are β = 180
@@ -69,9 +69,22 @@ and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 and	VA = inf.  Assume ideal Q1.  (c) Calculate the small-signal voltage gain.
 * problem/prob6_44c.py, textbook page 459
 * ./docx/chap06/problem/chap06_prob6_44cd.docx
-* LTspice/chap06/prob6_44
+* ./LTspice/chap06/prob6_44
 * keywords: `small_signal  voltage_gain  current_gain  rpi  input_resistance`
 * keywords: `output_resistance  transconductance`
+
+6.45a: The transistor parameters for the circuit in Figure P6.44 are β = 180
+and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.
+* problem/prob6_45a.py, textbook page 459
+* ./LTspice/chap06/prob6_45
+* keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
+
+6.45b: The transistor parameters for the circuit in Figure P6.45 are β = 120
+and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
+* problem/prob6_45b.py, textbook page 459
+* keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
+
+![P6.45b](../../docx/png/chap06_prob6_45b_dc_load_line.png)
 
 
 # Notes
