@@ -11,9 +11,9 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `voltage_divider  Thevenin_voltage  Thevenin_resistance`
-* `small_signal  voltage_gain  current_gain  rpi  input_resistance`
-* `output_resistance  transconductance`
+* `voltage_divider`  `Thevenin_voltage`  `Thevenin_resistance`
+* `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
+* `output_resistance`  `transconductance`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -85,6 +85,12 @@ and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 * keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
 ![P6.45b](../../docx/png/chap06_prob6_45b_dc_load_line.png)
+
+6.48: Consider the emitter-follower amplifier shown in Figure P6.48.
+The transistor parameters are β = 100 and VA = 100 V. (a) Find the output
+resistance Ro.
+* problem/prob6_48.py, textbook page 460
+* keywords: `output_resistance`
 
 
 # Notes
