@@ -61,9 +61,10 @@ and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.
 6.44b: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 * problem/prob6_44b.py, textbook page 459
+* ./docx/chap06/problem/chap06_prob6_44b.docx
 * keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
-![P6.44b](../../docx/png/chap06_prob6_44b_dc_load_line.png)
+![P6.44b](../../docx/png/chap06_prob6_44b_acdc_load_lines.png)
 
 6.44cd: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Assume ideal Q1.  (c) Calculate the small-signal voltage gain.

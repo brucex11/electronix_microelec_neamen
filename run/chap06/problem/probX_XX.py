@@ -2,7 +2,7 @@ from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions.assertions import assert_within_percentage
 
 def probX_XX(self):
 	"""Page XX:
@@ -44,7 +44,7 @@ REPLACE THIS TEXT.
 	print( '\n---- (a) -------------------------------------------' )
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
+		assert_within_percentage( calc_result, ans, assert_percentage )
 		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"AssertionError {pnum}: {e}" )
@@ -52,30 +52,30 @@ REPLACE THIS TEXT.
 	print( f"--- END {self.prob_str} ---" )
 
 
-	# Usage single value:
-	# ans_a:float = 0.518e-03   # A
-	# try:
-	# 	assertions.assert_within_percentage( iDS, ans_a, assert_percentage )
-	# 	print( f"ASSERT NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
-	# except AssertionError as e:
-	# 	print( f"AssertionError {pnum}: {e}" )
+# Usage single value:
+# ans_a:float = 0.518e-03   # A
+# try:
+# 	assert_within_percentage( iDS, ans_a, assert_percentage )
+# 	print( f"ASSERT NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
+# except AssertionError as e:
+# 	print( f"AssertionError {pnum}: {e}" )
 
-	# try:
-	# 	assertions.assert_within_percentage( iSD, ans_a, assert_percentage )
-	# 	print( f"ASSERT PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
-	# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
-	# except AssertionError as e:
-	# 	print( f"AssertionError {pnum}: {e}" )
+# try:
+# 	assert_within_percentage( iSD, ans_a, assert_percentage )
+# 	print( f"ASSERT PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
+# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
+# except AssertionError as e:
+# 	print( f"AssertionError {pnum}: {e}" )
 
-	# Usage with List:
-	# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
-	# ans_a_iDS:Tuple = (0.518e-03, 0.691e-03, 0.691e-03)   #
-	# for idx, ans_iDS in enumerate(ans_a_iDS):
-	# 	try:
-	# 		assertions.assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
-	# 		print( f"ASSERT NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
-	# 	except AssertionError as e:
-	# 		print( f"AssertionError {pnum}: {e}" )
+# Usage with List:
+# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
+# ans_a_iDS:Tuple = (0.518e-03, 0.691e-03, 0.691e-03)   #
+# for idx, ans_iDS in enumerate(ans_a_iDS):
+# 	try:
+# 		assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
+# 		print( f"ASSERT NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
+# 	except AssertionError as e:
+# 		print( f"AssertionError {pnum}: {e}" )
 
 
 # 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
