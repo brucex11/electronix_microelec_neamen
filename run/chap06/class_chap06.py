@@ -14,8 +14,9 @@ from scipy.constants import Boltzmann
 class Chap06():
 	"""
 	HW problems:  44a, c, and d, but with Vcc = 18V and Vss = 0
-	HW problems:  45a, c, and d, but with Vcc = 10V and Vss = 0
-	HW problems:  48 but with Vcc = 6V and Vss = 0.
+							  45a, c, and d, but with Vcc = 10V and Vss = 0
+								48 but with Vcc = 6V and Vss = 0
+								76, parts a, c, d, and e.
 
 	Args:
 

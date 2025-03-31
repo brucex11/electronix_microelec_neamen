@@ -93,6 +93,13 @@ resistance Ro.
 * problem/prob6_48.py, textbook page 460
 * keywords: `output_resistance`
 
+6.76a: Consider the circuit shown in Figure P6.76 with transistor parameters
+	β = 120 and VA = inf.
+	(a) Determine the small-signal parameters gm, rπ, and ro for both transistors.
+* problem/prob6_76a.py, textbook page 466
+* keywords: `small_signal  voltage_gain  current_gain  rpi  input_resistance`
+* keywords: `output_resistance  transconductance`
+
 
 # Notes
 * Pg XX: 
