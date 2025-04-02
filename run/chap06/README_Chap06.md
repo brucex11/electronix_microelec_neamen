@@ -14,7 +14,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `voltage_divider`  `Thevenin_voltage`  `Thevenin_resistance`
 * `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
 * `impedance_reflection`  `output_resistance`  `transconductance`
-
+* `output_voltage_swing`
 
 # Examples, Exercises, Test Your Understanding, and Problems
 All worked sections are listed in order by number in their prospective category.
@@ -112,6 +112,15 @@ resistance Ro.
 * keywords: `output_resistance  transconductance`
 
 ![P6.76b](../../docx/png/chap06_prob6_76b_Q1_acdc_load_lines.png)
+
+6.76cde: Consider the circuit shown in Figure P6.76 with transistor parameters
+	β = 120 and VA = inf.
+	(b) Plot the dc and ac load lines for both transistors.
+* problem/prob6_76cde.py, textbook page 466
+* ./docx/chap06/problem/chap06_prob6_76cde_LTspice.docx
+* ./LTspice/chap06/prob6_76
+* keywords: `small_signal`  `voltage_gain`  `current_gain`  `rpi`
+* keywords: `output_resistance`  `output_voltage_swing`
 
 
 # Notes
