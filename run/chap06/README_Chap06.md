@@ -77,6 +77,7 @@ and	VA = inf.  Assume ideal Q1.  (c) Calculate the small-signal voltage gain.
 6.45a: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.
 * problem/prob6_45a.py, textbook page 459
+* ./docx/chap06/problem/chap06_prob6_45_VCC10V.docx
 * ./LTspice/chap06/prob6_45
 * keywords: `voltage_divider  Thevenin_voltage  Thevenin_resistance`
 
@@ -91,6 +92,7 @@ and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 The transistor parameters are β = 100 and VA = 100 V. (a) Find the output
 resistance Ro.
 * problem/prob6_48.py, textbook page 460
+* ./docx/chap06/problem/chap06_prob6_48_VCC6V.docx
 * keywords: `output_resistance`
 
 6.76a: Consider the circuit shown in Figure P6.76 with transistor parameters
@@ -99,6 +101,16 @@ resistance Ro.
 * problem/prob6_76a.py, textbook page 466
 * keywords: `small_signal  voltage_gain  current_gain  rpi  input_resistance`
 * keywords: `output_resistance  transconductance`
+
+6.76b: Consider the circuit shown in Figure P6.76 with transistor parameters
+	β = 120 and VA = inf.
+	(b) Plot the dc and ac load lines for both transistors.
+* problem/prob6_76b.py, textbook page 466
+* ./docx/chap06/problem/chap06_prob6_76b.docx
+* keywords: `small_signal  voltage_gain  current_gain  rpi  input_resistance`
+* keywords: `output_resistance  transconductance`
+
+![P6.76b](../../docx/png/chap06_prob6_76b_Q1_acdc_load_lines.png)
 
 
 # Notes
