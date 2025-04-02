@@ -13,7 +13,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `voltage_divider`  `Thevenin_voltage`  `Thevenin_resistance`
 * `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
-* `output_resistance`  `transconductance`
+* `impedance_reflection`  `output_resistance`  `transconductance`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -68,11 +68,12 @@ and	VA = inf.  Plot DC and AC load-lines using Q-point from part (a).
 
 6.44cd: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Assume ideal Q1.  (c) Calculate the small-signal voltage gain.
+(d) Calculate Rib and Ro.
 * problem/prob6_44c.py, textbook page 459
 * ./docx/chap06/problem/chap06_prob6_44cd.docx
 * ./LTspice/chap06/prob6_44
-* keywords: `small_signal  voltage_gain  current_gain  rpi  input_resistance`
-* keywords: `output_resistance  transconductance`
+* keywords: `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
+* keywords: `impedance_reflection`  `output_resistance`  `transconductance`
 
 6.45a: The transistor parameters for the circuit in Figure P6.44 are β = 180
 and	VA = inf.  Assume ideal Q1.  (a) Find ICQ and VCEQ.

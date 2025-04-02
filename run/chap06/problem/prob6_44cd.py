@@ -14,7 +14,7 @@ def prob6_44cd(self):
 	(b) Plot the dc and ac load lines.
 	(c) Calculate the small-signal voltage gain.
 	(d) Determine the input and output resistances Rib and Ro.
-	ANS(a):  ICQ = 15.7mA, VCEQ = 10.1V
+	ANS(a):  ICQ = 15.6mA, VCEQ = 10.1V
 	ANS(c):  rpi = 300Ω, Rib = 34237.5Ω, Av = 0.806
 	ANS(d):  Ro = 6.18Ω
 	"""
@@ -54,83 +54,147 @@ def prob6_44cd(self):
 
 
 	# ---- Calcs ---------------------
-	VTh = 0   # by inspection
-	RTh:float = equations.r1_parallel_r2( R1, R2 )
-	print( f"Test equations module: Rth = {RTh}" )
+	# Q's input resistance, Rib
+	rpi:float = (Beta * self._vthrml0_026 ) / given_ICQ
 	RE_pllel_RL:float = equations.r1_parallel_r2( RE, RL )
-	print( f"Test equations module: RE||RL = {RE_pllel_RL}" )
-	req:float = equations.equivalent_parallel_resisitance( list_3rs )
-	print( f"Test equations module: R1||R2||R3 = {req}" )
+	# REzf, emitter-resistance due to impedance-reflection
+	REzf:float = (1 + Beta) * RE_pllel_RL
+	Rib:float = rpi + REzf
 
-
-	calc_rpi:float = (Beta * self._vthrml0_026 ) / given_ICQ
-	calc_Rib:float = calc_rpi + (1 + Beta) * RE_pllel_RL
-	list_3rs:List[float] = [R1,R2,calc_Rib]
-	calc_parallel_R1_R2_Rib:float = equations.equivalent_parallel_resisitance( list_3rs )
-	calc_parallel_R1_R2_Rib = round(calc_parallel_R1_R2_Rib,0)
-	calc_gm:float = Beta / calc_rpi
+	# Circuit transistor's base-resistance; this is different than Rib;
+	# this is the circuit resistance with respect to the source signal.
+	# Small-signal equivalent-circuit input resistance, Ri.
+	list_3rs:List[float] = [R1,R2,Rib]
+	Ri:float = equations.equivalent_parallel_resisitance( list_3rs )
+	Ri = round(Ri,0)
+	calc_gm:float = Beta / rpi
 
 	# Just plug in eq from solution manual:
-	calc_Req_Av:float = calc_parallel_R1_R2_Rib / ( calc_parallel_R1_R2_Rib + RS )
-	calc_Av_numer:float = ( 1 + Beta ) * RE_pllel_RL
+	calc_Req_Av:float = Ri / ( Ri + RS )
+	# calc_Av_numer:float = ( 1 + Beta ) * RE_pllel_RL
 	# calc_Av_denom:float = ( 1 + Beta ) * RE_pllel_RL
-	calc_Av:float = ( calc_Av_numer / calc_Rib ) * calc_Req_Av
+	# calc_Av:float = ( REzf / Rib ) * calc_Req_Av
+	# calc_Av:float = Beta * RE_pllel_RL / Ri
+	calc_Av:float = ( REzf / Rib ) * ( Ri / (RS + Ri) )
+	# calc_Av:float = ( REzf / (rpi + REzf) ) * ( Ri / (RS + Ri) )
 
   # Ro
-	list_3rs:List[float] = [R1,R2,RS]
-	calc_parallel_R1_R2_RS:float = equations.equivalent_parallel_resisitance( list_3rs )
-	calc_parallel_R1_R2_RS = round(calc_parallel_R1_R2_RS,0)
-	calc_RO_thev_R:float = (calc_rpi + calc_parallel_R1_R2_RS) / (1 + Beta)
-	calc_Ro:float = equations.r1_parallel_r2( RE, calc_RO_thev_R )
+	list_3rs:List[float] = [RS,R1,R2]
+	calc_parallel_RS_R1_R2:float = equations.equivalent_parallel_resisitance( list_3rs )
+	calc_parallel_RS_R1_R2 = round(calc_parallel_RS_R1_R2,0)
+	Rlkb:float = rpi + calc_parallel_RS_R1_R2
+	RBzf:float = Rlkb / (1 + Beta)
+	# calc_RO_thev_R:float = (rpi + calc_parallel_RS_R1_R2) / (1 + Beta)
+	Ro:float = equations.r1_parallel_r2( RE, RBzf )
 
 
 	ans_string:str = f"""
-The small-signal voltage gain, Av = Vo/Vs, of the circuit is defined
+The AC small-signal voltage gain, Av = Vo/Vs, of the circuit is defined
 as the ratio of output signal voltage to input signal voltage.
 
-Av depends on the transistor's base-emitter resistance rpi:
-  * rpi is called the diffusion resistance
-  * rpi is a function of the Q-point parameters.
+Av depends on the following circuit factors:
+  * voltage/signal source resistance
+  * transistor DC Q-point
+    - to determine transistor base-resistance, rpi
+  * transistor Beta
+    - to determine circuit base input-resistance, Rib
+    - note: Beta does vary (slightly) with Q-point
+  * effective emitter-resistance
+
+Transistor base-emitter resistance, rpi:
+  * also known as 'diffusion resistance'
+  * is a function of the Q-point current
 
   rpi = VT / IBQ
       = (Beta * VT) / ICQ   Eq 6.22 page 379
-        where VT = {self._vthrml0_026}V at room temp
+        where VT = {self._vthrml0_026}V at room temp.
 
 Since ICQ has been calculated per part (a) of this problem,
 ICQ = {given_ICQ}A.
 
   rpi = ({Beta} * {self._vthrml0_026} ) / {given_ICQ}
-      = {calc_rpi}ohm.
+      = {rpi}ohm.
 
-Rib is the input resistance into the base:
+To determine the transistor's input resistance Rib 'looking' into its base,
+use the AC small-signal equivalent circuit and 'impedance reflection' to
+perform the calculation.
 
-  Rib = rpi + (1 + Beta) * RE||RL
-      = {calc_rpi} + (1 + {Beta}) * {RE_pllel_RL}
-      = {calc_Rib}ohm.
+  REzf = emitter resistance due to impedance-reflection
+       = (1 + Beta) * (effective emitter-resistance)
+       = (1 + Beta) * RE||RL
+       = (1 + {Beta}) * {RE_pllel_RL}
+       = {REzf}ohm.
 
-Equivalent resistance of the transitor base and the base-bias-circuit
-voltage-divider:
+    where effective emitter-resistance = RE||RL because capacitor CC2
+    acts like a short for AC small-signal equivalent circuit.
 
-  R1||R2||Rib = {R1}||{R2}||{calc_Rib}
-              = {calc_parallel_R1_R2_Rib}ohm.
+    Then, Rib is simply the sum of rpi and REzf:
+      Rib = rpi + REzf
+          = {rpi} + {REzf}
+          = {Rib}ohm.
 
-  Av = small-signal voltage gain
-     = Vo / Vs  (phasor notation)
-     = -(gm * RC) / ( rpi / ( rpi + RB ) )
+The voltage source (Vs in series with Rs) 'looking-in' sees 3 resistors
+in parallel; hence the input resistance, Ri:
+
+  Ri = R1||R2||Rib
+     = {R1}||{R2}||{Rib}
+     = {Ri}ohm.
+
+Av = small-signal voltage gain is defined as Vo / Vs (phasor notation).
+Av is the product of two ratios:
+
+  1) REzf / Rib
+     where:
+     REzf = emitter-resistance due to impedance-reflection
+          = (1 + Beta) * RE||RL
+     Rib = total input resistance at the base-terminal
+         = rpi + emitter-resistance due to impedance-reflection
+         = rpi + REzf
+
+  2) Ri / (RS + Ri)
+     where:
+     Ri = see above
+     RS = voltage source resistance
+
+  Av = ( REzf /     Rib )      X ( Ri / (RS + Ri) )
+     = ( REzf / (rpi + REzf) ) X ( Ri / (RS + Ri) )
+     = ( {REzf} / ({rpi} + {REzf}) ) X ( {Ri} / ({RS} + {Ri}) )
      = {calc_Av}.
 
-Output resistance Ro:
+To determine output resistance, Ro, use impedance-reflection (analagous
+to Ri determination) to 'look-back' from the emitter-terminal all the way
+to the signal-source (that is an AC short-circuit).
+This 'looks' like rpi in series with the 3 resistors at the node connecting
+the source resistor RS and the base-bias voltage-divider resistors R1 and R2.
+Since Vs is an AC-equivalent short:
 
-  Ro = RE || [ ( rpi + R1||R2||RS ) / (1 + Beta) ]
-     = {calc_Ro}ohm.
+  Rlkb = rpi + RS||R1||R2
+       = {rpi} + {RS}||{R1}||{R2}
+       = {rpi} + {calc_parallel_RS_R1_R2}
+       = {Rlkb}ohm.
 
+Then, per impedance-reflection, simply divide Rlkb by (1+Beta):
+
+  RBzf = Rlkb / (1+Beta)
+       = {Rlkb} / (1+{Beta})
+       = {RBzf}ohm.
+
+Finally, Ro from the perspective of the emitter-terminal is RE in parallel
+with RBzf:
+
+  Ro = RE || RBzf
+     = {RE} || {RBzf}
+     = {Ro}ohm.
+
+Note that the output resistance Ro is ~= emitter-terminal reflection-impedance
+since reflection-impedance << RE.
 """
 	print( ans_string )
 
 
 	try:
-		assert_within_percentage( calc_rpi, ans_rpi, assert_percentage )
-		print( f"ASSERT rpi = {calc_rpi}ohm is within {assert_percentage}% of accepted answer: {ans_rpi:.3e}ohm." )
+		assert_within_percentage( rpi, ans_rpi, assert_percentage )
+		print( f"ASSERT rpi = {rpi}ohm is within {assert_percentage}% of accepted answer: {ans_rpi:.3e}ohm." )
 	except AssertionError as e:
 		print( f"AssertionError {pnum}: {e}" )
 
