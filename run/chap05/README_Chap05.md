@@ -19,7 +19,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `NPN_common_emitter_RE_0_and_1k`
 
 
-# Examples, Exercises, Test Your Understanding, and Problems
+# BJT, Examples, Exercises, Test Your Understanding, and Problems
 All worked sections are listed in order by number in their prospective category.
 Here is the format for each problem number (X.XX):
 
@@ -28,6 +28,18 @@ X.X: Description
 * associated word docx (optional)
 * LTspice folder (optional)
 * keywords list `YYY ZZZ`(optional)
+
+
+## BJT
+This folder contains scripts that are not from the textbook and pertain to
+the BJT.
+
+5.1: Plot the CE collector I-V characteristics.  For a range of 'constant'
+VBE, calculate a 'list' of IC for a range of VCE from -(VA) to VCE-max.
+* ./chap05/bjt/bjt_collector_IV_char.py
+* keywords: `IS_saturation_current`  `output_resistance`
+
+![CE_collector_IV_Early_voltage](../../docx/bjt/CE_collector_IV_Early_voltage.png)
 
 
 ## Examples

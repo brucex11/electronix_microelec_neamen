@@ -2,7 +2,9 @@ from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions.assertions import assert_within_percentage
+import equations.equations
+
 
 def exam5_XX(self):
 	"""Page XX:
@@ -22,7 +24,7 @@ def exam5_XX(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
-	#  α   β   Ω   μ   λ   ξ   ω
+	#  α   β   Ω   μ   λ   ξ   ω  π
 
 	# ---- Answers -------------------
 	ans:float = 0   #
@@ -50,7 +52,7 @@ For each device, calculate VDS(sat) and compare against VDS:
 
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
+		assert_within_percentage( calc_result, ans, assert_percentage )
 		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"AssertionError {pnum}: {e}" )
@@ -59,7 +61,7 @@ For each device, calculate VDS(sat) and compare against VDS:
 
 # 	for idx, ans in enumerate(answers2):
 # 		try:
-# 			assertions.assert_within_percentage( calc_result[idx], ans, 3.0 )
+# 			assert_within_percentage( calc_result[idx], ans, 3.0 )
 # 			print( f"ASSERT when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
 # 		except AssertionError as e:
 # 			print( f"AssertionError {pnum}: {e}" )

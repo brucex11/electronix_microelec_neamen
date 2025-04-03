@@ -5,7 +5,7 @@ from inspect import currentframe
 import math
 import os
 import sys
-from typing import Dict   # also available: Any, List, Set
+from typing import Any, Dict, List   # also available:  Set, Tuple
 
 from scipy.constants import Boltzmann
 
@@ -176,6 +176,113 @@ class Chap05():
 		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
 		ID:float = IS * ( math.exp( VBE / self.vthrml0_026) )
 		return ID
+
+
+	def bjt_collector_IV_characteristic_IC( self, **kwargs ) -> float:
+		"""
+		When considering the Early voltage (VA), the collector current (IC) in a BJT is affected by the Early effect
+		- which accounts for the variation of the collector current with the collector-emitter voltage (VCE).
+		The equation to model the collector current considers VBE to be constant.
+		Typical values for IS:
+		  * Si: 10^-14 to 10^-12 A
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        IS:float reverse saturation current, A
+				TK:float temperature, Kelvin
+				VA:float Early voltage, V
+				VBE:float base-emitter voltage, V
+				VCE:float collector-emitter voltage, V
+		
+		Return: emitter current IC
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		IS:float = kwargs['IS']
+		VT:float = self.thermal_voltage( kwargs['TK'] )
+		VA:float = kwargs['VA']
+		VBE:float = kwargs['VBE']
+		VCE:float = kwargs['VCE']
+		print( f"VT: {VT}" )
+		IC:float = IS * ( math.exp( VBE / VT) ) * ( 1 + (VCE / VA) )
+		return IC
+
+
+	def bjt_collector_IV_characteristic_IC_list( self, **kwargs ) -> Dict[str,Any]:
+		"""
+		When considering the Early voltage (VA), the collector current (IC) in a BJT is affected by the Early effect
+		- which accounts for the variation of the collector current with the collector-emitter voltage (VCE).
+		The equation to model the collector current considers VBE to be constant.
+		Typical values for IS:
+		  * Si: 10^-14 to 10^-12 A
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        IS:float reverse saturation current, A
+				TK:float temperature, Kelvin
+				VA:float Early voltage, V
+				VBE:float base-emitter voltage, V
+				plot_params:List[Any] dictionary of plot params
+				plot_params['VCE_max_volts']:float max VCE value
+				plot_params['VCE_list_count']:int controls lenght of return list
+		Return: emitter current IC
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# output
+		dict_IV:Dict[str,Any] = {}
+		IS:float = kwargs['IS']
+		VT:float = self.thermal_voltage( kwargs['TK'] )
+		VA:float = kwargs['VA']
+		VBE:float = kwargs['VBE']
+		VCE_max_volts:float = kwargs['plot_params']['VCE_max_volts']
+		VCE_list_count:int = kwargs['plot_params']['VCE_list_count']
+		print( f"VT: {VT}" )
+
+		step_size:float = (VA + VCE_max_volts) / VCE_list_count
+
+		list_VCE_range:List[float] = [round(-VA + i * step_size, 3) for i in range(VCE_list_count+1)]
+		dict_IV['VCE'] = list_VCE_range
+		# print( f"list_VCE_range: {list_VCE_range}V" )
+		# print( f"len(list_VCE_range): {len(list_VCE_range)}" )
+
+		list_IC:List[float] = []
+		for VCE in list_VCE_range:
+			list_IC.append( IS * ( math.exp( VBE / VT) ) * ( 1 + (VCE / VA) ) )
+
+		dict_IV['IC'] = list_IC
+		# print( f"list_IC: {list_IC}A" )
+		# print( f"len(list_IC): {len(list_IC)}" )
+
+		# Calculate ro = run/rise.
+		rise:float = list_IC[-1] - list_IC[0]
+		ro:float = ( VA + VCE_max_volts ) / rise
+		dict_IV['ro'] = ro
+
+		return dict_IV
+
+
+	def thermal_voltage( self, TK:float=300 ) -> float:
+		"""
+		round() seems to stop at 6-significant digits: 0.025852.
+
+		Args:
+			TK:float temp in Kelvin, default to room temp 300K
+		
+		Return: thermal voltage
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
+		vt:float = Boltzmann * TK / self.qev
+		# vt:float = round( (Boltzmann * TK / self.qev), 7)
+		return vt
 
 
 
