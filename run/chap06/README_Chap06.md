@@ -15,6 +15,8 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
 * `impedance_reflection`  `output_resistance`  `transconductance`
 * `output_voltage_swing`
+* `gm`  `Vpi`  `rpi`  `voltage_gain`
+
 
 # Examples, Exercises, Test Your Understanding, and Problems
 All worked sections are listed in order by number in their prospective category.
@@ -28,9 +30,10 @@ X.X: Description
 
 
 ## Examples
-X.X: DESCRIPTION.
-* example/examX_XX.py, textbook page PP
-* keywords: `YYY ZZZ`
+6.01: Calculate the small-signal voltage gain of the most-basic NPN BJT
+circuit shown in Figure 6.3.
+* example/exam6_01.py, textbook page 382
+* keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
 
 
 ## Exercises
