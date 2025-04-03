@@ -2,7 +2,8 @@ from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions import assert_within_percentage
+import equations.equations
 
 def exerX_XX(self):
 	"""Page XX:
@@ -22,7 +23,7 @@ def exerX_XX(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
-	#  α   β   Ω   μ   λ   γ   ξ   ω
+	#  α   β   Ω   μ   λ   γ   ξ   ω  π
 
 	# ---- Answers -------------------
 	ans:float = 0
@@ -45,16 +46,17 @@ REPLACE THIS TEXT.
 
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
+		assert_within_percentage( calc_result, ans, assert_percentage )
 		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"ASSERT AssertionError {pnum}: {e}" )
 
 
+	print( f"--- END {self.prob_str} ---" )
 
 # 	for idx, ans in enumerate(answers2):
 # 		try:
-# 			assertions.assert_within_percentage( calc_result[idx], ans, 3.0 )
+# 			assert_within_percentage( calc_result[idx], ans, 3.0 )
 # 			print( f"ASSERT when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
 # 		except AssertionError as e:
 # 			print( f"ASSERT AssertionError {pnum}: {e}" )

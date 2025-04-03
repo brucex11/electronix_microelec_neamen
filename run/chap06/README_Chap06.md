@@ -37,9 +37,10 @@ circuit shown in Figure 6.3.
 
 
 ## Exercises
-X.X: DESCRIPTION.
-* exercise/exerX_XX.py, textbook page PP
-* keywords: `YYY ZZZ`
+6.01: Calculate the small-signal voltage gain of the most-basic NPN BJT
+circuit shown in Figure 6.3.
+* exercise/exerm6_01.py, textbook page 383
+* keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
 
 
 ## Test Your Understanding
