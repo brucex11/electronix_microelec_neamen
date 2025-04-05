@@ -2,7 +2,8 @@ from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions.assertions import assert_within_percentage
+
 
 def exer5_XX(self):
 	"""Page XX:
@@ -22,20 +23,23 @@ def exer5_XX(self):
 	assert_percentage:float = 2.0
 	print( '-----------------------------------------------\nSolution' )
 
+
+	#  α   β   Ω   μ   λ   γ   ξ   ω  π
+
 	# ---- Answers -------------------
 	ans:float = 0
 
 	# ---- Givens --------------------
 	calc_result:float = 0
 
+	# ---- Assumptions ---------------
+	VBE:float = 0.7   # V
 
-	ans_string:str = """
-The devices per schematic symbol are n-channel enhancement-mode.  This is
-confirmed by the given threshold voltage as `VTN` (vs `VTP`) -AND- VTN > 0.
+	# ---- Calcs ---------------------
 
-For each device, calculate VDS(sat) and compare against VDS:
-* if VDS > VDS(sat), operation is saturation-region
-* if VDS < VDS(sat), operation is ohmic-region
+
+	ans_string:str = f"""
+REPLACE THIS TEXT.
 """
 	print( ans_string )
 
@@ -43,19 +47,20 @@ For each device, calculate VDS(sat) and compare against VDS:
 
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"CALC diode current ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
+		assert_within_percentage( calc_result, ans, assert_percentage )
+		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
-		print( f"CALC AssertionError {pnum}: {e}" )
+		print( f"AssertionError {pnum}: {e}" )
 
 
+	print( f"--- END {self.prob_str} ---" )
 
 # 	for idx, ans in enumerate(answers2):
 # 		try:
 # 			assertions.assert_within_percentage( calc_result[idx], ans, 3.0 )
-# 			print( f"CALC when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
+# 			print( f"ASSERT when IS = {IS}A and VD = {diode_voltages[idx]}, diode current ID = {calc_result[idx]}A" )
 # 		except AssertionError as e:
-# 			print( f"CALC AssertionError {pnum}: {e}" )
+# 			print( f"AssertionError {pnum}: {e}" )
 
 # 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
 # 		prep_fig( self, x=diode_voltages, y=calc_result )
