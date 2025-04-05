@@ -32,14 +32,20 @@ X.X: Description
 
 ## BJT
 This folder contains scripts that are not from the textbook and pertain to
-the BJT.
+the BJT, et al.
 
-5.1: Plot the CE collector I-V characteristics.  For a range of 'constant'
+Plot the CE collector I-V characteristics.  For a range of 'constant'
 VBE, calculate a 'list' of IC for a range of VCE from -(VA) to VCE-max.
 * ./chap05/bjt/bjt_collector_IV_char.py
 * keywords: `IS_saturation_current`  `output_resistance`
 
 ![CE_collector_IV_Early_voltage](../../docx/bjt/CE_collector_IV_Early_voltage.png)
+
+
+Calculate equivalent resistance of parallel resistors.
+* ./chap05/bjt/equiv_parallel_Rs.py
+* keywords: `parallel_resistance`
+
 
 
 ## Examples
