@@ -21,10 +21,21 @@ X.X: Description
 * keywords list `YYY ZZZ`(optional)
 
 
+## Common Emitter CE
 
-## Problems
-X.X: DESCRIPTION.
+### Small-Signal AC Equivalent
+Calculate linear-gain Av..
 * bjt/ce/ce_active_region.py
+
+![src_ckt](../../docx/png/bjt/support/CE_small_signal_AC_equivalent.png)
+
+
+## Support
+Calculate Thevenin voltage and resistance for input to BJT.
+* bjt/support/bjt_input_thevenin_VTh_RTh.py
+
+![src_ckt](../../docx/png/bjt/support/bjt_input_thevenin_VTh_RTh.png)
+
 
 
 # Notes

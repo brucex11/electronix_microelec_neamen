@@ -7,7 +7,8 @@ import equations.equations
 
 
 def ce_active_region(self):
-	"""Desc
+	"""
+	See schematic LTspice/schematics_for_diagrams_only/CE_small_signal_AC_equivalent.asc.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -36,7 +37,30 @@ def ce_active_region(self):
 
 
 	ans_string:str = f"""
-Inside ce_active_region.
+These are the equations for the AC-eq ckt for CE in active-region.
+See file ./docx/png/bjt/support/CE_small_signal_AC_equivalent.png. 
+vth and RTh have been calculated.
+Goal here is to calculate ib.
+
+KVL base-junction loop: (note B = Beta)
+
+  vth - ib*RTh - (B+1) * ib * [re + RE||RE1] = 0
+  Note that ib occurs twice, so rearrange:
+  vth = ib * [ RTh + (B+1)(re + RE||RE1) ]
+
+  **> ib = vth / [ RTh + (B+1)(re + RE||RE1) ]
+
+Ohm's Law for load-resistance RL:
+
+  vLoad = -(ic) * (RC||RL)
+        = -(B*ib) * (RC||RL)  because ic = B*ib
+
+Substitue for ib (from above):
+
+  **> vLoad = -B * [ vth) / [ Rth + (B+1)*(re + RE||RE1) ] * (RC||RL)
+
+KVL collector-junction loop:
+
 """
 	print( ans_string )
 
