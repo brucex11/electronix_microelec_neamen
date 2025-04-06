@@ -143,7 +143,7 @@ def prob3_03_plot(self):
 	# print( f"LEN list_iDSsat:::{len(list_iDSsat)}" )
 
 
-	if( ast.literal_eval(self.cf.get_config_params['common']['draw_figure']) ):
+	if( ast.literal_eval(self.get_config_param['common']['draw_figure']) ):
 		print( '---- DRAW PLOT -----' )
 		title:str = f"{pnum} NMOS I-V, Kn = {ans_Kn}A/V^2"
 		fname_save_plot:str = f"{fcn_name}.png"
@@ -154,7 +154,7 @@ def prob3_03_plot(self):
 		# see also for 'twin' : chap02/example/exam1_10.py
 		import matplotlib.pyplot as plt
 
-		plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
+		plt.figure( figsize=ast.literal_eval(self.get_config_param['common']['param_figure_figsize']) )
 		plt.plot( x_VDS_range, list_calc_iDS_vgs_5, color='k', label=f"VGS={vGS_5}V" )  # customize color, recall 'k' = black
 		plt.plot( x_VDS_range, list_calc_iDS_vgs_4, color='b', label=f"VGS={vGS_4}V" )
 		plt.plot( x_VDS_range, list_calc_iDS_vgs_3, color='r', label=f"VGS={vGS_3}V" )
@@ -240,7 +240,7 @@ def plot_diode_IV_characteristic(self,
 	# 	print( f"PLOT: [{idx}] (x={VDacr}, y=ID: {ID[idx]})" )
 	# print( f"count PLOT pts: (x=VD={len(VD)}, y=ID={len(ID)})" )
 
-	plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
+	plt.figure( figsize=ast.literal_eval(self.get_config_param['common']['param_figure_figsize']) )
 
 	# Highlight a specific point with a different color
 	highlight_x = [VD[iDS_idx]]  # x-coordinate of the point to highlight

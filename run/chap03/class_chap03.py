@@ -1,22 +1,16 @@
 import ast
 # from collections import OrderedDict
 # from datetime import datetime
-from typing import Dict, List   # also available: Dict, Set, Tuple
-import os
+from typing import Dict, List   # also available: Any, Set, Tuple
 import importlib
 from inspect import currentframe
 from math import sqrt
 from scipy.constants import Boltzmann
 
-# from pytools import glob_dir
-# from parse_config_file import ParseConfigFile
-# from pytools import py_file_io
-# import class_chap01
+from setup import class_setup
 
-# below is not actually required
-# from chap02 import example, exercise, problem
 
-class Chap03():
+class Chap03( class_setup.Setup ):
 	"""
 	HW problems:  2A: 3, 5, 13, 16
 	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
@@ -25,7 +19,7 @@ class Chap03():
 
 	"""
 
-	def __init__( self, configparams_obj, logger_obj ) -> None:
+	def __init__( self, path_config_file:str ) -> None:
 		"""
 		Call the base-class to parse the config.ini file.
 		Prep the log file's PATH.
@@ -39,33 +33,7 @@ class Chap03():
 		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
-		self._cf = configparams_obj
-		self._lg = logger_obj
-		# print( f"+++PATH to config file: '{self.cf.path_to_config_file}'" )
-		self.lg.info( f"PATH to config file: '{self.cf.path_to_config_file}'" )
-
-		# Pick-up the specific config params
-		# subdir_name is used to build the "path" to dynamically call the problem function
-		self._subdir_name = self.cf.get_config_params['common']['subdir_name']
-		self.prob:str = self.cf.get_config_params['common']['problem_num']
-		# Strip the leading 'p' and replace '_' with '.' for printing purpose only.
-		# tmps:str = self.prob.lstrip(self.prob[0])
-		self._prob_str:str = self.prob.replace( '_', '.' )
-
-		self._problem_txt:str = self.cf.get_config_params['common']['problem_txt']
-		self._problem_ans:str = self.cf.get_config_params['common']['problem_ans']
-
-		self._draw_figure:bool = ast.literal_eval(
-			self.cf.get_config_params['common']['draw_figure'] )
-
-		# save figure params
-		self._save_figure:bool = ast.literal_eval(
-			self.cf.get_config_params['common']['save_figure'] )
-		self._save_figure_dir:str = os.path.join(
-			self.cf.get_config_params['common']['save_figure_rootdir'],
-			self.cf.get_config_params['common']['save_figure_subdir'],
-			self.cf.get_config_params['common']['project_title']
-		)
+		super().__init__( path_config_file )
 
 
 		# Class-level attributes
@@ -103,14 +71,6 @@ class Chap03():
 	# --- Getters ----------------------------------------------------------------
 	# ----------------------------------------------------------------------------
 	@property
-	def cf(self):
-		return self._cf
-	@property
-	# short name for logging-object
-	def lg(self):
-		return self._lg
-
-	@property
 	def boltzmann_ev(self):
 		return self._boltzmann_ev
 	@property
@@ -146,9 +106,6 @@ class Chap03():
 	@property
 	def save_figure_dir(self):
 		return self._save_figure_dir
-	@property
-	def subdir_name(self):
-		return self._subdir_name
 	@property
 	def Tk_300(self):
 		return self._Tk_300

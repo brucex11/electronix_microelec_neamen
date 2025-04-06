@@ -19,7 +19,7 @@ C:\SourceCode\GitHub\electronix\microelec_neamen> py -3.12 -m venv .venvPy3-12-0
 See specific config_*.ini file for details on how to run.
 
 ```
-C:\SourceCode\GitHub\electronix\microelec_neamen> py_activate_3-12-0.bat  <======
+C:\SourceCode\GitHub\electronix\microelec_neamen> pyactivate_3-12-0.bat  <======
 
 (.venvPy3-12-0) C:\SourceCode\GitHub\electronix\microelec_neamen> python --version  <======
 Python 3.12.0
@@ -31,7 +31,7 @@ pip 23.2.1 from C:\SourceCode\GitHub\electronix\microelec_neamen\.venvPy3-12-0\L
 
 (.venvPy3-12-0) C:\SourceCode\GitHub\electronix\microelec_neamen> cd run
 
-(.venvPy3-12-0) C:\SourceCode\GitHub\electronix\microelec_neamen\run> microelx.py  <====== dump help
+(.venvPy3-12-0) C:\SourceCode\GitHub\electronix\microelec_neamen\run> run.py  <====== dump help
 
 ```
 
