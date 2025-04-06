@@ -1,27 +1,21 @@
 import ast
 # from collections import OrderedDict
 # from datetime import datetime
-from typing import Dict, List, Tuple   # also available: Any, Set
-import math
+from typing import Any, Dict   # also available: List, Set, Tuple
 import importlib
 from inspect import currentframe
+import math
 from scipy.constants import Boltzmann
 
 from setup import class_setup
 
 
-class Chap01( class_setup.Setup ):
+class Bjt( class_setup.Setup ):
 	"""
-	Chapter title:  Semiconductor Materials and Diodes
-	HW problems:  3, 19, 27
+	HW problems:  2A: 3, 5,13, 16
+	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
 
-	Functions for critical concepts in this chapter are included as member functions
-	in this file.
-
-	For example, section 1.2.4 speaks-to the ideal Current-Voltage relationship
-	for a diode when an electric-field (voltage) is applied across the pn junction
-	(of said diode).
-	See calc_diode_ideal_current(...)
+	Args:
 
 	"""
 
@@ -35,11 +29,11 @@ class Chap01( class_setup.Setup ):
 			path_to_config_file : string
 				this is passed to the base class for parsing
 		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
-		super().__init__(path_config_file)
+		super().__init__( path_config_file )
 
 
 		# Class-level attributes
@@ -70,6 +64,8 @@ class Chap01( class_setup.Setup ):
 		# if rsp != 'yes':
 		# 	print( 'QUIT' )
 		# 	exit()
+
+		# exez.exer2_01.exer2_01(self)
 
 	# ----------------------------------------------------------------------------
 	# --- Getters ----------------------------------------------------------------
@@ -107,148 +103,142 @@ class Chap01( class_setup.Setup ):
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions: helpers to support all of Chapter 01 ------------------------
+	# --- Functions: helpers to support all BJT ----------------------------------
 	# ----------------------------------------------------------------------------
-
-	def calc_diode_ideal_current( self, IS:float, VD:float ) -> float:
+	def calc_BJT_collector_current( self, IS:float, VBE:float ) -> float:
 		"""
 		This function implements the theoretical relationship between the current
-		and voltage in the pn junction of a diode.
+		and voltage in the collector (junction) of BJT.
 
 		Args:
 			IS:float reverse saturation current
-			VD:float voltage across junction
+			VD:float voltage across base-emitter junction
 		
-		Return: diode drift current
+		Return: emitter current
 		"""
 		# fcn_name:str = currentframe().f_code.co_name
 		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
-		ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
+		ID:float = IS * ( math.exp( VBE / self.vthrml0_026) )
 		return ID
 
 
-	def calc_diode_ideal_current_log( self, IS:float, VD:float ) -> float:
+	def bjt_collector_IV_characteristic_IC( self, **kwargs ) -> float:
 		"""
-		This function implements the theoretical relationship between the current
-		and voltage in the pn junction of a diode.
-		Take the log of each 'value' in the ideal I-V equation and note that
-		the logarithm turns multiplication into addition.
+		When considering the Early voltage (VA), the collector current (IC) in a BJT is affected by the Early effect
+		- which accounts for the variation of the collector current with the collector-emitter voltage (VCE).
+		The equation to model the collector current considers VBE to be constant.
+		Typical values for IS:
+		  * Si: 10^-14 to 10^-12 A
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        IS:float reverse saturation current, A
+				TK:float temperature, Kelvin
+				VA:float Early voltage, V
+				VBE:float base-emitter voltage, V
+				VCE:float collector-emitter voltage, V
+		
+		Return: emitter current IC
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		IS:float = kwargs['IS']
+		VT:float = self.thermal_voltage( kwargs['TK'] )
+		VA:float = kwargs['VA']
+		VBE:float = kwargs['VBE']
+		VCE:float = kwargs['VCE']
+		print( f"VT: {VT}" )
+		IC:float = IS * ( math.exp( VBE / VT) ) * ( 1 + (VCE / VA) )
+		return IC
+
+
+	def bjt_collector_IV_characteristic_IC_list( self, **kwargs ) -> Dict[str,Any]:
+		"""
+		When considering the Early voltage (VA), the collector current (IC) in a BJT is affected by the Early effect
+		- which accounts for the variation of the collector current with the collector-emitter voltage (VCE).
+		The equation to model the collector current considers VBE to be constant.
+		Typical values for IS:
+		  * Si: 10^-14 to 10^-12 A
+
+		Keyword arguments:
+    **kwargs: keyword arguments:
+        IS:float reverse saturation current, A
+				TK:float temperature, Kelvin
+				VA:float Early voltage, V
+				VBE:float base-emitter voltage, V
+				plot_params:List[Any] dictionary of plot params
+				plot_params['VCE_max_volts']:float max VCE value
+				plot_params['VCE_list_count']:int controls lenght of return list
+		Return: emitter current IC
+		"""
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+		# output
+		dict_IV:Dict[str,Any] = {}
+		IS:float = kwargs['IS']
+		VT:float = self.thermal_voltage( kwargs['TK'] )
+		VA:float = kwargs['VA']
+		VBE:float = kwargs['VBE']
+		VCE_max_volts:float = kwargs['plot_params']['VCE_max_volts']
+		VCE_list_count:int = kwargs['plot_params']['VCE_list_count']
+		print( f"VT: {VT}" )
+
+		step_size:float = (VA + VCE_max_volts) / VCE_list_count
+
+		list_VCE_range:List[float] = [round(-VA + i * step_size, 3) for i in range(VCE_list_count+1)]
+		dict_IV['VCE'] = list_VCE_range
+		# print( f"list_VCE_range: {list_VCE_range}V" )
+		# print( f"len(list_VCE_range): {len(list_VCE_range)}" )
+
+		list_IC:List[float] = []
+		for VCE in list_VCE_range:
+			list_IC.append( IS * ( math.exp( VBE / VT) ) * ( 1 + (VCE / VA) ) )
+
+		dict_IV['IC'] = list_IC
+		# print( f"list_IC: {list_IC}A" )
+		# print( f"len(list_IC): {len(list_IC)}" )
+
+		# Calculate ro = run/rise.
+		rise:float = list_IC[-1] - list_IC[0]
+		ro:float = ( VA + VCE_max_volts ) / rise
+		dict_IV['ro'] = ro
+
+		return dict_IV
+
+
+	def thermal_voltage( self, TK:float=300 ) -> float:
+		"""
+		round() seems to stop at 6-significant digits: 0.025852.
 
 		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
+			TK:float temp in Kelvin, default to room temp 300K
 		
-		Return: diode drift current
+		Return: thermal voltage
 		"""
 		# fcn_name:str = currentframe().f_code.co_name
 		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
 		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		# print( f"&&&&& VT: {self.vthrml0_026:.5e}V @ 300Kelvin" )
-		# ID:float = IS * ( ( math.exp( VD / self.vthrml0_026) ) - 1 )
-		log_ID:float = math.log(IS)  +  math.log( ( math.exp( VD / self.vthrml0_026) ) - 1 )
-		return log_ID
+		vt:float = Boltzmann * TK / self.qev
+		# vt:float = round( (Boltzmann * TK / self.qev), 7)
+		return vt
 
-
-	def calc_diode_ideal_current_complete(
-			self, IS:float, VD:float, Tk:float, n:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the current
-		and voltage in the pn junction of a diode.  Requires all variables
-		(hence 'complete').
-		Calculates the VT thermal voltage based on temp, Boltzmann, and electron
-		charge.
-
-		Args:
-			IS:float reverse saturation current
-			VD:float voltage across junction
-			Tk:float temp in Kelvin
-			n:float  emission coefficient or ideality factor,
-							 and its value is in the range 1 <= n <= 2.
-		
-		Return: diode drift current
-		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		VT:float = ( Boltzmann * Tk ) / self.qev
-		print( f"&&&&& VT: {VT:.5e}V @ {round(Tk,4)}Kelvin" )
-		ID:float = IS * ( math.exp( VD / VT ) - 1 )
-		return ID
-
-
-	def calc_diode_ideal_voltage( self, IS:float, ID:float ) -> float:
-		"""
-		This function implements the theoretical relationship between the voltage
-		and current in the pn junction of a diode.
-
-		Args:
-			IS:float reverse saturation current
-			ID:float current through junction
-		
-		Return: diode voltage VD
-		"""
-		# fcn_name:str = currentframe().f_code.co_name
-		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
-
-		# VT:float = ( Boltzmann * Tk ) / self.qev
-		VT:float = self.vthrml0_026
-
-		# The original equation below
-		# ID:float = IS * ( math.exp( VD / VT ) - 1 )
-		# See Mathematics for Scientists, Bak, Licchtenberg, page 174 for log-math-rules for division
-		# math.log(ID) - math.log(IS) + math.log(1) = (VD /VT)
-		VD:float = VT * ( math.log(ID) - math.log(IS) + 0 )   # math.log(1) = 0
-
-		return VD
-
-
-	def plot_diode_IV_characteristic(self, title:str, fname_save_plot:str, VD:Tuple, ID:List[float] ):
-		import os
-		import pathlib
-		# import matplotlib
-		import matplotlib.pyplot as plt
-		from matplotlib.ticker import MaxNLocator
-		# print( f"matplotlib.__version__ : {matplotlib.__version__}" )
-
-		print( f"self.save_figure_dir: '{self.save_figure_dir}'" )
-		pathlib.Path( self.save_figure_dir ).mkdir( parents=True, exist_ok=True )
-
-		path_save_figure = os.path.join( self.save_figure_dir, fname_save_plot )
-		print( f"path_save_figure: '{path_save_figure}'" )
-
-		plt.figure( figsize=ast.literal_eval(self.cf.get_config_params['common']['param_figure_figsize']) )
-		# plt.scatter( VD, ID, color='blue', marker='o' )  # customize color and marker style
-		# plt.plot( VD, ID, color='blue' )  # customize color
-
-		# # Set titles and labels
-		# plt.title( title )
-		# plt.xlabel('Diode V')
-		# plt.xlim( -1, 1 )
-		# # Set the x-axis to have 12 divisions
-		# plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
-
-		# plt.ylabel('Diode A')
-		# plt.ylim( -1, 6 )
-		# # plt.yscale( 'log' )
-
-		# if( self.save_figure ):
-		# 	plt.savefig( path_save_figure, dpi=300 )
-
-		# # Display the plot
-		# plt.show()
 
 
 	# ----------------------------------------------------------------------------
 	# --- Dynamic method caller --------------------------------------------------
 	# ----------------------------------------------------------------------------
 	def run_in_dir(self):
-		"""Call the method per the config.ini file [problem_num]
+		"""Call the method per the config.ini file [problem_num] WHEN THE MODULE
+			 (OR .PY FILENAME) IS IN THE SAME SUBDIR AS THIS MODULE/.PY FILE.
 		"""
 		fcn_name:str = currentframe().f_code.co_name
 		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -258,8 +248,8 @@ class Chap01( class_setup.Setup ):
 		class_name:str = self.__class__.__name__
 		# convert the camel-case classname to all lowercase
 		cllow:str = class_name.lower()
-		module_name:str = f"{cllow}.{self.prob}"
 		# module_name:str = f"class_{cllow}.{self.prob}"
+		module_name:str = f"{cllow}.{self.prob}"
 		method_name:str = f"{self.prob}"
 		module = importlib.import_module( module_name )
 		method = getattr( module, method_name )
@@ -272,9 +262,9 @@ class Chap01( class_setup.Setup ):
 	def run_in_subdir(self):
 		"""Call the method per the config.ini file [problem_num]
 		"""
-		fcn_name:str = currentframe().f_code.co_name
-		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		# fcn_name:str = currentframe().f_code.co_name
+		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		# # Example to retrieve all modules
 		# global_variables = globals()
@@ -299,7 +289,6 @@ class Chap01( class_setup.Setup ):
 		py_fname_sans_extension:str = self.prob
 		# build the FULL module name
 		module_name:str = f"{class_name}.{subdir_name}.{py_fname_sans_extension}"
-		# print( f"module_name: '{module_name}'" )
 		# use the module-name string to import the desired module
 		module = importlib.import_module( module_name )
 		# finally, grab the function-name in the module

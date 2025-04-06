@@ -77,9 +77,6 @@ class Chap03( class_setup.Setup ):
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
 	@property
-	def draw_figure(self):
-		return self._draw_figure
-	@property
 	def ni_GaAs_300K(self):
 		return self._ni_GaAs_300K
 	@property
@@ -89,23 +86,11 @@ class Chap03( class_setup.Setup ):
 	def ni_Si_300K(self):
 		return self._ni_Si_300K
 	@property
-	def problem_ans(self):
-		return self._problem_ans
-	@property
-	def problem_txt(self):
-		return self._problem_txt
-	@property
-	def prob_str(self):
-		return self._prob_str
-	@property
 	def qev(self):
 		return self._qev
 	@property
 	def save_figure(self):
 		return self._save_figure
-	@property
-	def save_figure_dir(self):
-		return self._save_figure_dir
 	@property
 	def Tk_300(self):
 		return self._Tk_300

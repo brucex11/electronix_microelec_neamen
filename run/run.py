@@ -14,6 +14,7 @@ from typing import List   # also available: Dict, Set
 
 # import parse_cmd_line
 # import parse_config_file
+from bjt import class_bjt
 from chap01 import class_chap01
 from chap02 import class_chap02
 from chap03 import class_chap03
@@ -103,6 +104,8 @@ def parse_the_args():
 
 	parser = argparse.ArgumentParser( prog=desc )
 	subparsers = parser.add_subparsers( dest='command', required=False, help='Specify chapter' )
+	parser_bjt = subparsers.add_parser( 'Bjt', help='run Bjt problems' )
+	parser_bjt.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_chap01 = subparsers.add_parser( 'Chap01', help='run Chapter 01 problems' )
 	parser_chap01.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_chap02 = subparsers.add_parser( 'Chap02', help='run Chapter 02 problems' )

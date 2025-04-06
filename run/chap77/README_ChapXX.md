@@ -22,8 +22,8 @@ Here is the format for each problem number (X.X):
 
 X.X: Description
 * worked-file PATH, textbook page num
-* associated word docx (optional)
-* LTspice folder (optional)
+* associated word docx (optional)  ./docx/chap77/problem/probX_XX.docx
+* LTspice folder (optional)   ./LTspice/chap77/probX_XX
 * keywords list `YYY ZZZ`(optional)
 
 

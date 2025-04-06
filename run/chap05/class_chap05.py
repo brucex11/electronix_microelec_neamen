@@ -85,26 +85,8 @@ class Chap05( class_setup.Setup ):
 	def ni_Si_300K(self):
 		return self._ni_Si_300K
 	@property
-	def param_figure_figsize(self):
-		return self._param_figure_figsize
-	@property
-	def problem_ans(self):
-		return self._problem_ans
-	@property
-	def problem_txt(self):
-		return self._problem_txt
-	@property
-	def prob_str(self):
-		return self._prob_str
-	@property
 	def qev(self):
 		return self._qev
-	@property
-	def save_figure(self):
-		return self._save_figure
-	@property
-	def save_figure_dir(self):
-		return self._save_figure_dir
 	@property
 	def Tk_300(self):
 		return self._Tk_300

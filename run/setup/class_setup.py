@@ -83,14 +83,16 @@ class Setup():
 			lg.info( f"PATH to config file: '{str(path_config_file).replace("\\", "/")}'" )
 
 
-		# # save figure params
-		# self._save_figure = ast.literal_eval(
-		# 	self.cf.get_config_param['common']['save_figure'] )
-		# self._save_figure_folder:str = os.path.join(
-		# 	self.cf.get_config_param['common']['save_figure_rootdir'],
-		# 	self.cf.get_config_param['common']['save_figure_subdir'],
-		# 	self.cf.get_config_param['common']['project_title']
-		# )
+		# figure show and save params
+		self._param_figure_figsize = ast.literal_eval(
+			self.get_config_param['common']['param_figure_figsize'] )
+		self._save_figure = ast.literal_eval(
+			self.get_config_param['common']['save_figure'] )
+		self._save_figure_folder:str = os.path.join(
+			self.get_config_param['common']['save_figure_rootdir'],
+			self.get_config_param['common']['save_figure_subdir'],
+			self.get_config_param['common']['chapter_title']
+		)
 
 
 		# Class-level attributes
@@ -113,6 +115,9 @@ class Setup():
 	@property
 	def chapter_title(self):
 		return self._chapter_title
+	@property
+	def param_figure_figsize(self):
+		return self._param_figure_figsize
 	@property
 	def problem_ans(self):
 		return self._problem_ans
