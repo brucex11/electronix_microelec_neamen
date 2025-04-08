@@ -80,24 +80,24 @@ Solve equation above for iE, assume VBE = 0.7V.
 	print( ans_string )
 
 	clac_denom:float = ( ( 1 / (1 + Beta)) * RB_d ) + RE_d + RC_d
-	calc_iE:float = ( VCC_d - VBE_NPN ) / clac_denom
-	calc_iE = round(calc_iE,7)
-	print( f"iE = {calc_iE}A = {round(calc_iE,7)*1000}mA" )
+	calc_IE:float = ( VCC_d - VBE_NPN ) / clac_denom
+	calc_IE = round(calc_IE,7)
+	print( f"iE = {calc_IE}A = {round(calc_IE,7)*1000}mA" )
 
 	print( f"Per iE = (1 + Beta)iB    Eq (5.9), calculate iB." )
-	calc_iB:float = calc_iE / (1+Beta)
-	calc_iB = round(calc_iB,8)
-	# print( f"iB = {calc_iB}A = {round(calc_iB,8)*1e+06}uA." )
+	calc_IB:float = calc_IE / (1+Beta)
+	calc_IB = round(calc_IB,8)
+	# print( f"iB = {calc_IB}A = {round(calc_IB,8)*1e+06}uA." )
 
 	try:
-		assertions.assert_within_percentage( calc_iB, ans_d_iB, assert_percentage )
-		print( f"ASSERT iB = {calc_iB}A is within {assert_percentage}% of accepted answer: {ans_d_iB}A." )
+		assertions.assert_within_percentage( calc_IB, ans_d_iB, assert_percentage )
+		print( f"ASSERT iB = {calc_IB}A is within {assert_percentage}% of accepted answer: {ans_d_iB}A." )
 	except AssertionError as e:
 		print( f"ASSERT AssertionError {pnum}: {e}" )
 
 
-	print( f"VC is the voltage-drop across RC: VC = VCC - iE*RC\n" )
-	calc_VC:float = VCC_d - calc_iE * RC_d
+	print( f"VC is the voltage-drop across RC: VC = VCC - iE*RC" )
+	calc_VC:float = VCC_d - calc_IE * RC_d
 	calc_VC = round(calc_VC,2)
 
 	try:
@@ -105,5 +105,40 @@ Solve equation above for iE, assume VBE = 0.7V.
 		print( f"ASSERT VC = {calc_VC}V is within {assert_percentage}% of accepted answer: {ans_d_VC}V." )
 	except AssertionError as e:
 		print( f"ASSERT AssertionError {pnum}: {e}" )
+
+
+	print( '\n---- (Calc VB and VE) ------------------------------', end='' )
+
+	# 1)
+	calc_VRB:float = calc_IB * RB_d
+	calc_VB:float = calc_VC - calc_VRB
+	calc_VE:float = calc_VB - VBE_NPN
+
+	# 2)
+	calc_IC:float = Beta * calc_IB
+	calc_IE:float = calc_IB + calc_IC
+	calc_VE = calc_IE * RE_d
+	calc_VB = calc_VE + VBE_NPN
+
+	ans_string = f"""
+With IB and VC now known, lets see the most accurate way to calc
+VB and VE.
+
+1) Calc the voltage-drop across RB and subtract from VC to get VB.
+   Then subtract VBE from VB to get VE.
+   VRB = {calc_IB} * {RB_d}
+       = {calc_VRB}V.
+    VB = {calc_VB}V.
+    VE = {calc_VE}V.
+
+2) Calc IC = Beta*IB, then IE = IB + IC.  Calc the voltage-drop
+   across RE to get VE, then add VBE to get VB.
+    VE = {calc_VE}V.
+    VB = {calc_VB}V.
+
+"""
+	print( ans_string )
+
+
 
 	print( f"\n--- END {self.prob_str} ---" )
