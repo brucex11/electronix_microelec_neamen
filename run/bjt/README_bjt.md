@@ -24,10 +24,13 @@ X.X: Description
 ## Common Emitter CE
 
 ### Small-Signal AC Equivalent
-Calculate linear-gain Av..
-* bjt/ce/ce_active_region.py
+Calculate linear-gain Av.
+* bjt/ce/ce_active_Zreflect_BtoE.py
 
-![src_ckt](../../docx/png/bjt/support/CE_small_signal_AC_equivalent.png)
+![src_ckt](../../docx/png/bjt/CE/CE_small_signal_AC_equivalent.png)
+
+Calculate collector I-V characteristics.
+* bjt/ce/ce_collector_IV_char.py
 
 
 ## Support
