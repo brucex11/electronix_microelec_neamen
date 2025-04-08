@@ -3,7 +3,7 @@ import math
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
-import equations.equations
+from equations import equations
 
 
 def examX_XX(self):
