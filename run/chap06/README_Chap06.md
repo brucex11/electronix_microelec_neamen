@@ -14,11 +14,12 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `voltage_divider`  `Thevenin_voltage`  `Thevenin_resistance`
 * `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
 * `impedance_reflection`  `output_resistance`  `transconductance`
-* `output_voltage_swing`
+* `output_voltage_swing`  `self_bias`
 * `gm`  `Vpi`  `rpi`  `voltage_gain`
+* `Rin`  `Rib`  `rpi`  `Ro`  `ro`
 
 
-# Examples, Exercises, Test Your Understanding, and Problems
+# Examples, Exercises, Test Your Understanding, Problems, and Figures
 All worked sections are listed in order by number in their prospective category.
 Here is the format for each problem number (X.X):
 
@@ -28,12 +29,18 @@ X.X: Description
 * ./LTspice folder (optional)
 * keywords list `YYY ZZZ`(optional)
 
+Figures are solutions to figures in the text.  This was inspired by development
+of a tool to iterate resistances for simple circuits.  See Fig6_14.
 
 ## Examples
 6.01: Calculate the small-signal voltage gain of the most-basic NPN BJT
 circuit shown in Figure 6.3.
 * example/exam6_01.py, textbook page 382
 * keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
+
+6.13: Calculate the small-signal Rin and Ro per Figure 6.49.
+* example/exam6_13.py, pg 424
+* keywords: `Rin`  `Rib`  `rpi`  `Ro`  `ro`
 
 
 ## Exercises
@@ -125,6 +132,17 @@ resistance Ro.
 * ./LTspice/chap06/prob6_76
 * keywords: `small_signal`  `voltage_gain`  `current_gain`  `rpi`
 * keywords: `output_resistance`  `output_voltage_swing`
+
+
+## Figures
+6.14: Determine Q-point IBQ, ICQ and VCEQ for Figure 6.14.
+Calculate circuit Av = Vo / Vs and compare with simulation.
+See ./LTspice/chap06/fig6_14/.
+* figure/fig6_14.py, textbook page 466
+* ./docx/chap06/figure/chap06_fig6_14.docx
+* ./LTspice/chap06/fig6_14
+* keywords: `small_signal`  `voltage_gain`  `current_gain`  `rpi`
+* keywords: `output_resistance`  `output_voltage_swing`  `self_bias`
 
 
 # Notes

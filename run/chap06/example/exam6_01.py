@@ -3,7 +3,7 @@ import math
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
-import equations.equations
+from equations.equations import to_s_k, to_s_mA
 
 
 def exam6_01(self):
@@ -75,6 +75,7 @@ Since there is no emitter resistor, VCEQ = VCQ = {VCEQ}V.
 
 	print( '\n---- (AC Solution) -------------------------------' )
 	rpi:float = (Beta * self._vthrml0_026) / ICQ
+	rpi_IBQ:float = self._vthrml0_026 / IBQ
 	gm:float = ICQ / self._vthrml0_026
 	Av:float = -( gm * RC * rpi ) / (rpi + RB)
 
@@ -82,15 +83,20 @@ Since there is no emitter resistor, VCEQ = VCQ = {VCEQ}V.
 Use the small-signal equivalent circuit (Fig 6.11) to solve
 for rpi, gm and Av.
 
-rpi = (Beta * VT) / ICQ
-    = ({Beta} * {self._vthrml0_026}) / {ICQ}
-    = {rpi}ohm.
+  rpi = (Beta * VT) / ICQ
+      = ({Beta} * {self._vthrml0_026}) / {ICQ}
+      = {rpi}ohm.
 
-gm = ICQ / VT
-   = {ICQ} / {self._vthrml0_026}
-   = {gm}A/V.
+  rpi = VT / IBQ
+      = {self._vthrml0_026} / {IBQ}
+      = {to_s_k(val=rpi_IBQ, r_val=1)}k-ohm.
 
-Av = Vo / Vs.
+  gm = ICQ / VT
+     = {ICQ} / {self._vthrml0_026}
+     = {gm}A/V.
+     = {to_s_mA(gm, r_val=3)}/V.
+
+  Av = Vo / Vs.
 
 At the output:
 Vo = -(Ic * RC)  and is negative because (conventional) current

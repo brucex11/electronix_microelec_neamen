@@ -3,7 +3,7 @@ import math
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
-import equations.equations
+from equations.equations import to_s_mA, to_s_uA
 
 
 def exer6_01(self):
@@ -45,7 +45,9 @@ def exer6_01(self):
 
 	print( '\n---- (DC Solution) -------------------------------' )
 	IBQ:float = (VBB - VBE) / RB
+	IBQuA:str = to_s_uA( IBQ, r_val=6 )
 	ICQ = Beta * IBQ
+	ICQmA:str = to_s_mA( ICQ, r_val=4 )
 	VCQ:float = VCC - (ICQ * RC)
 	VCEQ:float = VCQ
 
@@ -55,22 +57,22 @@ Calculate Q-point ICQ and VCEQ.  Q is in active-region.
 
 IBQ = (VBB - VBE) / RB
     = ({VBB} - {VBE}) / {RB}
-    = {IBQ}A.
+    = {IBQuA}.
 ICQ = Beta * IBQ
     = {Beta} * {IBQ}
-    = {ICQ}A.
+    = {ICQmA}.
 
 VCQ = VCC - (ICQ * RC)
-    = {VCC} - ({ICQ} * {RC})
-    = {VCQ}V.
+    = {VCC} - ({ICQmA} * {RC})
+    = {round(VCQ,1)}V.
 
-Since there is no emitter resistor, VCEQ = VCQ = {VCEQ}V.
+Since there is no emitter resistor, VCEQ = VCQ = {round(VCEQ,1)}V.
 """
 	print( ans_string )
 
 	try:
 		assert_within_percentage( ICQ, ans_ICQ, assert_percentage )
-		print( f"ASSERT ICQ = {ICQ}A is within {assert_percentage}% of accepted answer: {ans_ICQ}A." )
+		print( f"ASSERT ICQ = {ICQmA} is within {assert_percentage}% of accepted answer: {to_s_mA(ans_ICQ, r_val=4)}." )
 	except AssertionError as e:
 		print( f"ASSERT AssertionError {pnum}: {e}" )
 
@@ -85,12 +87,12 @@ Use the small-signal equivalent circuit (Fig 6.11) to solve
 for rpi, gm and Av.
 
 rpi = (Beta * VT) / ICQ
-    = ({Beta} * {self._vthrml0_026}) / {ICQ}
+    = ({Beta} * {self._vthrml0_026}) / {ICQmA}
     = {rpi}ohm.
 
 gm = ICQ / VT
-   = {ICQ} / {self._vthrml0_026}
-   = {gm}A/V.
+   = {ICQmA} / {self._vthrml0_026}V
+   = {to_s_mA(gm, r_val=3)}/V.
 
 Av = Vo / Vs.
 
