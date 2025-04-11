@@ -38,7 +38,7 @@ def to_s_k( val:float, r_val:int ) -> str:
 		Args:
 			val:float value to convert
 			r_val:int round param
-		Return str milliAmps rounded-off
+		Return \"val\" rounded to r_val
 	"""
 	rnd:float = round( val*1e-03, r_val )
 	return f"{rnd}"
@@ -52,7 +52,7 @@ def to_s_mA( val:float, r_val:int ) -> str:
 		Args:
 			val:float amps
 			r_val:int round param
-		Return str milliAmps rounded-off
+		Return \"val-mA\" rounded to r_val (without the '-')
 	"""
 	rnd:float = round( val*1e+03, r_val )
 	return f"{rnd}mA"
@@ -66,7 +66,7 @@ def to_s_uA( val:float, r_val:int ) -> str:
 		Args:
 			val:float amps
 			r_val:int round param
-		Return str microAmps rounded-off
+		Return \"val-uA\" rounded to r_val and truncated (without the '-')
 	"""
 	rnd:float = round( val*1e+06, r_val )
 	trnc:float = math.trunc( rnd * 1000 ) / 1000

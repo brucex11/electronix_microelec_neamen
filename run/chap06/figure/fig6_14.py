@@ -11,6 +11,7 @@ def fig6_14(self):
 	Determine Q-point IBQ, ICQ and VCEQ for Figure 6.14.
 	Calculate circuit Av = Vo / Vs and compare with simulation.
 	See ./LTspice/chap06/fig6_14/
+			./docx/chap06/figure/chap06_fig6_14.docx
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )

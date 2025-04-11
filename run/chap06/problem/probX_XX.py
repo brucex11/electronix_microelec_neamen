@@ -3,6 +3,8 @@ import math
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
+from equations import equations
+
 
 def probX_XX(self):
 	"""Page XX:
