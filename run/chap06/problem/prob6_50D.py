@@ -3,7 +3,9 @@ import math
 from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
-from equations import equations
+from equations.equations import to_s_k, to_s_mA, to_s_uA
+from equations.equations import equivalent_parallel_resisitance
+from equations.equations import r1_parallel_r2
 
 
 def prob6_50D(self):
@@ -17,11 +19,10 @@ def prob6_50D(self):
 	peak value in the output voltage, assuming vs is equal to the value determined
 	in part (b).
 	See file ./docx/chap06/problem/chap06_prob6_50D.docx.
-	See folder ./LTspice/chap06/ prob6_50D/.
 	Fri, Apr 11, 2025  9:27:26 AM
-	ANS:  (a) vO(peak) = 16.27V
-				(b) iD(peak) = 8.14mA
-			  (c) 48.7pcnt
+	ANS:  (a) RE = 5k, RB = 434.3k, IBQ = 9.9uA
+				(b) vb p-p = 4.02V, vs p-p = 4.03V
+			  (c) See folder ./LTspice/chap06/ prob6_50D/.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -45,6 +46,8 @@ def prob6_50D(self):
 	IEQ:float = 0.001  # 1mA
 	Beta:float = 100
 	vo_pp:float = 4    # V
+	Rs:float = 700     # Ω
+	RL:float = 1000    # Ω
 
 	# ---- Assumptions ---------------
 	VBE:float = 0.7   # V
@@ -74,28 +77,28 @@ Solve for RE:
   VRE   = (VCEQ - 0) = (IEQ * RE)
   VCEQ  = (IEQ * RE)
     RE = VCEQ / IEQ
-       = {VCEQ} / {equations.to_s_mA(IEQ,3)}
-       = {RE} = {equations.to_s_k(RE,3)}k.
+       = {VCEQ} / {to_s_mA(IEQ,3)}
+    RE = {RE} = {to_s_k(RE,3)}k.
 
 Solve for RB using KVL in B-E branch.
 First, calculate IBQ given Beta and IE:
 
   IBQ = IEQ / (1 + Beta)
       = {IEQ} / (1 + {Beta})
-      = {IBQ} = {equations.to_s_uA(IBQ,6)}
+  IBQ = {IBQ} = {to_s_uA(IBQ,6)}
 
 KVL in B-E junction branch:
 
   VCC - IBQ*RB - VBE - VCEQ = 0
 	IBQ*RB = VCC - VBE - VCEQ
 
-	RB = (VCC - VBE - VCEQ) / IBQ
-  RB = {RB} = {equations.to_s_k(RB,1)}k.
+  RB = (VCC - VBE - VCEQ) / IBQ
+  RB = {RB} = {to_s_k(RB,1)}k.
 """
-	print( ans_string )
+	print( ans_string, end='' )
 
 
-	# ---- AC Calcs ---------------------
+	# ---- AC vb p-p Calcs ---------------------
 	RE:float = VCEQ / IEQ
 	rpi:float = self._vthrml0_026 / IBQ
 	rpi = round(rpi,0)
@@ -107,7 +110,7 @@ KVL in B-E junction branch:
 
 
 	ans_string = f"""
----- AC analysis ----
+---- AC analysis vb p-p ----
 Draw the AC small-signal equivalent circuit (see file
 ./LTspice/schematics_for_diagrams_only/chap06/prob6_50D
 /prob6_50D_AC_small-signal_equivalent.asc).
@@ -115,8 +118,8 @@ Draw the AC small-signal equivalent circuit (see file
 rpi is required, so do the calculation:
 
   rpi = VT / IBQ = (Beta * VT) / ICQ   Eq 6022 pg 379
-	    = {self._vthrml0_026} / {IBQ}
-  rpi = {rpi} = {equations.to_s_k(rpi,3)}k.
+      = {self._vthrml0_026} / {IBQ}
+  rpi = {rpi} = {to_s_k(rpi,3)}k.
 
 Using the AC small-signal equivalent circuit, there are
 4 steps to do the analysis:
@@ -124,11 +127,11 @@ Using the AC small-signal equivalent circuit, there are
      solve for IBQ.
   2) apply Ohm's law to Q1-emitter-branch (RE) for OUTPUT and
      solve for vo.
-	3) Substitute IBQ per the INPUT equation for
+  3) substitute IBQ per the INPUT equation for
      IBQ in OUTPUT equation.
   4) divide by vb to obtain the ratio Av = vo/vb.
 
-1) INPUT
+1) INPUT KVL
   vb - IBQ*rpi - vRE = 0
 
 Now, to solve for vRE, use Ohm's law per the given emitter
@@ -145,9 +148,9 @@ INPUT branch:
 Solve for IBQ:
 
   vb = IBQ*rpi + (1 + Beta)*IBQ*RE
-     = IBQ * ( rpi + (1 + Beta)*RE )
+     = IBQ * (rpi + (1 + Beta)*RE)
 
-  **> IBQ = vb / ( rpi + (1 + Beta)*RE )
+  **> IBQ = vb / (rpi + (1 + Beta)*RE)
 
 2) OUTPUT
 Use Ohm's law for OUTPUT circuit in emitter branch for vo:
@@ -161,22 +164,122 @@ Use Ohm's law for OUTPUT circuit in emitter branch for vo:
    IBQ in OUTPUT equation:
 
   vo = (1 + Beta)*RE * IBQ
-     = (1 + Beta)*RE * [vb / ( rpi + (1 + Beta)*RE )]
-     = (1 + Beta)*RE * (vb) / ( rpi + (1 + Beta)*RE )
+     = (1 + Beta)*RE * [vb / (rpi + (1 + Beta)*RE)]
+     = (1 + Beta)*RE * (vb) / (rpi + (1 + Beta)*RE)
 
 4) Divide by vb for ratio Av = vo / vb:
 
-  **> Av = (1 + Beta)*RE / ( rpi + (1 + Beta)*RE )
-         = (1 + {Beta})*{RE} / ( {rpi} + (1 + {Beta})*{RE} )
+  **> Av = (1 + Beta)*RE / (rpi + (1 + Beta)*RE)
+         = (1 + {Beta})*{RE} / ({rpi} + (1 + {Beta})*{RE})
          = {Av}.
 
 Now, peak-to-peak at Q1's base-node vb = vo / Av = {vo_pp} / {Av}
-     vb p-p = {vb_pp}V.
+     vb = {vb_pp}Vp-p.
 """
 	print( ans_string )
 
-	print( '\n---- (a) -------------------------------------------' )
 
+	# ---- AC vs p-p Calcs ---------------------
+	Rib:float = rpi + (1 + Beta)*RE
+	Ri:float = r1_parallel_r2(RB, Rib)
+
+	vs_pp:float = ( vb_pp * (Rs + Ri) ) / Ri
+	vs_pp = round(vs_pp,3)
+
+	ans_string = f"""
+---- AC analysis vs p-p ----
+For AC small-signal equivalent circuit, see file
+./LTspice/schematics_for_diagrams_only/chap06/prob6_50D
+/prob6_50D_AC_small-signal_equivalent.asc.
+
+The input-side of the circuit is a single loop with vs
+as the signal source and resistor Rs and Ri in series.
+
+Rib is the resistance looking into Q1's base-node and
+\"seen\" through the rest of the circuit; for this
+schematic, this includes rpi, and RE.
+
+Q1 input resistance into the base:
+
+  Rib = rpi + (1 + Beta)*RE
+      = {rpi} + (1 + {Beta})*{RE}
+  Rib = {Rib} = {to_s_k(Rib,1)}k.
+
+And,
+  Ri = RB||Rib
+     = {RB}||{Rib}
+  Ri = {Ri} = {to_s_k(Ri,1)}k.
+
+Use voltage-divider to determine vs.
+
+  vb = (vs * Ri) / (Rs + Ri)
+  vb * (Rs + Ri) = (vs * Ri)
+  vs = [vb * (Rs + Ri)] / Ri
+     = [{vb_pp} * ({Rs} + {to_s_k(Ri,1)}k)] / {to_s_k(Ri,1)}k
+  vs = {vs_pp}Vp-p.
+"""
+	print( ans_string, end='' )
+
+
+	# ---- AC with load RL Calcs ---------------------
+	RE_p_RL:float = r1_parallel_r2(RE, RL)
+	RE_p_RL = round(RE_p_RL,0)
+	Rib_with_load:float = rpi + (1 + Beta)*RE_p_RL
+	Ri_with_load:float = r1_parallel_r2(RB, Rib_with_load)
+
+	vb_pp = ( vs_pp * Ri_with_load) / (Rs + Ri_with_load )
+	vb_pp = round(vb_pp,2)
+
+	vo_pp = ( vb_pp * (1+Beta)*RE_p_RL) / (rpi + (1+Beta)*RE_p_RL)
+	vo_pp = round(vo_pp,2)
+
+	ans_string = f"""
+---- AC analysis add load RL = 1k ----
+For AC small-signal equivalent circuit, see file
+./LTspice/schematics_for_diagrams_only/chap06/prob6_50D
+/prob6_50D_AC_small-signal_with_1k-load.asc.
+
+With load resistor RL, Rib decreases because RE is now
+in parallel with RL.
+Determine the \"new\" vo p-p using vs = {vs_pp}V.
+
+Q1 input resistance into the base:
+
+  Rib = rpi + (1 + Beta)*(RE||RL)
+      = {rpi} + (1 + {Beta})*({RE_p_RL})
+  Rib = {Rib_with_load} = {to_s_k(Rib_with_load,1)}k.
+
+(Note that Rib has dropped from {to_s_k(Rib,1)}k to {to_s_k(Rib_with_load,1)}k).
+
+And,
+  Ri = RB||Rib
+     = {RB}||{Rib_with_load}
+  Ri = {Ri_with_load} = {to_s_k(Ri_with_load,1)}k.
+
+(Note that Ri has dropped from {to_s_k(Ri,1)}k to {to_s_k(Ri_with_load,1)}k).
+
+Use 2 voltage-dividers to determine vo p-p:
+  1) vs -> vb
+  2) vb -> vo.
+
+1) Use voltage-divider to determine vb.
+
+  vb = (vs * Ri) / (Rs + Ri)
+  vb = ({vs_pp} * {Ri_with_load}) / ({Rs} + {Ri_with_load})
+  vs = [vb * (Rs + Ri)] / Ri
+     = [{vb_pp} * ({Rs} + {to_s_k(Ri,1)}k)] / {to_s_k(Ri,1)}k
+
+  vb = {vb_pp}Vp-p.
+
+2) Use voltage-divider to determine vo.
+
+  vo = (vb * (1+Beta)*RE||RL) / (rpi + (1+Beta)*RE||RL)
+     = ({vb_pp} * (1+{Beta})*{RE_p_RL}) / ({rpi} + (1+{Beta})*{RE_p_RL})
+
+  vo = {vo_pp}Vp-p.
+"""
+	print( ans_string, end='' )
+	
 
 	print( f"--- END {self.prob_str} ---" )
 

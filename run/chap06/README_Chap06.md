@@ -118,6 +118,10 @@ of the dc load line.
 * ./LTspice/chap06/prob6_50D
 * keywords: `small_signal`  `voltage_gain`  `rpi`
 
+![P6.50D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_50D/prob6_50D_AC_small-signal_equivalent.png)
+
+![P6.50D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_50D/prob6_50D_AC_small-signal_with_1k-load.png)
+
 6.76a: Consider the circuit shown in Figure P6.76 with transistor parameters
 	β = 120 and VA = inf.
 	(a) Determine the small-signal parameters gm, rπ, and ro for both transistors.
