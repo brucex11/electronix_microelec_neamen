@@ -1,6 +1,25 @@
 import math
 from typing import List
 
+def current_divider( R_thru:float, R_other:float, Is:float ) -> float:
+	"""
+	Calculate current through two parallel resistances. The desired current
+	flows thru R_thru branch, the other flows through R_other branch.
+	In paramater list, R_thru is the resistor through which the current
+	is desired (and is output by this function).
+
+		I_thru = [ R_thru / (R_other + R_thru) ] * Is
+
+		Args:
+			R_thru: resistor for desired current
+			R_other: the other parallel resistor
+			Is: input current
+
+		Return: float I_thru desired current
+	"""
+	return  ( R_thru / (R_other + R_thru) ) * Is
+
+
 def equivalent_parallel_resisitance( list_rs:List[float] ) -> float:
 	"""
 	Calculate equivalent resistance of resistors in parallel.
@@ -8,8 +27,9 @@ def equivalent_parallel_resisitance( list_rs:List[float] ) -> float:
 		1/Req = 1/R1 + 1/R2 + 1/R2 + ...
 
 		Args:
-			list_rs:List[float] 3 or more resistance values
-		Return float resistance
+			list_rs: 3 or more resistance values
+
+		Return: float equivalent resistance
 	"""
 	req:float = 0
 	# Use list comprehension to compute the reciprocal of each value.
@@ -23,9 +43,10 @@ def r1_parallel_r2( r1:float, r2:float ) -> float:
 	Calculate equivalent resistance of r1 in parallel with r2.
 
 		Args:
-			r1:float resistor-1 value
-			r2:float resistor-2 value
-		Return float resistance
+			r1: resistor-1 value
+			r2: resistor-2 value
+
+		Return: float equivalent resistance
 	"""
 	return r1 * r2 / (r1 + r2)
 
@@ -36,9 +57,10 @@ def to_s_k( val:float, r_val:int ) -> str:
 	with units; good for print to console.
 
 		Args:
-			val:float value to convert
-			r_val:int round param
-		Return \"val\" rounded to r_val
+			val: value to convert
+			r_val: round param
+
+		Return: str \"val\" rounded to r_val
 	"""
 	rnd:float = round( val*1e-03, r_val )
 	return f"{rnd}"
@@ -50,9 +72,10 @@ def to_s_mA( val:float, r_val:int ) -> str:
 	with units; good for print to console.
 
 		Args:
-			val:float amps
-			r_val:int round param
-		Return \"val-mA\" rounded to r_val (without the '-')
+			val: amps
+			r_val: round param
+
+		Return: str \"val-mA\" rounded to r_val (without the '-')
 	"""
 	rnd:float = round( val*1e+03, r_val )
 	return f"{rnd}mA"
@@ -64,9 +87,10 @@ def to_s_uA( val:float, r_val:int ) -> str:
 	with units; good for print to console.
 
 		Args:
-			val:float amps
-			r_val:int round param
-		Return \"val-uA\" rounded to r_val and truncated (without the '-')
+			val: amps
+			r_val: round param
+
+		Return: str \"val-uA\" rounded to r_val and truncated (without the '-')
 	"""
 	rnd:float = round( val*1e+06, r_val )
 	trnc:float = math.trunc( rnd * 1000 ) / 1000

@@ -17,6 +17,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `output_voltage_swing`  `self_bias`
 * `gm`  `Vpi`  `rpi`  `voltage_gain`
 * `Rin`  `Rib`  `rpi`  `Ro`  `ro`
+* `current_divider`  `Thevenin`
 
 
 # Examples, Exercises, Test Your Understanding, Problems, and Figures
@@ -121,6 +122,17 @@ of the dc load line.
 ![P6.50D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_50D/prob6_50D_AC_small-signal_equivalent.png)
 
 ![P6.50D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_50D/prob6_50D_AC_small-signal_with_1k-load.png)
+
+D6.56: For the emitter-follower circuit in Figure P6.54, assume VCC = 24V,
+β = 75, and Ai = io/is = 8. Design the circuit to drive an 8Ω load.
+(a) Design the circuit such that IEQ = 1mA and the Q-point is in the center
+of the dc load line.
+* problem/prob6_56D.py, page 462
+* ./docx/chap06/problem/chap06_prob6_56D.docx
+* ./LTspice/chap06/prob6_56D
+* keywords: `current_divider`  `Thevenin`  `Thevenin_resistance`
+
+![P6.56D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_56D/prob6_56D_AC_small-signal_RTh.png)
 
 6.76a: Consider the circuit shown in Figure P6.76 with transistor parameters
 	β = 120 and VA = inf.
