@@ -10,7 +10,7 @@ __pycache__/
 /input
 /output
 # below, ignore all *.docx files throughout entire repository
-/docx
+# /docx
 *.docx
 *.png
 
