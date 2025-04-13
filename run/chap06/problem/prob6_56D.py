@@ -98,7 +98,7 @@ Calc rpi based on Q-point IBQ:
 	RTh = round(RTh,1)
 
 	ans_string:str = f"""
-Calc  Q input impedance RiB:
+Calc Q input impedance RiB using impedance-reflection:
   Rib = rpi + (1 + Beta) * (RE||RL)
       = {rpi} + (1 + {Beta}) * ({RE_p_RL})
       = {rpi} + {RE_eff}

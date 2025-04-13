@@ -130,7 +130,7 @@ of the dc load line.
 * problem/prob6_56D.py, page 462
 * ./docx/chap06/problem/chap06_prob6_56D.docx
 * ./LTspice/chap06/prob6_56D
-* keywords: `current_divider`  `Thevenin`  `Thevenin_resistance`
+* keywords: `current_divider`  `Thevenin`  `Thevenin_resistance`  `impedance_reflection`
 
 ![P6.56D](../../LTspice/schematics_for_diagrams_only/chap06/prob6_56D/prob6_56D_AC_small-signal_RTh.png)
 
