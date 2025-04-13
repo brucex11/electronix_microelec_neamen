@@ -12,7 +12,12 @@ __pycache__/
 # below, ignore all *.docx files throughout entire repository
 # /docx
 *.docx
+*.tmp
 *.png
+
+# LTspice
+*.net
+*.raw
 
 # C extensions
 *.so
