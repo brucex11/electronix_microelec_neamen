@@ -18,6 +18,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `gm`  `Vpi`  `rpi`  `voltage_gain`
 * `Rin`  `Rib`  `rpi`  `Ro`  `ro`
 * `current_divider`  `Thevenin`
+* `Av`  `rpi`  `voltage_gain`  `Ri`  `Ro`
 
 
 # Examples, Exercises, Test Your Understanding, Problems, and Figures
@@ -51,6 +52,12 @@ circuit shown in Figure 6.3.
 circuit shown in Figure 6.3.
 * exercise/exerm6_01.py, page 383
 * keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
+
+6.07: For the circuit in Figure 6.38, (a) determine the input resistance seen
+by the signal source, and (b) find the small-signal voltage gain.
+* exercise/exerm6_07.py, page 410
+* ./docx/chap06/exercise/chap06_exer6_07.docx
+* keywords: `Av`  `rpi`  `voltage_gain`  `Ri`  `Ro`
 
 
 ## Test Your Understanding
