@@ -2,7 +2,12 @@ from inspect import currentframe
 import math
 from typing import List, Tuple  # Any, Dict, Set
 
-from assertions import assertions
+from assertions.assertions import assert_within_percentage
+from equations.equations import to_s_k, to_s_mA, to_s_uA
+from equations.equations import equivalent_parallel_resisitance
+from equations.equations import r1_parallel_r2
+from equations.equations import current_divider
+
 
 def testX_XX(self):
 	"""Page XX:
@@ -41,14 +46,15 @@ REPLACE THIS TEXT.
 """
 	print( ans_string )
 
-	print( '\n---- (a) -------------------------------------------' )
+	print( '\n---- (a) ----' )
 
 	try:
-		assertions.assert_within_percentage( calc_result, ans, assert_percentage )
+		assert_within_percentage( calc_result, ans, assert_percentage )
 		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
 	except AssertionError as e:
 		print( f"AssertionError {pnum}: {e}" )
 
+	print( f"--- END {self.prob_str} ---" )
 
 
 	# Usage single value:

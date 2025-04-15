@@ -54,8 +54,12 @@ circuit shown in Figure 6.3.
 
 
 ## Test Your Understanding
-TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
-* /testunder/test1_09, pg 43
+TYU6.07: PFor the circuit in Figure 6.39, let B = 125 and VA = 200V.
+Determine the small-signal voltage gain Av and Ro.
+* testunder/test6_07, pg 410
+* ./LTspice/chap06/test6_07
+* ./docx/chap06/testunder/chap06_test6_07_LTspice.docx
+* keywords: `impedance_reflection`  `inverse_impedance_reflection`
 
 
 ## Problems
