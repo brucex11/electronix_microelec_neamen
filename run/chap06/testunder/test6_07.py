@@ -153,6 +153,20 @@ In-circuit OUTPUT impedance:
 
 	ans_string:str = f"""
 ---- (AC analysis) ----
+Per the AC small-signal circuit, Av = vo / vb
+INPUT side:
+  vb = ib * rpi
+  ib = (vb / rpi)
+
+OUTPUT side using KCL:
+  -BetaDC * ib = vo / (Ro||RL)
+
+To calculate Av, substitute ib from the INPUT side into
+the OUTPUT side:
+
+  -BetaDC * (vb / rpi) = vo / (Ro||RL)
+	-BetaDC / rpi = (vo / vb) / (Ro||RL)
+	-BetaDC / rpi * (Ro||RL) = (vo / vb) = Av
 
   Av = -BetaDC * (Ro||RL) / rpi
      = -{BetaDC} * ({Ro}||{RL}) / {rpi}
