@@ -14,11 +14,12 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `voltage_divider`  `Thevenin_voltage`  `Thevenin_resistance`
 * `small_signal`  `voltage_gain`  `current_gain`  `rpi`  `input_resistance`
 * `impedance_reflection`  `output_resistance`  `transconductance`
-* `output_voltage_swing`  `self_bias`
+* `output_voltage_swing`  `single_DC_supply`
 * `gm`  `Vpi`  `rpi`  `voltage_gain`
 * `Rin`  `Rib`  `rpi`  `Ro`  `ro`
 * `current_divider`  `Thevenin`
 * `Av`  `rpi`  `voltage_gain`  `Ri`  `Ro`
+* `common_base_current_gain`  `common_base_voltage_gain`
 
 
 # Examples, Exercises, Test Your Understanding, Problems, and Figures
@@ -29,6 +30,7 @@ X.X: Description
 * worked-file PATH, page num
 * associated word docx (optional)
 * ./LTspice folder (optional)
+* BENCH - ENKI2: C:\ENKI2\Electronix\BENCH\BENCH_subdir_struct.txt
 * keywords list `YYY ZZZ`(optional)
 
 Any python file that contains `*D.py` is a `D`ESIGN problem.
@@ -61,13 +63,19 @@ by the signal source, and (b) find the small-signal voltage gain.
 
 
 ## Test Your Understanding
-TYU6.07: PFor the circuit in Figure 6.39, let B = 125 and VA = 200V.
+TYU6.07: For the circuit in Figure 6.39, let B = 125 and VA = 200V.
 Determine the small-signal voltage gain Av and Ro.
 * testunder/test6_07, pg 410
-* ./LTspice/chap06/test6_07
+* ./LTspice/chap06/test6_07/
 * ./docx/chap06/testunder/chap06_test6_07_LTspice.docx
 * keywords: `impedance_reflection`  `inverse_impedance_reflection`
 
+TYU6.13: For the circuit shown in Figure 6.63 calculate ICQ, VECQ, Av, Ai.
+* testunder/test6_13, pg 434
+* ./LTspice/chap06/test6_13/  (none as of 16Apr25)
+* ./docx/chap06/testunder/chap06_test6_13.docx
+* keywords: `common_base_current_gain`  `common_base_voltage_gain`
+* Note: LTspice simulation confirms textbook answers (see docx).
 
 ## Problems
 6.44_assumeIB: The transistor parameters for the circuit in Figure P6.44 are
@@ -179,8 +187,9 @@ See ./LTspice/chap06/fig6_14/.
 * figure/fig6_14.py, page 466
 * ./docx/chap06/figure/chap06_fig6_14.docx
 * ./LTspice/chap06/fig6_14
+* BENCH - ENKI2: C:\ENKI2\Electronix\BENCH\BJT\CE_single_supply\
 * keywords: `small_signal`  `voltage_gain`  `current_gain`  `rpi`
-* keywords: `output_resistance`  `output_voltage_swing`  `self_bias`
+* keywords: `output_resistance`  `output_voltage_swing`  `single_DC_supply`
 
 
 # Notes
