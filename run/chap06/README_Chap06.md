@@ -20,6 +20,9 @@ When applicable, each problem has keywords that reflect code in that problem.
 * `current_divider`  `Thevenin`
 * `Av`  `rpi`  `voltage_gain`  `Ri`  `Ro`
 * `common_base_current_gain`  `common_base_voltage_gain`
+* `iteration_range`
+* `common_emitter_current_gain`  `common_emitter_voltage_gain`
+* `python_iteration_range`  `AC_rides_on_DC_bias`
 
 
 # Examples, Exercises, Test Your Understanding, Problems, and Figures
@@ -78,6 +81,16 @@ TYU6.13: For the circuit shown in Figure 6.63 calculate ICQ, VECQ, Av, Ai.
 * Note: LTspice simulation confirms textbook answers (see docx).
 
 ## Problems
+6.04: The transistor in Figure 6.3 has parameters β = 120 and VA = inf.
+Determine iC, vCE, Av, Ai.
+Use iteration to determine VBB:RB pair to satisfy Q-point; then simulate
+using the problem given as input.
+* problem/prob6_04.py, page 451
+* ./LTspice/chap06/prob6_04
+* ./docx/chap06/problem/chap06_04.docx
+* keywords: `common_emitter_current_gain`  `common_emitter_voltage_gain`
+* keywords: `python_iteration_range`  `AC_rides_on_DC_bias`
+
 6.44_assumeIB: The transistor parameters for the circuit in Figure P6.44 are
 β = 180	and	VA = inf.  Assume IB = 75μA.  (a) Find ICQ and VCEQ.
 * problem/prob6_44assumeIB.py, page 459
