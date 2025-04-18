@@ -12,17 +12,14 @@ import sys
 from typing import Any
 from typing import List   # also available: Dict, Set
 
-# import parse_cmd_line
-# import parse_config_file
-from bjt import class_bjt
-from chap01 import class_chap01
-from chap02 import class_chap02
-from chap03 import class_chap03
-from chap05 import class_chap05
+# from bjt import class_bjt
+# from chap01 import class_chap01
+# from chap02 import class_chap02
+# from chap03 import class_chap03
+# from chap05 import class_chap05
 from chap06 import class_chap06
-from labs import class_labs
-# from chap77 import class_chap77
-# from logger import logger
+from chap07 import class_chap07
+# from labs import class_labs
 
 
 def main() -> int:
@@ -117,6 +114,8 @@ def parse_the_args():
 	parser_chap05.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_chap06 = subparsers.add_parser( 'Chap06', help='run Chapter 06 problems' )
 	parser_chap06.add_argument( 'config_file', help='PATH to config.ini' )
+	parser_chap07 = subparsers.add_parser( 'Chap07', help='run Chapter 07 problems' )
+	parser_chap07.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_labs = subparsers.add_parser( 'Labs', help='run Labs solutions' )
 	parser_labs.add_argument( 'config_file', help='PATH to config.ini' )
 	# parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
