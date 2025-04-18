@@ -104,9 +104,29 @@ class Chap06( class_setup.Setup ):
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions: helpers to support all of Chapter 77 ------------------------
+	# --- Functions: helpers to support all of Chapter 6 -------------------------
 	# ----------------------------------------------------------------------------
+	def calc_gm( self, ICQ:float) -> float:
+		"""
+		Args:
+			ICQ: Q-point collector current
+		
+		Return: BJT transconductance
+		"""
+		gm:float = ICQ / self._vthrml0_026
+		gm = round(gm,6)
+		return gm
 
+	def calc_rpi( self, IBQ:float) -> float:
+		"""
+		Args:
+			IBQ: Q-point base current
+		
+		Return: BJT VBE resistance
+		"""
+		rpi:float = self._vthrml0_026 / IBQ
+		rpi = round(rpi,0)
+		return rpi
 
 	# ----------------------------------------------------------------------------
 	# --- Dynamic method caller --------------------------------------------------
