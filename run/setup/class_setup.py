@@ -154,5 +154,18 @@ class Setup():
 
 
 	# ----------------------------------------------------------------------------
-	# --- Functions: helpers to support all of Chapter 02 ------------------------
+	# --- Functions: helpers to support all of Chapters --------------------------
 	# ----------------------------------------------------------------------------
+	def calc_RC_tau( self, R:float, C:float) -> float:
+		"""
+		Calculate the time constant for the RC circuit.
+
+		Args:
+			R: total resistance
+			C: total capacitance
+		
+		Return: time constant τ
+		"""
+		return R * C
+
+

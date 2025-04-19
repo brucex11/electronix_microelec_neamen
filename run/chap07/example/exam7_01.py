@@ -10,9 +10,13 @@ from equations.equations import current_divider
 
 
 def exam7_01(self):
-	"""Page XX:
-	DESCRIPTION.
-	ANS(a): (i) 1.03μA, (ii) 2.25mA.
+	"""Page 479:
+	Objective: Determine the corner frequencies and maximum-magnitude
+	asymptotes of the Bode plots for a specified circuit.
+	For the circuits in Figures 7.2 and 7.3, the parameters are: RS = 1kΩ,
+	RP = 10kΩ, CS = 1μF, and CP = 3pF.
+	Fri, Apr 18, 2025  4:54:56 PM
+	ANS:  τ = 11ms, max mag = 0.909, f = 58.3MHz"
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -32,107 +36,79 @@ def exam7_01(self):
 	ans:float = 0
 
 	# ---- Givens --------------------
-	BetaDC:float = 125
-	VA:float = 200    # V
-	VCC:float = 5
-	VEE:float = 5
-	VBB:float = -1
-	RS:float = 5e+03
-	R1:float = 20e+03
-	R2:float = 20e+03
-	RC:float = 2.3e+03
-	RE:float = 5e+03
-	RL:float = 5e+03
-	calc_result:float = 0
-
-	# ---- Assumptions ---------------
-	VBE:float = 0.7   # V
+	RS:float = 1e+03
+	RP:float = 10e+03
+	CS:float = 1e-06   # uF
+	CP:float = 3e-12   # pF
 
 	# ---- Calcs ---------------------
-	ICQ:float = 0.676
-	gm:float = self.calc_gm( ICQ=ICQ )
+
+	tRC1:float = self.calc_RC_tau( (RS+RP), CS )
+	f1:float = 1 / (2 * math.pi * tRC1)
+	maxm1:float = RP / (RS + RP)
+	maxdb1 = 20 * math.log10( maxm1 )
+
+	RS_p_RP:float = r1_parallel_r2( RS, RP )
+	tRC2:float = self.calc_RC_tau( RS_p_RP, CP )
+	f2:float = 1 / (2 * math.pi * tRC2)
+	maxm2:float = RP / (RS + RP)
+	maxdb2 = 20 * math.log10( maxm2 )
 
 
 	ans_string:str = f"""
----- (DC op point) ----
-gm = {gm}A/V.
+FIG 7.2, (Resistor + Capacitor in series)
+  TC (time constant) = (RS+RP) * CS)s.
+                     = ({RS}+{RP}) * {CS})s.
+  TC = {tRC1}s.
+
+Corner frequency:
+  f = 1 / (2 * pi * tau)
+    = 1 / (2 * pi * {tRC1})
+  f = {f1}Hz.
+
+Maximum magnitude asymptotes:
+  RP / (RS + RP)
+  {RP} / ({RS} + {RP}) = {maxm1}
+-OR-
+  20log( RP / (RS + RP) ) = {maxdb1}dB.
+
+FIG 7.3, (Resistor + Capacitor in parallel):
+Time constant still involves R and C, but it's influenced by the
+effective resistance seen by the capacitor.
+If a voltage source is applied, capacitor charges instantly (in theory)
+through the resistor branch, but in practice, the circuit's time behavior
+still has a characteristic shape, depending on current splitting and
+equivalent resistance.
+  TC (time constant) = (RS||RP) * CP)s.
+                     = ({RS}||{RP}) * {CP})s.
+                     = ({RS_p_RP}) * {CP})s.
+  TC = {tRC2}s.
+
+Corner frequency:
+  f = 1 / (2 * pi * tau)
+    = 1 / (2 * pi * {tRC2})
+  f = {f2:.6e}Hz.
+
+Maximum magnitude asymptotes:
+  RP / (RS + RP)
+  {RP} / ({RS} + {RP}) = {maxm2}
+-OR-
+  20log( RP / (RS + RP) ) = {maxdb2}dB.
+
+The maximum magnitude is the same as just calculated: 0.909 or -0.828 dB.
+
+Comment: Since the two capacitance values are substantially different,
+the two time constants differ by orders of magnitude, which means that
+the two corner frequencies also differ by orders of magnitude.
 """
 	print( ans_string )
 
 	# print( '\n---- (a) ----' )
 
-	try:
-		assert_within_percentage( calc_result, ans, assert_percentage )
-		print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
-	except AssertionError as e:
-		print( f"AssertionError {pnum}: {e}" )
+	# try:
+	# 	assert_within_percentage( calc_result, ans, assert_percentage )
+	# 	print( f"ASSERT ID = {calc_result}A is within {assert_percentage}% of accepted answer: {ans}." )
+	# except AssertionError as e:
+	# 	print( f"AssertionError {pnum}: {e}" )
 
 	print( f"--- END {self.prob_str} ---" )
-
-
-# Usage single value:
-# ans_a:float = 0.518e-03   # A
-# try:
-# 	assert_within_percentage( iDS, ans_a, assert_percentage )
-# 	print( f"ASSERT NMOS iDS = {iDS:.3e}A is within {assert_percentage}% of accepted answer: {ans_a:.3e}." )
-# except AssertionError as e:
-# 	print( f"AssertionError {pnum}: {e}" )
-
-# try:
-# 	assert_within_percentage( iSD, ans_a, assert_percentage )
-# 	print( f"ASSERT PMOS enhancement mode in saturation: iSD = {round(iSD,7)}V", end=' ' )
-# 	print( f"is within {assert_percentage}% of accepted answer {ans_a}V." )
-# except AssertionError as e:
-# 	print( f"AssertionError {pnum}: {e}" )
-
-# Usage with List:
-# list_calc_iD:List[float] = []   #  don't forget to use list_calc_iD.append(val) to load the list!!
-# ans_a_iDS:Tuple = (0.518e-03, 0.691e-03, 0.691e-03)   #
-# for idx, ans_iDS in enumerate(ans_a_iDS):
-# 	try:
-# 		assert_within_percentage( list_calc_iDS[idx], ans_iDS, assert_percentage )
-# 		print( f"ASSERT NMOS iDS = {list_calc_iDS[idx]:.3e}A is within {assert_percentage}% of accepted answer: {ans_iDS:.3e}." )
-# 	except AssertionError as e:
-# 		print( f"AssertionError {pnum}: {e}" )
-
-
-# 	if( ast.literal_eval(self.dict_params['draw_figure']) ):
-# 		prep_fig( self, x=diode_voltages, y=calc_result )
-
-# def prep_fig(self, x=(), y=[] ):
-# 	import os
-# 	import pathlib
-# 	import matplotlib.pyplot as plt
-# 	from matplotlib.ticker import MaxNLocator
-
-# 	print( f"{prep_fig.__name__}" )
-# 	print( f"p1_27.__name__: {p1_27.__name__}" )
-# 	dir_plot = os.path.join( self.dir_draw_root, self.dir_draw_subdir )
-# 	print( f"dir_plot: '{dir_plot}'" )
-# 	pathlib.Path( dir_plot ).mkdir( parents=True, exist_ok=True )
-
-# 	fname = "{a}.png".format( a=p1_27.__name__ )
-# 	path_plot = os.path.join( dir_plot, fname )
-# 	print( f"path_plot: '{path_plot}'" )
-
-# 	# x = [1, 2, 3, 4, 5]
-# 	# y = [2, 3, 5, 7, 11]
-# 	x = x
-# 	y = y
-
-# 	plt.figure( figsize=self.param_figure_figsize )
-# 	plt.scatter(x, y, color='blue', marker='o')  # You can customize the color and marker style
-
-# 	# Set titles and labels
-# 	plt.title('Diode Current')
-# 	plt.xlabel('Diode V')
-# 	plt.xlim( -2.5, 1 )
-# 	# Set the x-axis to have 12 divisions
-# 	plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=12) )
-
-# 	plt.ylabel('Diode A')
-# 	plt.ylim( -1, 25 )
-# 	# plt.yscale( 'log' )
-
-# 	# Display the plot
-# 	plt.show()

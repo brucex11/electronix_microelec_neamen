@@ -11,9 +11,7 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* ``
-* ``
-* `YYY ZZZ`
+* `time_constant`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -28,9 +26,10 @@ X.X: Description
 
 
 ## Examples
-X.X: DESCRIPTION.
-* example/examX_XX.py, textbook page PP
-* keywords: `YYY ZZZ`
+7.1: RC circuit time constant.
+* example/exam7_01.py, textbook page 479
+* .\docx\chap07\example\chap07_exam7_01_timeconst.docx
+* keywords: `time_constant`
 
 
 ## Exercises
