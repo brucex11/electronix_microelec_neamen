@@ -57,8 +57,8 @@ def exam7_01(self):
 
 	ans_string:str = f"""
 FIG 7.2, (Resistor + Capacitor in series)
-  TC (time constant) = (RS+RP) * CS)s.
-                     = ({RS}+{RP}) * {CS})s.
+  TC (time constant) = ((RS+RP) * CS)s.
+                     = (({RS}+{RP}) * {CS})s.
   TC = {tRC1}s.
 
 Corner frequency:
@@ -79,9 +79,9 @@ If a voltage source is applied, capacitor charges instantly (in theory)
 through the resistor branch, but in practice, the circuit's time behavior
 still has a characteristic shape, depending on current splitting and
 equivalent resistance.
-  TC (time constant) = (RS||RP) * CP)s.
-                     = ({RS}||{RP}) * {CP})s.
-                     = ({RS_p_RP}) * {CP})s.
+  TC (time constant) = ((RS||RP) * CP)s.
+                     = (({RS}||{RP}) * {CP})s.
+                     = (({RS_p_RP}) * {CP})s.
   TC = {tRC2}s.
 
 Corner frequency:

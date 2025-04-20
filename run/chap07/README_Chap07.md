@@ -11,7 +11,7 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `time_constant`
+* `bode_plot`  `time_constant`  `plot_example`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -26,9 +26,9 @@ X.X: Description
 
 
 ## Examples
-7.1: RC circuit time constant.
-* example/exam7_01.py, textbook page 479
-* .\docx\chap07\example\chap07_exam7_01_timeconst.docx
+7.1: For the equivalent ...
+* example/exam7_01.py, textbook page 483
+* .\docx\chap07\example\exam7_01.docx
 * keywords: `time_constant`
 
 
@@ -39,8 +39,24 @@ X.X: DESCRIPTION.
 
 
 ## Test Your Understanding
-TYU 77.9: Per Exercise EX 1.8, Fig 1.28, determine VD and ID, using the graphical technique.
-* ./testunder/test1_09, textbook pg 43
+log.omega: Plot the Bode-plot for τ=RC=1.
+* test/test7_log_omega.py, see textbook pg 474
+* .\docx\chap07\test\test7_log_omega.docx
+* keywords: `bode_plot`  `time_constant`  `plot_example`
+
+### Compare semilog vs linear plot
+Very obvious why semilog plot is used:
+
+![bode-plot](../../docx/chap07/testunder/bode_plot_tau=RC=1_semilog.png)
+
+![bode-plot](../../docx/chap07/testunder/bode_plot_tau=RC=1_linear.png)
+
+7.1: For the equivalent circuit shown in Figure 7.13, the parameters are:
+RS = 1kΩ, rpi = 2kΩ, RL = 4kΩ, gm = 50mA/V, and CC = 1μF.
+(a) Determine the expression for the circuit time constant.
+* test/test7_01.py, textbook page 483
+* .\docx\chap07\example\chap07_exam7_01_timeconst.docx
+* keywords: `time_constant`
 
 
 ## Problems
