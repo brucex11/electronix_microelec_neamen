@@ -34,10 +34,11 @@ def test7_log_omega(self):
 	omega_range:List[float] = [round(0.01 + i * 0.01, 2) for i in range(100000)]  # 100000 values from 0.01 to 1000
 	# print( omega_range )
 
+	tenthX_crossing_point:List[Any] = []  # ratio is 0.1X
 	z0_dB_crossing_point:List[Any] = []   # ratio is 1X (unity)
+	sqrt2X_crossing_point:List[Any] = []  # ratio is sqrt(2)X
 	twoX_crossing_point:List[Any] = []    # ratio is 2X
 	tenX_crossing_point:List[Any] = []    # ratio is 10X
-	tenthX_crossing_point:List[Any] = []  # ratio is 10X
 
 	list_log_omega:List[float] = []
 
@@ -50,6 +51,10 @@ def test7_log_omega(self):
 		if( ω == 1 ):
 			z0_dB_crossing_point = [omega_range[idx],int(val)]
 			print( f"z0_dB_crossing_point: {z0_dB_crossing_point}" )
+		if( ω == 1.4 ):  # closest to sqrt(2) = 1.414213
+			val = round(val,0)
+			sqrt2X_crossing_point = [omega_range[idx],int(val)]
+			print( f"sqrt2X_crossing_point: {sqrt2X_crossing_point}" )
 		if( ω == 2 ):
 			twoX_crossing_point = [omega_range[idx],int(val)]
 			print( f"twoX_crossing_point: {twoX_crossing_point}" )
@@ -67,7 +72,7 @@ def test7_log_omega(self):
 	ax1.set_ylabel('20log(ω/ωo)', color='k')  # Set y-axis label for the first axis
 
 	# linear v linear ( y v x )
-	# ax1.plot( omega_range, list_log_omega, color='k', label='log' )
+	# ax1.plot( omega_range, list_log_omega, color='r', label='log' )
 	# linear v log
 	ax1.semilogx( omega_range, list_log_omega, color='k', label='log' )
 	# log v linear
@@ -77,9 +82,14 @@ def test7_log_omega(self):
 
 	lw:float = 2.0
 	# Add a horiz guide line at 0.1X that stops at 20log(ω/ωo)
-	plt.hlines( y=tenthX_crossing_point[1], xmin=omega_range[0], xmax=tenthX_crossing_point[0], color='purple', label='0.1X', linestyle='--', linewidth=lw )
+	plt.hlines( y=tenthX_crossing_point[1],
+		xmin=omega_range[0], xmax=tenthX_crossing_point[0],
+		label=f"{tenthX_crossing_point[1]}dB @ω/ωo=0.1X",
+		color='purple', linestyle='--', linewidth=lw )
 	# Add a vertical guide line at 10X that stops at 20log(ω/ωo)
-	plt.vlines( x=tenthX_crossing_point[0], ymin=list_log_omega[0], ymax=tenthX_crossing_point[1], color='purple', linestyle='--', linewidth=lw )
+	plt.vlines( x=tenthX_crossing_point[0],
+		ymin=list_log_omega[0], ymax=tenthX_crossing_point[1],
+		color='purple', linestyle='--', linewidth=lw )
 
 	# Add an entire-height horizontal guide line at unity
 	# plt.axhline( y=z0_dB_crossing_point[1], color='k', label='unity' , linestyle='--', linewidth=lw )
@@ -87,9 +97,24 @@ def test7_log_omega(self):
 	# plt.axvline( x=z0_dB_crossing_point[0], color='k', linestyle='--', linewidth=lw )
 
 	# Add a horiz guide line at unity that stops at 20log(ω/ωo)
-	plt.hlines( y=z0_dB_crossing_point[1], xmin=omega_range[0], xmax=z0_dB_crossing_point[0], color='r', label='unity', linestyle='--', linewidth=lw )
+	plt.hlines( y=z0_dB_crossing_point[1],
+		xmin=omega_range[0], xmax=z0_dB_crossing_point[0],
+		label=f"{z0_dB_crossing_point[1]}dB @ω/ωo=unity",
+		color='k', linestyle='--', linewidth=lw )
 	# Add a vertical guide line at unity that stops at 20log(ω/ωo)
-	plt.vlines( x=z0_dB_crossing_point[0], ymin=list_log_omega[0], ymax=z0_dB_crossing_point[1], color='r', linestyle='--', linewidth=lw )
+	plt.vlines( x=z0_dB_crossing_point[0],
+		ymin=list_log_omega[0], ymax=z0_dB_crossing_point[1],
+		color='k', linestyle='--', linewidth=lw )
+
+	# Add a horiz guide line at sqrt(2) that stops at 20log(ω/ωo)
+	plt.hlines( y=sqrt2X_crossing_point[1],
+		xmin=omega_range[0], xmax=sqrt2X_crossing_point[0],
+		label=f"{sqrt2X_crossing_point[1]}dB @ω/ωo=sqrt(2)X",
+		color='r', linestyle='--', linewidth=lw )
+	# Add a vertical guide line at sqrt(2) that stops at 20log(ω/ωo)
+	plt.vlines( x=sqrt2X_crossing_point[0],
+		ymin=list_log_omega[0], ymax=sqrt2X_crossing_point[1],
+		color='r', linestyle='--', linewidth=lw )
 
 
 	# Add an entire-height horizontal guide line at 2X
@@ -98,9 +123,14 @@ def test7_log_omega(self):
 	# plt.axvline( x=twoX_crossing_point[0], color='b', linestyle='--', linewidth=lw )
 
 	# Add a horiz guide line at 2X that stops at 20log(ω/ωo)
-	plt.hlines( y=twoX_crossing_point[1], xmin=omega_range[0], xmax=twoX_crossing_point[0], color='b', label='2X', linestyle='--', linewidth=lw )
+	plt.hlines( y=twoX_crossing_point[1],
+		xmin=omega_range[0], xmax=twoX_crossing_point[0],
+		label=f"{twoX_crossing_point[1]}dB @ω/ωo=2X",
+		color='b', linestyle='--', linewidth=lw )
 	# Add a vertical guide line at 2X that stops at 20log(ω/ωo)
-	plt.vlines( x=twoX_crossing_point[0], ymin=list_log_omega[0], ymax=twoX_crossing_point[1], color='b', linestyle='--', linewidth=lw )
+	plt.vlines( x=twoX_crossing_point[0],
+		ymin=list_log_omega[0], ymax=twoX_crossing_point[1],
+		color='b', linestyle='--', linewidth=lw )
 
 
 	# Add an entire-height horizontal guide line at 10X
@@ -109,9 +139,14 @@ def test7_log_omega(self):
 	# plt.axvline( x=tenX_crossing_point[0], color='g', linestyle='--', linewidth=lw )
 
 	# Add a horiz guide line at 10X that stops at 20log(ω/ωo)
-	plt.hlines( y=tenX_crossing_point[1], xmin=omega_range[0], xmax=tenX_crossing_point[0], color='g', label='10X', linestyle='--', linewidth=lw )
+	plt.hlines( y=tenX_crossing_point[1],
+		xmin=omega_range[0], xmax=tenX_crossing_point[0],
+		label=f"{tenX_crossing_point[1]}dB @ω/ωo=10X",
+		color='g', linestyle='--', linewidth=lw )
 	# Add a vertical guide line at 10X that stops at 20log(ω/ωo)
-	plt.vlines( x=tenX_crossing_point[0], ymin=list_log_omega[0], ymax=tenX_crossing_point[1], color='g', linestyle='--', linewidth=lw )
+	plt.vlines( x=tenX_crossing_point[0],
+		ymin=list_log_omega[0], ymax=tenX_crossing_point[1],
+		color='g', linestyle='--', linewidth=lw )
 
 
 	ax1.tick_params(axis='y', labelcolor='k')
@@ -128,7 +163,7 @@ def test7_log_omega(self):
 	# plt.scatter( x=q_point[0], y=q_point[1], color='black', label=f"Q-point ({q_point[0]}V, {round(q_point[1],5)*1000}mA)" )
 
 	plt.title( f"{pnum} Bode" )
-	plt.text(x=0.1, y=58, s='τ=RC=1', fontsize=12, color='k')
+	plt.text(x=0.5, y=58, s='τ=RC=1', fontsize=12, color='k')
 
 	# plt.gca().xaxis.set_major_locator( MaxNLocator(nbins=4) )
 	# plt.tight_layout()
