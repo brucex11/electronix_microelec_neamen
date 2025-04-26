@@ -11,9 +11,9 @@ from setup import class_setup
 
 class Chap07( class_setup.Setup ):
 	"""
-	HW problems:  2A: 3, 5,13, 16
-	HW problems:  2B: 19, 22a and b, 30, 34, 41, 45
-
+	HW problems:  low frequency response: 17, 21, 31, and 52.
+	HW problems:  high frequency response: 52 part ), first two blitz circuits
+								per ./docx/chap07/Blitz_Sophia_Freq_response_schematics.pdf
 	Args:
 
 	"""

@@ -1,0 +1,242 @@
+from inspect import currentframe
+import math
+from typing import List, Tuple  # Any, Dict, Set
+
+from assertions.assertions import assert_within_percentage
+from equations.equations import to_s_k, to_s_mA, to_s_uA
+from equations.equations import equivalent_parallel_resisitance
+from equations.equations import r1_parallel_r2
+from equations.equations import current_divider
+
+
+def blitz01(self):
+	"""Top-left circuit:
+	See file ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+	See also LTspice: ./LTspice/chap07/blitz01/.
+	Find the total frequency response.
+	cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+	Sat, Apr 26, 2025  6:15:46 AM
+	"""
+	fcn_name:str = currentframe().f_code.co_name
+	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+	print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+
+	print( 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' )
+	pnum:str = f"{self.prob_str}"
+	print( f"Problem: {pnum}" )
+	print( f"{self.problem_txt}" )
+	print( f"{self.problem_ans}" )
+	assert_percentage:float = 1.6
+	print( '-----------------------------------------------\nSolution' )
+
+	#  α   β   Ω   μ   λ   γ   ξ   ω  π  τ
+
+	# ---- Givens --------------------
+	Beta:float = 100
+	VA:float = 150    # V
+	VCC:float = 18
+	VEE:float = 0
+	RS:float = 10e+03
+	R1:float = 300e+03
+	R2:float = 60e+03
+	RC:float = 10e+03
+	RE:float = 1e+03
+	# C1:float = 10e-06
+	C1:float = 0.01e-06
+	cpi:float = 5e-12  # pF
+	cu:float =  2e-12  # pF
+	calc_result:float = 0
+
+	# ---- Assumptions ---------------
+	VBE:float = 0.7   # V
+	# IBQ:float = 15.47e-06  # per LTspice simulation
+
+	# ---- Calcs ---------------------
+	VTh:float = (R2 * VCC) / (R1 + R2)
+	RTh:float = r1_parallel_r2(R1,R2)
+	IBQ = (VTh - VBE) / (RTh + (1+Beta)*RE)
+	ICQ:float = Beta * IBQ
+
+	ans_string:str = f"""
+This schematic is exactly the same as Fig 7.21a pg 486.
+The difference between small-signal equivalent Fig 7.21b and the small-signal
+equivalent circuit for this problem is that ro is not infinite because the
+Early voltage VA is given as 150V.
+
+---- (DC op point assuming IBQ=0) ----
+Per LTspice, VQ1B = 2.23V which is considerably lower than that calculated
+assuming IBQ=0, VBE=0.7, and given Beta=100 as will be seen below.
+
+For Rib=inf, RTh = (R1||R2).
+
+Using voltage-divider:
+  VTh = (R2 * VCC) / (R1 + R2)
+      = ({R2} * {VCC}) / ({R1} + {R2})
+  VTh = {VTh}V.  THIS IS TOO HIGH.
+
+  R1||R2 = {R1}||{R2}
+     RTh = {RTh} = {to_s_k(RTh,0)}k.
+
+Using KVL for B-E junction branch:
+
+  VTh - VRTh - VBE - VRE = 0
+  VTh - IBQ*RTh - VBE - (1+Beta)IBQ*RE = 0
+  VTh - VBE = IBQ*RTh + (1+Beta)IBQ*RE
+
+  IBQ = (VTh - VBE) / (RTh + (1+Beta)*RE)
+      = ({VTh} - {VBE}) / ({RTh} + (1+{Beta})*{RE})
+  IBQ = {IBQ}A = {to_s_uA(IBQ,2)}.
+
+  ICQ = Beta * IBQ = {to_s_mA(ICQ,3)}.
+"""
+	print( ans_string )
+
+
+	# Get diff % between theoretical IBQ and LTspice.
+	try:
+		assert_within_percentage( IBQ, 15.469e-06, assert_percentage )
+		print( f"ASSERT IBQ theoretical = {IBQ}A is within {assert_percentage}% of LTspice sim: {15.469e-06}A." )
+	except AssertionError as e:
+		print( f"AssertionError {pnum}: {e}" )
+
+
+	# ---- Calcs ---------------------
+	IBQ = 15.469e-06
+	VT:float = self._vthrml0_026
+	# Q1 input resistance
+	rpi:float = (Beta * VT) / ICQ
+	rpi = round(rpi,1)
+	Rib:float = rpi + (1 + Beta)*RE
+	Ri:float = r1_parallel_r2(RTh,Rib)
+
+	# Q1 output resistance
+	ro:float = VA / (Beta * IBQ)
+	ro = round(ro,1)
+	Ro:float = r1_parallel_r2(ro,RC)
+	Ro = round(Ro,1)
+
+	# Q1 transconductance
+	gm:float = ICQ / VT
+	gm = round(gm,6)
+
+
+	ans_string = f"""
+---- (DC op point using LTspice IBQ) ----
+IBQ = {to_s_uA(IBQ,3)}.
+
+Input resistance:
+  rpi = VT / IBQ
+      = {VT} / {IBQ}
+  rpi = {rpi} = {to_s_k(rpi,1)}k.
+
+  Rib = rpi + (1 + Beta)*RE
+      = {rpi} + (1 + {Beta})*{RE}
+  Rib = {Rib} = {to_s_k(Rib,1)}k.
+
+  Ri = (RTh||Rib)
+     = ({RTh}||{Rib})
+  Ri = {Ri} = {to_s_k(Ri,1)}k.
+
+Output resistance:
+  ro = VA / (Beta * IBQ) = VA / ICQ
+     = {VA} / ({Beta} * {IBQ})
+  ro = {ro} = {to_s_k(ro,0)}k.
+
+  Ro = (ro||RC)
+     = ({ro}||{RC})
+  Ro = {Ro} = {to_s_k(Ro,3)}k.
+
+Transconductance:
+  gm = ICQ / VT
+     = {ICQ} / {VT}
+  gm = {gm} = {to_s_mA(gm,1)}/V.
+
+"""
+	print( ans_string )
+
+
+	# ---- Calcs ---------------------
+	tau:float = (RS + Ri) * C1
+	fc:float = 1 / ( 2 * math.pi * tau )
+
+	ans_string = f"""
+---- (Corner freq) ----
+Since the input capacitor C1 is 'series-coupling', the resistance 'seen'
+by C1 = RS + Ri.
+
+The time constant tau-s = (RS + Ri)*C1.
+  RS + Ri = {RS+Ri}.
+
+  tau = (RS + Ri) * C1
+      = ({RS} + {Ri}) * {C1}
+  tau = {tau}s.
+
+Therefore, the corner frequency fc = 1 / (2pi*tau)s.
+
+  fc = 1 / (2pi*tau)
+     = 1 / (2 * {math.pi} * {tau})
+  fc = {fc}Hz.
+
+"""
+	print( ans_string )
+
+
+	# ---- Calcs ---------------------
+	# Vpi:float = Ib / rpi
+	# Vo:float = -gm * Vpi * Ro
+
+	ans_string = f"""
+---- (Current-voltage analysis) ----
+Calculate the small-signal voltage-gain Av = Vo/Vi.
+
+Substitute the input current Ib into the equation for output-voltage Vo.
+
+The circuit input current Ii flows through the series resistances
+RS, C1, and Ri:
+
+  Ii = Vi / (RS + (1/sC1) + Ri)   (Eq 1)
+
+Using a current divider, determine the base current.
+
+Ib = (RTh/(RTh = Rib)) * Ii    (2)
+
+Vpi = Ib*rpi   (3)
+
+Output voltage:
+  Vo = -gm * Vpi * (ro||RC)
+  Vo = -gm * Vpi * Ro
+
+Substitute for Vpi (Eq 3):
+
+  Vo = -gm * (Ib*rpi) * Ro
+
+Substitute for Ib (Eq 2):
+
+  Vo = -gm * [(RTh/(RTh = Rib))] * Ii * rpi * Ro
+
+Finally, substitute for Ii (Eq 1):
+
+  Vo = -gm * [(RTh/(RTh = Rib))] * [Vi / (RS + (1/sC1) + Ri)] * rpi * Ro
+
+Bring-over Vi and rearrange:
+
+  Av = Vo / Vi
+  Av = -gm * [(RTh/(RTh = Rib))] * [1 / (RS + (1/sC1) + Ri)] * rpi * Ro
+
+Combine the DC components:
+
+  K = -(gm * rpi * Ro) * [(RTh/(RTh = Rib))]
+
+such that:
+
+  Av = K * [1 / (RS + (1/sC1) + Ri)]    SEE PAGE 487
+
+Multiply by sC1 to put into known form:
+
+  Av = K * 
+"""
+	print( ans_string )
+
+
+
+	print( f"--- END {self.prob_str} ---" )
