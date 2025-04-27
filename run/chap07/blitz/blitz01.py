@@ -11,10 +11,11 @@ from equations.equations import current_divider
 
 def blitz01(self):
 	"""Top-left circuit:
-	See file ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
-	See also LTspice: ./LTspice/chap07/blitz01/.
 	Find the total frequency response.
 	cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+	./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+	./LTspice/chap07/blitz01/.
+	./docx/chap07/blitz/blitz01.docx
 	Sat, Apr 26, 2025  6:15:46 AM
 	"""
 	fcn_name:str = currentframe().f_code.co_name
@@ -42,7 +43,7 @@ def blitz01(self):
 	RC:float = 10e+03
 	RE:float = 1e+03
 	# C1:float = 10e-06
-	C1:float = 0.01e-06
+	C1:float = 10e-06
 	cpi:float = 5e-12  # pF
 	cu:float =  2e-12  # pF
 	calc_result:float = 0
@@ -185,55 +186,86 @@ Therefore, the corner frequency fc = 1 / (2pi*tau)s.
 	# Vpi:float = Ib / rpi
 	# Vo:float = -gm * Vpi * Ro
 
+	K:float = -(gm * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+	Av_mag:float = 20 * math.log10( abs(K) )
+
 	ans_string = f"""
----- (Current-voltage analysis) ----
+---- (Input-current/output-voltage analysis) ----
 Calculate the small-signal voltage-gain Av = Vo/Vi.
 
 Substitute the input current Ib into the equation for output-voltage Vo.
 
-The circuit input current Ii flows through the series resistances
-RS, C1, and Ri:
+For the small-signal equivalent circuit Fig 7.21b, the circuit input
+current Ii flows through the series resistances RS, C1, and Ri:
 
   Ii = Vi / (RS + (1/sC1) + Ri)   (Eq 1)
 
 Using a current divider, determine the base current.
 
-Ib = (RTh/(RTh = Rib)) * Ii    (2)
+Ib = (RTh/(RTh + Rib)) * Ii    (2)
 
 Vpi = Ib*rpi   (3)
 
-Output voltage:
+For the small-signal equivalent circuit Fig 7.21b, the output voltage:
   Vo = -gm * Vpi * (ro||RC)
-  Vo = -gm * Vpi * Ro
+  Vo = -gm * Vpi * Ro       (4)
 
-Substitute for Vpi (Eq 3):
+Substitute for Vpi (Eq 3) into (4):
 
   Vo = -gm * (Ib*rpi) * Ro
 
 Substitute for Ib (Eq 2):
 
-  Vo = -gm * [(RTh/(RTh = Rib))] * Ii * rpi * Ro
+  Vo = -gm * [(RTh/(RTh + Rib))] * Ii * rpi * Ro
 
 Finally, substitute for Ii (Eq 1):
 
-  Vo = -gm * [(RTh/(RTh = Rib))] * [Vi / (RS + (1/sC1) + Ri)] * rpi * Ro
+  Vo = -gm * [(RTh/(RTh + Rib))] * [Vi / (RS + (1/sC1) + Ri)] * rpi * Ro
+  Vo = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))] * [Vi / (RS + (1/sC1) + Ri)]
 
 Bring-over Vi and rearrange:
 
   Av = Vo / Vi
-  Av = -gm * [(RTh/(RTh = Rib))] * [1 / (RS + (1/sC1) + Ri)] * rpi * Ro
+  Av = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))] * [1 / (RS + (1/sC1) + Ri)]
 
-Combine the DC components:
+Combine the DC-gain components:
 
-  K = -(gm * rpi * Ro) * [(RTh/(RTh = Rib))]
+  K = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))]
 
 such that:
 
   Av = K * [1 / (RS + (1/sC1) + Ri)]    SEE PAGE 487
 
-Multiply by sC1 to put into known form:
+For the frequency-dependent portion of the Av equation, multiply
+by (sC1/sC1) to put into known form that contains the time-constant
+tau = (RS + Ri)*C1:
 
-  Av = K * 
+  [1  / ( RS + (1/sC1) + Ri )] * (sC1/sC1)
+	sC1 / ( sC1*RS + 1 + sC1*Ri )
+	sC1 / ( sC1*RS + sC1*Ri + 1 )
+	sC1 / ( sC1*(RS + Ri) + 1 )
+
+	Sub C1 = tau / (RS + Ri)
+
+	s*(tau / (RS + Ri)) / ( s*(tau / (RS + Ri)*(RS + Ri) + 1 )
+	( 1 / (RS + Ri) ) * ( s*tau / (s*tau + 1))
+
+	Move the ( 1 / (RS + Ri) ) over to K such that:
+
+  K = -(gm * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+
+  **> Av = K * ( s*tau / ( 1 + s*tau) )
+
+Therefore, max gain = K.
+
+  K = -({gm} * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+	K = {K}.
+And,
+
+  **> |Av(max)|dB = 20*log10( K )
+                  = 20*log10( {abs(K)} )
+  **> |Av(max)|dB = {Av_mag}.
+
 """
 	print( ans_string )
 
