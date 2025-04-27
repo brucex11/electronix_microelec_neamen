@@ -13,6 +13,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 ## Available Keywords
 * `bode_plot`  `time_constant`  `plot_example`
 * `Av`  `20log`
+* `3dB_cutoff_freq`  `beta_cutoff_freq`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -31,6 +32,11 @@ X.X: Description
 * example/exam7_01.py, textbook page 483
 * .\docx\chap07\example\exam7_01.docx
 * keywords: `time_constant`
+
+7.8: Determine the 3 dB frequency of the short-circuit current gain for BJT.
+See function Chap07.beta_cutoff_freq(...).
+* example/exam7_08.py, textbook page 505
+* keywords: `3dB_cutoff_freq`  `beta_cutoff_freq`
 
 
 ## Exercises

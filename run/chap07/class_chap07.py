@@ -1,9 +1,9 @@
 import ast
-# from collections import OrderedDict
 # from datetime import datetime
 from typing import Dict   # also available: Any, List, Set, Tuple
 import importlib
 from inspect import currentframe
+from math import pi
 from scipy.constants import Boltzmann
 
 from setup import class_setup
@@ -104,6 +104,19 @@ class Chap07( class_setup.Setup ):
 	# ----------------------------------------------------------------------------
 	# --- Functions: helpers to support all of Chapter 07 ------------------------
 	# ----------------------------------------------------------------------------
+	def beta_cutoff_freq( self, rπ:float, Cπ:float, Cμ:float ) -> float:
+		"""
+		Calc 3dB corner-frequency of the short-circuit current gain for BJT.
+		Args:
+			rπ : forward-biased junction diffusion-resistance
+			Cπ  : forward-biased B-E junction capacitance
+			Cμ  : reverse-biased B'-C' junction capacitance
+		
+		Return: beta cutoff frequency that is 3dB corner-freq
+		"""
+		fb:float = 1 / ( 2 * pi * rπ * ( Cπ + Cμ) )
+		return fb
+
 	def calc_gm( self, ICQ:float) -> float:
 		"""
 		Args:
