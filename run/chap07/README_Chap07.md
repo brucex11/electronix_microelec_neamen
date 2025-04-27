@@ -12,6 +12,7 @@ When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
 * `bode_plot`  `time_constant`  `plot_example`
+* `Av`  `20log`
 
 
 # Examples, Exercises, Test Your Understanding, and Problems
@@ -62,6 +63,25 @@ RS = 1kΩ, rpi = 2kΩ, RL = 4kΩ, gm = 50mA/V, and CC = 1μF.
 ## Problems
 X.X: DESCRIPTION.
 * problem/probX_XX.py, textbook page PP
+
+
+## Blitz
+blitz01: Top-left circuit:
+Find the total frequency response.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz01/.
+* ./docx/chap07/blitz/blitz01.docx
+* keywords: `time_constant`  `Av`  `20log`
+
+blitz01_HPF: Top-left circuit:
+Find the total frequency response.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz01/.
+* ./docx/chap07/blitz/blitz01.docx
+* keywords: `bode_plot`  `time_constant`  `plot_example`
+
 
 
 # Notes
