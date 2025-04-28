@@ -11,14 +11,14 @@ import matplotlib.pyplot as plt
 # from equations.equations import current_divider
 
 
-def blitz01_HPF(self):
+def blitz01_HPF_cap(self):
 	"""Top-left circuit:
-	Find the total frequency response.  Ignore parasitic capacitances cpi and cu.
+	Find the total frequency response.
 	cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
 	./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
 	./LTspice/chap07/blitz01/.
-	./docx/chap07/blitz/01/blitz01.docx
-	Sun, Apr 27, 2025  7:31:57 AM
+	./docx/chap07/blitz/01_cap/blitz01.docx
+	Sun, Apr 27, 2025  5:33:42 PM
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )

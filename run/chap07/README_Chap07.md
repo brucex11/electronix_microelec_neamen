@@ -73,19 +73,51 @@ X.X: DESCRIPTION.
 
 ## Blitz
 blitz01: Top-left circuit:
-Find the total frequency response.
+Find the total frequency response.  Ignore parasitic capacitances cpi and cu.
 cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
 * ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
 * ./LTspice/chap07/blitz01/.
-* ./docx/chap07/blitz/blitz01.docx
+* ./docx/chap07/blitz/01/blitz01.docx
 * keywords: `time_constant`  `Av`  `20log`
 
 blitz01_HPF: Top-left circuit:
+Find the total frequency response.  Ignore parasitic capacitances cpi and cu.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz01/.
+* ./docx/chap07/blitz/01/blitz01.docx
+* keywords: `bode_plot`  `time_constant`  `plot_example`
+
+blitz01_cap: Top-left circuit:
 Find the total frequency response.
 cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
 * ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
 * ./LTspice/chap07/blitz01/.
-* ./docx/chap07/blitz/blitz01.docx
+* ./docx/chap07/blitz/01_cap/blitz01_cap.docx
+* keywords: `time_constant`  `Av`  `20log`
+
+blitz01_HPF_cap: Top-left circuit:
+Find the total frequency response.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz01/.
+* ./docx/chap07/blitz/01_cap/blitz01_cap.docx
+* keywords: `bode_plot`  `time_constant`  `plot_example`
+
+blitz02: Top-right circuit:
+Find the total frequency response.  Ignore parasitic capacitances cpi and cu.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz02/.
+* ./docx/chap07/blitz/02/blitz02.docx
+* keywords: `time_constant`  `Av`  `20log`
+
+blitz02_HPF: Top-right circuit:
+Find the total frequency response.  Ignore parasitic capacitances cpi and cu.
+cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+* ./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
+* ./LTspice/chap07/blitz02/.
+* ./docx/chap07/blitz/02/blitz02.docx
 * keywords: `bode_plot`  `time_constant`  `plot_example`
 
 
