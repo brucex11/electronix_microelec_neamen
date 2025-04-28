@@ -12,7 +12,7 @@ from equations.equations import current_divider
 def blitz01_cap(self):
 	"""Top-left circuit:
 	Find the total frequency response.
-	cpi = 5pF, cu = 2pF, Beta = 100, and VA = 150V.
+	Cpi = 5pF, Cu = 2pF, Beta = 100, and VA = 150V.
 	./chap07/blitz/Blitz_Sophia_Freq_response_schematics.pdf.
 	./LTspice/chap07/blitz01/.
 	./docx/chap07/blitz/01_cap/blitz01.docx
@@ -44,8 +44,8 @@ def blitz01_cap(self):
 	RE:float = 1e+03
 	# C1:float = 10e-06
 	C1:float = 10e-06
-	cpi:float = 5e-12  # pF
-	cu:float =  2e-12  # pF
+	Cpi:float = 5e-12  # pF
+	Cu:float =  2e-12  # pF
 
 	# ---- Assumptions ---------------
 	VBE:float = 0.7   # V
@@ -53,8 +53,8 @@ def blitz01_cap(self):
 
 	# ---- Calcs ---------------------
 	VTh:float = (R2 * VCC) / (R1 + R2)
-	RTh:float = r1_parallel_r2(R1,R2)
-	IBQ = (VTh - VBE) / (RTh + (1+Beta)*RE)
+	RB:float = r1_parallel_r2(R1,R2)
+	IBQ = (VTh - VBE) / (RB + (1+Beta)*RE)
 	ICQ:float = Beta * IBQ
 
 	ans_string:str = f"""
@@ -67,24 +67,24 @@ Early voltage VA is given as 150V.
 Per LTspice, VQ1B = 2.23V which is considerably lower than that calculated
 assuming IBQ=0, VBE=0.7, and given Beta=100 as will be seen below.
 
-For Rib=inf, RTh = (R1||R2).
+For Rib=inf, RB = (R1||R2).
 
 Using voltage-divider:
   VTh = (R2 * VCC) / (R1 + R2)
       = ({R2} * {VCC}) / ({R1} + {R2})
-  VTh = {VTh}V.  THIS IS TOO HIGH.
+  VTh = {VTh}V.
 
   R1||R2 = {R1}||{R2}
-     RTh = {RTh} = {to_s_k(RTh,0)}k.
+      RB = {RB} = {to_s_k(RB,0)}k.
 
 Using KVL for B-E junction branch:
 
   VTh - VRTh - VBE - VRE = 0
-  VTh - IBQ*RTh - VBE - (1+Beta)IBQ*RE = 0
-  VTh - VBE = IBQ*RTh + (1+Beta)IBQ*RE
+  VTh - IBQ*RB - VBE - (1+Beta)IBQ*RE = 0
+  VTh - VBE = IBQ*RB + (1+Beta)IBQ*RE
 
-  IBQ = (VTh - VBE) / (RTh + (1+Beta)*RE)
-      = ({VTh} - {VBE}) / ({RTh} + (1+{Beta})*{RE})
+  IBQ = (VTh - VBE) / (RB + (1+Beta)*RE)
+      = ({VTh} - {VBE}) / ({RB} + (1+{Beta})*{RE})
   IBQ = {IBQ}A = {to_s_uA(IBQ,2)}.
 
   ICQ = Beta * IBQ = {to_s_mA(ICQ,3)}.
@@ -107,7 +107,7 @@ Using KVL for B-E junction branch:
 	rpi:float = (Beta * VT) / ICQ
 	rpi = round(rpi,1)
 	Rib:float = rpi + (1 + Beta)*RE
-	Ri:float = r1_parallel_r2(RTh,Rib)
+	Ri:float = r1_parallel_r2(RB,Rib)
 
 	# Q1 output resistance
 	ro:float = VA / (Beta * IBQ)
@@ -133,8 +133,8 @@ Input resistance:
       = {rpi} + (1 + {Beta})*{RE}
   Rib = {Rib} = {to_s_k(Rib,1)}k.
 
-  Ri = (RTh||Rib)
-     = ({RTh}||{Rib})
+  Ri = (RB||Rib)
+     = ({RB}||{Rib})
   Ri = {Ri} = {to_s_k(Ri,1)}k.
 
 Output resistance:
@@ -154,6 +154,47 @@ Transconductance:
 """
 	print( ans_string )
 
+
+	# ---- Calcs ---------------------
+	CM:float = Cu * (1 + gm * Ro)
+	Ceq:float= Cpi + CM
+	# fc:float = 1 / ( 2 * math.pi * tau )
+	Req:float = equivalent_parallel_resisitance( [Rib, RB, RS] )
+
+	tau_p:float = Req * Ceq
+
+	fh:float = 1 / ( 2 * math.pi * tau_p )
+
+	ans_string = f"""
+---- (Miller capacitance) ----
+Per theory:
+
+  CM = Cu * (1 + gm * Ro)   where Ro = (ro||RC)
+     = {Cu} * (1 + {gm} * {Ro})
+  CM = {CM}.
+
+The upper 3dB frequency is determined by using the time-constant technique.
+
+  fh = 1 / (2*pi*tau-p)   see pg 521
+
+where tau-p = Req*Ceq . In this case, the equivalent capacitance
+is Ceq = Cpi + CM, and the equivalent resistance is the effective
+resistance seen by the capacitance, Req = (Rib||RB||RS).
+
+  Ceq = Cpi + CM
+      = {Cpi} + {CM}
+  Ceq = {Ceq}.
+
+  Req = {Req}.
+
+  tau_p = Req * Ceq = {tau_p}.
+
+  fh = 1 / (2*pi*tau-p)
+     = 1 / (2*pi*tau-p)
+  fh = {fh}Hz.
+"""
+	print( ans_string )
+	return
 
 	# ---- Calcs ---------------------
 	tau:float = (RS + Ri) * C1
@@ -185,7 +226,7 @@ Therefore, the corner frequency fc = 1 / (2pi*tau)s.
 	# Vpi:float = Ib / rpi
 	# Vo:float = -gm * Vpi * Ro
 
-	K:float = -(gm * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+	K:float = -(gm * rpi * Ro) * (RB/(RB + Rib)) * ( 1 / (RS + Ri) )
 	Av_mag:float = 20 * math.log10( abs(K) )
 
 	ans_string = f"""
@@ -201,7 +242,7 @@ current Ii flows through the series resistances RS, C1, and Ri:
 
 Using a current divider, determine the base current.
 
-Ib = (RTh/(RTh + Rib)) * Ii    (2)
+Ib = (RB/(RB + Rib)) * Ii    (2)
 
 Vpi = Ib*rpi   (3)
 
@@ -215,21 +256,21 @@ Substitute for Vpi (Eq 3) into (4):
 
 Substitute for Ib (Eq 2):
 
-  Vo = -gm * [(RTh/(RTh + Rib))] * Ii * rpi * Ro
+  Vo = -gm * [(RB/(RB + Rib))] * Ii * rpi * Ro
 
 Finally, substitute for Ii (Eq 1):
 
-  Vo = -gm * [(RTh/(RTh + Rib))] * [Vi / (RS + (1/sC1) + Ri)] * rpi * Ro
-  Vo = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))] * [Vi / (RS + (1/sC1) + Ri)]
+  Vo = -gm * [(RB/(RB + Rib))] * [Vi / (RS + (1/sC1) + Ri)] * rpi * Ro
+  Vo = -(gm * rpi * Ro) * [(RB/(RB + Rib))] * [Vi / (RS + (1/sC1) + Ri)]
 
 Bring-over Vi and rearrange:
 
   Av = Vo / Vi
-  Av = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))] * [1 / (RS + (1/sC1) + Ri)]
+  Av = -(gm * rpi * Ro) * [(RB/(RB + Rib))] * [1 / (RS + (1/sC1) + Ri)]
 
 Combine the DC-gain components:
 
-  K = -(gm * rpi * Ro) * [(RTh/(RTh + Rib))]
+  K = -(gm * rpi * Ro) * [(RB/(RB + Rib))]
 
 such that:
 
@@ -251,13 +292,13 @@ tau = (RS + Ri)*C1:
 
 	Move the ( 1 / (RS + Ri) ) over to K such that:
 
-  K = -(gm * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+  K = -(gm * rpi * Ro) * (RB/(RB + Rib)) * ( 1 / (RS + Ri) )
 
   **> Av = K * ( s*tau / ( 1 + s*tau) )
 
 Therefore, max gain = K.
 
-  K = -({gm} * rpi * Ro) * (RTh/(RTh + Rib)) * ( 1 / (RS + Ri) )
+  K = -({gm} * rpi * Ro) * (RB/(RB + Rib)) * ( 1 / (RS + Ri) )
 	K = {K}.
 And,
 
