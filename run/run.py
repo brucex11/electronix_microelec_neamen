@@ -19,6 +19,7 @@ from typing import List   # also available: Dict, Set
 # from chap05 import class_chap05
 from chap06 import class_chap06
 from chap07 import class_chap07
+from chap08 import class_chap08
 # from labs import class_labs
 
 
@@ -116,6 +117,8 @@ def parse_the_args():
 	parser_chap06.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_chap07 = subparsers.add_parser( 'Chap07', help='run Chapter 07 problems' )
 	parser_chap07.add_argument( 'config_file', help='PATH to config.ini' )
+	parser_chap08 = subparsers.add_parser( 'Chap08', help='run Chapter 08 problems' )
+	parser_chap08.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_labs = subparsers.add_parser( 'Labs', help='run Labs solutions' )
 	parser_labs.add_argument( 'config_file', help='PATH to config.ini' )
 	# parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
