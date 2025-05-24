@@ -30,9 +30,9 @@ class Chap06( class_setup.Setup ):
 			path_to_config_file : string
 				this is passed to the base class for parsing
 		"""
-		# fcn_name:str = currentframe().f_code.co_name
-		# print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
-		# print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
+		fcn_name:str = currentframe().f_code.co_name
+		print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
+		print( f"            Ctor: '{self.__class__.__init__}'; function: '{fcn_name}'" )
 
 		super().__init__( path_config_file )
 

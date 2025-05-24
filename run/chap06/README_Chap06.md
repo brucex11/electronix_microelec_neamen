@@ -47,6 +47,12 @@ circuit shown in Figure 6.3.
 * example/exam6_01.py, page 382
 * keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
 
+6.06: Calculate the small-signal voltage gain of PNP BJT circuit shown
+in Figure 6.32.
+* example/exam6_06.py, page 404
+* ./docx/chap06/example/chap06_exam6_06.docx
+* keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
+
 6.13: Calculate the small-signal Rin and Ro per Figure 6.49.
 * example/exam6_13.py, pg 424
 * keywords: `Rin`  `Rib`  `rpi`  `Ro`  `ro`

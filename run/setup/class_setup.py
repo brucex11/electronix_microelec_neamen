@@ -76,11 +76,11 @@ class Setup():
 				level=logging.INFO,  # Set the minimum level of messages to capture
 				format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # Log message format
 			)
-			lg = logging.getLogger( self.prob )
-			# print( f"type(lg): {type(lg)}" )
-			lg.info( f"---- START {self.get_config_param['common']['problem_num']} ----" )
-			lg.info( f"PATH to this log file: '{str(path_to_log_file).replace("\\", "/")}'" )
-			lg.info( f"PATH to config file: '{str(path_config_file).replace("\\", "/")}'" )
+			self._lg = logging.getLogger( self.prob )
+			# print( f"type(self.lg): {type(self.lg)}" )
+			self.lg.info( f"--- START {self.prob_str} ---" )
+			self.lg.info( f"PATH to this log file: '{str(path_to_log_file).replace("\\", "/")}'" )
+			self.lg.info( f"PATH to config file:   '{str(path_config_file).replace("\\", "/")}'" )
 
 
 		# figure show and save params
@@ -111,6 +111,9 @@ class Setup():
 	@property
 	def get_config_param(self):
 		return self._dict_config_params
+	@property
+	def lg(self):
+		return self._lg
 
 	@property
 	def chapter_title(self):

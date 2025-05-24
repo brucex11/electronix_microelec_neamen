@@ -165,8 +165,8 @@ To calculate Av, substitute ib from the INPUT side into
 the OUTPUT side:
 
   -BetaDC * (vb / rpi) = vo / (Ro||RL)
-	-BetaDC / rpi = (vo / vb) / (Ro||RL)
-	-BetaDC / rpi * (Ro||RL) = (vo / vb) = Av
+  -BetaDC / rpi = (vo / vb) / (Ro||RL)
+  -BetaDC / rpi * (Ro||RL) = (vo / vb) = Av
 
   Av = -BetaDC * (Ro||RL) / rpi
      = -{BetaDC} * ({Ro}||{RL}) / {rpi}
@@ -188,4 +188,5 @@ the OUTPUT side:
 		print( f"AssertionError {pnum}: {e}" )
 
 
+	self.lg.info( f"--- END {self.prob_str} ---" )
 	print( f"--- END {self.prob_str} ---" )
