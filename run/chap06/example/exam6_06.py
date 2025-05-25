@@ -6,7 +6,8 @@ from assertions.assertions import assert_within_percentage
 from equations.equations import to_s_k, to_s_mA, to_s_uA
 from equations.equations import equivalent_parallel_resisitance
 from equations.equations import r1_parallel_r2
-from equations.equations import current_divider
+from equations.current import current_divider
+from equations.voltage import voltage_divider
 
 
 def exam6_06(self):
@@ -55,7 +56,8 @@ def exam6_06(self):
 
 	# ---- DC op point calcs ---------------------
 	RTh:float = r1_parallel_r2( R1, R2 )
-	VTh:float = ((VEE / R1) + (VCC/R2)) / ((1/R1) + (1/R2))
+	# VTh:float = ((VEE / R1) + (VCC/R2)) / ((1/R1) + (1/R2))
+	VTh:float = voltage_divider( VEE, R1, R2, VCC )
 	VTh1:float = ((VEE*R2) + (VCC*R1)) / (R1 + R2)
 
 	# IEQ:float =  ( VB - VBE - VEE ) / RE

@@ -4,8 +4,9 @@ from typing import List, Tuple  # Any, Dict, Set
 
 from assertions.assertions import assert_within_percentage
 from equations.equations import to_s_k, to_s_mA, to_s_uA
-from equations.equations import equivalent_parallel_resisitance
-from equations.equations import current_divider, r1_parallel_r2
+from equations.equations import equivalent_parallel_resisitance, r1_parallel_r2
+from equations.current import current_divider
+from equations.voltage import voltage_divider
 
 
 def prob6_56D(self):

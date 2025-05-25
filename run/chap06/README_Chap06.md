@@ -51,7 +51,7 @@ circuit shown in Figure 6.3.
 in Figure 6.32.
 * example/exam6_06.py, page 404
 * ./docx/chap06/example/chap06_exam6_06.docx
-* keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`
+* keywords: `gm`  `Vpi`  `rpi`  `voltage_gain`  `voltage_divider`
 
 6.13: Calculate the small-signal Rin and Ro per Figure 6.49.
 * example/exam6_13.py, pg 424
