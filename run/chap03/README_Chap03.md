@@ -11,6 +11,7 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
+* `call_class_method`
 * `conduction  angstroms_per_meter  cm_per_meter`
 * `iDS_in_saturation  iDS_in_NONsaturation`
 * `Kn_in_NONsaturation  Kn_in_saturation  calc_Knp_from_conduction_parameters`
@@ -43,6 +44,7 @@ X.X: Description
 ## Examples
 3.1: Calculate the current in an n-channel MOSFET.
 * example/exam3_01.py, textbook page 134
+* keywords: `call_class_method`
 * keywords: `calc_Knp_from_conduction_parameters`
 * keywords: `MOSFET_conduction_param_Kn`  `MOSFET_saturation_current`  `NMOS_threshold_voltage_VTN`
 * keywords: `angstroms_per_meter`  `cm_per_meter`

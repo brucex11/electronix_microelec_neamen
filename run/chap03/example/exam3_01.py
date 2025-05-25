@@ -4,6 +4,7 @@ import math
 from typing import Dict, List, Tuple  # Any, Set
 
 from assertions import assertions
+from chap03 import class_chap03 as ch3
 
 def exam3_01(self):
 	"""Page 134:
@@ -16,7 +17,7 @@ def exam3_01(self):
 	Comment: The current capability of a transistor can be increased by increasing
 	the conduction parameter. For a given fabrication technology, Kn is adjusted
 	by varying the transistor width W."
-	ANS (a) iD = 0.224 mA  (b) iD = 2.02mA.
+	ANS (a) iD = 0.224mA  (b) iD = 2.02mA.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
@@ -58,7 +59,7 @@ def exam3_01(self):
 	un:float = 650     # inversion-layer electron-mobility
 
 	# Below, test the function-call.
-	abc:float = self.calc_MOSFET_oxide_capacitance( eox=eox, tox=tox )
+	abc:float = ch3.Chap03.calc_MOSFET_oxide_capacitance( self, eox=eox, tox=tox )
 
 	Kn:float = ( W * un * eox ) / ( 2 * L * tox )   # A/V^2
 	print( f"LOCAL Kn:    {Kn}" )
@@ -72,13 +73,14 @@ def exam3_01(self):
 	conduction_parameter_params['oxide_thickness'] = tox
 	# Function below calls calc_MOSFET_oxide_capacitance() and then uses that
 	# result to calculate conduction-parameter.
-	Knf:float = self.calc_MOSFET_K_conduction_parameter( **conduction_parameter_params )
+	Knf:float = ch3.Chap03.calc_MOSFET_K_conduction_parameter(
+		self, **conduction_parameter_params )
 	print( f"FUNCTION Kn: {Knf}" )
 
 	try:
 		assertions.assert_within_percentage( Kn, Knf, assert_percentage )
 		print( f"CALC Kn local and by function-call", end=' ' )
-		print( f"are within {assert_percentage}% of each other." )
+		print( f"are within {assert_percentage}% of accepted answer {Knf}A/V^2." )
 	except AssertionError as e:
 		print( f"CALC AssertionError Kn==Knf {pnum}: {e}" )
 
@@ -92,10 +94,11 @@ def exam3_01(self):
 	# Now calculate the current in saturation region for given thresh voltage VTN.
 	VTN:float = 0.4
 	for vgs in tuple_vGS_control:
-		id:float = Kn * ( vgs - VTN ) **2
+		id:float = ch3.Chap03.calc_iDS_for_NMOS_enhancement_in_saturation(
+			self, Kn_sat=Kn, vGS=vgs, VTN=VTN )
 		list_calc_iD.append( id )
 
-	print( f"id SAT: {list_calc_iD}" )
+	print( f"List id SAT: {list_calc_iD}" )
 
 	for idx, id in enumerate(tuple_ans_iD):
 		try:

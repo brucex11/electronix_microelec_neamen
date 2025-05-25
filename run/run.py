@@ -8,7 +8,7 @@ import argparse
 from  inspect import currentframe
 # import logging
 import sys
-# import importlib
+import importlib
 from typing import Any
 from typing import List   # also available: Dict, Set
 
@@ -17,9 +17,9 @@ from typing import List   # also available: Dict, Set
 # from chap02 import class_chap02
 # from chap03 import class_chap03
 # from chap05 import class_chap05
-from chap06 import class_chap06
-from chap07 import class_chap07
-from chap08 import class_chap08
+# from chap06 import class_chap06
+# from chap07 import class_chap07
+# from chap08 import class_chap08
 # from labs import class_labs
 
 
@@ -54,18 +54,26 @@ def main() -> int:
 		# This is the implementation of the source-code's design.
 		class_name:str = chapter_subcmd
 		# print( f"class_name: {class_name}" )
+		module = import_module_based_on_subcmd( chapter_subcmd )
+		# exit()
+
 		# Convert the camel-case classname to all lowercase.
-		cllow:str = class_name.lower()
+		# This was done when all the imports were located at top of file.
+		# This was improved by using match/case function.
+		# cllow:str = class_name.lower()
 		# Generate the module name as below; again, this is per project architecture
 		# module-by-subdir and source-code fnames.
-		module_name:str = f"class_{cllow}"
+		# module_name:str = f"class_{cllow}"
 
 		try:
-			# Retrieve the module's reference per its name:str
-			module_ref = globals()[module_name]
+			# Retrieve the module's reference per its name:str.
+			# This was done when all the imports were located at top of file.
+			# This was improved by using match/case function.
+			# module_ref = globals()[module_name]
+			# class_ref = getattr( module_ref, class_name )
 			# print( f"module_ref: '{module_ref}' -> TYPE: '{type(module_ref)}'" )
 			# Retrieve the class reference from the module
-			class_ref = getattr( module_ref, class_name )
+			class_ref = getattr( module, class_name )
 			# print( f"class_ref: '{class_ref}' -> TYPE: '{type(class_ref)}'" )
 			# Setup the __init__ parameters
 			params = [path_config_file]
@@ -149,6 +157,32 @@ def parse_the_args():
 	chapter_subcmd = args.command
 	global path_config_file
 	path_config_file = args.config_file
+
+
+
+def import_module_based_on_subcmd(subcmd: str):
+	match subcmd:
+		case "Bjt":
+			return importlib.import_module("bjt.class_bjt")
+		case "Chap01":
+			return importlib.import_module("chap01.class_chap01")
+		case "Chap02":
+			return importlib.import_module("chap02.class_chap02")
+		case "Chap03":
+			return importlib.import_module("chap03.class_chap03")
+		case "Chap05":
+			return importlib.import_module("chap05.class_chap05")
+		case "Chap06":
+			return importlib.import_module("chap06.class_chap06")
+		case "Chap07":
+			return importlib.import_module("chap07.class_chap07")
+		case "Chap08":
+			return importlib.import_module("chap08.class_chap08")
+		case "Labs":
+			return importlib.import_module("labs.class_labs")
+		case _:
+			raise ValueError(f"Unsupported subcmd: '{subcmd}'" )
+
 
 
 # This is useful when the "file" is to be run directly by python (and not imported)
