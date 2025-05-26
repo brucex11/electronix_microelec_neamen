@@ -11,7 +11,7 @@ Use the keywords below for python-code implementations, problems with plots, etc
 When applicable, each problem has keywords that reflect code in that problem.
 
 ## Available Keywords
-* `call_class_method`
+* `call_class_method`  `calc_iDS_for_NMOS_enhancement_in_nonsaturation`
 * `conduction  angstroms_per_meter  cm_per_meter`
 * `iDS_in_saturation  iDS_in_NONsaturation`
 * `Kn_in_NONsaturation  Kn_in_saturation  calc_Knp_from_conduction_parameters`
@@ -62,6 +62,7 @@ enhancement-mode MOSFET in the saturation region.
 3.2: For PMOS in enhancement mode, calculate current iSD.
 * exercise/exer3_02.py, textbook page 137
 * keywords: `NMOS_calc_iD_function`  `PMOS_calc_iD_function`
+* keywords: `call_class_method`  `calc_iDS_for_NMOS_enhancement_in_nonsaturation`
 
 
 ## Test Your Understanding
