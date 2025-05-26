@@ -169,7 +169,7 @@ class Chap03( class_setup.Setup ):
 		Args:
 			Kp_sat:float (trans)conduction parameter, A/V^2
 			vSG:float gate-to-source voltage, V, positive by convention
-			VTN:float gate threshold voltage, V, negative by convention
+			VTP:float gate threshold voltage, V, negative by convention
 		Return:
 			current:float
 		"""
@@ -185,7 +185,7 @@ class Chap03( class_setup.Setup ):
 		Args:
 			Kp_nonsat:float (trans)conduction parameter, A/V^2
 			vSG:float gate-to-source voltage, V, positive by convention
-			VTN:float gate threshold voltage, V, negative by convention
+			VTP:float gate threshold voltage, V, negative by convention
 			vSD:float drain-to-source voltage, V, positive by convention
 		Return:
 			current:float

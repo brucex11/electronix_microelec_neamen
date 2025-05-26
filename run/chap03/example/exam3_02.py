@@ -16,7 +16,7 @@ def exam3_02(self):
 	Comment: Biasing a transistor in either the saturation or the nonsaturation
 	region depends on both the gate-to-source voltage and the drain-to-source
 	voltage.
-	ANS vSD > vSD(sat) = vSG + VTP = 2.08e-0.5 = 1.58V.
+	ANS vSD > vSD(sat) = vSG + VTP = 2.08 + -0.5 = 1.58V.
 	"""
 	fcn_name:str = currentframe().f_code.co_name
 	print( f"ENTRYPOINT: Module: '{__name__}'; Class: '{self.__class__.__name__}'" )
