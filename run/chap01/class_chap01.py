@@ -66,6 +66,15 @@ class Chap01( class_setup.Setup ):
 		self._vthrml0_026:float = round(self.vthermal,3)
 		self._boltzmann_ev:float = Boltzmann / self.qev
 
+
+		self._dict_electron_mobility_doping_Si_cm:Dict = {
+			'light': { 'mobility': 1350, 'concentration': 1e+14 },
+			'medium-light': { 'mobility': 1200, 'concentration': 1e+16 },
+			'medium': { 'mobility': 900, 'concentration': 1e+17 },
+			'medium-heavy': { 'mobility': 500, 'concentration': 1e+18 },
+			'heavy': { 'mobility': 150, 'concentration': 1e+19 }
+		}
+
 		# rsp = input( 'yes if ok, else press <Enter>' )
 		# if rsp != 'yes':
 		# 	print( 'QUIT' )
@@ -77,6 +86,9 @@ class Chap01( class_setup.Setup ):
 	@property
 	def boltzmann_ev(self):
 		return self._boltzmann_ev
+	@property
+	def dict_electron_mobility_doping_Si_cm(self):
+		return self._dict_electron_mobility_doping_Si_cm
 	@property
 	def dict_semicond_mat_consts(self):
 		return self._dict_semicond_mat_consts
