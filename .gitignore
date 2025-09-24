@@ -12,6 +12,7 @@ __pycache__/
 # below, ignore all *.docx files throughout entire repository
 # /docx
 *.docx
+*.pdf
 *.tmp
 *.png
 

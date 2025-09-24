@@ -127,6 +127,8 @@ def parse_the_args():
 	parser_chap07.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_chap08 = subparsers.add_parser( 'Chap08', help='run Chapter 08 problems' )
 	parser_chap08.add_argument( 'config_file', help='PATH to config.ini' )
+	parser_chap09 = subparsers.add_parser( 'Chap09', help='run Chapter 09 problems' )
+	parser_chap09.add_argument( 'config_file', help='PATH to config.ini' )
 	parser_labs = subparsers.add_parser( 'Labs', help='run Labs solutions' )
 	parser_labs.add_argument( 'config_file', help='PATH to config.ini' )
 	# parser_chap77 = subparsers.add_parser( 'Chap77', help='run Chapter XX problems' )
@@ -178,6 +180,8 @@ def import_module_based_on_subcmd(subcmd: str):
 			return importlib.import_module("chap07.class_chap07")
 		case "Chap08":
 			return importlib.import_module("chap08.class_chap08")
+		case "Chap09":
+			return importlib.import_module("chap09.class_chap09")
 		case "Labs":
 			return importlib.import_module("labs.class_labs")
 		case _:
